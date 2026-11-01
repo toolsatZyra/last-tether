@@ -492,5 +492,19 @@
       "engine.ts": "f1d380dba46199090d01b255e3bf3b47d06fd9501c8b2ebb8241c38c9bd11023"
     },
     "conditions": "Desktop Chrome, WebGL2, AMD Radeon integrated graphics, Explorer, Balanced, ordinary render loop with development-only input policy. Known route and puzzle solutions; no teleport, extra health or accelerated simulation."
+  },
+  "publicDeployment": {
+    "commit": "8e46dcc5dc2ae53a105443ec2cb97d8710b49dfa",
+    "deployment": "dpl_CKmNfqgQU6qky2o91EgD1fZih16w",
+    "url": "https://last-tether.vercel.app/",
+    "result": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
   }
 }
