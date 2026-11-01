@@ -56,3 +56,21 @@ The ordinary-keyboard production check initially exposed repeated short swings a
 Final short Balanced frame samples at 1036 × 703 reported 63.9, 56.1 and 60.7 engine FPS in sectors 0, 3 and 6; p95 frame intervals were 18.4, 18.3 and 18.4 ms. These are four-second stationary-player samples, not sustained whole-chapter performance. Human enjoyment, first-time pacing and the requested top-tier visual quality remain open.
 
 Public 0.2.2 verification: application commit `d29d6ceaea5400639b5af2ebe0816a08d5cc4185`, Vercel deployment `dpl_ATq1DyhhfKLRBqYSQRpHvM3j7jg8`, reached READY. The public ordinary-keyboard opening passed with three defeats, zero recoveries, watchpost progression, pause and save/reload/resume, no development hook, no page errors and no failed asset responses.
+
+## Structure and landmark pass — 0.2.3
+
+Eighteen behaviour and geometry tests and the TypeScript/Vite build pass. The geometry test checks outward normals and non-degenerate faces for 57 arch-stone variants. All 71 imported source meshes retain unchanged geometry across four sector rebuilds. The updated vegetation check covers 128 plants, allowing deliberate partial burial of bush bounds; rendered opening and sector views were also inspected.
+
+The full input-driven Havok story run reached the ending in **683.77 simulated seconds (11m24s), 193 defeats and zero recoveries**. The observer timed out while awaiting the result. The original CLI process was then confirmed absent, and the existing browser was inspected: sector 7 / objective 3 was finished, the ending was visible, and the finished checkpoint was saved. The chapter was not restarted to recover this evidence. The completed scene retained 2 skeletons, 45 textures (two new persistent surface/water textures) and 48 animation groups.
+
+The compiled ordinary-keyboard opening passed three defeats, watchpost progression, pause and save/reload/resume with no page errors, failed requests or development hook. Final four-second Balanced samples at 1036 × 703 reported 50.3, 46.5 and 62.5 engine FPS in sectors 0, 3 and 6, with p95 frame intervals 24.3, 24.4 and 24.3 ms. Separate early screenshot captures reported approximately 26–33 FPS; these warm short samples do not establish cold-load or sustained whole-chapter performance.
+
+The requested top-tier visual bar, human enjoyment and first-time 15–20-minute duration remain unverified. The new landmarks and structural detail are an incremental art pass, not evidence of parity with leading commercial games.
+
+### Normal-speed full chapter audit
+
+The unaccelerated application loop completed the chapter in **677.36 seconds wall time (11m17s)** and 667.88 game seconds (11m08s), with **193 defeats and one recovery**. All 32 objectives, the visible ending and a finished checkpoint were recorded. The browser remained visible throughout. The scene ended at 2 skeletons, 45 textures and 48 animation groups. Source SHA-256 values were unchanged throughout the run and are included in `verification/structures-0.2.3.json`.
+
+Across 37,766 frames, the run averaged **55.76 FPS**, with median **17.2 ms**, p95 **23.3 ms** and **50 frames over 50 ms**. Each of the seven area rebuilds caused a long frame, ranging from **0.96 to 1.33 seconds**. These transition stalls are unresolved; the average must not be presented as uniformly smooth play. Conditions: desktop Chrome/WebGL2, AMD Radeon integrated graphics, Balanced, 1036 × 703, Explorer difficulty. Loading before the input driver started is excluded.
+
+The development-only policy uses normal input intent with actual Havok movement and the ordinary rendering/interface loop. It knows enemy state, the route and puzzle solutions. It does not teleport, grant health or speed up simulation. This is stronger mechanical and performance evidence than accelerated traversal, but is still not a first-time human playtest.

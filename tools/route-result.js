@@ -1,0 +1,1 @@
+async(page)=>{return page.evaluate(()=>{const a=window.__expedition;return{...a.snapshot(),resources:{skeletons:a.view.scene.skeletons.length,textures:a.view.scene.textures.length,animationGroups:a.view.scene.animationGroups.length},saved:JSON.parse(localStorage.getItem('last-tether-v2:story')),endingVisible:!document.getElementById('ending').hidden};});}

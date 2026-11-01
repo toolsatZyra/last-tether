@@ -699,6 +699,10 @@ export class Assets {
     const base = root.getHierarchyBoundingVectors(true).min.y;
     root.position.copyFrom(p);
     root.position.y -= base * scale;
+    if (key.startsWith("Bush")) {
+      const bounds = root.getHierarchyBoundingVectors(true);
+      root.position.y -= (bounds.max.y - bounds.min.y) * scale * 0.28;
+    }
     root.scaling.setAll(scale);
     root.rotation.y = (p.x + p.z) * 0.47;
     root.metadata = { foliage: true, phase: (p.x + p.z) * 0.2 };

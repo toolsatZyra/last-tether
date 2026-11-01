@@ -1,0 +1,496 @@
+{
+  "version": "0.2.3",
+  "date": "2026-11-02",
+  "automatedStory": {
+    "sector": 7,
+    "beat": 3,
+    "p": {
+      "x": -1.2047277889584072,
+      "y": 43.0797520765931,
+      "z": 401.36428633845617
+    },
+    "health": 100,
+    "seconds": 683.7666666663735,
+    "deaths": 0,
+    "kills": 193,
+    "finished": true,
+    "paused": false,
+    "playing": false,
+    "enemies": [],
+    "meshes": 545,
+    "animation": "kavi_Idle_Neutral",
+    "resources": {
+      "skeletons": 2,
+      "textures": 45,
+      "animationGroups": 48
+    },
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 683.7666666663735,
+      "deaths": 0,
+      "kills": 193,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "observation": "The observer timed out after starting the full route. The CLI process was confirmed absent, then the existing browser endpoint and finished checkpoint were recovered without rerunning the chapter.",
+  "unitTests": 18,
+  "foliage": {
+    "checked": 128,
+    "bad": [],
+    "note": "Bush bounds deliberately intersect the planting surface; visual inspection supplements bounds checks"
+  },
+  "sourceGeometry": {
+    "meshes": 71,
+    "sectors": 4,
+    "unchanged": true
+  },
+  "frameSamples": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 50.28494803938915,
+      "medianFrameMs": 18.19999999999709,
+      "p95FrameMs": 24.30000000000291,
+      "frames": 216
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 46.4900046492151,
+      "medianFrameMs": 18.30000000000291,
+      "p95FrameMs": 24.40000000000873,
+      "frames": 196
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 62.4609618992004,
+      "medianFrameMs": 18.19999999999709,
+      "p95FrameMs": 24.30000000000291,
+      "frames": 236
+    }
+  ],
+  "limits": [
+    "Automated known-route timing is not first-time human pacing",
+    "Short stationary-player frame samples are not sustained whole-chapter performance",
+    "Top-tier visual quality and enjoyment are not established"
+  ],
+  "productionPreview": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "archGeometry": {
+    "wedgeVariants": 57,
+    "outwardNormals": true,
+    "nonDegenerateTriangles": true
+  },
+  "normalSpeedAudit": {
+    "status": "complete",
+    "wallSeconds": 677.355799999997,
+    "game": {
+      "sector": 7,
+      "beat": 3,
+      "p": {
+        "x": -1.2317391773964215,
+        "y": 43.07925008035186,
+        "z": 401.260379740447
+      },
+      "health": 100,
+      "seconds": 667.8833333330546,
+      "deaths": 1,
+      "kills": 193,
+      "finished": true,
+      "paused": false,
+      "playing": false,
+      "enemies": [],
+      "fps": 71.07320540131326,
+      "meshes": 545,
+      "animation": "kavi_Idle_Neutral"
+    },
+    "frameStats": {
+      "frames": 37766,
+      "averageFps": 55.7550651024462,
+      "medianMs": 17.200000002980232,
+      "p95Ms": 23.30000000447035,
+      "maxMs": 1328.3999999985099,
+      "over50Ms": 50
+    },
+    "sectorStats": {
+      "0": {
+        "frames": 3861,
+        "averageFps": 55.856627422842095,
+        "medianMs": 17.30000000447035,
+        "p95Ms": 22.80000000447035,
+        "maxMs": 189,
+        "over50Ms": 10
+      },
+      "1": {
+        "frames": 6010,
+        "averageFps": 60.486387040416886,
+        "medianMs": 15.800000004470348,
+        "p95Ms": 21.30000000447035,
+        "maxMs": 1134.1999999955297,
+        "over50Ms": 8
+      },
+      "2": {
+        "frames": 5469,
+        "averageFps": 52.80690574126644,
+        "medianMs": 18.200000002980232,
+        "p95Ms": 23.899999998509884,
+        "maxMs": 1174.9000000059605,
+        "over50Ms": 9
+      },
+      "3": {
+        "frames": 4325,
+        "averageFps": 58.68074823719844,
+        "medianMs": 16.400000005960464,
+        "p95Ms": 21,
+        "maxMs": 1034,
+        "over50Ms": 3
+      },
+      "4": {
+        "frames": 5419,
+        "averageFps": 53.97313593979551,
+        "medianMs": 17.700000002980232,
+        "p95Ms": 24.100000001490116,
+        "maxMs": 1328.3999999985099,
+        "over50Ms": 8
+      },
+      "5": {
+        "frames": 4511,
+        "averageFps": 49.72568748987079,
+        "medianMs": 19.399999998509884,
+        "p95Ms": 25.400000005960464,
+        "maxMs": 1048,
+        "over50Ms": 5
+      },
+      "6": {
+        "frames": 5852,
+        "averageFps": 57.50899192201105,
+        "medianMs": 16.899999998509884,
+        "p95Ms": 22.299999997019768,
+        "maxMs": 960.2999999970198,
+        "over50Ms": 5
+      },
+      "7": {
+        "frames": 2319,
+        "averageFps": 59.886115666197526,
+        "medianMs": 16,
+        "p95Ms": 20.69999999552965,
+        "maxMs": 1093.5999999940395,
+        "over50Ms": 2
+      }
+    },
+    "objectives": [
+      {
+        "key": "0-0",
+        "wallSeconds": 0.189,
+        "gameSeconds": 0.05,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "wallSeconds": 11.3385,
+        "gameSeconds": 11.133333333333466,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "wallSeconds": 29.77019999999553,
+        "gameSeconds": 29.56666666666627,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "wallSeconds": 44.72619999999553,
+        "gameSeconds": 44.466666666665425,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "wallSeconds": 70.25759999999404,
+        "gameSeconds": 68.83333333333071,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "wallSeconds": 84.82219999999553,
+        "gameSeconds": 83.38333333332989,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "wallSeconds": 105.20359999999404,
+        "gameSeconds": 103.76666666666206,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "wallSeconds": 137.621,
+        "gameSeconds": 136.16666666666717,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "wallSeconds": 169.6595,
+        "gameSeconds": 166.96666666669168,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "wallSeconds": 186.3885,
+        "gameSeconds": 183.68333333337165,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "wallSeconds": 222.2108999999985,
+        "gameSeconds": 219.48333333340014,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "wallSeconds": 250.47809999999404,
+        "gameSeconds": 247.71666666675594,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "wallSeconds": 273.08459999999405,
+        "gameSeconds": 269.26666666675044,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "wallSeconds": 277.08709999999405,
+        "gameSeconds": 273.3000000000801,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "wallSeconds": 300.1545,
+        "gameSeconds": 296.35000000005914,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "wallSeconds": 324.6351999999955,
+        "gameSeconds": 320.8333333333702,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "wallSeconds": 347.0828999999985,
+        "gameSeconds": 341.9666666666843,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "wallSeconds": 362.0405,
+        "gameSeconds": 356.9333333333374,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "wallSeconds": 387.482599999994,
+        "gameSeconds": 382.3666666666476,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "wallSeconds": 408.43029999999703,
+        "gameSeconds": 403.2833333332952,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "wallSeconds": 447.20429999999703,
+        "gameSeconds": 439.8499999999286,
+        "deaths": 1
+      },
+      {
+        "key": "5-1",
+        "wallSeconds": 461.80719999999553,
+        "gameSeconds": 454.48333333324865,
+        "deaths": 1
+      },
+      {
+        "key": "5-2",
+        "wallSeconds": 480.50059999999405,
+        "gameSeconds": 473.166666666565,
+        "deaths": 1
+      },
+      {
+        "key": "5-3",
+        "wallSeconds": 515.9040999999941,
+        "gameSeconds": 508.5666666665328,
+        "deaths": 1
+      },
+      {
+        "key": "6-0",
+        "wallSeconds": 537.834299999997,
+        "gameSeconds": 529.5333333331804,
+        "deaths": 1
+      },
+      {
+        "key": "6-1",
+        "wallSeconds": 551.7316999999955,
+        "gameSeconds": 543.4333333331678,
+        "deaths": 1
+      },
+      {
+        "key": "6-2",
+        "wallSeconds": 598.568,
+        "gameSeconds": 590.2166666664585,
+        "deaths": 1
+      },
+      {
+        "key": "6-3",
+        "wallSeconds": 621.9943999999986,
+        "gameSeconds": 613.5999999997706,
+        "deaths": 1
+      },
+      {
+        "key": "7-0",
+        "wallSeconds": 639.7255999999941,
+        "gameSeconds": 630.2499999997555,
+        "deaths": 1
+      },
+      {
+        "key": "7-1",
+        "wallSeconds": 641.2043999999985,
+        "gameSeconds": 631.7333333330874,
+        "deaths": 1
+      },
+      {
+        "key": "7-2",
+        "wallSeconds": 652.921,
+        "gameSeconds": 643.4499999997435,
+        "deaths": 1
+      },
+      {
+        "key": "7-3",
+        "wallSeconds": 664.7450999999941,
+        "gameSeconds": 655.2666666663994,
+        "deaths": 1
+      }
+    ],
+    "longFrames": [
+      {
+        "ms": 1328.3999999985099,
+        "sector": 4,
+        "beat": 0,
+        "gameSeconds": 341.9666666666843
+      },
+      {
+        "ms": 1174.9000000059605,
+        "sector": 2,
+        "beat": 0,
+        "gameSeconds": 166.96666666669168
+      },
+      {
+        "ms": 1134.1999999955297,
+        "sector": 1,
+        "beat": 0,
+        "gameSeconds": 68.83333333333071
+      },
+      {
+        "ms": 1093.5999999940395,
+        "sector": 7,
+        "beat": 0,
+        "gameSeconds": 630.2499999997555
+      },
+      {
+        "ms": 1048,
+        "sector": 5,
+        "beat": 0,
+        "gameSeconds": 439.8499999999286
+      },
+      {
+        "ms": 1034,
+        "sector": 3,
+        "beat": 0,
+        "gameSeconds": 269.26666666675044
+      },
+      {
+        "ms": 960.2999999970198,
+        "sector": 6,
+        "beat": 0,
+        "gameSeconds": 529.5333333331804
+      },
+      {
+        "ms": 189,
+        "sector": 0,
+        "beat": 0,
+        "gameSeconds": 0.05
+      },
+      {
+        "ms": 111.29999999701977,
+        "sector": 1,
+        "beat": 3,
+        "gameSeconds": 137.25000000000136
+      },
+      {
+        "ms": 103.19999999552965,
+        "sector": 6,
+        "beat": 1,
+        "gameSeconds": 589.1833333331261
+      },
+      {
+        "ms": 101.90000000596046,
+        "sector": 0,
+        "beat": 3,
+        "gameSeconds": 58.18333333333131
+      }
+    ],
+    "visibilityChanges": [],
+    "renderSize": [
+      1036,
+      703
+    ],
+    "quality": "balanced",
+    "endingVisible": true,
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 667.8833333330546,
+      "deaths": 1,
+      "kills": 193,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "resources": {
+      "skeletons": 2,
+      "textures": 45,
+      "animationGroups": 48
+    },
+    "sourceSha256": {
+      "app.ts": "9bcfba6f8421e5a59691b222265ace35475eb74b80b0106464de55b0ffc37ad8",
+      "actors.ts": "b5c0ee5f14dd531938a722c964c6aca8a851a39197ae5c24f49d58fb194b16e4",
+      "scene.ts": "278358355f22f2db6ca81f4e659defea558dd882eea5babadafa0e65d5370d88",
+      "geometry.ts": "81e581a8ac8af2b425c9c90724a29ce88ab2b462c8d62579bd48d35cec0f375e",
+      "structures.ts": "086deddd64e59cbde4b427973b4988522599b7f6af5a555a689e32adb12421aa",
+      "landmarks.ts": "829ae0ae306bfcb41ee0794d3dee82e6d4a132dd0b8c3fdfd9f386c46ab8da94",
+      "engine.ts": "f1d380dba46199090d01b255e3bf3b47d06fd9501c8b2ebb8241c38c9bd11023"
+    },
+    "conditions": "Desktop Chrome, WebGL2, AMD Radeon integrated graphics, Explorer, Balanced, ordinary render loop with development-only input policy. Known route and puzzle solutions; no teleport, extra health or accelerated simulation."
+  }
+}

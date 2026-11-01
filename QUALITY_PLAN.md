@@ -33,3 +33,13 @@ User authorised the rebuild, GitHub repository integration and Vercel publicatio
 ## Current gate status
 
 The rebuilt chapter, local replay and production-preview reliability checks are implemented and tested. Art, animation readability, camera occlusion and performance have undergone several passes. The requested top-tier visual bar, human enjoyment and first-time 15–20 minute duration remain open; automated completion must not close those gates. No paid subscription or cloud project has been created.
+
+## Visual review after the structural pass
+
+The opening, reservoir and forest captures still show repeated paving, similar rectangular terraces and sparse scenery. The structural arcades make the route more believable, but do not resolve those larger composition problems. The forest needs a distinct canopy and ground treatment; the waterworks needs convincing channels, built machinery and spray at its falls. Lanterns currently glow without illuminating nearby surfaces. These are observed art gaps, not failed gameplay tests.
+
+Next art work should prioritise a clearly different silhouette, surface treatment and close-range detail for each area; a coherent set of detailed props; and visible interaction between light, water, vegetation and the player. Keep combat silhouettes and landing zones readable. Inspect ordinary gameplay views, not only staged cameras. Measure performance after added detail, and preserve the chapter route and checkpoint checks.
+
+The download pass should distinguish source bytes from network bytes: the public host serves the hero glTF with Brotli. Unused animation clips and architecture assets are candidates for removal only after preserving the source/license manifest and verifying the retained animation and geometry. No paid subscription is needed for these changes.
+
+The normal-speed audit also found seven 0.96–1.33 second stalls during area rebuilds. Smooth transitions are now an explicit remaining performance task; the 55.8 FPS average does not close that gate.

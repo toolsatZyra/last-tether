@@ -33,12 +33,16 @@ import { Assets, Actor } from "./actors";
 import { PhysicsWorld } from "./physics";
 import { createRiver } from "./water";
 import { weatheredStone } from "./surfaces";
+import { terraceStructure, bridgeStructure } from "./structures";
+import { landmarks } from "./landmarks";
+import { PBRCustomMaterial } from "@babylonjs/materials/custom/pbrCustomMaterial";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
 import { Expedition, clamp, type Event } from "./engine";
 const c = (s: string) => Color3.FromHexString(s);
 const V = (p: V) => new Vector3(p.x, p.y, p.z);
 export class GameScene {
+  cascadeTexture!: DynamicTexture;
   rain!: ParticleSystem;
   motes!: ParticleSystem;
   sparkTexture!: DynamicTexture;
@@ -307,6 +311,33 @@ export class GameScene {
       this.materials[name] = m;
       return m;
     };
+    const cascade = new StandardMaterial("spillway-water", this.scene);
+    this.cascadeTexture = new DynamicTexture(
+      "cascade-streaks",
+      { width: 256, height: 256 },
+      this.scene,
+      true,
+    );
+    const ink = this.cascadeTexture.getContext();
+    ink.clearRect(0, 0, 256, 256);
+    for (let x = 0; x < 256; x++) {
+      const edge = Math.sin((x / 255) * Math.PI),
+        a = (0.25 + 0.22 * Math.sin(x * 0.7) + 0.1 * Math.sin(x * 2.9)) * edge;
+      ink.fillStyle = "rgba(181,225,218," + Math.max(0.04, a) + ")";
+      ink.fillRect(x, 0, 1, 256);
+    }
+    for (let y = 0; y < 256; y += 16) {
+      ink.fillStyle = "rgba(215,246,237,0.08)";
+      ink.fillRect(0, y, 256, 2);
+    }
+    this.cascadeTexture.hasAlpha = true;
+    this.cascadeTexture.update();
+    cascade.diffuseTexture = this.cascadeTexture;
+    cascade.useAlphaFromDiffuseTexture = true;
+    cascade.emissiveColor = c("#527f7d");
+    cascade.backFaceCulling = false;
+    cascade.disableDepthWrite = true;
+    this.materials.cascade = cascade;
     const stone = pbr("stone", "#a1aaa0");
     stone.albedoTexture = new Texture(
       "/assets/materials/stone.jpg",
@@ -324,7 +355,26 @@ export class GameScene {
       "#899383",
       0.13,
     );
-    const floor = pbr("floor", "#c6cac0");
+    this.materials.masonry = weatheredStone(
+      "structural-stone",
+      this.scene,
+      stone.albedoTexture as Texture,
+      "#87927e",
+      0.45,
+    );
+    const terrainNormal = (stone.bumpTexture as Texture).clone();
+    terrainNormal.uScale = 96;
+    terrainNormal.vScale = 134;
+    terrainNormal.level = 0.45;
+    (this.materials.terrain as PBRMaterial).bumpTexture = terrainNormal;
+    const floor = new PBRCustomMaterial("floor", this.scene);
+    floor.albedoColor = c("#d1d6d1").toLinearSpace();
+    floor.roughness = 0.85;
+    floor.metallic = 0;
+    floor.Fragment_Custom_Albedo(
+      "float pavingLuma=dot(surfaceAlbedo,vec3(0.299,0.587,0.114));surfaceAlbedo=mix(surfaceAlbedo,vec3(pavingLuma)*vec3(0.93,1.0,1.03),0.55);",
+    );
+    this.materials.floor = floor;
     floor.albedoTexture = new Texture(
       "/assets/materials/floor-diff.jpg",
       this.scene,
@@ -413,6 +463,35 @@ export class GameScene {
       cameraSolid: true,
       physics: false,
     };
+  }
+  addCascade(p: V, width: number, height: number) {
+    const left: Vector3[] = [],
+      right: Vector3[] = [];
+    for (let i = 0; i <= 16; i++) {
+      const t = i / 16,
+        z = p.z - Math.sin((t * Math.PI) / 2) * 1.6;
+      left.push(new Vector3(p.x - width / 2, p.y - height * t, z));
+      right.push(new Vector3(p.x + width / 2, p.y - height * t, z));
+    }
+    const mesh = MeshBuilder.CreateRibbon(
+      "spillway-cascade",
+      { pathArray: [left, right], sideOrientation: Mesh.DOUBLESIDE },
+      this.scene,
+    );
+    mesh.material = this.materials.cascade;
+    mesh.parent = this.root;
+    mesh.isPickable = false;
+    mesh.metadata = { animatedWater: true };
+    const foam = MeshBuilder.CreateGround(
+      "spillway-foam",
+      { width: width * 1.7, height: 6 },
+      this.scene,
+    );
+    foam.position.set(p.x, p.y - height + 0.1, p.z - 2);
+    foam.material = this.materials.cascade;
+    foam.parent = this.root;
+    foam.isPickable = false;
+    foam.metadata = { animatedWater: true };
   }
   makeWater() {
     this.river = createRiver(this.scene);
@@ -647,32 +726,27 @@ export class GameScene {
     };
     for (let i = 0; i < ch.points.length; i++) {
       const p = ch.points[i];
-      this.slab(p, p.arena ? 46 : 26, p.arena ? 46 : 28, 1.5);
+      this.slab(p, p.arena ? 46 : 26, p.arena ? 46 : 28, 3.1);
       this.slab(
-        v(p.x, p.y - 1.3, p.z),
+        v(p.x, p.y - 2.8, p.z),
         p.arena ? 47 : 27,
         p.arena ? 47 : 29,
         0.5,
         "edge",
       );
-      for (const side of [-1, 1])
-        this.architecture(
-          "Column_BridgeSupport",
-          v(p.x + side * (p.arena ? 15 : 8), -12, p.z),
-          p.y + 11,
-          0,
-          false,
-        );
+      terraceStructure(this, p);
       if (i % 2) {
         for (const side of [-1, 1]) {
           this.lamp(v(p.x + side * 18, p.y, p.z - 17));
-          this.arch(v(p.x + side * 18, p.y, p.z + 18), 5, 8);
+          if (i === 3 && side === -1)
+            this.arch(v(p.x + side * 18, p.y, p.z + 18), 5, 8);
         }
       } else {
         this.lamp(v(p.x + 8, p.y, p.z + 5));
       }
       const q = ch.points[i + 1];
       if (q && !q.gap) {
+        bridgeStructure(this, p, q);
         const left: Vector3[] = [],
           right: Vector3[] = [];
         const dx = q.x - p.x,
@@ -946,6 +1020,7 @@ export class GameScene {
     this.arch(v(last.x, last.y, last.z + 23), 22, 22);
     this.arch(v(last.x, last.y, last.z + 34), 26, 30);
     this.dress(s);
+    landmarks(this);
     this.batchStatic();
     this.foregroundProps = this.root
       .getChildMeshes()
@@ -961,7 +1036,16 @@ export class GameScene {
     for (const n of this.foliage)
       for (const m of n.getChildMeshes()) this.shadow.addShadowCaster(m);
     this.shadowCasters = [...(this.shadow.getShadowMap()?.renderList || [])];
-    this.river.reflect(this.staticDraws.filter((m) => m.metadata?.landscape));
+    this.river.reflect([
+      this.scene.getMeshByName("sky")!,
+      ...this.staticDraws.filter(
+        (m) =>
+          m.metadata?.landscape ||
+          m.material === this.materials.masonry ||
+          m.material === this.materials.metal ||
+          m.material === this.materials.brass,
+      ),
+    ]);
     this.physics.rebuild(
       this.root.getChildMeshes().filter((m) => m instanceof Mesh) as Mesh[],
       s,
@@ -999,7 +1083,8 @@ export class GameScene {
           animated = true;
         parent = parent.parent;
       }
-      if (animated || m.name === "oncoming-flood") continue;
+      if (animated || m.metadata?.animatedWater || m.name === "oncoming-flood")
+        continue;
       m.computeWorldMatrix(true);
       const p = m.getBoundingInfo().boundingBox.centerWorld;
       const key = [
@@ -1124,13 +1209,6 @@ export class GameScene {
             1.3,
             0,
             true,
-          );
-          this.architecture(
-            "Column_BridgeSupport",
-            v(p.x + side * 8, p.y - 17, p.z),
-            17,
-            0,
-            false,
           );
         }
       }
@@ -1376,6 +1454,7 @@ export class GameScene {
     }
     this.particleBursts = this.particleBursts.filter((p) => p.life > 0);
     this.time += dt;
+    this.cascadeTexture.vOffset = (this.cascadeTexture.vOffset - dt * 0.7) % 1;
     const actorDt = s.hitstop > 0 ? 0 : dt;
     this.hero.player(s, actorDt);
     for (const e of s.enemies) {

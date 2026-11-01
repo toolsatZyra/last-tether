@@ -47,6 +47,7 @@ let game = new Expedition(),
 const sound = new Soundscape();
 const keys = new Set<string>(),
   edges = new Set<string>();
+let testInput: ((state: Expedition) => Input) | null = null;
 let drag = false;
 let day = new Date().toISOString().slice(0, 10);
 let preferences = validPreferences(read("last-tether-v2:settings"));
@@ -459,7 +460,12 @@ function frame(now: number) {
   last = now;
   if (playing && !paused) {
     acc += dt;
-    const i = acc >= 1 / 60 ? input() : { x: 0, z: 0 };
+    const i =
+      acc >= 1 / 60
+        ? import.meta.env.DEV && testInput
+          ? testInput(game)
+          : input()
+        : { x: 0, z: 0 };
     let first = true;
     while (acc >= 1 / 60) {
       game.step(
@@ -618,6 +624,9 @@ async function boot() {
           return view;
         },
         start,
+        setTestInput(handler: ((state: Expedition) => Input) | null) {
+          testInput = handler;
+        },
         pause,
         close,
         save,
