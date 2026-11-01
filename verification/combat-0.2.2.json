@@ -233,5 +233,20 @@
       "p95FrameMs": 18.40000000000873,
       "frames": 251
     }
-  ]
+  ],
+  "publicDeployment": {
+    "url": "https://last-tether.vercel.app/",
+    "commit": "d29d6ceaea5400639b5af2ebe0816a08d5cc4185",
+    "deployment": "dpl_ATq1DyhhfKLRBqYSQRpHvM3j7jg8",
+    "state": "READY",
+    "ordinaryKeyboardOpening": true,
+    "defeats": 3,
+    "recoveries": 0,
+    "objective": "Take back the watchpost",
+    "pause": true,
+    "saveReloadResume": true,
+    "noDebugHook": true,
+    "pageErrors": [],
+    "failedRequests": []
+  }
 }
