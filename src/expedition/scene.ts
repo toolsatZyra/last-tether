@@ -6,6 +6,7 @@ import {
   Color4,
   FreeCamera,
   HemisphericLight,
+  PointLight,
   DirectionalLight,
   MeshBuilder,
   PBRMaterial,
@@ -32,16 +33,18 @@ import {
 import { Assets, Actor } from "./actors";
 import { PhysicsWorld } from "./physics";
 import { createRiver } from "./water";
-import { weatheredStone } from "./surfaces";
+import { weatheredStone, pavingMaterial } from "./surfaces";
 import { terraceStructure, bridgeStructure } from "./structures";
 import { landmarks } from "./landmarks";
-import { PBRCustomMaterial } from "@babylonjs/materials/custom/pbrCustomMaterial";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
 import { Expedition, clamp, type Event } from "./engine";
 const c = (s: string) => Color3.FromHexString(s);
 const V = (p: V) => new Vector3(p.x, p.y, p.z);
 export class GameScene {
+  surfaceClimate = new Vector3(0.3, 0.8, 0);
+  lampPositions: Vector3[] = [];
+  lampLights: PointLight[] = [];
   cascadeTexture!: DynamicTexture;
   rain!: ParticleSystem;
   motes!: ParticleSystem;
@@ -50,6 +53,8 @@ export class GameScene {
   foregroundProps: AbstractMesh[] = [];
   shadowCasters: AbstractMesh[] = [];
   foliage: TransformNode[] = [];
+  foliageViews: { meshes: AbstractMesh[]; center: Vector3; radius: number }[] =
+    [];
   wheels: TransformNode[] = [];
   staticDraws: Mesh[] = [];
   visibilityTick = 0;
@@ -87,7 +92,13 @@ export class GameScene {
   gates: Mesh[] = [];
   pointers: Mesh[] = [];
   pods: Mesh[] = [];
-  cacheMeshes: Mesh[] = [];
+  cacheMeshes: AbstractMesh[] = [];
+  memoryCaches: {
+    key: string;
+    lid: TransformNode;
+    light: Mesh;
+    opened: number;
+  }[] = [];
   shots = new Map<number, Mesh>();
   rings = new Map<number, Mesh>();
   effects: { mesh: Mesh; life: number; max: number; velocity: Vector3 }[] = [];
@@ -131,6 +142,17 @@ export class GameScene {
       this.scene,
     );
     this.sun.intensity = 3.6;
+    for (let i = 0; i < 2; i++) {
+      const light = new PointLight(
+        "nearby-lantern-" + i,
+        Vector3.Zero(),
+        this.scene,
+      );
+      light.diffuse = c("#ffc778");
+      light.intensity = 0;
+      light.range = 13;
+      this.lampLights.push(light);
+    }
     this.sun.diffuse = c("#ffe1b6");
     this.sun.shadowMinZ = 1;
     this.sun.shadowMaxZ = 180;
@@ -367,31 +389,7 @@ export class GameScene {
     terrainNormal.vScale = 134;
     terrainNormal.level = 0.45;
     (this.materials.terrain as PBRMaterial).bumpTexture = terrainNormal;
-    const floor = new PBRCustomMaterial("floor", this.scene);
-    floor.albedoColor = c("#d1d6d1").toLinearSpace();
-    floor.roughness = 0.85;
-    floor.metallic = 0;
-    floor.Fragment_Custom_Albedo(
-      "float pavingLuma=dot(surfaceAlbedo,vec3(0.299,0.587,0.114));surfaceAlbedo=mix(surfaceAlbedo,vec3(pavingLuma)*vec3(0.93,1.0,1.03),0.55);",
-    );
-    this.materials.floor = floor;
-    floor.albedoTexture = new Texture(
-      "/assets/materials/floor-diff.jpg",
-      this.scene,
-    );
-    floor.bumpTexture = new Texture(
-      "/assets/materials/floor-nor_gl.jpg",
-      this.scene,
-    );
-    floor.bumpTexture.level = 0.55;
-    floor.metallicTexture = new Texture(
-      "/assets/materials/floor-rough.jpg",
-      this.scene,
-    );
-    floor.useRoughnessFromMetallicTextureGreen = true;
-    floor.useRoughnessFromMetallicTextureAlpha = false;
-    floor.useMetallnessFromMetallicTextureBlue = false;
-    floor.backFaceCulling = true;
+    this.materials.floor = pavingMaterial(this.scene, this.surfaceClimate);
     const cut = pbr("cutstone", "#9ba6a1");
     cut.albedoTexture = stone.albedoTexture;
     cut.bumpTexture = stone.bumpTexture;
@@ -406,6 +404,10 @@ export class GameScene {
     pbr("edge", "#394d51");
     pbr("brass", "#ac8952", 0.36, 0.72);
     pbr("metal", "#30474c", 0.45, 0.8);
+    const channel = pbr("channel", "#2f6a62", 0.24, 0.15);
+    channel.alpha = 0.84;
+    channel.clearCoat.isEnabled = true;
+    channel.clearCoat.intensity = 0.4;
     pbr("wood", "#69513c");
     pbr("grass", "#486552");
     pbr("red", "#b34e35", 0.5, 0.3);
@@ -669,23 +671,100 @@ export class GameScene {
       w + 3,
     );
   }
+  memoryCache(p: V, key: string, s: Expedition) {
+    const chest = this.architecture("Chest_Gold", p, 1.3, 0, false);
+    const meshes = chest.getChildMeshes();
+    const tops = meshes.filter((m) => m.name.includes("Top"));
+    const lid = new TransformNode("memory-lid", this.scene);
+    lid.parent = chest;
+    if (tops.length) {
+      const min = new Vector3(Infinity, Infinity, Infinity),
+        max = new Vector3(-Infinity, -Infinity, -Infinity);
+      for (const mesh of tops) {
+        mesh.computeWorldMatrix(true);
+        const b = mesh.getBoundingInfo().boundingBox;
+        min.minimizeInPlace(b.minimumWorld);
+        max.maximizeInPlace(b.maximumWorld);
+      }
+      lid.setAbsolutePosition(new Vector3((min.x + max.x) / 2, min.y, max.z));
+      for (const mesh of tops) mesh.setParent(lid);
+    }
+    const light = MeshBuilder.CreateSphere(
+      "memory-glimmer",
+      { diameter: 0.16, segments: 8 },
+      this.scene,
+    );
+    light.position.set(p.x, p.y + 1.65, p.z);
+    light.parent = this.root;
+    light.material = this.materials.cyan;
+    light.isPickable = false;
+    this.cacheMeshes.push(...meshes, light);
+    const opened = s.secrets.includes(key) ? 1 : 0;
+    lid.rotation.x = opened * 1.15;
+    light.setEnabled(!opened);
+    this.memoryCaches.push({ key, lid, light, opened });
+  }
   lamp(p: V) {
-    this.cylinder("lamp-base", v(p.x, p.y + 0.25, p.z), 0.9, 0.5, "edge");
-    this.cylinder("lamp-post", v(p.x, p.y + 1.5, p.z), 0.14, 2.5, "brass");
-    const lantern = this.box(
+    const parts: Mesh[] = [];
+    const cylinder = (
+      name: string,
+      y: number,
+      diameter: number,
+      height: number,
+      top = diameter,
+    ) => {
+      const mesh = this.cylinder(
+        name,
+        v(p.x, p.y + y, p.z),
+        diameter,
+        height,
+        "metal",
+        top,
+      );
+      parts.push(mesh);
+      return mesh;
+    };
+    cylinder("lantern-foot", 0.16, 0.85, 0.32);
+    cylinder("lantern-foot-ring", 0.36, 0.58, 0.12);
+    cylinder("lantern-shaft", 1.62, 0.12, 2.5);
+    cylinder("lantern-collar", 2.7, 0.3, 0.12);
+    cylinder("lantern-cup", 2.86, 0.75, 0.18, 0.62);
+    cylinder("lantern-roof", 3.66, 0.95, 0.42, 0.16);
+    cylinder("lantern-finial", 3.95, 0.12, 0.2, 0.03);
+    for (let i = 0; i < 6; i++) {
+      const angle = (i * Math.PI) / 3;
+      parts.push(
+        this.box(
+          "lantern-mullion",
+          v(
+            p.x + Math.sin(angle) * 0.33,
+            p.y + 3.19,
+            p.z + Math.cos(angle) * 0.33,
+          ),
+          v(0.045, 0.68, 0.045),
+          "metal",
+          false,
+        ),
+      );
+    }
+    const frame = Mesh.MergeMeshes(parts, true, true, undefined, false, false)!;
+    frame.name = "lamp-post";
+    frame.parent = this.root;
+    frame.material = this.materials.metal;
+    frame.receiveShadows = true;
+    frame.isPickable = false;
+    frame.metadata = { physics: false, cameraSolid: false };
+    this.shadow.addShadowCaster(frame);
+    const lantern = MeshBuilder.CreateCylinder(
       "lantern",
-      v(p.x, p.y + 3, p.z),
-      v(0.5, 0.9, 0.5),
-      "glow",
-      false,
+      { diameter: 0.57, height: 0.65, tessellation: 6 },
+      this.scene,
     );
-    this.box(
-      "lantern-cap",
-      v(p.x, p.y + 3.5, p.z),
-      v(0.8, 0.18, 0.8),
-      "metal",
-      false,
-    );
+    lantern.position.set(p.x, p.y + 3.19, p.z);
+    lantern.material = this.materials.glow;
+    lantern.parent = this.root;
+    lantern.isPickable = false;
+    this.lampPositions.push(new Vector3(p.x, p.y + 3.1, p.z));
     return lantern;
   }
   build(s: Expedition) {
@@ -735,6 +814,7 @@ export class GameScene {
       yield;
     }
     this.root = new TransformNode("sector-" + s.sector, this.scene);
+    this.lampPositions = [];
     this.dials = [];
     this.anchors = [];
     this.devices = [];
@@ -742,6 +822,7 @@ export class GameScene {
     this.gates = [];
     this.pods = [];
     this.cacheMeshes = [];
+    this.memoryCaches = [];
     this.actors.forEach((a) => a.dispose());
     this.actors.clear();
     this.shots.forEach((m) => m.dispose());
@@ -751,6 +832,19 @@ export class GameScene {
     this.effects.forEach((e) => e.mesh.dispose());
     this.effects = [];
     const ch = s.chapter;
+    const climates = [
+      [0.32, 0.85, 0],
+      [0.85, 0.2, 0],
+      [0.7, 1, 0],
+      [1, 0.45, 0],
+      [0.05, 0.05, 1],
+      [0.15, 0.75, 0],
+      [0.2, 0.25, 0],
+      [0.4, 1, 0],
+    ];
+    this.surfaceClimate.copyFromFloats(
+      ...(climates[s.sector] as [number, number, number]),
+    );
     this.scene.fogColor = c(ch.sky);
     this.scene.clearColor = new Color4(
       ...(c(ch.sky).asArray() as [number, number, number]),
@@ -857,6 +951,8 @@ export class GameScene {
           x = p.x + side * ((p.arena ? 21 : 11) - rand() * 3),
           z = p.z - 20 + rand() * 40;
         if (Math.abs(z - p.z) > 13 && !p.arena) continue;
+        if (i > 0 && i % 2 === 0 && Math.hypot(x - p.x - 10, z - p.z - 6) < 3.5)
+          continue;
         this.assets.prop(
           j % 3 ? "Bush_Small" : "Bush_Large",
           this.scene,
@@ -865,23 +961,12 @@ export class GameScene {
           1.2 + rand() * 1.8,
         );
       }
-      if (i > 0 && i % 2 === 0) {
-        const cache = this.box(
-          "memory-cache",
-          v(p.x + 10, p.y + 0.8, p.z + 6),
-          v(1.2, 1.4, 1.2),
-          "brass",
-          false,
+      if (i > 0 && i % 2 === 0)
+        this.memoryCache(
+          v(p.x + 10, p.y, p.z + 6),
+          s.sector + "-" + (i / 2 - 1),
+          s,
         );
-        this.box(
-          "cache-light",
-          v(p.x + 10, p.y + 1.6, p.z + 6),
-          v(0.7, 0.12, 0.7),
-          "cyan",
-          false,
-        );
-        this.cacheMeshes.push(cache);
-      }
       yield;
     }
     this.makeLandscape();
@@ -1077,6 +1162,14 @@ export class GameScene {
     this.foliage = this.root
       .getChildTransformNodes()
       .filter((n) => n.metadata?.foliage);
+    this.foliageViews = this.foliage.map((n) => {
+      const bounds = n.getHierarchyBoundingVectors(true);
+      return {
+        meshes: n.getChildMeshes(),
+        center: bounds.min.add(bounds.max).scale(0.5),
+        radius: bounds.max.subtract(bounds.min).length() * 0.42,
+      };
+    });
     this.wheels = this.root
       .getChildTransformNodes()
       .filter((n) => n.metadata?.wheel);
@@ -1107,7 +1200,7 @@ export class GameScene {
     }
   }
   *batchStaticSteps(): Generator<void> {
-    const keep = new Set<Mesh>([
+    const keep = new Set<AbstractMesh>([
       ...this.anchors,
       ...this.gates,
       ...this.pointers,
@@ -1298,7 +1391,7 @@ export class GameScene {
       if ([0, 1, 2, 3].includes(s.sector)) {
         for (const side of [-1, 1]) {
           const x = p.x + side * (p.arena ? 21 : 11),
-            z = p.z + (i % 2 ? 14 : 5);
+            z = p.z + (i % 2 ? 14 : side === 1 && i > 0 ? -9 : 5);
           this.assets.prop(
             "BirchTree_1",
             this.scene,
@@ -1335,10 +1428,18 @@ export class GameScene {
           this.box(
             "garden-channel",
             v(p.x + side * 10, p.y + 0.04, p.z),
-            v(0.7, 0.08, p.arena ? 33 : 23),
-            "cyan",
+            v(0.85, 0.08, p.arena ? 33 : 23),
+            "channel",
             false,
           );
+          for (const edge of [-1, 1])
+            this.box(
+              "channel-curb",
+              v(p.x + side * 10 + edge * 0.56, p.y + 0.15, p.z),
+              v(0.24, 0.3, p.arena ? 33 : 23),
+              "cutstone",
+              false,
+            );
           for (let j = -1; j <= 1; j++) {
             this.cylinder(
               "garden-column",
@@ -1538,6 +1639,13 @@ export class GameScene {
       (n) =>
         (n.rotation.z = Math.sin(this.time * 0.8 + n.metadata.phase) * 0.012),
     );
+    for (const cache of this.memoryCaches) {
+      const opened = s.secrets.includes(cache.key);
+      cache.opened +=
+        ((opened ? 1 : 0) - cache.opened) * (1 - Math.exp(-dt * 8));
+      cache.lid.rotation.x = cache.opened * 1.15;
+      cache.light.setEnabled(!opened);
+    }
     this.dials.forEach((d) => {
       d.hand.rotation.z =
         (-(d.beat === s.beat ? s.runes[d.index] : 0) * Math.PI) / 2;
@@ -1738,6 +1846,12 @@ export class GameScene {
       const alpha = occludes(center, actor.height * 0.45) ? 0.22 : 1;
       actor.meshes.forEach((m) => (m.visibility = alpha));
     }
+    for (const plant of this.foliageViews) {
+      const blocked =
+        occludes(plant.center, plant.radius) ||
+        Vector3.Distance(this.camera.position, plant.center) < plant.radius;
+      for (const mesh of plant.meshes) mesh.visibility = blocked ? 0.16 : 1;
+    }
     for (const prop of this.foregroundProps) {
       prop.visibility = occludes(
         prop.getBoundingInfo().boundingBox.centerWorld,
@@ -1757,6 +1871,18 @@ export class GameScene {
       !this.reduced && (s.dodge > 0 || s.grapple) ? 1.14 : 1.02,
       dt * 5,
     );
+    const nearestLamps = this.lampPositions
+      .map((p) => ({ p, d: Vector3.DistanceSquared(p, V(s.p)) }))
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 2);
+    for (let i = 0; i < this.lampLights.length; i++) {
+      const lamp = nearestLamps[i],
+        light = this.lampLights[i];
+      if (lamp) light.position.copyFrom(lamp.p);
+      light.intensity = lamp
+        ? 22 * clamp((22 - Math.sqrt(lamp.d)) / 8, 0, 1)
+        : 0;
+    }
     this.sun.position.set(s.p.x + 40, s.p.y + 60, s.p.z - 35);
     this.sun.setDirectionToTarget(new Vector3(s.p.x, s.p.y, s.p.z + 12));
     if (++this.visibilityTick % 15 === 0) {

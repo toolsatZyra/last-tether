@@ -1,0 +1,269 @@
+{
+  "version": "0.2.5",
+  "date": "2026-11-02",
+  "unitTests": 18,
+  "details": {
+    "initial": {
+      "lights": 2,
+      "lampPositions": 32,
+      "chests": 3,
+      "lidMeshes": 2
+    },
+    "opened": {
+      "secret": true,
+      "flasks": 2,
+      "lid": 1.1497128305383117,
+      "glimmer": false
+    },
+    "restored": {
+      "lid": 1.15,
+      "glimmer": false
+    },
+    "foliage": {
+      "faded": true,
+      "restored": true
+    },
+    "errors": []
+  },
+  "story": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 45,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 683.7666666663735,
+    "kills": 193,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 12.23333333333352,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 32.5666666666661,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 48.833333333331844,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 88.4833333333296,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 110.84999999999499,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 143.38333333333958,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 175.9166666666988,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 192.1833333333784,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 228.78333333340754,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 256.23333333342896,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 278.6000000000753,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 283.683333333404,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 305.0333333333846,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 328.41666666669664,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 355.8666666666717,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 370.09999999999206,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 396.53333333330136,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 418.8999999999477,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 455.4999999999144,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 469.7333333332348,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 489.0499999998839,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 520.5666666665219,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 540.8999999998367,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 555.1333333331571,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 600.8833333331155,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 628.3333333330905,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 646.6333333330739,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 647.6499999997396,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 659.8499999997285,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 671.0333333330517,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 683.7666666663735,
+      "deaths": 0,
+      "kills": 193,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "geometry": {
+    "sourceMeshes": 71,
+    "sectorsRebuilt": 4,
+    "sharedGeometryUnchanged": true
+  },
+  "foliage": {
+    "checked": 125,
+    "bad": []
+  },
+  "production": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "frameSamples": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 49.212598425076536,
+      "medianFrameMs": 18.200000000004366,
+      "p95FrameMs": 24.400000000001455,
+      "frames": 215
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 56.764427625354756,
+      "medianFrameMs": 18.19999999999709,
+      "p95FrameMs": 24.30000000000291,
+      "frames": 211
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 66.80026720084726,
+      "medianFrameMs": 18.10000000000582,
+      "p95FrameMs": 24.19999999999709,
+      "frames": 242
+    }
+  ],
+  "limits": [
+    "Detail interaction check uses a staged position and flask count; native E triggers collection. This is not a complete native-input story run.",
+    "The full chapter route is accelerated and knows the route and puzzle solutions.",
+    "Four-second frame samples during the art pass are not sustained performance; final lamp intensity and garden-channel cosmetics were adjusted afterwards.",
+    "First-time pacing, top-tier modern-game art, human enjoyment and audible mix remain unverified."
+  ]
+}

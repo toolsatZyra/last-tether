@@ -596,8 +596,9 @@ export class Assets {
                       0.6,
                     )
                   : new PBRMaterial("ruins-" + paletteKey, scene));
-              mat.roughness = 0.9;
-              mat.metallic = 0;
+              const metal = n.includes("gold") || n.includes("metal");
+              mat.roughness = metal ? 0.4 : 0.9;
+              mat.metallic = metal ? 0.72 : 0;
               mat.albedoColor = Color3.FromHexString(color).toLinearSpace();
               if (!shared) paletteMaterials.set(paletteKey, mat);
               if (original.diffuseTexture) {

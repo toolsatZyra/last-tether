@@ -75,7 +75,34 @@ function reservoir(view: GameScene, p: V) {
 }
 export function landmarks(view: GameScene) {
   const p = view.current.chapter.points[1];
-  if (view.sector === 0) bellTower(view, v(p.x - 48, p.y - 8, p.z + 30));
+  if (view.sector === 0) {
+    bellTower(view, v(p.x - 48, p.y - 8, p.z + 30));
+    for (const index of [0, 2, 4]) {
+      const q = view.current.chapter.points[index];
+      view.architecture(
+        "Window_Bars_Overgrown",
+        v(q.x - 11.2, q.y, q.z - 3),
+        5.8,
+        Math.PI / 2,
+        true,
+        5.2,
+      );
+      view.architecture(
+        "Wall_Broken",
+        v(q.x - 10.5, q.y, q.z + 5),
+        2.9,
+        Math.PI / 2,
+        true,
+      );
+      view.architecture(
+        "Pot1_Broken",
+        v(q.x - 8.6, q.y, q.z + 1),
+        0.75,
+        0.3,
+        false,
+      );
+    }
+  }
   if (view.sector === 2) reservoir(view, v(p.x + 28, 0, p.z + 60));
   if (view.sector === 7) bellTower(view, v(p.x + 58, p.y - 2, p.z + 40));
   if (view.sector === 3)

@@ -86,3 +86,13 @@ The accelerated input-driven Havok chapter reached its ending and saved a finish
 The compiled opening passed ordinary keyboard movement/combat, three defeats, watchpost progression, pause and save/reload/resume. Both new-game and resume transitions completed. No development hook, page errors or failed asset responses were recorded. The transition screen was visually inspected. Full human pacing, enjoyment and the requested visual quality remain open.
 
 Public 0.2.4 verification: application commit `18ffba1bcfa4d05123cb2ad9ab799253bd3d156b`, deployment `dpl_GE1Aw4iKxBP8ZYNGPoA1pSuLAdqe`, reached READY. The public game passed new-game and resume transitions, ordinary keyboard opening combat, three defeats, watchpost progression, pause and save/reload/resume. No development hook, page errors or failed asset responses were recorded.
+
+## Surface and interaction detail — 0.2.5
+
+Eighteen unit/geometry checks and the TypeScript/Vite build pass. The full accelerated Havok story/interface route completed **683.77 simulated seconds**, **193 defeats**, **zero recoveries**, all 32 objectives, a visible ending and a finished checkpoint. The scene retained 2 skeletons, 45 textures and 48 animation groups. All 71 imported meshes retained their geometry over four rebuilds. The planting check passed for 125 nearby plants; three overlapping bushes were deliberately removed from cache clearances.
+
+A staged cache check used ordinary E input to collect a memory: the flask count changed from 1 to 2, the lid opened to approximately 1.15 radians, the glimmer disappeared, and save/resume restored the open state. Both authored lid meshes remain attached to the hinge. A camera-inside-foliage check verified fade and restoration. The opening, closed/open chest and three area views were visually inspected. A shader variable error found during development was corrected before these browser checks; TypeScript compilation alone would not have caught it.
+
+Four-second Balanced samples during the art pass, at 1036 × 703, reported 49.2, 56.8 and 66.8 engine FPS in sectors 0, 3 and 6; p95 frame intervals were 24.4, 24.3 and 24.2 ms. These precede the final lower lamp intensity and garden-channel cosmetic adjustment and do not establish sustained chapter performance.
+
+The final compiled opening passed ordinary movement/combat, three defeats, watchpost progression, pause and save/reload/resume. No development hook, page errors or failed responses were recorded. The requested modern-game visual bar, human enjoyment and first-time duration remain open.
