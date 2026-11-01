@@ -76,3 +76,11 @@ Across 37,766 frames, the run averaged **55.76 FPS**, with median **17.2 ms**, p
 The development-only policy uses normal input intent with actual Havok movement and the ordinary rendering/interface loop. It knows enemy state, the route and puzzle solutions. It does not teleport, grant health or speed up simulation. This is stronger mechanical and performance evidence than accelerated traversal, but is still not a first-time human playtest.
 
 Public 0.2.3 verification: application commit `8e46dcc5dc2ae53a105443ec2cb97d8710b49dfa`, Vercel deployment `dpl_CKmNfqgQU6qky2o91EgD1fZih16w`, reached READY. The public ordinary-keyboard opening passed three defeats, zero recoveries, watchpost progression, pause and save/reload/resume. The development hook was absent, with no page errors or failed asset responses in this bounded check.
+
+## Responsive area transitions — 0.2.4
+
+Eighteen unit/geometry checks and the TypeScript/Vite build pass. All seven area changes were exercised through the asynchronous application path. Each kept position, health and game time fixed during loading; pausing during a transition remained in effect after loading. Each rebuilt 52–78 Havok bodies as appropriate and retained 2 skeletons and 48 animation groups. Transition wall times were **1.89–2.39 seconds**, with **133–182 ms maximum animation-frame intervals** and p95 intervals of 18.3–30.3 ms. These staged transitions are not a second full normal-speed chapter run. The earlier 0.2.3 audit remains separate.
+
+The accelerated input-driven Havok chapter reached its ending and saved a finished checkpoint in **683.77 simulated seconds**, with **193 defeats and zero recoveries**. Its observer timed out; the original CLI process was confirmed absent and the existing completed browser/checkpoint was recovered, without starting another run. The scene ended with 2 skeletons, 45 textures and 48 animation groups. All 71 imported source meshes retained their geometry over four rebuilds.
+
+The compiled opening passed ordinary keyboard movement/combat, three defeats, watchpost progression, pause and save/reload/resume. Both new-game and resume transitions completed. No development hook, page errors or failed asset responses were recorded. The transition screen was visually inspected. Full human pacing, enjoyment and the requested visual quality remain open.

@@ -43,3 +43,5 @@ Next art work should prioritise a clearly different silhouette, surface treatmen
 The download pass should distinguish source bytes from network bytes: the public host serves the hero glTF with Brotli. Unused animation clips and architecture assets are candidates for removal only after preserving the source/license manifest and verifying the retained animation and geometry. No paid subscription is needed for these changes.
 
 The normal-speed audit also found seven 0.96–1.33 second stalls during area rebuilds. Smooth transitions are now an explicit remaining performance task; the 55.8 FPS average does not close that gate.
+
+Version 0.2.4 addresses the one-second area rebuild stalls with batched construction and material preparation behind an area title. Seven checks measured 1.89–2.39 seconds of loading, with the largest browser interval 133–182 ms. Combat and time stop during these transitions. The remaining first-render delay and total loading time are explicit limits; this improves responsiveness without claiming seamless streaming or adding loading to the chapter-duration target.

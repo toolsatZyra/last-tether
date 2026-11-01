@@ -37,6 +37,7 @@ let game = new Expedition(),
   view: GameScene,
   playing = false,
   paused = false,
+  transitioning = false,
   last = performance.now(),
   acc = 0,
   uiTime = 0,
@@ -89,7 +90,8 @@ function camp() {
     (s ? "New expedition" : "Begin expedition") + " <span>↗</span>";
   $("begin").focus();
 }
-function start(mode: "story" | "daily", resume = false) {
+function start(mode: "story" | "daily", resume = false, immediate = false) {
+  if (transitioning) return;
   day = new Date().toISOString().slice(0, 10);
   game = new Expedition(resume ? validSave(read(STORY)) : null, mode);
   if (!resume)
@@ -116,7 +118,7 @@ function start(mode: "story" | "daily", resume = false) {
   acc = 0;
   last = performance.now();
   save();
-  events();
+  events(immediate);
   hud();
 }
 function modal(title: string, body: string) {
@@ -297,12 +299,54 @@ function ending() {
     : "Chapter complete. The forest beyond is a future adventure.";
   $("end-daily").focus();
 }
-function events() {
+async function crossArea() {
+  transitioning = true;
+  keys.clear();
+  edges.clear();
+  drag = false;
+  const sector = game.sector;
+  $("crossing-number").textContent =
+    String(sector + 1).padStart(2, "0") + " / THE BROKEN SPILLWAY";
+  $("crossing-title").textContent = game.chapter.title;
+  $("crossing").classList.toggle("reduce-motion", reduced);
+  $("crossing").hidden = false;
+  try {
+    // Give the browser a paint before replacing the world beneath the transition.
+    await new Promise<void>((resolve) =>
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+    );
+    await view.buildAsync(game);
+    await view.prepareArea(game);
+    view.update(game, 0);
+    await new Promise<void>((resolve) =>
+      requestAnimationFrame(() => resolve()),
+    );
+    $("crossing").hidden = true;
+    hud();
+  } catch (error) {
+    console.error(error);
+    playing = false;
+    $("crossing").hidden = true;
+    modal(
+      "The route could not open.",
+      '<p>Your secured checkpoint is saved. Reload the valley to try again.</p><button id="reload-route" class="primary">Reload valley →</button>',
+    );
+    $("reload-route").onclick = () => location.reload();
+  } finally {
+    acc = 0;
+    last = performance.now();
+    keys.clear();
+    edges.clear();
+    transitioning = false;
+  }
+}
+function events(immediate = false) {
   for (const e of game.events) {
     sound.play(e.type);
     view.event(e, game);
     if (e.type === "sector") {
-      view.build(game);
+      if (immediate) view.build(game);
+      else if (!transitioning) void crossArea();
       $("chapter-reveal").querySelector("span")!.textContent =
         game.chapter.subtitle;
       $("chapter-reveal").querySelector("h1")!.textContent = game.chapter.title;
@@ -458,6 +502,11 @@ function input(): Input {
 function frame(now: number) {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
+  if (transitioning) return;
+  if (playing && game.events.length) {
+    events();
+    if (transitioning) return;
+  }
   if (playing && !paused) {
     acc += dt;
     const i =
@@ -483,6 +532,10 @@ function frame(now: number) {
             },
       );
       events();
+      if (transitioning) {
+        acc = 0;
+        return;
+      }
       acc -= 1 / 60;
       first = false;
     }
@@ -531,7 +584,7 @@ document.addEventListener("keydown", (e) => {
     }
     return;
   }
-  if (!playing || paused) return;
+  if (!playing || paused || transitioning) return;
   if (e.code === "KeyJ") {
     journal();
     return;
@@ -559,6 +612,7 @@ document.addEventListener("visibilitychange", () => {
 $("game").addEventListener("contextmenu", (e) => e.preventDefault());
 $("game").addEventListener("pointerdown", (e) => {
   const p = e as PointerEvent;
+  if (transitioning) return;
   if (p.button === 2) drag = true;
   if (p.button === 0) keys.add("Mouse0");
 });
@@ -623,7 +677,9 @@ async function boot() {
         get view() {
           return view;
         },
-        start,
+        start(mode: "story" | "daily", resume = false) {
+          start(mode, resume, true);
+        },
         setTestInput(handler: ((state: Expedition) => Input) | null) {
           testInput = handler;
         },
@@ -633,7 +689,7 @@ async function boot() {
         step(i: Input, n = 1) {
           for (let k = 0; k < n; k++) {
             game.step(1 / 60, i);
-            events();
+            events(true);
           }
           view.update(game, 1 / 60);
           hud();
@@ -649,6 +705,7 @@ async function boot() {
             kills: game.kills,
             finished: game.finished,
             paused,
+            transitioning,
             playing,
             enemies: game.living.map((e) => ({
               kind: e.kind,

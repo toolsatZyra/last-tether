@@ -689,11 +689,51 @@ export class GameScene {
     return lantern;
   }
   build(s: Expedition) {
+    for (const _ of this.buildSteps(s)) {
+      /* synchronous developer/load path */
+    }
+  }
+  async buildAsync(s: Expedition) {
+    let slice = performance.now();
+    for (const _ of this.buildSteps(s)) {
+      if (performance.now() - slice >= 5) {
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+        slice = performance.now();
+      }
+    }
+  }
+  async prepareArea(s: Expedition) {
+    this.update(s, 0, false);
+    let slice = performance.now();
+    for (const mesh of this.scene.meshes) {
+      while (!mesh.isReady(true))
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+      if (performance.now() - slice >= 5) {
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+        slice = performance.now();
+      }
+    }
+    await this.scene.whenReadyAsync();
+  }
+  *buildSteps(s: Expedition): Generator<void> {
     this.current = s;
     this.particleBursts.forEach((p) => p.system.dispose(false));
     this.particleBursts = [];
     this.sector = s.sector;
-    this.root?.dispose(false, false);
+    if (this.root) {
+      for (const mesh of this.root.getChildMeshes()) {
+        if (!mesh.isDisposed()) mesh.dispose(false, false);
+        yield;
+      }
+      this.root.dispose(false, false);
+      yield;
+    }
     this.root = new TransformNode("sector-" + s.sector, this.scene);
     this.dials = [];
     this.anchors = [];
@@ -735,6 +775,7 @@ export class GameScene {
         "edge",
       );
       terraceStructure(this, p);
+      yield;
       if (i % 2) {
         for (const side of [-1, 1]) {
           this.lamp(v(p.x + side * 18, p.y, p.z - 17));
@@ -796,6 +837,7 @@ export class GameScene {
           }
         }
       }
+      yield;
       if (p.gap) {
         const anchor = MeshBuilder.CreateTorus(
           "grapple-ring",
@@ -840,8 +882,10 @@ export class GameScene {
         );
         this.cacheMeshes.push(cache);
       }
+      yield;
     }
     this.makeLandscape();
+    yield;
     for (let i = 0; i < 65; i++) {
       const x = (i % 2 ? 1 : -1) * (95 + rand() * 100),
         z = -30 + rand() * 530,
@@ -853,8 +897,9 @@ export class GameScene {
         new Vector3(x, y, z),
         1.4 + rand() * 1.4,
       );
+      yield;
     }
-    ch.beats.forEach((b, i) => {
+    for (const [i, b] of ch.beats.entries()) {
       const p = ch.points[b.node];
       const device = new TransformNode("device-" + i, this.scene);
       device.parent = this.root;
@@ -987,7 +1032,8 @@ export class GameScene {
       if (b.hazard === "blades") {
         this.cylinder("turbine", v(p.x, p.y - 1, p.z), 9, 3, "metal");
       }
-    });
+      yield;
+    }
     if (s.sector === 6) {
       const p = ch.points[3];
       for (const pillar of [
@@ -1019,9 +1065,10 @@ export class GameScene {
     const last = ch.points[7];
     this.arch(v(last.x, last.y, last.z + 23), 22, 22);
     this.arch(v(last.x, last.y, last.z + 34), 26, 30);
-    this.dress(s);
+    yield* this.dressSteps(s);
     landmarks(this);
-    this.batchStatic();
+    yield;
+    yield* this.batchStaticSteps();
     this.foregroundProps = this.root
       .getChildMeshes()
       .filter((m) =>
@@ -1046,14 +1093,20 @@ export class GameScene {
           m.material === this.materials.brass,
       ),
     ]);
-    this.physics.rebuild(
+    yield* this.physics.rebuildSteps(
       this.root.getChildMeshes().filter((m) => m instanceof Mesh) as Mesh[],
       s,
     );
     this.camera.position.set(s.p.x + 8, s.p.y + 7, s.p.z - 12);
     this.camera.setTarget(new Vector3(s.p.x, s.p.y + 2, s.p.z));
+    // Cull the newly built area before its first render, not fifteen frames later.
+    this.visibilityTick = 14;
   }
   batchStatic() {
+    for (const _ of this.batchStaticSteps()) {
+    }
+  }
+  *batchStaticSteps(): Generator<void> {
     const keep = new Set<Mesh>([
       ...this.anchors,
       ...this.gates,
@@ -1110,9 +1163,12 @@ export class GameScene {
       }
       list.push(m);
       groups.set(bucket, list);
+      yield;
     }
-    for (const list of groups.values())
+    for (const list of groups.values()) {
       for (const mesh of list) mesh.setParent(this.root);
+      yield;
+    }
     this.staticDraws = [];
     for (const meshes of groups.values()) {
       const metadata = meshes[0].metadata,
@@ -1137,6 +1193,7 @@ export class GameScene {
       merged.freezeWorldMatrix();
       if (cast) this.shadow.addShadowCaster(merged);
       this.staticDraws.push(merged);
+      yield;
     }
   }
   project(p: V) {
@@ -1156,6 +1213,10 @@ export class GameScene {
     };
   }
   dress(s: Expedition) {
+    for (const _ of this.dressSteps(s)) {
+    }
+  }
+  *dressSteps(s: Expedition): Generator<void> {
     this.blades = [];
     this.chargeMarks.forEach((m) => m.dispose());
     this.chargeMarks.clear();
@@ -1359,6 +1420,7 @@ export class GameScene {
         }
         frame.metadata = { wheel: true };
       }
+      yield;
     }
     ch.beats.forEach((b) => {
       if (b.hazard !== "blades") return;
@@ -1378,8 +1440,10 @@ export class GameScene {
       this.blades.push(root);
     });
     // The distant aqueduct is a landmark that establishes the height of the route.
-    for (let j = 0; j < 6; j++)
+    for (let j = 0; j < 6; j++) {
       this.arch(v(85 + j * 22, -3, 95 + j * 36), 19, 29 + j * 2);
+      yield;
+    }
     if (s.sector === 7) {
       this.flood = this.box(
         "oncoming-flood",
@@ -1442,7 +1506,7 @@ export class GameScene {
     if (e.type === "hit")
       this.shake = Math.max(this.shake, (e.value || 0) >= 70 ? 0.12 : 0.055);
   }
-  update(s: Expedition, dt: number) {
+  update(s: Expedition, dt: number, render = true) {
     if (!this.loaded) return;
     this.current = s;
     if (this.sector !== s.sector) this.build(s);
@@ -1721,7 +1785,7 @@ export class GameScene {
           Math.hypot(center.x - s.p.x, center.z - s.p.z) < 150 + radius;
       }
     }
-    this.scene.render();
+    if (render) this.scene.render();
     if (dt > 0) {
       this.frameTimes.push(dt * 1000);
       if (this.frameTimes.length > 600) this.frameTimes.shift();

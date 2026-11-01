@@ -30,9 +30,16 @@ export class PhysicsWorld {
     this.scene.getPhysicsEngine()!.setTimeStep(1 / 60);
   }
   rebuild(meshes: Mesh[], s: Expedition) {
+    for (const _ of this.rebuildSteps(meshes, s)) {
+    }
+  }
+  *rebuildSteps(meshes: Mesh[], s: Expedition): Generator<void> {
     this.controller?.dispose();
     this.controller = null;
-    this.bodies.forEach((b) => b.dispose());
+    for (const body of this.bodies) {
+      body.dispose();
+      yield;
+    }
     this.bodies = [];
     for (const mesh of meshes) {
       if (!mesh.metadata?.physics) continue;
@@ -66,6 +73,7 @@ export class PhysicsWorld {
           this.scene,
         ),
       );
+      yield;
     }
     this.controller = new PhysicsCharacterController(
       new Vector3(s.p.x, s.p.y + 1.05, s.p.z),

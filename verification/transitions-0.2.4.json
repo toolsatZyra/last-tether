@@ -1,0 +1,154 @@
+{
+  "version": "0.2.4",
+  "date": "2026-11-02",
+  "unitTests": 18,
+  "transition": {
+    "results": [
+      {
+        "sector": 1,
+        "wallMs": 1976.7999999970198,
+        "frames": 191,
+        "maxMs": 163.70000000000073,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": true,
+        "physicsBodies": 52,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 2,
+        "wallMs": 2115.399999994039,
+        "frames": 205,
+        "maxMs": 182,
+        "p95Ms": 24.19999999999891,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 61,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 3,
+        "wallMs": 2393.39999999702,
+        "frames": 207,
+        "maxMs": 182.10000000000036,
+        "p95Ms": 26.799999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 54,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 4,
+        "wallMs": 2365.899999994039,
+        "frames": 209,
+        "maxMs": 181.89999999999964,
+        "p95Ms": 30.30000000000109,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 78,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 5,
+        "wallMs": 2011.999999994041,
+        "frames": 194,
+        "maxMs": 163.70000000000073,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 57,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 6,
+        "wallMs": 1907.999999994041,
+        "frames": 190,
+        "maxMs": 169.90000000000146,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 74,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 7,
+        "wallMs": 1885.5999999985106,
+        "frames": 185,
+        "maxMs": 133.40000000000146,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      }
+    ],
+    "errors": []
+  },
+  "story": {
+    "sector": 7,
+    "beat": 3,
+    "p": {
+      "x": -1.2047277889584072,
+      "y": 43.0797520765931,
+      "z": 401.36428633845617
+    },
+    "health": 100,
+    "seconds": 683.7666666663735,
+    "deaths": 0,
+    "kills": 193,
+    "finished": true,
+    "paused": false,
+    "transitioning": false,
+    "playing": false,
+    "enemies": [],
+    "fps": 79.09306617515448,
+    "meshes": 545,
+    "animation": "kavi_Idle_Neutral",
+    "resources": {
+      "skeletons": 2,
+      "textures": 45,
+      "animationGroups": 48
+    },
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 683.7666666663735,
+      "deaths": 0,
+      "kills": 193,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "production": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "geometry": {
+    "sourceMeshes": 71,
+    "sectorsRebuilt": 4,
+    "sharedGeometryUnchanged": true
+  },
+  "conditions": "Desktop Chrome on the same integrated AMD machine, Balanced. Transition checks enter each sector directly and measure browser animation-frame intervals. They are separate from the accelerated input-driven story route.",
+  "limits": [
+    "The largest transition interval was 133–182 ms; zero blocking or seamless streaming is not established.",
+    "Transitions took 1.89–2.39 seconds, excluded from game time.",
+    "The accelerated story observer timed out; its CLI process was absent before the existing browser ending and checkpoint were recovered without restarting.",
+    "The full normal-speed chapter audit remains the separately recorded 0.2.3 run.",
+    "First-time duration, top-tier art and human enjoyment remain unverified."
+  ]
+}

@@ -4,7 +4,7 @@
 
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-Version 0.2.3 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
+Version 0.2.4 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
 
 ## Run and verify
 
@@ -65,6 +65,6 @@ Read [WALKTHROUGH.md](WALKTHROUGH.md) for chapter actions, [ENGINEERING.md](ENGI
 
 ## Current limits
 
-A normal-speed, input-driven chapter run reached the ending in 11m17s wall time (11m08s on the game clock), with 193 defeats and one recovery. It uses route and puzzle knowledge, not first-time human play. A separate accelerated route completed in 11m24s of simulated time without recoveries. A 15–20 minute first play remains a target; timing evidence is retained in VERIFICATION.md.
+The 0.2.3 normal-speed, input-driven chapter run reached the ending in 11m17s wall time (11m08s on the game clock), with 193 defeats and one recovery. It uses route and puzzle knowledge, not first-time human play. A separate accelerated route completed in 11m24s of simulated time without recoveries. A 15–20 minute first play remains a target; timing evidence is retained in VERIFICATION.md.
 
-Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. The full normal-speed run on integrated AMD graphics averaged 55.8 FPS at Balanced settings (1036 × 703 rendering), with a 23.3 ms 95th-percentile frame interval. Seven area rebuilds caused 0.96–1.33 second stalls; these remain a polish issue. Shader preparation now runs under the loading screen. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.
+Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. The 0.2.3 full normal-speed run on integrated AMD graphics averaged 55.8 FPS at Balanced settings (1036 × 703 rendering), with a 23.3 ms 95th-percentile frame interval. Version 0.2.4 replaces those 0.96–1.33 second rebuild stalls with batched loading behind area titles. Seven transition checks measured 1.89–2.39 seconds total loading and a largest browser-frame interval of 133–182 ms; combat and the game clock remain held until ready. This is not seamless streaming. Shader preparation now runs under the loading screen. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.

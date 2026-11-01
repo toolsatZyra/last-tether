@@ -895,3 +895,55 @@ input {
 #dialogue p {
   font-size: 11px;
 }
+
+#crossing {
+  position: fixed;
+  inset: 0;
+  z-index: 22;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 35%, #294047, #0b1d23 75%);
+  pointer-events: auto;
+}
+#crossing .crossing-mark {
+  width: 48px;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+#crossing h1 {
+  font-size: clamp(48px, 7vw, 82px);
+  margin: 18px 0 12px;
+}
+#crossing p {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.crossing-line {
+  width: 160px;
+  height: 2px;
+  margin-top: 28px;
+  background: linear-gradient(90deg, transparent, #d9bb7c, transparent);
+  animation: route-light 1s ease-in-out infinite alternate;
+}
+@keyframes route-light {
+  from {
+    transform: scaleX(0.25);
+    opacity: 0.3;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crossing-line {
+    animation: none;
+  }
+}
+
+#crossing.reduce-motion .crossing-line {
+  animation: none;
+}
