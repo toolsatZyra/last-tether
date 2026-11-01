@@ -1,0 +1,6 @@
+async(page)=>{
+ await page.waitForFunction(()=>window.__expedition);const result=await page.evaluate(async()=>{
+ const a=window.__expedition;const {drive}=await import('/tests/expedition-driver.ts');a.start('story');a.game.difficulty='explorer';a.pause();let mark='',log=[],last={x:0,z:0},stuck=0;
+ for(let tick=0;tick<60*1500&&!a.game.finished;tick++){if(a.view.sector!==a.game.sector)a.view.build(a.game);a.game.step(1/60,drive(a.game,tick));if(tick%60===0){a.step({x:0,z:0});const key=a.game.sector+'-'+a.game.beat;if(key!==mark){log.push({key,seconds:a.game.seconds,deaths:a.game.deaths});mark=key;}if(Math.hypot(last.x-a.game.p.x,last.z-a.game.p.z)<.1)stuck++;else stuck=0;last={...a.game.p};if(stuck>30)break;await new Promise(r=>setTimeout(r,0));}}
+ a.step({x:0,z:0});a.close();return{finished:a.game.finished,seconds:a.game.seconds,kills:a.game.kills,deaths:a.game.deaths,log,saved:JSON.parse(localStorage.getItem('last-tether-v2:story'))};});result.endingVisible=await page.locator('#ending').isVisible();await page.screenshot({path:'output/playwright/story-complete.png'});if(!result.finished||!result.saved.finished||!result.endingVisible)throw new Error(JSON.stringify(result));return result;
+}

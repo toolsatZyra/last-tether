@@ -1,6 +1,0 @@
-// All sound is locally synthesised, opt-in, and starts only after a user gesture.
-export class Audio{
- enabled=false;ctx:AudioContext|null=null;master:GainNode|null=null;
- set(on:boolean){this.enabled=on;if(on){this.ctx??=new AudioContext();if(!this.master){this.master=this.ctx.createGain();this.master.gain.value=.12;this.master.connect(this.ctx.destination);}void this.ctx.resume();}else void this.ctx?.suspend();}
- play(kind:string){if(!this.enabled||!this.ctx||!this.master)return;const c=this.ctx,o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(this.master);const table:Record<string,[number,number,number]>={jump:[180,310,.13],attach:[450,700,.16],detach:[420,230,.1],swing:[140,65,.1],hit:[90,40,.16],hurt:[140,60,.25],kill:[240,90,.2],stage:[330,660,.5],bridge:[90,150,.6],stun:[60,110,.45],armour:[320,80,.3],gate:[80,190,.8],complete:[440,880,1],dodge:[160,80,.1],charge:[100,55,.35],cache:[550,900,.5]};const f=table[kind];if(!f)return;o.type=kind==='hit'||kind==='hurt'?'triangle':'sine';o.frequency.setValueAtTime(f[0],c.currentTime);o.frequency.exponentialRampToValueAtTime(f[1],c.currentTime+f[2]);g.gain.setValueAtTime(.001,c.currentTime);g.gain.exponentialRampToValueAtTime(.5,c.currentTime+.01);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+f[2]);o.start();o.stop(c.currentTime+f[2]+.02);}
-}

@@ -1,0 +1,1 @@
+async(page)=>{await page.goto('http://127.0.0.1:4173/');await page.waitForFunction(()=>window.__expedition);return 'ready';}

@@ -1,0 +1,682 @@
+[
+  {
+    "path": "assets/nature/Bush_Large.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Bush_Large.gltf",
+    "sha256": "273e81a2f84bd63ab3a41c8a3f22a8b39d6bfbd20ba1b50ee80d9a788a0ab4d8",
+    "bytes": 26922,
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "originalDownloadSha256": "b10a36e7d9767f6c95b69e98281d9523440ba66edcd3e01e0e016e5cdc1aac99",
+    "modifications": "Unused bark texture references removed; foliage materials restored in the runtime from the original pack textures."
+  },
+  {
+    "path": "assets/nature/BirchTree_2.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/BirchTree_2.gltf",
+    "sha256": "374109d221052a518b5219a5733aaa6c1eebb2038dfd5c26ad7a879c05bfc42f",
+    "bytes": 393180,
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "originalDownloadSha256": "9df8b048115beb48a83918e1266d1ba7ba2cfe8e7cae26a434b45d24c71cea0f",
+    "modifications": "Unused bark texture references removed; foliage materials restored in the runtime from the original pack textures."
+  },
+  {
+    "path": "assets/nature/BirchTree_1.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/BirchTree_1.gltf",
+    "sha256": "8e18e9621a88c2bbfe2d41fe257cb947211f188af3ad8799229d32744e93472f",
+    "bytes": 271358,
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "originalDownloadSha256": "bf9938758a3e89b1e90eebed9540641c334eff7305719d7cd2852625f44a6ae0",
+    "modifications": "Unused bark texture references removed; foliage materials restored in the runtime from the original pack textures."
+  },
+  {
+    "path": "assets/hero/Adventurer.gltf",
+    "source": "https://raw.githubusercontent.com/HamaDler/sami-park-mayhem/bde25463aa73fb60041ec4d7695382e5e9d340a8/assets/characters/crowd/men/Adventurer.gltf",
+    "sha256": "21f7a61afb6bd6cef6961490c367594e3c2fc01ec1f041662131172ce763063e",
+    "bytes": 3671456,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/nature/Bush_Small.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Bush_Small.gltf",
+    "sha256": "dc89f818ff4cc7d98fb3dc973531b1594a4239918577be3acab98e2d89342d41",
+    "bytes": 18897,
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "originalDownloadSha256": "297a693bf0e1cc19f4ccf67d362c25415c7099c4745e40b3cce92a8e91491786",
+    "modifications": "Unused bark texture references removed; foliage materials restored in the runtime from the original pack textures."
+  },
+  {
+    "path": "assets/creatures/Dino.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/big/Dino.gltf",
+    "sha256": "d7c57a4ad6444f9c845ecdc13782a7430fcb377594a00f719cd2d37b9434b6de",
+    "bytes": 1211215,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/creatures/Frog.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/big/Frog.gltf",
+    "sha256": "8a73522affc7483fbd43736e95d5581ff993685312995d2c7ebb112eb7d5c004",
+    "bytes": 1173679,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/creatures/Yeti.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/big/Yeti.gltf",
+    "sha256": "ab60f4fbc1c2e1fdc3ed4f63023dc2185240dbd55751df568099557b29af6fd5",
+    "bytes": 1227684,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/creatures/MushroomKing.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/big/MushroomKing.gltf",
+    "sha256": "ccf27e126b881d80a2046c3ab96ddd94eb996837480e783142009ecd6629a3a4",
+    "bytes": 1219690,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/flying/Dragon.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/flying/Dragon.gltf",
+    "sha256": "d219a29b5e928da26c24218a64284bbf999b88484a508ac6c01e0edad9f1f56c",
+    "bytes": 427100,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/flying/Goleling_Evolved.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/flying/Goleling_Evolved.gltf",
+    "sha256": "a36f8c1636b692d44fd74fbca07e1164ad14acc5db71300a92d5e51bc1a476ca",
+    "bytes": 494339,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/flying/Armabee.gltf",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/flying/Armabee.gltf",
+    "sha256": "10ca05955ab7f7f6e2f9bd8fd85f28ed1351c945e390b1fd0fa84428b43a5916",
+    "bytes": 297261,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/licenses/characters.txt",
+    "source": "https://raw.githubusercontent.com/HamaDler/sami-park-mayhem/bde25463aa73fb60041ec4d7695382e5e9d340a8/assets/characters/crowd/LICENSE.txt",
+    "sha256": "f64072e6da5de814fb41e08dc1a9e02b1fb294095ecb336c4b83364b9432f653",
+    "bytes": 179,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/licenses/creatures.txt",
+    "source": "https://raw.githubusercontent.com/mPhpMaster/wavebreak-godot-game/20062060002eb0c5beae1d4d763f0f24f4aa6def/assets/quaternius/License.txt",
+    "sha256": "f22fa91c48be8a5702579b317d69b4375a86ef10e16686d8a323cc7425fadb9d",
+    "bytes": 362,
+    "author": "Quaternius",
+    "license": "CC0-1.0"
+  },
+  {
+    "path": "assets/nature/Textures/BirchTree_Leaves.png",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/BirchTree_Leaves.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "sha256": "8b674a02017d987f8ec0448bd2a52ad788d1235f91b7f00499b4ca071f8e69fe",
+    "bytes": 77836
+  },
+  {
+    "path": "assets/nature/Textures/Bush_Leaves.png",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/Bush_Leaves.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "sha256": "9f662296a285ca56b1ed56e952a198b93b466ae39ab7b6ee1c1ac1bd1c46242f",
+    "bytes": 74828
+  },
+  {
+    "path": "assets/materials/stone.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/mossy_rock/mossy_rock_diff_1k.jpg",
+    "author": "Rob Tuytel",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/mossy_rock",
+    "sha256": "4dbf37f1b0465c9c8914213163923be159716f5b97fb6946437b6c5e143ef540",
+    "bytes": 1124438
+  },
+  {
+    "path": "assets/materials/stone-normal.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/mossy_rock/mossy_rock_nor_gl_1k.jpg",
+    "author": "Rob Tuytel",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/mossy_rock",
+    "sha256": "232cdd6a9fdfd01bb8bb1f8f604c53dbca79fa0d3d7995edf85c9945757aa8df",
+    "bytes": 995727
+  },
+  {
+    "path": "assets/materials/floor-diff.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/monastery_stone_floor/monastery_stone_floor_diff_1k.jpg",
+    "author": "Amal Kumar",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/monastery_stone_floor",
+    "sha256": "8e52ec982469ce9da312cefe3126c1dff05b7150234971bc6dff6e31c3c584ae",
+    "bytes": 766525
+  },
+  {
+    "path": "assets/materials/floor-nor_gl.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/monastery_stone_floor/monastery_stone_floor_nor_gl_1k.jpg",
+    "author": "Amal Kumar",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/monastery_stone_floor",
+    "sha256": "f2f1c3e8d52c1e3a49ef59695743872f2adaa57bc0d3f64b129ce988966162c1",
+    "bytes": 1063115
+  },
+  {
+    "path": "assets/materials/floor-rough.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/monastery_stone_floor/monastery_stone_floor_rough_1k.jpg",
+    "author": "Amal Kumar",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/monastery_stone_floor",
+    "sha256": "8d987222b727442c11c30cd4d8a32ed48f02e46683acd088d994baef5bf311a9",
+    "bytes": 477972
+  },
+  {
+    "path": "assets/materials/sky.hdr",
+    "source": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kloppenheim_06_puresky_1k.hdr",
+    "author": "Greg Zaal and Jarod Guest",
+    "license": "CC0-1.0",
+    "licenseSource": "https://polyhaven.com/a/kloppenheim_06_puresky",
+    "sha256": "206c67e3a1b992282821cf06662bdd69bbb4915c1c4444a66338a40d6a7d4e34",
+    "bytes": 1173154
+  },
+  {
+    "path": "assets/audio/knifeSlice.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f",
+    "bytes": 15532
+  },
+  {
+    "path": "assets/audio/knifeSlice2.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "6c2064d0ef988d1ec3d56868e823ea8823a5cac00f2742560052633529407def",
+    "bytes": 15099
+  },
+  {
+    "path": "assets/audio/cloth1.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d",
+    "bytes": 16508
+  },
+  {
+    "path": "assets/audio/cloth2.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+    "bytes": 11787
+  },
+  {
+    "path": "assets/audio/metalLatch.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708",
+    "bytes": 10208
+  },
+  {
+    "path": "assets/audio/metalClick.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3",
+    "bytes": 13615
+  },
+  {
+    "path": "assets/audio/creak1.ogg",
+    "source": "https://kenney.nl/assets/rpg-audio",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e",
+    "bytes": 15761
+  },
+  {
+    "path": "assets/audio/footstep_concrete_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "d7267e183067757c92c169de2a379abea592cfca6b39bb2e8feea15221ad79fe",
+    "bytes": 5808
+  },
+  {
+    "path": "assets/audio/footstep_concrete_001.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "507a75eb19b897087855a3be3cf11a12d7fa37d143ad535eeebe0b8031c7325d",
+    "bytes": 6308
+  },
+  {
+    "path": "assets/audio/footstep_concrete_002.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "b21fa546d74941196b25da8a20b7010abd8c05c4fcf93545d1f344e66a664e13",
+    "bytes": 6255
+  },
+  {
+    "path": "assets/audio/impactPunch_heavy_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+    "bytes": 11617
+  },
+  {
+    "path": "assets/audio/impactMetal_heavy_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+    "bytes": 6110
+  },
+  {
+    "path": "assets/audio/impactMining_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "36b4ea107222d073c67ca64dde26944975609202d5090b2f2021213c1a7e35cd",
+    "bytes": 12035
+  },
+  {
+    "path": "assets/audio/impactBell_heavy_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+    "bytes": 13915
+  },
+  {
+    "path": "assets/ruins/Arch_Gothic_RoundColumn.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Arch_Gothic_RoundColumn.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "f8ac8beb245d415a098d485675cf524eacae439c5db05ed5eef97b5a471a301a",
+    "bytes": 597
+  },
+  {
+    "path": "assets/ruins/Arch_Gothic_RoundColumn.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Arch_Gothic_RoundColumn.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "2da891d6c004d7f2e760c7d1b3ff9bcff3e70b5bcd67351ff8d40abbc80a6dbd",
+    "bytes": 196134
+  },
+  {
+    "path": "assets/ruins/Arch_Round_RoundColumn.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Arch_Round_RoundColumn.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "dbdf7abc3d73c49e5040591f4d5ffcb08ed1770a32865ca5379e2b0de90f6ad2",
+    "bytes": 410
+  },
+  {
+    "path": "assets/ruins/Arch_Round_RoundColumn.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Arch_Round_RoundColumn.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "1776cb6ca2566d7bb3f4e95a70ce7ec04d4892c1b688c08a8ca278a62cb9526d",
+    "bytes": 196370
+  },
+  {
+    "path": "assets/ruins/Barrel.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Barrel.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "85b09836b073dc8d03d34bc5c48584b34689c107d3edff1542872b3f2da60829",
+    "bytes": 595
+  },
+  {
+    "path": "assets/ruins/Barrel.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Barrel.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "152f4c67834f1d0848a439ec95cead146db58a2151e2a2b67a5a65bfa388e83f",
+    "bytes": 84456
+  },
+  {
+    "path": "assets/ruins/Bricks.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Bricks.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "8a2013d8f942ba68e7c4a4ad6af1819169c40f470151ef6ef67676a34b5d0d81",
+    "bytes": 415
+  },
+  {
+    "path": "assets/ruins/Bricks.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Bricks.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "fe726e455dde415abbb03e64475d02bfcde1bd065d8ecc86a526f143660b8eaf",
+    "bytes": 24158
+  },
+  {
+    "path": "assets/ruins/BridgeSection.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/BridgeSection.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "de5abd5e3817d1900864d8f6481580f3e9d6e0bc626ae5ed87e40005ded23f4c",
+    "bytes": 415
+  },
+  {
+    "path": "assets/ruins/BridgeSection.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/BridgeSection.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "1eaa6ab1e422b61a702b16c8f00595baa48693ec753548f28a083b485ad7c1ca",
+    "bytes": 127955
+  },
+  {
+    "path": "assets/ruins/Cart.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Cart.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "74e2ab3f701b3c461646433a52962b0bf0e82ff59815ec08a048a405efec1c64",
+    "bytes": 595
+  },
+  {
+    "path": "assets/ruins/Cart.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Cart.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "9b4615e7a9e5162cf8ebc6d44072d8f06653b0869cba80319d9885fb1f7a2a6f",
+    "bytes": 73410
+  },
+  {
+    "path": "assets/ruins/Chest_Gold.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Chest_Gold.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "24d7edcbf5568ed150b6be7ccb3186bb362b38dbf5a6e89d11e2e8d62b68e655",
+    "bytes": 776
+  },
+  {
+    "path": "assets/ruins/Chest_Gold.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Chest_Gold.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "305c77420dd1b2a2162ce49c2e5ad846b243bd0b0711b5b40e51fe9714dc333e",
+    "bytes": 1130865
+  },
+  {
+    "path": "assets/ruins/Column_BridgeSupport.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Column_BridgeSupport.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "5c5c1b5cd5344efb22440c2c7d3fcbcb55965589c256f891bc8f0dde4ffa7e36",
+    "bytes": 415
+  },
+  {
+    "path": "assets/ruins/Column_BridgeSupport.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Column_BridgeSupport.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "25b37ada69a4ef1c2eed6af6f4a5378ccfab94fb921fa5e344acf71f92742fb1",
+    "bytes": 68634
+  },
+  {
+    "path": "assets/ruins/Column_Round.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Column_Round.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "6cb5212b68d1455b61a83cc354f70d19d319592cc1d47180049ecd694aaa0a7e",
+    "bytes": 228
+  },
+  {
+    "path": "assets/ruins/Column_Round.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Column_Round.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "d9734b4270fb7ae8be40d8ece2bd9eadba585d656989e5cd5a36cf882301fb93",
+    "bytes": 56837
+  },
+  {
+    "path": "assets/ruins/Crate.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Crate.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "f83fa57457cbba9e8eb7c8336b6ec0560a39b8b8bcd04237c0469ca003646c24",
+    "bytes": 413
+  },
+  {
+    "path": "assets/ruins/Crate.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Crate.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "c62385b91db0df2e51d080c78ebb5dbc99807698eef6086a562be284031e87ec",
+    "bytes": 48643
+  },
+  {
+    "path": "assets/ruins/Flag_Wall.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Flag_Wall.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "c8e0acb423e87d5d7d1bb2200178c1aed7ae6edce63896da4fbacce3aab22bd0",
+    "bytes": 228
+  },
+  {
+    "path": "assets/ruins/Flag_Wall.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Flag_Wall.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "4e1a54ac7ab28e8d4c65c04f29a4d0c9cae765cb1797deeb6dd053c204fe7b53",
+    "bytes": 12241
+  },
+  {
+    "path": "assets/ruins/Grass.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Grass.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "194b10ce48ee0285ccfaf0ef13108961e077e6d32aefc818ffcde7451b97828c",
+    "bytes": 229
+  },
+  {
+    "path": "assets/ruins/Grass.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Grass.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "b75c4b9fb5f3a21dd03da72b110ca7d735db37cbfae84a4afe747fb803d647b7",
+    "bytes": 14333
+  },
+  {
+    "path": "assets/ruins/Pot1_Broken.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Pot1_Broken.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "df1cafc839df0ad1fc1fb8a5f24e982e4387100f978a668d2c0c047fcd9c7364",
+    "bytes": 419
+  },
+  {
+    "path": "assets/ruins/Pot1_Broken.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Pot1_Broken.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "0991b28c312ae2f4dc5ab8fee2f622cc824952f590adaf4cffe1d2e904989805",
+    "bytes": 27727
+  },
+  {
+    "path": "assets/ruins/Rail_Straight.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Rail_Straight.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "6e05ed3adc8c7f20b45795775fb442deff6c0e3c30237e6bf7a4cb58ed6a7b0d",
+    "bytes": 228
+  },
+  {
+    "path": "assets/ruins/Rail_Straight.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Rail_Straight.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "d8b682ba5b547b1baea1934b5176b5535034640ff549458f992ae500c055dfa1",
+    "bytes": 18939
+  },
+  {
+    "path": "assets/ruins/Statue_Fox.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Statue_Fox.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "0dc38ba5713438d1f32618fd1a9817d827724938a4781e44d110d3e3e1e555e1",
+    "bytes": 229
+  },
+  {
+    "path": "assets/ruins/Statue_Fox.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Statue_Fox.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "889b2ae1cacaa89658afa8f4f65ebc381451de731bf7c52bff020b6c0e46549f",
+    "bytes": 138074
+  },
+  {
+    "path": "assets/ruins/Statue_Stag.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Statue_Stag.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "a8e4eaed2d6e2d8d0c6d1b9096df518174bfe5396988dadf94d0093033a767c5",
+    "bytes": 229
+  },
+  {
+    "path": "assets/ruins/Statue_Stag.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Statue_Stag.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "8fd24d0b7c286906ccd0bdbb1cb90ba3c30cd665c1da07df2bc7c4a3b77440c0",
+    "bytes": 284989
+  },
+  {
+    "path": "assets/ruins/Torch.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Torch.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "ef9c7a2fde320457eba47c79698e34291cc4319aa1fe438ad9fd513b48ee055d",
+    "bytes": 414
+  },
+  {
+    "path": "assets/ruins/Torch.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Torch.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "a3af7dd072bfae9dc91c53cfe880424b4b27c59c0cb234ae1d0693f455a7ff38",
+    "bytes": 22734
+  },
+  {
+    "path": "assets/ruins/Wall_ArchRound_Overgrown_Broken.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Wall_ArchRound_Overgrown_Broken.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "86d27169e84772bc4e9fc9d90a18bbe866b39308a15449868b94be418d32f2dd",
+    "bytes": 819
+  },
+  {
+    "path": "assets/ruins/Wall_ArchRound_Overgrown_Broken.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Wall_ArchRound_Overgrown_Broken.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "59ef81d4c0956275f684ed2f044161a354593ca5751ca4230969735ac215a155",
+    "bytes": 181383
+  },
+  {
+    "path": "assets/ruins/Wall_Broken.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Wall_Broken.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "99eb4c3ba5f77bb082d1fea5b9635b7e85f266a91dec7ec1accc7ea56d4ab367",
+    "bytes": 415
+  },
+  {
+    "path": "assets/ruins/Wall_Broken.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Wall_Broken.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "16d0236d7f8f5a6f4df6f2e918891dd32dfe359b740ea20e973511ef3bbd4f8b",
+    "bytes": 72793
+  },
+  {
+    "path": "assets/ruins/Window_Bars_Overgrown.mtl",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Window_Bars_Overgrown.mtl",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "51803683c84596481a415502e1b9ee0697a0aa73485848dc26e64c573e96044c",
+    "bytes": 1001
+  },
+  {
+    "path": "assets/ruins/Window_Bars_Overgrown.obj",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/Window_Bars_Overgrown.obj",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "4fb7ba4b0359df2abbbcd0d1b2443da9dada9a3d4bdb83195d4841632fde4697",
+    "bytes": 110956
+  },
+  {
+    "path": "assets/ruins/textures/Bark_Texture.jpg",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/textures/Bark_Texture.jpg",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "d6fdb3cbf6df624bfe8e5d45fe7b5b1a05ec6d7b1fdb0fa4cc4774b4119bf017",
+    "bytes": 240999
+  },
+  {
+    "path": "assets/ruins/textures/Leaf_Texture.png",
+    "source": "https://raw.githubusercontent.com/DavidLyhedDanielsson/raylib-scripting/07fe1510dcd22cfa2653e2c7c05b4f28ce9b3961/assets/ruins/textures/Leaf_Texture.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
+    "sha256": "34649aec779adde617568fc89e6ed24277d2bc5b254f592cdf26627f29fe63e0",
+    "bytes": 118749
+  }
+]

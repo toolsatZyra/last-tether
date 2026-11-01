@@ -1,43 +1,22 @@
-# The Broken Spillway — character, world and play
+# Chapter one: what the player does
 
-## The character we are building
+Kavi is a daring routefinder: wiry, practical, used to crossing broken infrastructure with a spear and a tether. His storm cloak, field pack and brass tools mark a working explorer. He begins by reading the route and grows into a hunter by learning how each creature commits to an attack, how to use the terrain and when to spend his strongest ability.
 
-Kavi is a routefinder from a settlement below an old alpine waterworks. His trade is finding crossings, repairing access routes and bringing people home when weather makes familiar paths dangerous. He carries a climbing tether, a work spear and a field journal. His orange coat, scarf, pack and wrist line make him recognisable against stone and water.
+The valley depends on an old high-level reservoir. A storm has broken its spillway and displaced its creatures. The keeper can still speak through the warning network. Kavi follows the maintenance route upward, releasing pressure so the homes below survive another morning.
 
-The proposed personality is observant, daring and occasionally overconfident. He trusts a well-read landscape more than luck. His first instinct is to get past danger; the chapter teaches him to understand it and deliberately take control. He becomes a hunter by reading a creature's commitment, using the terrain and choosing the moment to act.
+| Sector | Player actions and escalation |
+|---|---|
+| Storm road | Move and jump along the causeway, dodge charging predators, learn the spear chain, grapple two broken crossings and light the warning beacon. The returning spear becomes available along the way. |
+| Hunting grounds | Pull a predator off balance, throw at ranged spitters and flyers, jump a heavy creature's shockwave, and handle mixed reinforcements before opening the gate. |
+| Drowned gardens | Fight around relief valves, turn machinery, and solve two linked-wheel arrangements. Turning any wheel also turns its neighbour. All blue hands must meet their gold notches. |
+| Hanging forest | Chain assisted grapples across suspended terraces, use jump attacks against packs, survive falling debris and earn the hunt burst. This sector also serves as the replay trial. |
+| Ember quarry | Draw enemies toward red blasting charges and strike the charges. Mix ranged attacks with close combat while avoiding falling stone and advancing through the quarry. |
+| Turbine gallery | Jump moving sweep arms, avoid pressure waves, fight amid machinery and solve another linked-wheel arrangement. |
+| Crown guardian | Clear the approach, bait the Slateback into a striped support, use Q while it is stunned to tear off armour, then attack during the exposure window. At lower health it adds attacks and reinforcements. Clear the final defenders and release the crown. |
+| Flood escape | Cross the final rising route before the flood timer ends, take the grapple crossings and reach safety. Completion records the expedition summary. |
 
-The playable build communicates this through objectives, discoveries and combat. A voiced personality, conversations, facial acting, backstory scenes and character customisation have not been implemented.
+Each sector has four objectives and a short narrative arrival/exit. Optional routefinder memories sit off the main line on intermediate terraces. They add a journal discovery and restore a healing flask without being required for completion.
 
-## The world
+The chapter is not an open world. Its traversal is an authored route with arenas and crossings. Tether crossings are assisted arcs; releasing early is possible, but this is not a rope-physics climbing simulator. Creatures have six different behaviour patterns, not six cosmetic versions of one attack. Defeating all waves unlocks the next objective.
 
-Ancient flood-control structures cross an alpine gorge. A later generation added weather stations, maintenance gantries, lamps and cables. Water has reclaimed the lower works. Creatures use abandoned human structures as hunting grounds. The distant settlement is the reason for the expedition: redirect the flood before it reaches home.
-
-The visual proposal is weathered stone, cold water, amber route lamps, moss and a warm-clothed protagonist. Gold marks tether targets and machinery; green marks the station interaction; red warns of an attack. These cues work with sound disabled.
-
-Future chapters could extend into a flooded forest, abandoned quarry and exposed mountain lifts. Those locations are design possibilities, not playable content.
-
-## What the player actually does
-
-1. **Start at the broken maintenance bridge.** Walk toward the amber marks. The path ends above water. Press Q when the gold target is highlighted, hold R and move forward. Space releases the line onto the far landing. A lower maintenance shelf provides a recovery interaction if you miss the first crossing.
-
-2. **Fight the terrace scrabblers.** Two ground predators approach and crouch before leaping. Dodge sideways, turn toward them and strike with the spear. Attacks need range and facing. Clearing the terrace opens the gate and adds a field note about the creatures' tells.
-
-3. **Choose the main path or optional lookout.** Follow the lower lamps to the winch, or jump up the higher terraces to find a routefinder's cache. E opens it and adds a journal discovery. This is an exploration reward, not a new weapon or stat upgrade in this build.
-
-4. **Solve the counterweight crossing.** The next bridge is missing. Approach the winch, face its gold release pin and attach with Q. Hold R to pull it free. The bridge becomes traversable. This introduces the tether's second use: moving a mechanism instead of Kavi.
-
-5. **Cross the reefwing's span.** The flying creature marks the location of its dive before committing. Keep moving, attach to the high anchor and reel across the gap. Release onto the far ledge. You can evade this creature; killing it is not required for chapter progression.
-
-6. **Take the station courtyard.** Two scrabblers pressure the ground while a raised spitter fires toward your last aimed position. Columns interrupt its projectiles. Fight through the pack, or hook the hanging cargo release and drop it onto nearby enemies. Reach the spitter, clear the courtyard, then use E at the green station console to open the route and establish the next checkpoint.
-
-7. **Turn the Slateback's strength against it.** Descend to an arena with striped supports. Spear hits bounce off its armour. Position a support along its straight charge path, let it commit and avoid the impact. The collision loosens its armour. Approach, Q to hook it, hold R to tear it loose, then close in and strike. It recovers its armour if the exposed window expires. Repeat as needed.
-
-8. **Open the floodgate and escape.** After the boss falls, reach the wheel and press E. A 75-second escape countdown begins. Run along the maintenance strip, reel across the final break, release onto the higher landing and jump up the stone steps. Landing at the high refuge completes the chapter. A failed escape restarts at the wheel and leaves the defeated boss defeated.
-
-9. **Return for a short time trial.** Daily Route starts at the fork and ends after the reefwing span. Lower the bridge and find an efficient crossing. Finish once to record a ghost; race it on the next attempt. Your story checkpoint remains separate.
-
-## Why the mechanics belong together
-
-The same tether supports travel, puzzle solving, an optional environmental attack and the boss's armour mechanic. Familiar actions gain new meaning as Kavi learns. The intended rhythm is observation, commitment, movement, recovery and a new lesson.
-
-The prototype currently makes that sequence playable. The next design test is with a first-time human player: can they identify the anchor, understand the pin, read the charge and discover an enjoyable solution without a walkthrough? That evidence should determine improvements to camera, pacing, difficulty, feedback and content length before expanding the campaign.
+A new player is intended to take 15–20 minutes while discovering the route, reading tells, solving wheels and recovering from mistakes. Automation with full knowledge is faster. No mandatory idle timer has been inserted to inflate length.

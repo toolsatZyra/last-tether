@@ -1,0 +1,1 @@
+async(page)=>{await page.evaluate(()=>{const a=window.__expedition;a.start('story');a.game.p={x:12,y:10,z:43};a.game.invuln=999;a.view.setQuality('high');});await page.waitForTimeout(6000);await page.screenshot({path:'output/playwright/art-arena.png'});return await page.evaluate(()=>window.__expedition.snapshot());}

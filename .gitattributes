@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Preserve downloaded asset bytes and their recorded hashes.
+public/assets/** -text -whitespace

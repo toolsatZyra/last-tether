@@ -1,0 +1,564 @@
+import {
+  Scene,
+  SceneLoader,
+  AssetContainer,
+  TransformNode,
+  AnimationGroup,
+  Mesh,
+  MeshBuilder,
+  Vector3,
+  Quaternion,
+  PBRMaterial,
+  Color3,
+  ShadowGenerator,
+  Texture,
+  VertexData,
+  StandardMaterial,
+  DynamicTexture,
+  InstantiatedEntries,
+} from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
+import "@babylonjs/loaders/OBJ";
+import { PBRCustomMaterial } from "@babylonjs/materials/custom/pbrCustomMaterial";
+const creatureMaterials = new Map<number, PBRCustomMaterial>();
+import { ASSETS, type Kind } from "./level";
+import type { Expedition, Enemy } from "./engine";
+export class Actor {
+  instance: InstantiatedEntries;
+  height: number;
+  contact: Mesh;
+  cloak?: Mesh;
+  root: TransformNode;
+  groups: AnimationGroup[];
+  meshes: Mesh[];
+  active = "";
+  weights = new Map<AnimationGroup, number>();
+  air = 0;
+  speed = 1;
+  nodes: TransformNode[];
+  hero: boolean;
+  removePose: (() => void) | null = null;
+  lastAttack = 0;
+  lastDodge = 0;
+  constructor(
+    container: AssetContainer,
+    scene: Scene,
+    id: string,
+    height: number,
+    shadows: ShadowGenerator,
+    hero = false,
+  ) {
+    this.height = height;
+    const contactMat = new StandardMaterial(id + "-contact", scene);
+    const contactTexture = new DynamicTexture(
+      id + "-contact-map",
+      { width: 64, height: 64 },
+      scene,
+      false,
+    );
+    const ctx = contactTexture.getContext();
+    const gradient = ctx.createRadialGradient(32, 32, 2, 32, 32, 30);
+    gradient.addColorStop(0, "rgba(3,12,13,0.5)");
+    gradient.addColorStop(1, "rgba(3,12,13,0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+    contactTexture.update();
+    contactTexture.hasAlpha = true;
+    contactMat.diffuseTexture = contactTexture;
+    contactMat.useAlphaFromDiffuseTexture = true;
+    contactMat.disableLighting = true;
+    contactMat.emissiveColor = Color3.White();
+    contactMat.disableDepthWrite = true;
+    this.contact = MeshBuilder.CreateGround(
+      id + "-contact",
+      { width: height * 0.75, height: height * 0.55 },
+      scene,
+    );
+    this.contact.material = contactMat;
+    this.contact.isPickable = false;
+    this.hero = hero;
+    const instance = container.instantiateModelsToScene(
+      (n) => id + "_" + n,
+      false,
+      { doNotInstantiate: true },
+    );
+    this.instance = instance;
+    this.root = new TransformNode(id, scene);
+    instance.rootNodes.forEach((n) => (n.parent = this.root));
+    this.groups = instance.animationGroups;
+    this.nodes = this.root.getChildTransformNodes();
+    this.meshes = this.root
+      .getChildMeshes()
+      .filter((m) => m instanceof Mesh) as Mesh[];
+    const bounds = this.root.getHierarchyBoundingVectors(true),
+      h = bounds.max.y - bounds.min.y;
+    this.root.scaling.setAll(height / Math.max(0.1, h));
+    this.meshes.forEach((m) => {
+      m.receiveShadows = true;
+      m.isPickable = false;
+      shadows.addShadowCaster(m);
+      if (m.material instanceof PBRMaterial) {
+        if (hero) m.material = m.material.clone(id + "_" + m.material.name);
+        else {
+          const original = m.material;
+          let appearance = creatureMaterials.get(original.uniqueId);
+          if (!appearance) {
+            appearance = new PBRCustomMaterial(
+              original.name + "-valley",
+              scene,
+            );
+            appearance.albedoTexture = original.albedoTexture;
+            appearance.backFaceCulling = original.backFaceCulling;
+            const tint =
+              height > 7
+                ? "0.65,0.78,0.85"
+                : height > 3
+                  ? "0.75,0.8,0.78"
+                  : height === 2.1
+                    ? "0.7,0.85,0.5"
+                    : height === 2
+                      ? "0.95,0.7,0.4"
+                      : "0.85,0.66,0.48";
+            appearance.Fragment_Custom_Albedo(
+              "float valleyLuma=dot(surfaceAlbedo,vec3(0.299,0.587,0.114));surfaceAlbedo=mix(surfaceAlbedo,vec3(valleyLuma)*vec3(" +
+                tint +
+                "),0.76*(1.0-smoothstep(0.65,0.95,valleyLuma)));",
+            );
+            creatureMaterials.set(original.uniqueId, appearance);
+          }
+          m.material = appearance;
+        }
+        const mat = m.material as PBRMaterial;
+        mat.roughness = 0.83;
+        mat.metallic = 0;
+        if (!hero) mat.albedoColor = new Color3(0.62, 0.68, 0.57);
+        if (hero) {
+          if (mat.name.endsWith("LightGreen"))
+            mat.albedoColor = Color3.FromHexString("#ba6a36");
+          if (mat.name.endsWith("_Green"))
+            mat.albedoColor = Color3.FromHexString("#70472e");
+          if (mat.name.endsWith("_Gold")) {
+            mat.albedoColor = Color3.FromHexString("#cbad70");
+            mat.metallic = 0.6;
+            mat.roughness = 0.4;
+          }
+        }
+      }
+    });
+    this.groups.forEach((g) => g.stop());
+    this.play(hero ? "Idle_Sword" : "Idle");
+    const observer = scene.onAfterAnimationsObservable.add(() => {
+      if (scene.animationsEnabled && this.air > 0.01) {
+        for (const n of this.nodes) {
+          if (!n.rotationQuaternion) continue;
+          const name = n.name;
+          let amount = 0;
+          if (/UpperArm\.L$/.test(name)) amount = -0.8;
+          if (/UpperArm\.R$/.test(name)) amount = -1.1;
+          if (/UpperLeg\.L$/.test(name)) amount = -0.8;
+          if (/LowerLeg\.L$/.test(name)) amount = 1.1;
+          if (/UpperLeg\.R$/.test(name)) amount = 0.3;
+          if (amount)
+            n.rotationQuaternion = n.rotationQuaternion.multiply(
+              Quaternion.RotationAxis(Vector3.Right(), amount * this.air),
+            );
+        }
+      }
+    });
+    this.removePose = () => scene.onAfterAnimationsObservable.remove(observer);
+    if (hero) {
+      this.weapon(scene);
+      this.outfit(scene);
+    }
+  }
+  outfit(scene: Scene) {
+    const chest = this.nodes.find((n) => /Chest$/.test(n.name));
+    if (!chest) return;
+    const cloth = new PBRMaterial("kavi-stormcloak", scene);
+    cloth.albedoColor = Color3.FromHexString("#24494b");
+    cloth.roughness = 0.96;
+    cloth.backFaceCulling = false;
+    const leather = new PBRMaterial("kavi-pack", scene);
+    leather.albedoColor = Color3.FromHexString("#69432d");
+    leather.roughness = 0.9;
+    const cape = new Mesh("weather-cloak", scene);
+    const data = new VertexData();
+    data.positions = [
+      -0.21, 0.14, -0.095, 0.21, 0.14, -0.095, -0.31, -0.27, -0.17, 0.31, -0.27,
+      -0.17, -0.36, -0.62, -0.13, 0.36, -0.62, -0.13,
+    ];
+    data.indices = [0, 2, 1, 1, 2, 3, 2, 4, 3, 3, 4, 5];
+    const normals: number[] = [];
+    VertexData.ComputeNormals(data.positions, data.indices, normals);
+    data.normals = normals;
+    data.applyToMesh(cape, true);
+    this.cloak = cape;
+    cape.material = cloth;
+    cape.parent = chest;
+    const pack = MeshBuilder.CreateBox(
+      "field-pack",
+      { width: 0.25, height: 0.31, depth: 0.16 },
+      scene,
+    );
+    pack.parent = chest;
+    pack.position.set(0, -0.15, -0.2);
+    pack.material = leather;
+    const collar = MeshBuilder.CreateTorus(
+      "woven-scarf",
+      { diameter: 0.25, thickness: 0.09, tessellation: 24 },
+      scene,
+    );
+    collar.parent = chest;
+    collar.position.y = 0.15;
+    const amber = new PBRMaterial("scarf-ochre", scene);
+    amber.albedoColor = Color3.FromHexString("#b8753c");
+    amber.roughness = 1;
+    collar.material = amber;
+  }
+  weapon(scene: Scene) {
+    const hand = this.nodes.find((n) => /Wrist\.R$/.test(n.name));
+    if (!hand) return;
+    const grip = new TransformNode("spear-grip", scene);
+    grip.parent = hand;
+    grip.rotation.z = Math.PI / 2;
+    grip.position.y = 0.08;
+    const wood = new PBRMaterial("spear-wood", scene);
+    wood.albedoColor = Color3.FromHexString("#473329");
+    wood.roughness = 0.7;
+    const metal = new PBRMaterial("spear-metal", scene);
+    metal.albedoColor = Color3.FromHexString("#c6d1c9");
+    metal.metallic = 0.85;
+    metal.roughness = 0.24;
+    const shaft = MeshBuilder.CreateCylinder(
+      "ash-spear",
+      { height: 1.85, diameter: 0.035, tessellation: 10 },
+      scene,
+    );
+    shaft.parent = grip;
+    shaft.position.y = 0.45;
+    shaft.material = wood;
+    const blade = MeshBuilder.CreateCylinder(
+      "spear-tip",
+      { height: 0.34, diameterBottom: 0.13, diameterTop: 0, tessellation: 4 },
+      scene,
+    );
+    blade.parent = grip;
+    blade.position.y = 1.52;
+    blade.material = metal;
+    const wrap = MeshBuilder.CreateCylinder(
+      "spear-wrap",
+      { height: 0.19, diameter: 0.065, tessellation: 10 },
+      scene,
+    );
+    wrap.parent = grip;
+    wrap.position.y = 1.28;
+    wrap.material = metal;
+  }
+  play(name: string, rate = 1, loop = true) {
+    const group =
+      this.groups.find((g) => g.name.endsWith("_" + name) || g.name === name) ||
+      this.groups.find((g) => g.name.endsWith("_Idle")) ||
+      this.groups[0];
+    if (!group) return;
+    if (this.active === group.name) {
+      group.speedRatio = rate;
+      return;
+    }
+    this.active = group.name;
+    group.start(loop, rate);
+    group.setWeightForAllAnimatables(0);
+    this.weights.set(group, this.weights.get(group) ?? 0);
+  }
+  update(dt: number) {
+    for (const [g, w] of this.weights) {
+      const target = g.name === this.active ? 1 : 0;
+      const next = w + (target - w) * Math.min(1, dt * 16);
+      g.setWeightForAllAnimatables(next);
+      this.weights.set(g, next);
+      if (target === 0 && next < 0.005) {
+        g.stop();
+        this.weights.delete(g);
+      }
+    }
+  }
+  player(s: Expedition, dt: number) {
+    if (s.attack > this.lastAttack + 0.05 || s.dodge > this.lastDodge + 0.05) {
+      this.groups.find((g) => g.name === this.active)?.stop();
+      this.active = "";
+    }
+    this.lastAttack = s.attack;
+    this.lastDodge = s.dodge;
+    this.contact.position.set(s.p.x, s.p.y + 0.04, s.p.z);
+    this.contact.visibility = s.grounded ? 0.8 : 0;
+    this.root.position.set(s.p.x, s.p.y, s.p.z);
+    let delta = s.yaw - this.root.rotation.y;
+    delta = Math.atan2(Math.sin(delta), Math.cos(delta));
+    this.root.rotation.y += delta * Math.min(1, dt * 20);
+    this.air += ((!s.grounded ? 1 : 0) - this.air) * Math.min(1, dt * 10);
+    if (this.cloak && dt > 0) {
+      const p = this.cloak.getVerticesData("position")!;
+      p[14] = -0.13 - s.speed * 0.008 + Math.sin(s.time * 8) * 0.02;
+      p[17] = -0.13 - s.speed * 0.008 + Math.sin(s.time * 8 + 0.9) * 0.02;
+      this.cloak.updateVerticesData("position", p);
+    }
+    if (s.finished) this.play("Idle_Neutral");
+    else if (s.death > 0) this.play("Death", 1, false);
+    else if (s.dodge > 0) this.play("Roll", 2.3, false);
+    else if (s.hurtTime > 0) this.play("HitRecieve", 1.8, false);
+    else if (s.throwTime > 0) this.play("Punch_Right", 1.6, false);
+    else if (s.attack > 0)
+      this.play(
+        s.combo === 2 ? "Kick_Right" : "Sword_Slash",
+        1.8 + s.combo * 0.3,
+        false,
+      );
+    else if (!s.grounded) this.play("Idle_Sword");
+    else if (s.speed > 0.7) this.play("Run", Math.max(0.6, s.speed / 5.8));
+    else this.play("Idle_Sword");
+    this.root.rotation.z = 0;
+    this.update(dt);
+  }
+  enemy(e: Enemy, dt: number) {
+    this.contact.position.set(e.p.x, e.p.y + 0.045, e.p.z);
+    this.contact.visibility = e.hp > 0 ? 0.65 : 0;
+    this.root.position.set(e.p.x, e.p.y, e.p.z);
+    this.root.rotation.y = e.yaw;
+    this.root.setEnabled(e.hp > 0 || e.dead > 0);
+    const flying = e.kind === "wing" || e.kind === "guardian";
+    let anim = flying ? "Flying_Idle" : "Idle";
+    if (e.hp <= 0) anim = "Death";
+    else if (e.flash > 0) anim = "HitReact";
+    else if (e.state === "windup" || e.state === "pulse" || e.state === "roar")
+      anim = flying ? "No" : "Duck";
+    else if (["lunge", "charge"].includes(e.state))
+      anim = flying ? "Headbutt" : "Punch";
+    else if (e.state === "idle" && e.kind !== "spitter")
+      anim = flying ? "Fast_Flying" : "Run";
+    else if (e.state === "stunned") anim = "HitReact";
+    this.play(anim, anim === "Run" ? 1.15 : 1, e.hp > 0);
+    this.root.scaling.y =
+      this.root.scaling.x * (e.hp <= 0 ? Math.min(1, e.dead * 2) : 1);
+    this.update(dt);
+  }
+  dispose() {
+    (this.contact.material as StandardMaterial).diffuseTexture?.dispose();
+    this.contact.dispose(false, true);
+    this.removePose?.();
+    this.instance.dispose();
+    this.root.dispose(false, false);
+  }
+}
+export class Assets {
+  containers = new Map<string, AssetContainer>();
+  async load(scene: Scene, onProgress: (n: number) => void) {
+    const entries = Object.entries(ASSETS);
+    let count = 0;
+    await Promise.all(
+      entries.map(async ([key, url]) => {
+        const at = url.lastIndexOf("/");
+        const container = await SceneLoader.LoadAssetContainerAsync(
+          url.slice(0, at + 1),
+          url.slice(at + 1),
+          scene,
+        );
+        this.containers.set(key, container);
+        onProgress(++count / entries.length);
+      }),
+    );
+    for (const name of [
+      "BirchTree_1",
+      "BirchTree_2",
+      "Bush_Large",
+      "Bush_Small",
+    ]) {
+      const container = await SceneLoader.LoadAssetContainerAsync(
+        "/assets/nature/",
+        name + ".gltf",
+        scene,
+      );
+      for (const material of container.materials) {
+        if (
+          material instanceof PBRMaterial &&
+          material.name.includes("Leaves")
+        ) {
+          material.albedoTexture = new Texture(
+            "/assets/nature/Textures/" +
+              (name.startsWith("Bush") ? "Bush_Leaves" : "BirchTree_Leaves") +
+              ".png",
+            scene,
+            false,
+            false,
+          );
+          material.albedoTexture.hasAlpha = true;
+          material.useAlphaFromAlbedoTexture = true;
+          material.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHATEST;
+          material.alphaCutOff = 0.45;
+          material.backFaceCulling = false;
+          material.roughness = 0.9;
+          material.metallic = 0;
+          material.albedoColor = new Color3(0.22, 0.31, 0.15);
+        }
+      }
+      this.containers.set(name, container);
+    }
+  }
+  async loadArchitecture(scene: Scene) {
+    const names = [
+      "Arch_Gothic_RoundColumn",
+      "Arch_Round_RoundColumn",
+      "Column_BridgeSupport",
+      "Column_Round",
+      "Bricks",
+      "Cart",
+      "Chest_Gold",
+      "Barrel",
+      "Crate",
+      "Statue_Stag",
+      "Statue_Fox",
+      "Rail_Straight",
+      "Wall_ArchRound_Overgrown_Broken",
+      "Wall_Broken",
+      "Window_Bars_Overgrown",
+      "Torch",
+      "Pot1_Broken",
+      "Flag_Wall",
+    ];
+    for (let i = 0; i < names.length; i += 4)
+      await Promise.all(
+        names.slice(i, i + 4).map(async (name) => {
+          const container = await SceneLoader.LoadAssetContainerAsync(
+            "/assets/ruins/",
+            name + ".obj",
+            scene,
+          );
+          const converted = new Map<StandardMaterial, PBRMaterial>();
+          for (const mesh of container.meshes) {
+            const original = mesh.material;
+            if (!(original instanceof StandardMaterial)) continue;
+            let mat = converted.get(original);
+            if (!mat) {
+              mat = new PBRMaterial(name + "-" + original.name, scene);
+              mat.roughness = 0.88;
+              mat.metallic = 0;
+              const n = original.name.toLowerCase();
+              let color = n.includes("highlight")
+                ? "#b8ae8e"
+                : n.includes("black")
+                  ? "#343b36"
+                  : n.includes("wood")
+                    ? "#74604a"
+                    : n.includes("gold")
+                      ? "#b2985c"
+                      : n.includes("green") || n.includes("leaf")
+                        ? "#465b32"
+                        : n.includes("metal")
+                          ? "#565b51"
+                          : "#8f947c";
+              mat.albedoColor = Color3.FromHexString(color).toLinearSpace();
+              if (original.diffuseTexture) {
+                mat.albedoTexture = original.diffuseTexture;
+                mat.albedoTexture.hasAlpha = true;
+                mat.useAlphaFromAlbedoTexture = true;
+                mat.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHATEST;
+                mat.alphaCutOff = 0.4;
+                mat.backFaceCulling = false;
+              }
+              converted.set(original, mat);
+              container.materials.push(mat);
+              scene.removeMaterial(mat);
+            }
+            mesh.material = mat;
+          }
+          this.containers.set(name, container);
+        }),
+      );
+  }
+  building(
+    key: string,
+    scene: Scene,
+    parent: TransformNode,
+    p: Vector3,
+    height: number,
+    rotation = 0,
+    solid = true,
+    shadows?: ShadowGenerator,
+    width?: number,
+  ) {
+    const container = this.containers.get(key)!;
+    const instance = container.instantiateModelsToScene(
+      (n) => key + "-" + n,
+      false,
+      { doNotInstantiate: true },
+    );
+    const root = new TransformNode(key, scene);
+    instance.rootNodes.forEach((n) => (n.parent = root));
+    const bounds = root.getHierarchyBoundingVectors(true),
+      size = bounds.max.subtract(bounds.min),
+      scale = height / size.y;
+    const offset = new Vector3(
+      -(bounds.min.x + bounds.max.x) / 2,
+      -bounds.min.y,
+      -(bounds.min.z + bounds.max.z) / 2,
+    );
+    instance.rootNodes.forEach((n) => {
+      if (n instanceof TransformNode) n.position.addInPlace(offset);
+    });
+    root.scaling.set(width ? width / size.x : scale, scale, scale);
+    root.rotation.y = rotation;
+    root.position.copyFrom(p);
+    root.parent = parent;
+    root.getChildMeshes().forEach((m) => {
+      m.receiveShadows = true;
+      m.isPickable = solid;
+      m.metadata = { physics: solid, cameraSolid: solid };
+      if (shadows) shadows.addShadowCaster(m);
+    });
+    return root;
+  }
+  actor(
+    key: "hero" | Kind,
+    scene: Scene,
+    id: string,
+    shadows: ShadowGenerator,
+  ) {
+    const heights = {
+      hero: 2.1,
+      raptor: 2.4,
+      spitter: 2.1,
+      brute: 3.7,
+      bomber: 2,
+      wing: 2.4,
+      guardian: 8,
+    };
+    return new Actor(
+      this.containers.get(key)!,
+      scene,
+      id,
+      heights[key],
+      shadows,
+      key === "hero",
+    );
+  }
+  prop(
+    key: string,
+    scene: Scene,
+    parent: TransformNode,
+    p: Vector3,
+    scale: number,
+  ) {
+    const c = this.containers.get(key)!;
+    const root = new TransformNode(key, scene);
+    root.parent = parent;
+    const result = c.instantiateModelsToScene(undefined, false);
+    result.rootNodes.forEach((n) => (n.parent = root));
+    root.position.copyFrom(p);
+    root.scaling.setAll(scale);
+    root.rotation.y = (p.x + p.z) * 0.47;
+    root.metadata = { foliage: true, phase: (p.x + p.z) * 0.2 };
+    root.getChildMeshes().forEach((m) => {
+      m.receiveShadows = true;
+      m.isPickable = false;
+    });
+    return root;
+  }
+}

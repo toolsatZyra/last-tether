@@ -1,0 +1,1 @@
+async(page)=>{await page.goto('http://127.0.0.1:4174/');await page.waitForSelector('#begin',{state:'visible',timeout:60000});await page.setViewportSize({width:1200,height:630});await page.waitForTimeout(2500);await page.screenshot({path:'public/share-cover.png'});await page.setViewportSize({width:1295,height:879});return 'Captured actual rendered camp';}

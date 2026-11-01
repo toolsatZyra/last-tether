@@ -1,74 +1,67 @@
-# Last Tether — Chapter 01: The Broken Spillway
+# Last Tether — The Broken Spillway
 
-A playable, original third-person browser adventure. Kavi crosses a failing spillway, learns to hunt its predators, defeats the Slateback and opens a floodgate before escaping the surge.
+An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-**Status:** complete local chapter prototype. Procedural art, compact encounters, local checkpoints, a dated time trial and personal ghost replay. Optional Supabase cloud-transfer code is implemented but **no live backend is configured or verified**. There is no public leaderboard, live multiplayer or second chapter.
+Version 0.2 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
 
-## Run
+## Run and verify
 
-Use Node 24+ and npm. From this folder:
+Use Node 24 and npm:
 
-```powershell
+```sh
 npm ci
 npm run dev
-```
-
-Open http://127.0.0.1:4173 in a current desktop browser with WebGL2/graphics acceleration. The game is designed for keyboard/mouse; controller mappings are implemented but have not been verified on physical hardware. Touch controls are not implemented. Audio starts off and only becomes audible if you enable it in Settings.
-
-Production build:
-
-```powershell
+npm test
 npm run build
 npm run preview -- --port 4174
 ```
 
-Open http://127.0.0.1:4174. This serves the compiled artifact, without the development test hooks. The included `vercel.json` uses `npm run build` and `dist`; no game server or websocket connection is required for the solo chapter.
+Development: http://127.0.0.1:4173. Production preview: http://127.0.0.1:4174. Desktop keyboard/mouse and hardware-accelerated WebGL2 are required. The production build contains no development simulation hook. Audio is off until enabled in Settings.
 
-## Play
+## Controls
 
-| Control | Action |
+| Input | Action |
 |---|---|
-| WASD / arrows | Move relative to camera |
-| Space | Jump; release an attached tether |
-| Q | Attach to highlighted target; detach |
-| Hold R | Reel toward a fixed anchor; pull a loose mechanism |
-| F / left click | Spear strike |
+| WASD / arrows | Move relative to the camera |
+| F / left click, held | Three-part spear chain; aerial strike when jumping |
+| R | Returning spear, unlocked during the storm road |
+| Q | Cross a marked gap, pull a creature, or tear stunned guardian armour |
 | Shift | Dodge |
-| E | Interact with a cache, shortcut or floodgate |
-| Right mouse drag | Turn camera |
-| C | Recenter behind Kavi |
-| J | Field journal |
-| Escape | Pause |
+| Space | Jump / release a grapple |
+| X | Spend a full hunt meter, unlocked in the hanging forest |
+| H | Healing flask |
+| E | Interact / turn a wheel / collect a memory |
+| Right drag / C | Look / recenter |
+| Escape / J | Pause / journal |
 
-The game saves completed encounter checkpoints, not arbitrary airborne positions. Falls reset the unfinished encounter. Finished encounters and discoveries persist. Starting a new expedition requires an explicit confirmation. Browser storage is per origin: the development and preview ports have different local saves.
+Checkpoints record secured objectives. Retrying restores that encounter with full health and flasks. New expedition asks before replacing a local story save. Optional memories restore a flask. Browser saves belong to the current origin: localhost, preview and the public deployment have separate storage.
 
-In the boss arena, line up a striped support between Kavi and the Slateback. Its charge commits to a straight line. After impact, approach, attach to the loose armour and hold R; attack during the exposed window. The last climb requires jumping onto raised steps.
+## Replay and online features
 
-See [WALKTHROUGH.md](WALKTHROUGH.md) for the character/world proposal and exact chapter actions, [DESIGN.md](DESIGN.md) for the implementation sequence, and [VERIFICATION.md](VERIFICATION.md) for bounded test evidence.
+The hanging-forest trial records personal times and a sampled movement ghost, retaining five runs on each of the four most recent dates. It is the same authored course each day. These records are local and client-controlled, not competitive scores.
 
-## Replay and persistence
+Cloud transfer, public leaderboards and multiplayer are not connected. No suitable dedicated Last Tether Supabase project was present; unrelated databases were left alone. The old Supabase proposal is explicitly archived in its setup notes and must not be applied as a v2 integration.
 
-- Story checkpoints and five discoverable journal entries are stored locally.
-- Daily Route reuses the fork, counterweight and exposed span. Its UTC date changes the reefwing's starting rhythm; it does not generate a new world.
-- Successful daily runs save time, falls and sampled movement. A second run shows the personal-best ghost. Retention is five runs per day across the four most recent recorded dates.
-- Records are personal and client-controlled. They are not competitive or cheat-resistant scores.
-- Cloud checkpoint transfers are explicit uploads/downloads with overwrite confirmation. Local saving remains automatic. Setup and remaining live checks are in [supabase/SETUP.md](supabase/SETUP.md).
+## Source layout
 
-## Implementation
+- `src/expedition/engine.ts`: chapter state, combat, enemy decisions, puzzles and checkpoint validation.
+- `level.ts`: authored route and encounters; `physics.ts`: Havok capsule movement against scene geometry.
+- `actors.ts`, `scene.ts`, `water.ts`: models, animation, lighting, materials, camera, scenery, particles and water.
+- `app.ts`, `profile.ts`, `markup.ts`, `style.css`: controls, local storage, settings and interface.
+- `audio.ts`: opt-in recorded effects and a quiet synthesized bed.
+- `tests/`: 13 behaviour checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
+- `public/assets/manifest.json`: 78 source/license/hash records covering approximately 19.6 MB of licensed assets.
 
-- `src/simulation.ts`: fixed-step movement, platform collision, tether, enemies, encounters, checkpoints and validation. Independent of rendering.
-- `src/world.ts`: Babylon.js procedural scene, characters, creatures, lighting, animation, camera collision and ghost rendering.
-- `src/main.ts`: interface, keyboard/controller inputs, pause, journal, settings and cloud-transfer flow.
-- `src/storage.ts`: local checkpoints and bounded daily records.
-- `src/cloud.ts`: optional Supabase Auth and account-scoped checkpoint adapter.
-- `src/audio.ts`: optional synthesised cues; no external audio files.
-- `tests/`: behavior tests and repeatable Playwright CLI checks. Input-driven integration never teleports, changes health, or changes progression.
-- `output/`: build/test/browser evidence. Screenshots in `output/playwright/` include earlier bug captures; the final chapter captures are `chapter-stage-*.png`.
+The rejected prototype remains recoverable at Git commit `e8ef61d`. Its unused source and tests were removed from the current build so old checks cannot be mistaken for v2 validation.
 
-No external character or environment assets, generated media, fonts, analytics or paid services are used. Geometry, colour, interface and synth cues were authored for this prototype. Babylon.js and Supabase JS retain their respective package licences. Reference-game research is in the sibling `adventure-game-research` folder; no reference game's art, names, maps or code were copied.
+## Credits and evidence
 
-## Current limitations
+Models, rigs, creatures, vegetation and modular ruins: [Quaternius](https://quaternius.com/), CC0. Stone surfaces: Rob Tuytel and Amal Kumar; HDR sky: Greg Zaal and Jarod Guest, [Poly Haven](https://polyhaven.com/), CC0. Recorded effects: [Kenney RPG Audio](https://kenney.nl/assets/rpg-audio) and [Impact Sounds](https://kenney.nl/assets/impact-sounds), CC0. Exact sources and local modifications are in the asset manifest; license files accompany the assets. Typography uses Barlow Condensed and DM Sans through Google Fonts. Engine/package licenses remain with their dependencies.
 
-This is a small playable chapter, not a finished commercial adventure. The optimal automated route is around one minute; that is evidence of reachability, not a claim about first-play duration. A 15–20 minute chapter and a satisfying difficulty curve have not been achieved or validated. The creatures and Kavi use simple procedural geometry and animation. Some decorative scenery is not collidable; enemy navigation is authored for these arenas. The opening bridge is already broken rather than collapsing dynamically. The counterweight appears when released rather than having a full machinery animation.
+Read [WALKTHROUGH.md](WALKTHROUGH.md) for chapter actions, [ENGINEERING.md](ENGINEERING.md) for implementation boundaries, [VERIFICATION.md](VERIFICATION.md) for test evidence and [QUALITY_PLAN.md](QUALITY_PLAN.md) for the still-open quality gates.
 
-Human enjoyment, accessibility with diverse players, physical gamepads, mobile input, weak-device performance, live account/cloud security checks and public deployment remain unverified. Public leaderboard validation and live multiplayer are later work. No paid resources were created.
+## Current limits
+
+The accelerated route-only Havok test completed in 9m53s without deaths; a full story/interface policy took 9m59s with one recovery, and a ranged-heavy policy took 15m51s. Those are automated policies with route and puzzle knowledge, not first-time human playtests. A 15–20 minute first play remains a target.
+
+Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. Short desktop Chrome samples on integrated AMD graphics varied roughly 33–58 FPS in the latest art pass, with additional cold shader compilation stalls. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.
