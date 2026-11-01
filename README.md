@@ -1,5 +1,7 @@
 # Last Tether — The Broken Spillway
 
+[Play the deployed chapter](https://last-tether.vercel.app/) · [GitHub source](https://github.com/toolsatZyra/last-tether)
+
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
 Version 0.2 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.

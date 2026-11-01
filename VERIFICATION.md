@@ -30,3 +30,9 @@ Human enjoyment, first-time pacing, parity with top commercial game art, audible
 The full story test that also processes interface events reached the ending and saved a finished version-2 checkpoint in 599.03 simulated seconds, with 193 defeats and one recovery. The earlier route-only test measured 592.68 seconds with zero recoveries. These are different automated policies.
 
 A long-run resource leak was found and fixed: actors now dispose their instantiated skeletons, animation groups and contact textures. Creating and disposing 100 creatures leaves the scene at exactly 2 skeletons, 47 textures and 48 animation groups before and after. Creature shaders are prepared under the loading screen before play. Camp difficulty changes were also checked to preserve a saved sector-2 checkpoint.
+
+## Public deployment verified
+
+Production URL: https://last-tether.vercel.app/
+
+Vercel built Git commit 8b3aeb24903e2eb5139f05414660fb80bc9cefcb as deployment dpl_7zqe9gYXkkBR4Kg7eELjxKe6s7GD. An unauthenticated browser opened the public game, defeated the first three creatures with ordinary keyboard controls, advanced to the watchpost, paused, saved, reloaded and resumed the same objective. The development hook was absent. The bounded check recorded no page errors and no failed asset responses. This verifies the live opening and persistence; full-chapter traversal was checked locally against the same application source.

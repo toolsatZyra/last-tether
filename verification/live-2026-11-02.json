@@ -1,0 +1,16 @@
+{
+  "url": "https://last-tether.vercel.app/",
+  "sourceCommit": "8b3aeb24903e2eb5139f05414660fb80bc9cefcb",
+  "verifiedAt": "2026-11-01T21:39:59.530Z",
+  "result": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "scope": "Native keyboard opening combat, progression, pause and checkpoint resume in the public production build. No developer hook.",
+  "limits": "Not a full real-time public chapter playthrough or a human quality assessment."
+}
