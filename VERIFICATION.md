@@ -15,7 +15,7 @@
 
 An optimal policy completes faster than the intended first-time experience. A ranged-heavy policy previously measured 15m51s with one recovery. Neither is a human first play. A 15–20 minute chapter for an unfamiliar player remains unverified.
 
-Latest short scene samples in desktop Chrome/WebGL2 on AMD Radeon integrated graphics were approximately 33–58 FPS at the test viewport, with cold shader compilation stalls. A later warm opening sample was about 51 FPS. They are bounded measurements, not a sustained 60 FPS claim or a guarantee on other hardware. Earlier constant-60 readings were invalid and must not be cited.
+Version 0.2.1 sampled the opening, hanging forest and guardian in desktop Chrome/WebGL2 on AMD Radeon integrated graphics at Balanced settings, rendering at 1036 × 703. After two seconds of settling, four-second samples reported engine FPS of 50.6, 69.4 and 71.6. Median frame intervals were 18.1, 18.1 and 12.2 ms; 95th percentiles were 24.2, 18.5 and 18.3 ms. These use a stationary invulnerable player and active encounters, so they are bounded samples rather than complete-playthrough or other-hardware guarantees. Shader preparation now runs under the loading screen. Earlier constant-60 readings were invalid and must not be cited.
 
 ## Reproduction
 
@@ -36,3 +36,9 @@ A long-run resource leak was found and fixed: actors now dispose their instantia
 Production URL: https://last-tether.vercel.app/
 
 Vercel built Git commit 8b3aeb24903e2eb5139f05414660fb80bc9cefcb as deployment dpl_7zqe9gYXkkBR4Kg7eELjxKe6s7GD. An unauthenticated browser opened the public game, defeated the first three creatures with ordinary keyboard controls, advanced to the watchpost, paused, saved, reloaded and resumed the same objective. The development hook was absent. The bounded check recorded no page errors and no failed asset responses. This verifies the live opening and persistence; full-chapter traversal was checked locally against the same application source.
+
+## Gorge and geometry update
+
+The updated chapter completed the story/interface policy in 597.95 simulated seconds, with 193 defeats and one recovery. The completed scene retained only 2 skeletons, 41 textures and 48 animation groups. A separate check rebuilt four sectors and confirmed that all 71 imported source meshes retained identical position/index fingerprints. This guards against the shared-index corruption found during the art pass.
+
+The 0.2.1 compiled preview also passed the ordinary-keyboard opening, three defeats, watchpost progression, pause and save/reload/resume check with no page errors or failed requests. `npm run verify:assets` checked all 78 downloaded files against their recorded sizes and SHA-256 hashes.

@@ -23,6 +23,7 @@ import { PBRCustomMaterial } from "@babylonjs/materials/custom/pbrCustomMaterial
 const creatureMaterials = new Map<number, PBRCustomMaterial>();
 import { ASSETS, type Kind } from "./level";
 import type { Expedition, Enemy } from "./engine";
+import { weatheredStone } from "./surfaces";
 export class Actor {
   instance: InstantiatedEntries;
   height: number;
@@ -403,6 +404,8 @@ export class Assets {
     }
   }
   async loadArchitecture(scene: Scene) {
+    const stoneTexture = new Texture("/assets/materials/stone.jpg", scene);
+    const paletteMaterials = new Map<string, PBRMaterial>();
     const names = [
       "Arch_Gothic_RoundColumn",
       "Arch_Round_RoundColumn",
@@ -445,7 +448,7 @@ export class Assets {
                 ? "#b8ae8e"
                 : n.includes("black")
                   ? "#343b36"
-                  : n.includes("wood")
+                  : n.includes("wood") || n.includes("brown")
                     ? "#74604a"
                     : n.includes("gold")
                       ? "#b2985c"
@@ -454,7 +457,41 @@ export class Assets {
                         : n.includes("metal")
                           ? "#565b51"
                           : "#8f947c";
+              mat.dispose();
+              const stone =
+                !original.diffuseTexture &&
+                ![
+                  "Cart",
+                  "Barrel",
+                  "Crate",
+                  "Chest_Gold",
+                  "Flag_Wall",
+                  "Torch",
+                ].includes(name) &&
+                !n.includes("green") &&
+                !n.includes("leaf") &&
+                !n.includes("metal") &&
+                !n.includes("black");
+              const paletteKey =
+                color +
+                "-" +
+                (stone ? "stone" : original.diffuseTexture?.name || "plain");
+              const shared = paletteMaterials.get(paletteKey);
+              mat =
+                shared ||
+                (stone
+                  ? weatheredStone(
+                      "ruins-" + paletteKey,
+                      scene,
+                      stoneTexture,
+                      color,
+                      0.6,
+                    )
+                  : new PBRMaterial("ruins-" + paletteKey, scene));
+              mat.roughness = 0.9;
+              mat.metallic = 0;
               mat.albedoColor = Color3.FromHexString(color).toLinearSpace();
+              if (!shared) paletteMaterials.set(paletteKey, mat);
               if (original.diffuseTexture) {
                 mat.albedoTexture = original.diffuseTexture;
                 mat.albedoTexture.hasAlpha = true;

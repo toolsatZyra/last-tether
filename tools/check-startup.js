@@ -1,0 +1,1 @@
+async(page)=>{await page.reload();await page.waitForFunction(()=>window.__expedition||document.querySelector('#load-status')?.textContent.includes('could not'),null,{timeout:60000});return await page.evaluate(()=>({ready:!!window.__expedition,status:document.querySelector('#load-status').textContent}));}

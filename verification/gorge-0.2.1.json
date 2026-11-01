@@ -1,0 +1,65 @@
+{
+  "version": "0.2.1",
+  "date": "2026-11-02",
+  "automatedStory": {
+    "seconds": 597.95,
+    "defeats": 193,
+    "recoveries": 1,
+    "endingVisible": true,
+    "finishedCheckpoint": true
+  },
+  "resourcesAtEnd": {
+    "skeletons": 2,
+    "textures": 41,
+    "animationGroups": 48
+  },
+  "geometry": {
+    "sourceMeshes": 71,
+    "sectorRebuilds": 4,
+    "unchanged": true
+  },
+  "productionPreview": {
+    "noDebugHook": true,
+    "defeats": 3,
+    "objective": "Take back the watchpost",
+    "pause": true,
+    "saveReloadResume": true,
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  "samples": {
+    "quality": "balanced",
+    "renderSize": [
+      1036,
+      703
+    ],
+    "durationSeconds": 4,
+    "settleSeconds": 2,
+    "player": "stationary and invulnerable",
+    "sector": [
+      0,
+      3,
+      6
+    ],
+    "engineFps": [
+      50.62,
+      69.4,
+      71.6
+    ],
+    "medianFrameMs": [
+      18.1,
+      18.1,
+      12.2
+    ],
+    "p95FrameMs": [
+      24.2,
+      18.5,
+      18.3
+    ]
+  },
+  "limits": [
+    "Automated pacing is not first-time human pacing",
+    "Short samples do not establish sustained performance",
+    "Top-tier visual quality and human enjoyment not established"
+  ]
+}

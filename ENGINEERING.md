@@ -19,3 +19,5 @@ The production bundle excludes the development hook. Vercel serves static files;
 Sources: [Babylon capabilities](https://www.babylonjs.com/specifications/), [Babylon Havok character controller documentation](https://github.com/BabylonJS/Documentation/blob/master/content/features/featuresDeepDive/physics/v2/characterController.md). Installed package source was also inspected for the exact APIs in use.
 
 Actor instances own and dispose their cloned skeletons and animation groups. Contact-shading textures are also explicitly disposed. Imported creature shaders are compiled during loading to reduce the first encounter hitch.
+
+The gorge is a continuous heightfield built with Babylon ground geometry. Stone grain is projected in world space through the engine material extension so scaled arches keep a consistent texture size. Batching copies imported geometry before disposing source instances; 71 source meshes retain identical position/index fingerprints across four rebuilt sectors. Collision data is validated before Havok receives it. Rain and ambient motes use particle systems.

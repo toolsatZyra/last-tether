@@ -32,12 +32,15 @@ import {
 import { Assets, Actor } from "./actors";
 import { PhysicsWorld } from "./physics";
 import { createRiver } from "./water";
+import { weatheredStone } from "./surfaces";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
 import { Expedition, clamp, type Event } from "./engine";
 const c = (s: string) => Color3.FromHexString(s);
 const V = (p: V) => new Vector3(p.x, p.y, p.z);
 export class GameScene {
+  rain!: ParticleSystem;
+  motes!: ParticleSystem;
   sparkTexture!: DynamicTexture;
   particleBursts: { system: ParticleSystem; life: number }[] = [];
   foregroundProps: AbstractMesh[] = [];
@@ -114,7 +117,7 @@ export class GameScene {
     this.camera.maxZ = 1100;
     this.camera.fov = 1.05;
     const hemi = new HemisphericLight("sky", new Vector3(0, 1, 0), this.scene);
-    hemi.intensity = 0.35;
+    hemi.intensity = 0.22;
     hemi.diffuse = c("#b7d4dc");
     hemi.groundColor = c("#39434b");
     this.sun = new DirectionalLight(
@@ -122,7 +125,7 @@ export class GameScene {
       new Vector3(-0.6, -0.8, 0.4),
       this.scene,
     );
-    this.sun.intensity = 2.5;
+    this.sun.intensity = 3.6;
     this.sun.diffuse = c("#ffe1b6");
     this.sun.shadowMinZ = 1;
     this.sun.shadowMaxZ = 180;
@@ -134,7 +137,7 @@ export class GameScene {
     this.shadow.filteringQuality = ShadowGenerator.QUALITY_MEDIUM;
     this.shadow.bias = 0.0005;
     this.shadow.normalBias = 0.035;
-    this.shadow.darkness = 0.18;
+    this.shadow.darkness = 0;
     const env = new HDRCubeTexture(
       "/assets/materials/sky.hdr",
       this.scene,
@@ -145,7 +148,7 @@ export class GameScene {
       true,
     );
     this.scene.environmentTexture = env;
-    this.scene.environmentIntensity = 0.65;
+    this.scene.environmentIntensity = 0.35;
     const skybox = this.scene.createDefaultSkybox(env, true, 1000, 0.15)!;
     skybox.name = "sky";
     skybox.isPickable = false;
@@ -212,16 +215,46 @@ export class GameScene {
     );
     this.rope.color = c("#e8d6a3");
     this.rope.isPickable = false;
-    for (let i = 0; i < 60; i++) {
-      const m = MeshBuilder.CreateSphere(
-        "mote",
-        { diameter: 0.04, segments: 3 },
-        this.scene,
-      );
-      m.material = this.materials.glow;
-      m.isPickable = false;
-      this.dust.push(m);
-    }
+    this.motes = new ParticleSystem("valley-motes", 100, this.scene);
+    this.motes.particleTexture = this.sparkTexture;
+    this.motes.emitter = Vector3.Zero();
+    this.motes.minEmitBox = new Vector3(-25, 0, -25);
+    this.motes.maxEmitBox = new Vector3(25, 13, 25);
+    this.motes.direction1 = new Vector3(-0.1, 0.04, -0.1);
+    this.motes.direction2 = new Vector3(0.1, 0.2, 0.1);
+    this.motes.minEmitPower = 0.3;
+    this.motes.maxEmitPower = 0.8;
+    this.motes.minLifeTime = 4;
+    this.motes.maxLifeTime = 6;
+    this.motes.minSize = 0.035;
+    this.motes.maxSize = 0.09;
+    this.motes.color1 = new Color4(0.9, 0.75, 0.45, 0.35);
+    this.motes.color2 = new Color4(0.7, 0.85, 0.8, 0.25);
+    this.motes.colorDead = new Color4(0.7, 0.8, 0.7, 0);
+    this.motes.emitRate = 16;
+    this.motes.updateSpeed = 1 / 60;
+    this.motes.start();
+    this.rain = new ParticleSystem("storm-rain", 500, this.scene);
+    this.rain.particleTexture = this.sparkTexture;
+    this.rain.emitter = Vector3.Zero();
+    this.rain.minEmitBox = new Vector3(-22, 0, -22);
+    this.rain.maxEmitBox = new Vector3(22, 0, 22);
+    this.rain.direction1 = new Vector3(-0.12, -1, 0.04);
+    this.rain.direction2 = new Vector3(-0.08, -1, 0.08);
+    this.rain.minEmitPower = 26;
+    this.rain.maxEmitPower = 32;
+    this.rain.minLifeTime = 0.7;
+    this.rain.maxLifeTime = 1.1;
+    this.rain.minSize = 0.025;
+    this.rain.maxSize = 0.045;
+    this.rain.minScaleY = 12;
+    this.rain.maxScaleY = 22;
+    this.rain.color1 = new Color4(0.6, 0.75, 0.8, 0.22);
+    this.rain.color2 = new Color4(0.75, 0.85, 0.9, 0.14);
+    this.rain.colorDead = new Color4(0.7, 0.8, 0.9, 0);
+    this.rain.emitRate = 200;
+    this.rain.updateSpeed = 1 / 60;
+    this.rain.start();
     window.addEventListener("resize", () => this.engine.resize());
   }
   async load(progress: (n: number) => void) {
@@ -283,6 +316,13 @@ export class GameScene {
       this.scene,
     );
     stone.bumpTexture.level = 0.45;
+    this.materials.terrain = weatheredStone(
+      "gorge-stone",
+      this.scene,
+      stone.albedoTexture as Texture,
+      "#899383",
+      0.13,
+    );
     const floor = pbr("floor", "#c6cac0");
     floor.albedoTexture = new Texture(
       "/assets/materials/floor-diff.jpg",
@@ -293,6 +333,13 @@ export class GameScene {
       this.scene,
     );
     floor.bumpTexture.level = 0.55;
+    floor.metallicTexture = new Texture(
+      "/assets/materials/floor-rough.jpg",
+      this.scene,
+    );
+    floor.useRoughnessFromMetallicTextureGreen = true;
+    floor.useRoughnessFromMetallicTextureAlpha = false;
+    floor.useMetallnessFromMetallicTextureBlue = false;
     floor.backFaceCulling = true;
     const cut = pbr("cutstone", "#9ba6a1");
     cut.albedoTexture = stone.albedoTexture;
@@ -324,6 +371,47 @@ export class GameScene {
       m.disableLighting = true;
       this.materials[key] = m;
     }
+  }
+  terrainHeight(x: number, z: number) {
+    const center = Math.sin(z * 0.011 + this.sector) * 14;
+    const width = 64 + Math.sin(z * 0.013 + this.sector * 0.8) * 12;
+    const ridge = clamp((Math.abs(x - center) - width) / 150, 0, 1);
+    const shoulder = ridge * ridge * (3 - 2 * ridge);
+    const grain =
+      Math.sin(x * 0.037 + z * 0.019) * 18 +
+      Math.sin(x * 0.081 - z * 0.044) * 9 +
+      Math.sin(x * 0.17 + z * 0.093) * 3;
+    const end = clamp((z - 470) / 150, 0, 1);
+    return -18 + shoulder * (120 + grain) + end * end * (80 + grain * 0.5);
+  }
+  makeLandscape() {
+    const terrain = MeshBuilder.CreateGround(
+      "river-gorge",
+      { width: 720, height: 1000, subdivisions: 120, updatable: true },
+      this.scene,
+    );
+    terrain.position.z = 230;
+    const positions = terrain.getVerticesData("position")!;
+    for (let i = 0; i < positions.length; i += 3)
+      positions[i + 1] = this.terrainHeight(
+        positions[i],
+        positions[i + 2] + 230,
+      );
+    const normals: number[] = [];
+    VertexData.ComputeNormals(positions, terrain.getIndices()!, normals);
+    terrain.updateVerticesData("position", positions);
+    terrain.updateVerticesData("normal", normals);
+    terrain.refreshBoundingInfo();
+    terrain.material = this.materials.terrain;
+    terrain.parent = this.root;
+    terrain.receiveShadows = true;
+    terrain.isPickable = true;
+    terrain.metadata = {
+      landscape: true,
+      distant: true,
+      cameraSolid: true,
+      physics: false,
+    };
   }
   makeWater() {
     this.river = createRiver(this.scene);
@@ -678,41 +766,18 @@ export class GameScene {
         this.cacheMeshes.push(cache);
       }
     }
+    this.makeLandscape();
     for (let i = 0; i < 65; i++) {
-      const z = -40 + rand() * 540,
-        side = i % 2 ? 1 : -1,
-        x = side * (100 + rand() * 100),
-        y = -10 + rand() * 20;
-      this.rock(
-        v(x, y - 18, z),
-        v(15 + rand() * 20, 20 + rand() * 20, 15 + rand() * 20),
-        rand() * 6,
+      const x = (i % 2 ? 1 : -1) * (95 + rand() * 100),
+        z = -30 + rand() * 530,
+        y = this.terrainHeight(x, z);
+      this.assets.prop(
+        i % 3 ? "BirchTree_1" : "BirchTree_2",
+        this.scene,
+        this.root,
+        new Vector3(x, y, z),
+        1.4 + rand() * 1.4,
       );
-      if (i % 2 === 0)
-        this.assets.prop(
-          i % 3 ? "BirchTree_1" : "BirchTree_2",
-          this.scene,
-          this.root,
-          new Vector3(x, y + 3, z),
-          1.4 + rand() * 1.3,
-        );
-    }
-    for (let i = 0; i < 20; i++) {
-      const side = i % 2 ? 1 : -1;
-      this.rock(
-        v(side * (230 + rand() * 130), 15, -100 + i * 40),
-        v(50, 80 + rand() * 70, 60),
-        rand() * 10,
-        "cutstone",
-      );
-    }
-    for (let j = -3; j <= 3; j++) {
-      const mountain = this.rock(
-        v(j * 65, -10, 570 + Math.abs(j) * 15),
-        v(55, 115 - Math.abs(j) * 14, 65),
-        j + 7,
-      );
-      mountain.metadata = { distant: true };
     }
     ch.beats.forEach((b, i) => {
       const p = ch.points[b.node];
@@ -892,10 +957,10 @@ export class GameScene {
     this.wheels = this.root
       .getChildTransformNodes()
       .filter((n) => n.metadata?.wheel);
+    for (const n of this.foliage)
+      for (const m of n.getChildMeshes()) this.shadow.addShadowCaster(m);
     this.shadowCasters = [...(this.shadow.getShadowMap()?.renderList || [])];
-    this.river.reflect(
-      this.staticDraws.filter((m) => m.material === this.materials.cliff),
-    );
+    this.river.reflect(this.staticDraws.filter((m) => m.metadata?.landscape));
     this.physics.rebuild(
       this.root.getChildMeshes().filter((m) => m instanceof Mesh) as Mesh[],
       s,
@@ -945,9 +1010,20 @@ export class GameScene {
         !!m.metadata?.distant,
         m.getVerticesDataKinds().sort().join(","),
       ].join(":");
-      const list = groups.get(key) || [];
+      let bucket = key,
+        index = 0,
+        list = groups.get(bucket) || [];
+      while (
+        list.reduce((total, mesh) => total + mesh.getTotalVertices(), 0) +
+          m.getTotalVertices() >
+          16000 &&
+        list.length
+      ) {
+        bucket = key + ":" + ++index;
+        list = groups.get(bucket) || [];
+      }
       list.push(m);
-      groups.set(key, list);
+      groups.set(bucket, list);
     }
     for (const list of groups.values())
       for (const mesh of list) mesh.setParent(this.root);
@@ -960,9 +1036,12 @@ export class GameScene {
       );
       const merged =
         meshes.length > 1
-          ? Mesh.MergeMeshes(meshes, true, true, undefined, false, false)
+          ? Mesh.MergeMeshes(meshes, false, true, undefined, false, false)
           : meshes[0];
       if (!merged) continue;
+      // Preserve shared imported geometry while the engine copies and offsets indices.
+      if (meshes.length > 1)
+        meshes.forEach((mesh) => mesh.dispose(false, false));
       merged.name = "environment-batch";
       merged.parent = this.root;
       merged.material = material;
@@ -1439,13 +1518,15 @@ export class GameScene {
         ],
         instance: this.rope,
       });
-    this.dust.forEach((m, i) =>
-      m.position.set(
-        s.p.x + Math.sin(i * 17 + this.time * 0.08) * 25,
-        s.p.y + 1 + (i % 13) + Math.cos(this.time + i) * 0.3,
-        s.p.z + Math.cos(i * 12 + this.time * 0.04) * 25,
-      ),
-    );
+    this.motes.emitter = new Vector3(s.p.x, s.p.y + 1, s.p.z);
+    this.motes.updateSpeed = dt > 0 ? 1 / 60 : 0;
+    this.rain.emitter = new Vector3(s.p.x, s.p.y + 20, s.p.z);
+    this.rain.emitRate = [0, 7].includes(s.sector)
+      ? this.quality === "low"
+        ? 80
+        : 220
+      : 0;
+    this.rain.updateSpeed = dt > 0 ? 1 / 60 : 0;
     if (this.ghostActor) {
       const frame = this.ghostFrames.find(
         (f) => f.t >= s.seconds && f.sector === s.sector,
@@ -1584,8 +1665,8 @@ export class GameScene {
     );
     this.pipeline.samples = q === "high" ? 4 : 1;
     this.pipeline.bloomEnabled = q !== "low";
-    if ((q !== "low") !== this.aoEnabled) {
-      this.aoEnabled = q !== "low";
+    if ((q === "high") !== this.aoEnabled) {
+      this.aoEnabled = q === "high";
       if (this.aoEnabled)
         this.scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline(
           "contact-shadows",

@@ -4,7 +4,7 @@
 
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-Version 0.2 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
+Version 0.2.1 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
 
 ## Run and verify
 
@@ -14,6 +14,7 @@ Use Node 24 and npm:
 npm ci
 npm run dev
 npm test
+npm run verify:assets
 npm run build
 npm run preview -- --port 4174
 ```
@@ -64,6 +65,6 @@ Read [WALKTHROUGH.md](WALKTHROUGH.md) for chapter actions, [ENGINEERING.md](ENGI
 
 ## Current limits
 
-The accelerated route-only Havok test completed in 9m53s without deaths; a full story/interface policy took 9m59s with one recovery, and a ranged-heavy policy took 15m51s. Those are automated policies with route and puzzle knowledge, not first-time human playtests. A 15–20 minute first play remains a target.
+The accelerated route-only Havok test completed in 9m53s without deaths; the latest full story/interface policy took 9m58s with one recovery, and a ranged-heavy policy took 15m51s. Those are automated policies with route and puzzle knowledge, not first-time human playtests. A 15–20 minute first play remains a target.
 
-Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. Short desktop Chrome samples on integrated AMD graphics varied roughly 33–58 FPS in the latest art pass, with additional cold shader compilation stalls. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.
+Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. Three four-second samples after warm-up on integrated AMD graphics reported roughly 51–72 FPS at Balanced settings (1036 × 703 rendering); 95th-percentile frame intervals were 18–24 ms. Shader preparation now runs under the loading screen. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.

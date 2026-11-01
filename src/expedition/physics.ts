@@ -37,6 +37,27 @@ export class PhysicsWorld {
     for (const mesh of meshes) {
       if (!mesh.metadata?.physics) continue;
       mesh.computeWorldMatrix(true);
+      const vertices = mesh.getVerticesData("position"),
+        indices = mesh.getIndices();
+      if (
+        !vertices ||
+        !indices ||
+        vertices.some((n) => !Number.isFinite(n)) ||
+        indices.some((n) => n < 0 || n >= vertices.length / 3)
+      )
+        throw new Error(
+          "Invalid collision mesh: " +
+            JSON.stringify({
+              name: mesh.name,
+              vertices: vertices?.length,
+              indices: indices?.length,
+              maxIndex: indices
+                ? Array.from(indices).reduce((a, b) => Math.max(a, b), 0)
+                : 0,
+              badVertex: vertices?.findIndex((n) => !Number.isFinite(n)),
+              material: mesh.material?.name,
+            }),
+        );
       this.bodies.push(
         new PhysicsAggregate(
           mesh,
