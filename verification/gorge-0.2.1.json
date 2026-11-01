@@ -61,5 +61,20 @@
     "Automated pacing is not first-time human pacing",
     "Short samples do not establish sustained performance",
     "Top-tier visual quality and human enjoyment not established"
-  ]
+  ],
+  "publicDeployment": {
+    "url": "https://last-tether.vercel.app/",
+    "commit": "4d07729aebef9a42845c5ce104a7373c159ee70a",
+    "deployment": "dpl_EVLdipSPTZng4pZ42RAMTGNXc965",
+    "state": "READY",
+    "ordinaryKeyboardOpening": true,
+    "objective": "Take back the watchpost",
+    "defeats": 3,
+    "recoveries": 0,
+    "pause": true,
+    "saveReloadResume": true,
+    "noDebugHook": true,
+    "pageErrors": [],
+    "failedRequests": []
+  }
 }
