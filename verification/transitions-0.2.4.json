@@ -150,5 +150,19 @@
     "The accelerated story observer timed out; its CLI process was absent before the existing browser ending and checkpoint were recovered without restarting.",
     "The full normal-speed chapter audit remains the separately recorded 0.2.3 run.",
     "First-time duration, top-tier art and human enjoyment remain unverified."
-  ]
+  ],
+  "publicDeployment": {
+    "commit": "18ffba1bcfa4d05123cb2ad9ab799253bd3d156b",
+    "deployment": "dpl_GE1Aw4iKxBP8ZYNGPoA1pSuLAdqe",
+    "url": "https://last-tether.vercel.app/",
+    "result": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
+  }
 }
