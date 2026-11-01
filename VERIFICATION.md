@@ -96,3 +96,5 @@ A staged cache check used ordinary E input to collect a memory: the flask count 
 Four-second Balanced samples during the art pass, at 1036 × 703, reported 49.2, 56.8 and 66.8 engine FPS in sectors 0, 3 and 6; p95 frame intervals were 24.4, 24.3 and 24.2 ms. These precede the final lower lamp intensity and garden-channel cosmetic adjustment and do not establish sustained chapter performance.
 
 The final compiled opening passed ordinary movement/combat, three defeats, watchpost progression, pause and save/reload/resume. No development hook, page errors or failed responses were recorded. The requested modern-game visual bar, human enjoyment and first-time duration remain open.
+
+Public 0.2.5 verification: application commit `5024ba75c5c725de25063079b38f0e338feb7067`, Vercel deployment `dpl_4Pup6a9JdoF421pQm8CpWFb2rDz3`, reached READY. The public ordinary-keyboard opening passed three defeats, watchpost progression, pause, new-game/resume transitions and save/reload/resume, with no development hook, page errors or failed responses.

@@ -265,5 +265,19 @@
     "The full chapter route is accelerated and knows the route and puzzle solutions.",
     "Four-second frame samples during the art pass are not sustained performance; final lamp intensity and garden-channel cosmetics were adjusted afterwards.",
     "First-time pacing, top-tier modern-game art, human enjoyment and audible mix remain unverified."
-  ]
+  ],
+  "publicDeployment": {
+    "commit": "5024ba75c5c725de25063079b38f0e338feb7067",
+    "deployment": "dpl_4Pup6a9JdoF421pQm8CpWFb2rDz3",
+    "url": "https://last-tether.vercel.app/",
+    "result": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
+  }
 }
