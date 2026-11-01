@@ -39,7 +39,8 @@ test("jump returns to the floor without consuming a healing flask", () => {
   const s = new Expedition();
   s.step(1 / 60, { x: 0, z: 0, jump: true });
   assert.ok(!s.grounded);
-  step(s, 90);
+  for (let frame = 0; frame < 90 && !s.grounded; frame++) step(s, 1);
+  assert.ok(s.landTime > 0);
   assert.ok(s.grounded);
   assert.equal(s.flasks, 3);
   assert.ok(Math.abs(s.p.y - 8) < 0.05);
@@ -141,4 +142,90 @@ test("a full input-only route can solve every objective, boss and escape", () =>
   assert.equal(visited.size, 8);
   assert.ok(s.kills >= 180);
   assert.equal(validSave(s.save())?.finished, true);
+});
+
+function meleeEncounter() {
+  const s = new Expedition();
+  s.spawned = true;
+  s.wave = 99;
+  s.addEnemy("brute", v(s.p.x, s.p.y, s.p.z + 2.5));
+  const enemy = s.enemies[0];
+  enemy.state = "stunned";
+  enemy.timer = 10;
+  return { s, enemy };
+}
+test("melee damage arrives at contact once, and dodge cancels an unfinished swing", () => {
+  const { s, enemy } = meleeEncounter();
+  const hp = enemy.hp;
+  s.step(1 / 60, { x: 0, z: 0, attack: true });
+  assert.equal(enemy.hp, hp);
+  step(s, 5);
+  assert.equal(enemy.hp, hp);
+  step(s, 4);
+  assert.equal(enemy.hp, hp - 34);
+  step(s, 25);
+  assert.equal(enemy.hp, hp - 34);
+  const cancel = meleeEncounter();
+  cancel.s.step(1 / 60, { x: 0, z: 0, attack: true });
+  cancel.s.step(1 / 60, { x: 1, z: 0, dodge: true });
+  step(cancel.s, 30);
+  assert.equal(cancel.enemy.hp, cancel.enemy.max);
+});
+test("impact pause holds motion but retains a quick jump and heal press", () => {
+  const { s } = meleeEncounter();
+  s.hitstop = 0.035;
+  s.health = 20;
+  const before = { ...s.p };
+  const time = s.seconds;
+  s.step(1 / 60, { x: 1, z: 0, jump: true, heal: true });
+  assert.deepEqual(s.p, before);
+  assert.equal(s.flasks, 3);
+  assert.ok(s.seconds > time);
+  step(s, 3);
+  assert.equal(s.flasks, 2);
+  assert.equal(s.health, 75);
+  assert.ok(!s.grounded);
+  step(s, 3);
+  assert.equal(s.flasks, 2);
+});
+test("a late attack press carries through recovery and melee takes priority over throwing", () => {
+  const { s } = meleeEncounter();
+  s.loadSector(1, 0);
+  s.spawned = true;
+  s.wave = 99;
+  s.step(1 / 60, { x: 0, z: 0, attack: true, throw: true });
+  assert.equal(s.throwTime, 0);
+  assert.ok(s.attack > 0);
+  while (s.attackCooldown > 0.08) s.step(1 / 60, { x: 0, z: 0 });
+  s.step(1 / 60, { x: 0, z: 0, attack: true });
+  step(s, 6);
+  assert.equal(s.combo, 1);
+  assert.ok(s.attack > 0.25);
+  s.retry();
+  assert.equal(s.swingDelay, -1);
+  assert.equal(s.attackBuffer, 0);
+  assert.equal(s.hitstop, 0);
+});
+
+test("the melee closing step moves through collision, never by teleporting", () => {
+  const { s, enemy } = meleeEncounter();
+  enemy.p.z = s.p.z + 4.8;
+  const origin = { ...s.p };
+  let sweeps = 0;
+  s.motion = (p, velocity, dt) => {
+    sweeps++;
+    assert.ok(dt > 0);
+    return { p: { ...p }, grounded: true };
+  };
+  s.step(1 / 60, { x: 0, z: 0, attack: true });
+  step(s, 12);
+  assert.ok(sweeps > 1);
+  assert.deepEqual(s.p, origin);
+  assert.equal(enemy.hp, enemy.max);
+  const free = meleeEncounter();
+  free.enemy.p.z = free.s.p.z + 4.8;
+  free.s.step(1 / 60, { x: 0, z: 0, attack: true });
+  step(free.s, 12);
+  assert.ok(free.s.p.z > origin.z + 0.2 && free.s.p.z < origin.z + 1);
+  assert.ok(free.enemy.hp < free.enemy.max);
 });

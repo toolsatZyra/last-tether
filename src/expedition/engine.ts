@@ -180,6 +180,11 @@ export class Expedition {
   dodgeDir = v();
   attack = 0;
   attackCooldown = 0;
+  attackDuration = 0.35;
+  attackBuffer = 0;
+  swingDelay = -1;
+  landTime = 0;
+  private bufferedActions: Partial<Input> = {};
   combo = 0;
   comboWindow = 0;
   throwTime = 0;
@@ -288,6 +293,7 @@ export class Expedition {
     this.deviceTurn = 0;
     this.podUsed.clear();
     this.grapple = null;
+    this.resetActions();
     this.velocity = v();
     this.grounded = true;
     this.checkpoint = { ...this.chapter.points[this.checkpointNode] };
@@ -366,6 +372,8 @@ export class Expedition {
     );
     this.invuln = 0.65;
     this.hurtTime = 0.3;
+    this.swingDelay = -1;
+    this.attack = this.attackBuffer = 0;
     this.hunt = Math.max(0, this.hunt - 8);
     this.event("hurt", undefined, this.p);
     if (this.health <= 0) this.die();
@@ -379,7 +387,25 @@ export class Expedition {
     this.event("death", "A route is learned one crossing at a time.");
   }
 
+  resetActions() {
+    this.attack =
+      this.attackCooldown =
+      this.attackBuffer =
+      this.comboWindow =
+        0;
+    this.swingDelay = -1;
+    this.hitstop =
+      this.landTime =
+      this.dodge =
+      this.throwTime =
+      this.hurtTime =
+        0;
+    this.slam = false;
+    this.bufferedActions = {};
+  }
+
   retry() {
+    this.resetActions();
     this.p = { ...this.checkpoint };
     this.velocity = v();
     this.health = 100;
@@ -413,7 +439,6 @@ export class Expedition {
       e.p.z += d.z * knock;
     }
     this.event("hit", undefined, e.p, amount);
-    this.hitstop = 0.035;
 
     if (e.hp <= 0) {
       e.state = "death";
@@ -428,17 +453,29 @@ export class Expedition {
   }
 
   strike() {
-    if (this.attackCooldown > 0 || this.grapple || this.death > 0) return;
+    if (
+      this.attackCooldown > 0 ||
+      this.throwTime > 0 ||
+      this.hurtTime > 0 ||
+      this.dodge > 0 ||
+      this.grapple ||
+      this.death > 0
+    )
+      return;
     this.combo = this.comboWindow > 0 ? (this.combo + 1) % 3 : 0;
     this.comboWindow = 1.1;
     this.attackCooldown = [0.35, 0.4, 0.58][this.combo];
+    this.attackDuration = this.attackCooldown;
     this.attack = this.attackCooldown;
+    this.attackBuffer = 0;
+    this.swingDelay = this.attackDuration * (24 / 62);
     this.event("attack", undefined, this.p, this.combo);
 
     if (
       !this.grounded &&
       this.p.y > (floorAt(this.chapter, this.p.x, this.p.z) ?? this.p.y) + 1
     ) {
+      this.swingDelay = -1;
       this.slam = true;
       this.velocity.y = -22;
       return;
@@ -447,18 +484,25 @@ export class Expedition {
     const target = this.target;
     if (target && distance(this.p, target.p) < 6)
       this.yaw = Math.atan2(target.p.x - this.p.x, target.p.z - this.p.z);
+  }
 
+  resolveSwing() {
+    this.event("swing", undefined, this.p, this.combo);
+    let connected = false;
     for (const e of this.living) {
       const d = distance(this.p, e.p),
         dot =
           ((e.p.x - this.p.x) * Math.sin(this.yaw) +
             (e.p.z - this.p.z) * Math.cos(this.yaw)) /
           (d || 1);
-      if (d < 4.2 && Math.abs(this.p.y - e.p.y) < 4 && dot > -0.2)
+      if (d < 4.2 && Math.abs(this.p.y - e.p.y) < 4 && dot > -0.2) {
         this.damage(e, [34, 42, 72][this.combo], this.combo === 2 ? 1.8 : 0.4);
+        connected = true;
+      }
     }
 
     this.checkPods(this.p, 6);
+    if (connected) this.hitstop = this.combo === 2 ? 0.055 : 0.035;
   }
 
   checkPods(p: V, r: number) {
@@ -525,7 +569,15 @@ export class Expedition {
   }
 
   cast() {
-    if (this.throwCooldown > 0 || this.death > 0) return;
+    if (
+      this.throwCooldown > 0 ||
+      this.hurtTime > 0 ||
+      this.attack > 0 ||
+      this.dodge > 0 ||
+      this.grapple ||
+      this.death > 0
+    )
+      return;
     this.throwTime = 0.4;
     this.throwCooldown = 1.1;
     const e = this.target;
@@ -621,6 +673,26 @@ export class Expedition {
       return;
     }
     this.seconds += dt;
+    const actions = [
+      "jump",
+      "dodge",
+      "attack",
+      "throw",
+      "grapple",
+      "interact",
+      "heal",
+      "burst",
+    ] as const;
+    if (this.hitstop > 0) {
+      this.hitstop = Math.max(0, this.hitstop - dt);
+      for (const key of actions)
+        if (input[key]) this.bufferedActions[key] = true;
+      return;
+    }
+    input = { ...input };
+    for (const key of actions)
+      input[key] = input[key] || this.bufferedActions[key];
+    this.bufferedActions = {};
     this.time += dt;
     this.transition = Math.max(0, this.transition - dt);
 
@@ -635,7 +707,8 @@ export class Expedition {
       "throwCooldown",
       "hurtTime",
       "grappleCooldown",
-      "hitstop",
+      "landTime",
+      "attackBuffer",
     ] as const)
       this[key] = Math.max(0, this[key] - dt);
 
@@ -664,8 +737,7 @@ export class Expedition {
     }
 
     if (input.grapple) this.useGrapple();
-    if (input.throw && (this.sector > 0 || this.beat >= 2)) this.cast();
-    if (input.attack) this.strike();
+    if (input.attack) this.attackBuffer = 0.14;
     if (input.interact) this.interact();
 
     if (input.jump) this.jumpBuffer = 0.16;
@@ -676,6 +748,8 @@ export class Expedition {
       iz = len > 1 ? input.z / len : input.z;
 
     if (input.dodge && this.dodgeCooldown <= 0 && !this.grapple) {
+      this.swingDelay = -1;
+      this.attack = this.attackBuffer = 0;
       this.dodge = 0.28;
       this.dodgeCooldown = 0.65;
       this.invuln = 0.32;
@@ -684,7 +758,11 @@ export class Expedition {
       this.event("dodge");
     }
 
+    if (this.attackBuffer > 0) this.strike();
+    if (input.throw && (this.sector > 0 || this.beat >= 2)) this.cast();
+
     if (this.grapple) {
+      this.swingDelay = -1;
       const g = this.grapple;
       g.t += dt / g.duration;
       const t = clamp(g.t, 0, 1),
@@ -702,6 +780,7 @@ export class Expedition {
         this.p = { ...g.to };
         this.velocity = v();
         this.grounded = true;
+        this.landTime = 0.22;
         this.event("land", undefined, this.p);
       } else if (input.jump && t > 0.3) {
         this.grapple = null;
@@ -723,14 +802,35 @@ export class Expedition {
       const targetSpeed = this.dodge > 0 ? 18 : this.attack > 0 ? 4.2 : 6.8,
         accel = this.grounded ? 18 : 8;
 
+      // A short planted step closes melee reach; it uses the same collision sweep as walking.
+      const closeTarget =
+        this.swingDelay >= 0 && this.grounded && len < 0.15
+          ? this.target
+          : null;
+      const reach = closeTarget ? distance(this.p, closeTarget.p) : 0;
+      const stepFloor = floorAt(
+        this.chapter,
+        this.p.x + Math.sin(this.yaw) * 0.8,
+        this.p.z + Math.cos(this.yaw) * 0.8,
+      );
+      const advance =
+        closeTarget &&
+        stepFloor !== null &&
+        Math.abs(stepFloor - this.p.y) < 1.5 &&
+        reach < 6 &&
+        reach > 2.6
+          ? Math.min(6.5, (reach - 2.6) * 8)
+          : 0;
       this.velocity.x = mix(
         this.velocity.x,
-        (this.dodge > 0 ? this.dodgeDir.x : ix) * targetSpeed,
+        (this.dodge > 0 ? this.dodgeDir.x : ix) * targetSpeed +
+          Math.sin(this.yaw) * advance,
         Math.min(1, accel * dt),
       );
       this.velocity.z = mix(
         this.velocity.z,
-        (this.dodge > 0 ? this.dodgeDir.z : iz) * targetSpeed,
+        (this.dodge > 0 ? this.dodgeDir.z : iz) * targetSpeed +
+          Math.cos(this.yaw) * advance,
         Math.min(1, accel * dt),
       );
 
@@ -766,6 +866,7 @@ export class Expedition {
       }
 
       if (landed) {
+        this.landTime = 0.22;
         this.event("land", undefined, this.p);
         if (this.slam) {
           for (const e of this.living)
@@ -788,6 +889,14 @@ export class Expedition {
       ? Math.min(...nearby.map((p) => p.y)) - 7
       : -12;
     if (this.p.y < recoveryFloor) this.die();
+
+    if (this.swingDelay >= 0) {
+      this.swingDelay -= dt;
+      if (this.swingDelay <= 0) {
+        this.swingDelay = -1;
+        this.resolveSwing();
+      }
+    }
 
     if (!this.spawned && distance(this.p, this.destination) < 43) this.spawn();
 

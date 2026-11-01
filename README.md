@@ -4,7 +4,7 @@
 
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-Version 0.2.1 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
+Version 0.2.2 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
 
 ## Run and verify
 
@@ -52,7 +52,7 @@ Cloud transfer, public leaderboards and multiplayer are not connected. No suitab
 - `actors.ts`, `scene.ts`, `water.ts`: models, animation, lighting, materials, camera, scenery, particles and water.
 - `app.ts`, `profile.ts`, `markup.ts`, `style.css`: controls, local storage, settings and interface.
 - `audio.ts`: opt-in recorded effects and a quiet synthesized bed.
-- `tests/`: 13 behaviour checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
+- `tests/`: 17 behaviour checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
 - `public/assets/manifest.json`: 78 source/license/hash records covering approximately 19.6 MB of licensed assets.
 
 The rejected prototype remains recoverable at Git commit `e8ef61d`. Its unused source and tests were removed from the current build so old checks cannot be mistaken for v2 validation.
@@ -65,6 +65,6 @@ Read [WALKTHROUGH.md](WALKTHROUGH.md) for chapter actions, [ENGINEERING.md](ENGI
 
 ## Current limits
 
-The accelerated route-only Havok test completed in 9m53s without deaths; the latest full story/interface policy took 9m58s with one recovery, and a ranged-heavy policy took 15m51s. Those are automated policies with route and puzzle knowledge, not first-time human playtests. A 15–20 minute first play remains a target.
+The latest accelerated story/interface route completed all eight sectors in 11m15s with one recovery and 193 defeats. It uses route and puzzle knowledge, not first-time human play. A 15–20 minute first play remains a target; older timing evidence is retained in VERIFICATION.md.
 
-Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. Three four-second samples after warm-up on integrated AMD graphics reported roughly 51–72 FPS at Balanced settings (1036 × 703 rendering); 95th-percentile frame intervals were 18–24 ms. Shader preparation now runs under the loading screen. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.
+Rendering is stylized and uses mixed free assets; it does not yet establish the requested top-tier modern-game visual quality. Three four-second samples after warm-up on integrated AMD graphics reported roughly 56–64 FPS at Balanced settings (1036 × 703 rendering); 95th-percentile frame intervals were about 18 ms. Shader preparation now runs under the loading screen. A sustained 60 FPS claim would be incorrect. Audio files were decoded silently; audible mix quality and human enjoyment remain unvalidated. Mobile/controller input and other hardware/browser combinations have not been verified.

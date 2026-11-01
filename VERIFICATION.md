@@ -44,3 +44,13 @@ The updated chapter completed the story/interface policy in 597.95 simulated sec
 The 0.2.1 compiled preview also passed the ordinary-keyboard opening, three defeats, watchpost progression, pause and save/reload/resume check with no page errors or failed requests. `npm run verify:assets` checked all 78 downloaded files against their recorded sizes and SHA-256 hashes.
 
 Public 0.2.1 verification: deployment `dpl_EVLdipSPTZng4pZ42RAMTGNXc965`, application commit `4d07729aebef9a42845c5ce104a7373c159ee70a`, reached READY and served the public alias. The ordinary-keyboard opening check again passed with three defeats, zero recoveries, watchpost progression, pause and save/reload/resume. No page errors or failed requests were recorded, and the development hook was absent.
+
+## Combat timing and grounded detail — 0.2.2
+
+Seventeen behaviour tests pass, including delayed melee contact, single damage per swing, dodge cancellation, retained inputs through impact pause, queued attacks, melee/throw priority and collision-respecting approach. A native-input browser trace recorded first damage at slash frame 23.62, 34 damage total, the completed recovery and a visible spear-following trail. Staged pose images inspect geometry and animation; they are not playthrough evidence.
+
+The final accelerated Havok story/interface route completed all eight sectors and 32 objectives in **675.35 simulated seconds (11m15s), 193 defeats and one recovery**, displayed the ending and saved a finished checkpoint. It retained 2 skeletons, 43 textures (including two new persistent cloak textures) and 48 animation groups. A separate check validated floor contact for 128 nearby foliage bases in three sectors.
+
+The ordinary-keyboard production check initially exposed repeated short swings against creatures outside spear reach. A small collision-tested approach step resolved that case; the opening then passed with three defeats, zero recoveries, watchpost progression, pause and save/resume. The check now waits for the visible defeat count within a bounded deadline instead of assuming combat always takes 6.5 seconds.
+
+Final short Balanced frame samples at 1036 × 703 reported 63.9, 56.1 and 60.7 engine FPS in sectors 0, 3 and 6; p95 frame intervals were 18.4, 18.3 and 18.4 ms. These are four-second stationary-player samples, not sustained whole-chapter performance. Human enjoyment, first-time pacing and the requested top-tier visual quality remain open.

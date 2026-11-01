@@ -16,6 +16,7 @@ import {
   StandardMaterial,
   DynamicTexture,
   InstantiatedEntries,
+  TrailMesh,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import "@babylonjs/loaders/OBJ";
@@ -29,12 +30,16 @@ export class Actor {
   height: number;
   contact: Mesh;
   cloak?: Mesh;
+  cloakRest: number[] = [];
   root: TransformNode;
   groups: AnimationGroup[];
   meshes: Mesh[];
   active = "";
   weights = new Map<AnimationGroup, number>();
   air = 0;
+  landing = 0;
+  weaponTrail?: TrailMesh;
+  trailActive = false;
   speed = 1;
   nodes: TransformNode[];
   hero: boolean;
@@ -149,7 +154,7 @@ export class Actor {
     this.groups.forEach((g) => g.stop());
     this.play(hero ? "Idle_Sword" : "Idle");
     const observer = scene.onAfterAnimationsObservable.add(() => {
-      if (scene.animationsEnabled && this.air > 0.01) {
+      if (scene.animationsEnabled && (this.air > 0.01 || this.landing > 0.01)) {
         for (const n of this.nodes) {
           if (!n.rotationQuaternion) continue;
           const name = n.name;
@@ -159,24 +164,60 @@ export class Actor {
           if (/UpperLeg\.L$/.test(name)) amount = -0.8;
           if (/LowerLeg\.L$/.test(name)) amount = 1.1;
           if (/UpperLeg\.R$/.test(name)) amount = 0.3;
+          amount *= this.air;
+          if (/UpperLeg\.[LR]$/.test(name)) amount -= 0.24 * this.landing;
+          if (/LowerLeg\.[LR]$/.test(name)) amount += 0.46 * this.landing;
+          if (/Chest$/.test(name)) amount += 0.08 * this.landing;
           if (amount)
             n.rotationQuaternion = n.rotationQuaternion.multiply(
-              Quaternion.RotationAxis(Vector3.Right(), amount * this.air),
+              Quaternion.RotationAxis(Vector3.Right(), amount),
             );
         }
       }
+      if (scene.animationsEnabled && this.trailActive)
+        this.weaponTrail?.update();
     });
     this.removePose = () => scene.onAfterAnimationsObservable.remove(observer);
     if (hero) {
       this.weapon(scene);
       this.outfit(scene);
+      for (const mesh of this.root.getChildMeshes()) {
+        if (!(mesh instanceof Mesh) || this.meshes.includes(mesh)) continue;
+        mesh.receiveShadows = true;
+        mesh.isPickable = false;
+        this.meshes.push(mesh);
+        shadows.addShadowCaster(mesh);
+      }
     }
   }
   outfit(scene: Scene) {
     const chest = this.nodes.find((n) => /Chest$/.test(n.name));
     if (!chest) return;
     const cloth = new PBRMaterial("kavi-stormcloak", scene);
-    cloth.albedoColor = Color3.FromHexString("#24494b");
+    cloth.albedoColor = Color3.White();
+    const weave = new DynamicTexture(
+      "stormcloak-weave",
+      { width: 256, height: 256 },
+      scene,
+      true,
+    );
+    const ink = weave.getContext();
+    ink.fillStyle = "#294e51";
+    ink.fillRect(0, 0, 256, 256);
+    for (let y = 0; y < 256; y += 3) {
+      ink.fillStyle = y % 2 ? "rgba(7,20,23,0.16)" : "rgba(158,180,166,0.12)";
+      ink.fillRect(0, y, 256, 1);
+    }
+    for (let x = 0; x < 256; x += 3) {
+      ink.fillStyle = x % 2 ? "rgba(8,25,28,0.14)" : "rgba(174,187,161,0.09)";
+      ink.fillRect(x, 0, 1, 256);
+    }
+    ink.strokeStyle = "#86795a";
+    ink.lineWidth = 2;
+    ink.setLineDash([3, 4]);
+    ink.strokeRect(8, 8, 240, 240);
+    weave.update();
+    cloth.albedoTexture = weave;
     cloth.roughness = 0.96;
     cloth.backFaceCulling = false;
     const leather = new PBRMaterial("kavi-pack", scene);
@@ -184,11 +225,29 @@ export class Actor {
     leather.roughness = 0.9;
     const cape = new Mesh("weather-cloak", scene);
     const data = new VertexData();
-    data.positions = [
-      -0.21, 0.14, -0.095, 0.21, 0.14, -0.095, -0.31, -0.27, -0.17, 0.31, -0.27,
-      -0.17, -0.36, -0.62, -0.13, 0.36, -0.62, -0.13,
-    ];
-    data.indices = [0, 2, 1, 1, 2, 3, 2, 4, 3, 3, 4, 5];
+    data.positions = [];
+    data.indices = [];
+    data.uvs = [];
+    for (let row = 0; row <= 12; row++) {
+      const t = row / 12,
+        width = 0.2 + 0.16 * t;
+      for (let col = 0; col <= 8; col++) {
+        const u = col / 8;
+        data.positions.push(
+          (u * 2 - 1) * width,
+          0.14 - 0.76 * t + Math.sin(u * Math.PI) * 0.025 * t,
+          -0.105 -
+            0.05 * Math.sin(t * Math.PI) +
+            Math.sin(u * Math.PI * 8) * 0.012 * t,
+        );
+        data.uvs.push(u, t);
+        if (row < 12 && col < 8) {
+          const a = row * 9 + col;
+          data.indices.push(a, a + 9, a + 1, a + 1, a + 9, a + 10);
+        }
+      }
+    }
+    this.cloakRest = [...data.positions];
     const normals: number[] = [];
     VertexData.ComputeNormals(data.positions, data.indices, normals);
     data.normals = normals;
@@ -246,6 +305,22 @@ export class Actor {
     blade.parent = grip;
     blade.position.y = 1.52;
     blade.material = metal;
+    const trail = new TrailMesh("spear-trail", blade, scene, {
+      diameter: 0.13,
+      length: 7,
+      segments: 7,
+      sections: 4,
+      autoStart: false,
+    });
+    const trailMaterial = new StandardMaterial("spear-trail-light", scene);
+    trailMaterial.disableLighting = true;
+    trailMaterial.emissiveColor = Color3.FromHexString("#e5c18a");
+    trailMaterial.alpha = 0.55;
+    trailMaterial.disableDepthWrite = true;
+    trail.material = trailMaterial;
+    trail.isPickable = false;
+    trail.isVisible = false;
+    this.weaponTrail = trail;
     const wrap = MeshBuilder.CreateCylinder(
       "spear-wrap",
       { height: 0.19, diameter: 0.065, tessellation: 10 },
@@ -270,6 +345,17 @@ export class Actor {
     group.setWeightForAllAnimatables(0);
     this.weights.set(group, this.weights.get(group) ?? 0);
   }
+  playTimed(name: string, elapsed: number, duration: number) {
+    this.play(name, 1, false);
+    const group = this.groups.find((g) => g.name === this.active);
+    if (!group) return;
+    group.pause();
+    group.goToFrame(
+      group.from +
+        (group.to - group.from) *
+          Math.max(0, Math.min(0.999, elapsed / duration)),
+    );
+  }
   update(dt: number) {
     for (const [g, w] of this.weights) {
       const target = g.name === this.active ? 1 : 0;
@@ -291,27 +377,48 @@ export class Actor {
     this.lastDodge = s.dodge;
     this.contact.position.set(s.p.x, s.p.y + 0.04, s.p.z);
     this.contact.visibility = s.grounded ? 0.8 : 0;
-    this.root.position.set(s.p.x, s.p.y, s.p.z);
+    this.landing =
+      s.landTime > 0 ? Math.sin(Math.PI * (1 - s.landTime / 0.22)) : 0;
+    this.root.position.set(s.p.x, s.p.y - this.landing * 0.06, s.p.z);
+    const phase = 1 - s.attack / s.attackDuration;
+    const trailActive = s.attack > 0 && !s.slam && phase > 0.27 && phase < 0.66;
+    if (trailActive && !this.trailActive) this.weaponTrail?.reset();
+    this.trailActive = trailActive;
+    if (this.weaponTrail) this.weaponTrail.isVisible = trailActive;
     let delta = s.yaw - this.root.rotation.y;
     delta = Math.atan2(Math.sin(delta), Math.cos(delta));
     this.root.rotation.y += delta * Math.min(1, dt * 20);
     this.air += ((!s.grounded ? 1 : 0) - this.air) * Math.min(1, dt * 10);
     if (this.cloak && dt > 0) {
       const p = this.cloak.getVerticesData("position")!;
-      p[14] = -0.13 - s.speed * 0.008 + Math.sin(s.time * 8) * 0.02;
-      p[17] = -0.13 - s.speed * 0.008 + Math.sin(s.time * 8 + 0.9) * 0.02;
+      for (let i = 0; i < p.length; i += 3) {
+        const t = Math.floor(i / 3 / 9) / 12,
+          u = ((i / 3) % 9) / 8;
+        p[i] =
+          this.cloakRest[i] +
+          Math.max(-0.1, Math.min(0.1, delta * 0.08)) * t * t;
+        p[i + 1] = this.cloakRest[i + 1];
+        p[i + 2] =
+          this.cloakRest[i + 2] -
+          s.speed * 0.009 * t * t +
+          Math.sin(s.time * 6 + t * 3 + u * 4) * 0.018 * t * t;
+      }
+      const normals: number[] = [];
+      VertexData.ComputeNormals(p, this.cloak.getIndices()!, normals);
       this.cloak.updateVerticesData("position", p);
+      this.cloak.updateVerticesData("normal", normals);
     }
     if (s.finished) this.play("Idle_Neutral");
     else if (s.death > 0) this.play("Death", 1, false);
-    else if (s.dodge > 0) this.play("Roll", 2.3, false);
+    else if (s.dodge > 0) this.playTimed("Roll", 0.28 - s.dodge, 0.28);
     else if (s.hurtTime > 0) this.play("HitRecieve", 1.8, false);
-    else if (s.throwTime > 0) this.play("Punch_Right", 1.6, false);
+    else if (s.throwTime > 0)
+      this.playTimed("Punch_Right", 0.4 - s.throwTime, 0.4);
     else if (s.attack > 0)
-      this.play(
-        s.combo === 2 ? "Kick_Right" : "Sword_Slash",
-        1.8 + s.combo * 0.3,
-        false,
+      this.playTimed(
+        "Sword_Slash",
+        s.attackDuration - s.attack,
+        s.attackDuration,
       );
     else if (!s.grounded) this.play("Idle_Sword");
     else if (s.speed > 0.7) this.play("Run", Math.max(0.6, s.speed / 5.8));
@@ -345,6 +452,7 @@ export class Actor {
     (this.contact.material as StandardMaterial).diffuseTexture?.dispose();
     this.contact.dispose(false, true);
     this.removePose?.();
+    this.weaponTrail?.dispose(false, true);
     this.instance.dispose();
     this.root.dispose(false, false);
   }
@@ -588,7 +696,9 @@ export class Assets {
     root.parent = parent;
     const result = c.instantiateModelsToScene(undefined, false);
     result.rootNodes.forEach((n) => (n.parent = root));
+    const base = root.getHierarchyBoundingVectors(true).min.y;
     root.position.copyFrom(p);
+    root.position.y -= base * scale;
     root.scaling.setAll(scale);
     root.rotation.y = (p.x + p.z) * 0.47;
     root.metadata = { foliage: true, phase: (p.x + p.z) * 0.2 };

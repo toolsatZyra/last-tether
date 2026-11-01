@@ -72,6 +72,7 @@ export class GameScene {
   menu = true;
   time = 0;
   shake = 0;
+  landingKick = 0;
   ao: SSAO2RenderingPipeline;
   aoEnabled = true;
   quality = "high";
@@ -737,7 +738,7 @@ export class GameScene {
       }
       for (let j = 0; j < 5; j++) {
         const side = j % 2 ? 1 : -1,
-          x = p.x + side * (13 + rand() * 9),
+          x = p.x + side * ((p.arena ? 21 : 11) - rand() * 3),
           z = p.z - 20 + rand() * 40;
         if (Math.abs(z - p.z) > 13 && !p.arena) continue;
         this.assets.prop(
@@ -1133,7 +1134,7 @@ export class GameScene {
           );
         }
       }
-      if (s.sector === 4) {
+      if (s.sector === 4 && p.arena) {
         this.architecture("Cart", v(p.x + 15, p.y, p.z - 12), 2.3, 0.4, true);
         this.architecture(
           "Crate",
@@ -1202,15 +1203,19 @@ export class GameScene {
           for (let j = -1; j <= 1; j++) {
             this.cylinder(
               "garden-column",
-              v(p.x + side * 17, p.y + 4, p.z + j * 12),
+              v(
+                p.x + side * (p.arena ? 17 : 10),
+                p.y + 4,
+                p.z + j * (p.arena ? 12 : 10),
+              ),
               0.75,
               8,
               "cutstone",
             );
             this.box(
               "pergola-beam",
-              v(p.x, p.y + 8, p.z + j * 12),
-              v(35, 0.45, 0.6),
+              v(p.x, p.y + 8, p.z + j * (p.arena ? 12 : 10)),
+              v(p.arena ? 35 : 21, 0.45, 0.6),
               "wood",
               false,
             );
@@ -1228,13 +1233,13 @@ export class GameScene {
           );
           this.box(
             "quarry-gantry",
-            v(p.x + side * 14, p.y + 8, p.z + 5),
+            v(p.x + side * (p.arena ? 14 : 10), p.y + 8, p.z + 5),
             v(1.2, 16, 1.2),
             "wood",
           );
           for (let j = 0; j < 3; j++) {
             const ore = this.rock(
-              v(p.x + side * 19, p.y + 1.2, p.z - 10 + j * 8),
+              v(p.x + side * (p.arena ? 19 : 11), p.y + 1.2, p.z - 10 + j * 8),
               v(1, 2.5, 1.2),
               j + 0.3,
               "red",
@@ -1245,7 +1250,7 @@ export class GameScene {
         this.box(
           "gantry-crossbeam",
           v(p.x, p.y + 16, p.z + 5),
-          v(30, 1.2, 1.2),
+          v(p.arena ? 30 : 22, 1.2, 1.2),
           "wood",
           false,
         );
@@ -1352,37 +1357,18 @@ export class GameScene {
       this.shake = 0.35;
     }
     if (e.type === "hurt") this.shake = 0.2;
-    if (e.type === "attack") {
-      const points = [];
-      for (let i = 0; i < 20; i++) {
-        const a = s.yaw - 1.4 + (i / 19) * 2.8;
-        points.push(
-          new Vector3(
-            s.p.x + Math.sin(a) * 3.5,
-            s.p.y + 1.1 + Math.sin((i / 19) * Math.PI) * 0.5,
-            s.p.z + Math.cos(a) * 3.5,
-          ),
-        );
-      }
-      const m = MeshBuilder.CreateTube(
-        "spear-arc",
-        { path: points, radius: 0.055, tessellation: 5 },
-        this.scene,
-      );
-      m.material = this.materials.glow;
-      this.effects.push({
-        mesh: m,
-        life: 0.16,
-        max: 0.16,
-        velocity: Vector3.Zero(),
-      });
+    if (e.type === "land") {
+      this.landingKick = 0.22;
+      this.burst(e.p || s.p, "glow", 5);
     }
+    if (e.type === "hit")
+      this.shake = Math.max(this.shake, (e.value || 0) >= 70 ? 0.12 : 0.055);
   }
   update(s: Expedition, dt: number) {
     if (!this.loaded) return;
     this.current = s;
     if (this.sector !== s.sector) this.build(s);
-    this.scene.animationsEnabled = dt > 0;
+    this.scene.animationsEnabled = dt > 0 && s.hitstop <= 0;
     for (const p of this.particleBursts) {
       p.system.updateSpeed = dt > 0 ? 1 / 60 : 0;
       p.life -= dt;
@@ -1390,14 +1376,15 @@ export class GameScene {
     }
     this.particleBursts = this.particleBursts.filter((p) => p.life > 0);
     this.time += dt;
-    this.hero.player(s, dt);
+    const actorDt = s.hitstop > 0 ? 0 : dt;
+    this.hero.player(s, actorDt);
     for (const e of s.enemies) {
       let a = this.actors.get(e.id);
       if (!a) {
         a = this.assets.actor(e.kind, this.scene, "enemy-" + e.id, this.shadow);
         this.actors.set(e.id, a);
       }
-      a.enemy(e, dt);
+      a.enemy(e, actorDt);
     }
     for (const [id, a] of this.actors)
       if (!s.enemies.some((e) => e.id === id)) {
@@ -1570,6 +1557,9 @@ export class GameScene {
           ray.direction.scale(Math.max(2, hit.distance - 0.6)),
         );
     }
+    this.landingKick = Math.max(0, this.landingKick - dt);
+    if (!this.reduced && this.landingKick > 0)
+      desired.y -= Math.sin((Math.PI * this.landingKick) / 0.22) * 0.16;
     this.shake = Math.max(0, this.shake - dt);
     if (this.shake > 0 && !this.reduced) {
       desired.x += (Math.random() - 0.5) * this.shake * 0.8;

@@ -124,7 +124,7 @@ export class Soundscape {
   play(event: string) {
     if (!this.enabled) return;
     const variation = (this.variant++ % 3) * 0.045;
-    if (event === "attack")
+    if (event === "swing")
       this.sample(
         this.variant % 2 ? "knifeSlice" : "knifeSlice2",
         0.75,
