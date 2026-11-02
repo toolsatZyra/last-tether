@@ -1,0 +1,507 @@
+{
+  "version": "0.2.22",
+  "date": "2026-11-02",
+  "status": "local validation passed; public verification pending",
+  "scope": "Storm-road foundations, damaged belfry roof, supported fixed grapple eyes; no new assets or paid generation",
+  "unitTests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "build": {
+    "passed": true
+  },
+  "environment": {
+    "geometry": {
+      "pristine": true,
+      "unchanged": true,
+      "contained": true,
+      "stable": true,
+      "bounds": [
+        {
+          "min": [
+            -10.063925958946072,
+            -28.99999767045665,
+            -10.444558950741744
+          ],
+          "max": [
+            7.400263563473942,
+            4.799999352240775,
+            11.875640480424082
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -24.747784790474714,
+            -29.00000075027083,
+            102.79151876369467
+          ],
+          "max": [
+            -2.6914922691476306,
+            10.799998705956568,
+            129.01970893922189
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -4.835604436893561,
+            -28.99999839870361,
+            221.36911235812553
+          ],
+          "max": [
+            14.80642881980333,
+            11.79999941178039,
+            242.0292624846878
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -8.105517263932754,
+            -28.999998206215366,
+            339.51677192717597
+          ],
+          "max": [
+            10.77178702141157,
+            13.799998382814465,
+            358.2633408488014
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -10.063925958946072,
+            -28.99999767045665,
+            -10.444558950741744
+          ],
+          "max": [
+            7.400263563473942,
+            4.799999352240775,
+            11.875640480424082
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -24.747784790474714,
+            -29.00000075027083,
+            102.79151876369467
+          ],
+          "max": [
+            -2.6914922691476306,
+            10.799998705956568,
+            129.01970893922189
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -4.835604436893561,
+            -28.99999839870361,
+            221.36911235812553
+          ],
+          "max": [
+            14.80642881980333,
+            11.79999941178039,
+            242.0292624846878
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -8.105517263932754,
+            -28.999998206215366,
+            339.51677192717597
+          ],
+          "max": [
+            10.77178702141157,
+            13.799998382814465,
+            358.2633408488014
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -10.063925958946072,
+            -28.99999767045665,
+            -10.444558950741744
+          ],
+          "max": [
+            7.400263563473942,
+            4.799999352240775,
+            11.875640480424082
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -24.747784790474714,
+            -29.00000075027083,
+            102.79151876369467
+          ],
+          "max": [
+            -2.6914922691476306,
+            10.799998705956568,
+            129.01970893922189
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -4.835604436893561,
+            -28.99999839870361,
+            221.36911235812553
+          ],
+          "max": [
+            14.80642881980333,
+            11.79999941178039,
+            242.0292624846878
+          ],
+          "physics": false
+        },
+        {
+          "min": [
+            -8.105517263932754,
+            -28.999998206215366,
+            339.51677192717597
+          ],
+          "max": [
+            10.77178702141157,
+            13.799998382814465,
+            358.2633408488014
+          ],
+          "physics": false
+        }
+      ],
+      "counts": [
+        {
+          "meshes": 649,
+          "materials": 104,
+          "textures": 55,
+          "bodies": 84
+        },
+        {
+          "meshes": 649,
+          "materials": 104,
+          "textures": 55,
+          "bodies": 84
+        },
+        {
+          "meshes": 649,
+          "materials": 104,
+          "textures": 55,
+          "bodies": 84
+        }
+      ]
+    },
+    "crossings": [
+      {
+        "point": 2,
+        "start": {
+          "target": {
+            "x": -14,
+            "y": 14,
+            "z": 110
+          },
+          "ring": [
+            -14,
+            20,
+            110
+          ],
+          "rotation": [
+            1.5707963267948966,
+            0,
+            0
+          ],
+          "deaths": 0
+        },
+        "rope": [
+          -14,
+          20,
+          110
+        ],
+        "landed": {
+          "x": -14,
+          "y": 14,
+          "z": 110
+        },
+        "end": {
+          "p": {
+            "x": -14,
+            "y": 14,
+            "z": 115.02822223608797
+          },
+          "deaths": 0,
+          "grounded": true,
+          "rotation": [
+            1.5707963267948966,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "point": 5,
+        "start": {
+          "target": {
+            "x": -27,
+            "y": 18,
+            "z": 284
+          },
+          "ring": [
+            -27,
+            24,
+            284
+          ],
+          "rotation": [
+            1.5707963267948966,
+            0,
+            0
+          ],
+          "deaths": 0
+        },
+        "rope": [
+          -27,
+          24,
+          284
+        ],
+        "landed": {
+          "x": -27,
+          "y": 18,
+          "z": 284
+        },
+        "end": {
+          "p": {
+            "x": -27,
+            "y": 18,
+            "z": 289.14155556526146
+          },
+          "deaths": 0,
+          "grounded": true,
+          "rotation": [
+            1.5707963267948966,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "errors": []
+  },
+  "visualReview": {
+    "views": [
+      "opening",
+      "signal",
+      "crossing",
+      "watchpost",
+      "native landing at both storm gaps"
+    ],
+    "rejected": "All-rock arena foundations appeared stretched; kept large arena arcades.",
+    "remaining": "Rectangular route repetition, uneven character and creature art, unverified first-time pacing and sustained performance."
+  },
+  "testCorrection": "The initial geometry bounds assertion used transformed local bounding boxes, which contain empty corners for rotated scans. The final assertion projects every source vertex into world space; it also excludes the imported empty root mesh.",
+  "fullRoute": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 65,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 684.983333333039,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 11.216666666666804,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 47.816666666665235,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 91.53333333332942,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 115.93333333332804,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 148.46666666667696,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 179.9833333333687,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 196.25000000004832,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 231.83333333340997,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 259.2833333334262,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 285.7166666667355,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 289.78333333339845,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 314.18333333337625,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 340.61666666668555,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 362.98333333333187,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 377.21666666665226,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 399.5833333332986,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 420.93333333327917,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 456.51666666658014,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 470.7499999999005,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 487.0166666665524,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 520.5666666665219,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 537.8499999998395,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 555.1333333331571,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 600.8833333331155,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 628.3333333330905,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 647.6499999997396,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 648.6666666664054,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 660.8666666663943,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 673.0666666663832,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 684.983333333039,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "compiled": {
+    "frameSample": {
+      "frames": 922,
+      "seconds": 13.671800000000001,
+      "averageFps": 67.36494097339047,
+      "medianMs": 12.200000000000728,
+      "p95Ms": 18.30000000000291
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

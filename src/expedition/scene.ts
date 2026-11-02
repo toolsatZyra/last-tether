@@ -1,3 +1,4 @@
+import { stormSpur, stormGrapple } from "./storm-road";
 import { EncounterGate } from "./encounter-gate";
 import { actorSight, actorOpacity } from "./actor-visibility";
 import {
@@ -967,6 +968,7 @@ export class GameScene {
         );
       if (s.sector === 4) quarryBench(this, p);
       else if (s.sector === 3) forestTerrace(this, p, i);
+      else if (s.sector === 0 && !p.arena) stormSpur(this, p, i);
       else terraceStructure(this, p);
       yield;
       if (i % 2) {
@@ -1036,7 +1038,8 @@ export class GameScene {
         }
       }
       yield;
-      if (p.gap) {
+      if (p.gap && s.sector === 0) this.anchors.push(stormGrapple(this, p));
+      else if (p.gap) {
         const anchor = MeshBuilder.CreateTorus(
           "grapple-ring",
           { diameter: 3.4, thickness: 0.13, tessellation: 40 },
@@ -1806,7 +1809,9 @@ export class GameScene {
     this.pointers.forEach((m, i) => {
       if (i === s.beat) m.rotation.z = (-s.deviceTurn * Math.PI) / 2;
     });
-    this.anchors.forEach((m) => (m.rotation.z = this.time * 0.35));
+    this.anchors.forEach((m) => {
+      if (!m.metadata?.fixedAnchor) m.rotation.z = this.time * 0.35;
+    });
     this.pods.forEach((m, i) => {
       m.position.copyFrom(V(s.pod(i)));
       m.position.y += 1.3;

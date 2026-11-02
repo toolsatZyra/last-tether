@@ -1,3 +1,4 @@
+import { stormBelfryRoof } from "./storm-road";
 import { MeshBuilder, Vector3 } from "@babylonjs/core";
 import type { GameScene } from "./scene";
 import { block, stoneArch } from "./structures";
@@ -27,18 +28,21 @@ function bellTower(view: GameScene, p: V) {
     );
   }
   block(view, "belfry-cornice", v(p.x, p.y + 20.7, p.z), v(19, 1.4, 19));
-  const roof = MeshBuilder.CreateCylinder(
-    "bell-tower-roof",
-    { height: 7, diameterBottom: 27, diameterTop: 4, tessellation: 4 },
-    view.scene,
-  );
-  roof.position.set(p.x, p.y + 24.6, p.z);
-  roof.rotation.y = Math.PI / 4;
-  roof.parent = view.root;
-  roof.material = view.materials.metal;
-  roof.metadata = { cameraSolid: true, physics: false };
-  roof.receiveShadows = true;
-  view.shadow.addShadowCaster(roof);
+  if (view.sector === 0) stormBelfryRoof(view, p);
+  else {
+    const roof = MeshBuilder.CreateCylinder(
+      "bell-tower-roof",
+      { height: 7, diameterBottom: 27, diameterTop: 4, tessellation: 4 },
+      view.scene,
+    );
+    roof.position.set(p.x, p.y + 24.6, p.z);
+    roof.rotation.y = Math.PI / 4;
+    roof.parent = view.root;
+    roof.material = view.materials.metal;
+    roof.metadata = { cameraSolid: true, physics: false };
+    roof.receiveShadows = true;
+    view.shadow.addShadowCaster(roof);
+  }
   view.cylinder("warning-bell", v(p.x, p.y + 14, p.z), 4.5, 4.6, "brass", 2.2);
   view.cylinder("bell-clapper", v(p.x, p.y + 11.3, p.z), 0.65, 1.8, "metal");
   block(view, "bell-hanger", v(p.x, p.y + 18, p.z), v(1, 1, 15));
