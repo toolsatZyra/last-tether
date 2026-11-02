@@ -9,6 +9,7 @@ export function weatheredStone(
   color: string,
   scale = 0.5,
   landscape?: Vector3,
+  normalMap?: Texture,
 ) {
   const material = new PBRCustomMaterial(name, scene);
   material.albedoColor = Color3.FromHexString(color).toLinearSpace();
@@ -28,6 +29,25 @@ export function weatheredStone(
         ? "float ledgeGrass=smoothstep(0.55,0.9,normalize(vNormalW).y)*landscapeStyle.x;surfaceAlbedo=mix(surfaceAlbedo,vec3(0.075,0.13,0.042),ledgeGrass*0.65);surfaceAlbedo*=mix(vec3(1.0),vec3(1.12,0.86,0.68),landscapeStyle.y);surfaceAlbedo*=0.93+0.07*sin(vPositionW.y*0.48+weatherGrain.r*2.0);"
         : ""),
   );
+  if (normalMap) {
+    material.AddUniform("weatherNormalTexture", "sampler2D", normalMap);
+    // Project each sampled slope onto the actual surface tangent plane before
+    // blending. A flat map preserves the mesh normal, including sloping arches.
+    // The three projections use the same coordinates as the colour grain.
+    material.Fragment_Before_Lights(`
+vec3 stoneN=normalize(normalW);
+vec3 stoneWeights=pow(abs(normalize(vNormalW)),vec3(4.0));
+stoneWeights/=max(0.001,stoneWeights.x+stoneWeights.y+stoneWeights.z);
+vec3 stoneX=texture2D(weatherNormalTexture,vPositionW.yz*${scale.toFixed(3)}).xyz*2.0-1.0;
+vec3 stoneY=texture2D(weatherNormalTexture,vPositionW.xz*${scale.toFixed(3)}).xyz*2.0-1.0;
+vec3 stoneZ=texture2D(weatherNormalTexture,vPositionW.xy*${scale.toFixed(3)}).xyz*2.0-1.0;
+vec3 stoneSlope=vec3(0.0,stoneX.xy/max(stoneX.z,0.45))*stoneWeights.x
+ +vec3(stoneY.x,0.0,stoneY.y)/max(stoneY.z,0.45)*stoneWeights.y
+ +vec3(stoneZ.xy/max(stoneZ.z,0.45),0.0)*stoneWeights.z;
+stoneSlope-=stoneN*dot(stoneN,stoneSlope);
+normalW=normalize(stoneN+stoneSlope*0.55);
+`);
+  }
   return material;
 }
 

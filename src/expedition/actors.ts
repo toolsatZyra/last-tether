@@ -677,6 +677,7 @@ export class Assets {
     );
     this.containers.set("Rock_Mass", rock);
     const stoneTexture = new Texture("/assets/materials/stone.jpg", scene);
+    const stoneNormal = new Texture("/assets/materials/stone-normal.jpg", scene);
     const paletteMaterials = new Map<string, PBRMaterial>();
     const names = [
       "Arch_Gothic_RoundColumn",
@@ -758,6 +759,8 @@ export class Assets {
                       stoneTexture,
                       color,
                       0.6,
+                      undefined,
+                      stoneNormal,
                     )
                   : new PBRMaterial("ruins-" + paletteKey, scene));
               const metal = n.includes("gold") || n.includes("metal");

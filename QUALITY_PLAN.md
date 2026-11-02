@@ -85,3 +85,9 @@ A further edge audit found unsupported raptor positions in 11 of 16 controlled a
 ## Storm-road composition pass, 0.2.22
 
 The retained treatment alternates rock-supported small landings and masonry arena arcades, replaces the opening tower cap with a damaged framed roof, and replaces the two floating storm-road hoops with timber-and-metal anchor gantries. Initial all-rock foundations looked excessively stretched and repetitive, so the arena arcades were retained. Four staged normal-camera views and native landing views were inspected. These are incremental construction/detail improvements: the road still reads as repeated rectangular platforms, character/creature art remains uneven, and the overall visual acceptance gate stays open.
+
+## Masonry surface pass, 0.2.23
+
+Structural stone and imported ruins now respond to light through aligned normal detail. A diagnostic close-up compares the actual map with an exactly neutral normal while retaining the same colour, lighting and camera; the former gives cracks and uneven stone subtle relief. Ordinary gameplay-camera captures still show the larger layout and silhouette limitations. Retain the detail as a surface improvement, not as evidence that the broader visual bar is met.
+
+The waterworks inspection revealed a separate readability issue: the foreground valve could hide Kavi. Complete control wheels now fade when they lie between the camera and player, restoring the view while keeping the wheel position visible. This repair applies to ordinary and linked controls throughout the chapter; it does not replace the still-needed waterworks machinery/art pass.

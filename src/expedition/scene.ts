@@ -67,6 +67,8 @@ export class GameScene {
   sparkTexture!: DynamicTexture;
   particleBursts: { system: ParticleSystem; life: number }[] = [];
   foregroundProps: AbstractMesh[] = [];
+  controlViews: { center: Vector3; meshes: AbstractMesh[]; opacity: number }[] =
+    [];
   shadowCasters: AbstractMesh[] = [];
   foliage: TransformNode[] = [];
   foliageViews: FoliageView[] = [];
@@ -410,6 +412,8 @@ export class GameScene {
       stone.albedoTexture as Texture,
       "#87927e",
       0.45,
+      undefined,
+      stone.bumpTexture as Texture,
     );
     const terrainNormal = (stone.bumpTexture as Texture).clone();
     terrainNormal.uScale = 96;
@@ -900,6 +904,7 @@ export class GameScene {
     this.root = new TransformNode("sector-" + s.sector, this.scene);
     this.lampPositions = [];
     this.dials = [];
+    this.controlViews = [];
     this.anchors = [];
     this.devices = [];
     this.pointers = [];
@@ -1126,14 +1131,22 @@ export class GameScene {
           false,
         );
         this.pointers.push(pointer);
+        const control = {
+          center: ring.position.clone(),
+          meshes: [ring, pointer],
+          opacity: 1,
+        };
+        this.controlViews.push(control);
         for (let j = 0; j < 4; j++) {
           const a = (j * Math.PI) / 2;
-          this.box(
-            "dial-notch",
-            v(p.x + Math.sin(a) * 1.55, p.y + 2.6 + Math.cos(a) * 1.55, p.z),
-            v(0.23, 0.23, 0.23),
-            j === ((s.sector + i * 2) % 3) + 1 ? "glow" : "metal",
-            false,
+          control.meshes.push(
+            this.box(
+              "dial-notch",
+              v(p.x + Math.sin(a) * 1.55, p.y + 2.6 + Math.cos(a) * 1.55, p.z),
+              v(0.23, 0.23, 0.23),
+              j === ((s.sector + i * 2) % 3) + 1 ? "glow" : "metal",
+              false,
+            ),
           );
         }
       } else
@@ -1191,14 +1204,22 @@ export class GameScene {
             hand,
           );
           this.dials.push({ beat: i, index: j, hand });
+          const control = {
+            center: ring.position.clone(),
+            meshes: [ring, ...hand.getChildMeshes()],
+            opacity: 1,
+          };
+          this.controlViews.push(control);
           for (let k = 0; k < 4; k++) {
             const a = (k * Math.PI) / 2;
-            this.box(
-              "gold-alignment",
-              v(q.x + Math.sin(a) * 1.6, q.y + 2.3 + Math.cos(a) * 1.6, q.z),
-              v(0.24, 0.24, 0.2),
-              k === targets[j] ? "glow" : "metal",
-              false,
+            control.meshes.push(
+              this.box(
+                "gold-alignment",
+                v(q.x + Math.sin(a) * 1.6, q.y + 2.3 + Math.cos(a) * 1.6, q.z),
+                v(0.24, 0.24, 0.2),
+                k === targets[j] ? "glow" : "metal",
+                false,
+              ),
             );
           }
           const next = v(
@@ -1311,6 +1332,7 @@ export class GameScene {
   *batchStaticSteps(): Generator<void> {
     const keep = new Set<AbstractMesh>([
       ...this.anchors,
+      ...this.controlViews.flatMap((control) => control.meshes),
       ...this.gates.flatMap((gate) => gate.meshes),
       ...this.pointers,
       ...this.pods,
@@ -2010,6 +2032,20 @@ export class GameScene {
         occludes(plant.center, plant.radius) ||
         Vector3.Distance(this.camera.position, plant.center) < plant.radius;
       fadeFoliage(plant, blocked, this.shadowCasters);
+    }
+    // Keep each control readable as one object, and reveal the player when it
+    // falls between the camera and the play space. Do not fade a control ahead.
+    for (const control of this.controlViews) {
+      control.opacity = actorOpacity(
+        control.opacity,
+        occludes(control.center, 1.85),
+        dt,
+      );
+      const visible = Vector3.DistanceSquared(control.center, V(s.p)) < 110 * 110;
+      for (const mesh of control.meshes) {
+        mesh.visibility = control.opacity;
+        mesh.isVisible = visible;
+      }
     }
     for (const prop of this.foregroundProps) {
       prop.visibility = occludes(

@@ -1,0 +1,685 @@
+{
+  "version": "0.2.23",
+  "date": "2026-11-02",
+  "status": "local validation passed; public verification pending",
+  "change": "World-space normal detail on structural masonry and imported stone ruins using the existing licensed stone-normal.jpg map.",
+  "method": "PBRCustomMaterial Fragment_Before_Lights; project and blend the normal-map slopes onto the actual surface tangent plane at the same world-space coordinates as albedo.",
+  "baseline": {
+    "rows": [
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 104,
+        "textures": 55,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 78.65345288659708,
+        "p95Ms": 15.199999999254942
+      },
+      {
+        "sector": 2,
+        "meshes": 662,
+        "materials": 104,
+        "textures": 55,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 76.83245402862566,
+        "p95Ms": 15.5
+      },
+      {
+        "sector": 3,
+        "meshes": 875,
+        "materials": 112,
+        "textures": 61,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 71.01936461343045,
+        "p95Ms": 16.5
+      },
+      {
+        "sector": 4,
+        "meshes": 552,
+        "materials": 115,
+        "textures": 65,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 80.51529790660226,
+        "p95Ms": 14.299999998882413
+      },
+      {
+        "sector": 6,
+        "meshes": 600,
+        "materials": 115,
+        "textures": 65,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 91.87235866962536,
+        "p95Ms": 12.700000001117587
+      },
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 115,
+        "textures": 65,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 83.02429844471239,
+        "p95Ms": 15.600000001490116
+      }
+    ],
+    "errors": []
+  },
+  "detail": {
+    "rows": [
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 78.80634653775908,
+        "p95Ms": 15.099999999627471
+      },
+      {
+        "sector": 2,
+        "meshes": 662,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 70.62811940864438,
+        "p95Ms": 17
+      },
+      {
+        "sector": 3,
+        "meshes": 875,
+        "materials": 112,
+        "textures": 62,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 73.4142521535115,
+        "p95Ms": 15.800000000745058
+      },
+      {
+        "sector": 4,
+        "meshes": 552,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 78.7112347169327,
+        "p95Ms": 15.599999999627471
+      },
+      {
+        "sector": 6,
+        "meshes": 600,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 89.99280057591369,
+        "p95Ms": 13.599999999627471
+      },
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 79.59248646929304,
+        "p95Ms": 15.699999999254942
+      }
+    ],
+    "errors": []
+  },
+  "closeup": {
+    "view": "Diagnostic belfry close-up, not gameplay camera",
+    "materialsCompared": 3,
+    "method": "Swap only the detail sampler for an exactly neutral float normal; restore afterwards."
+  },
+  "limits": [
+    "Normal mapping changes shading, not geometry or collision.",
+    "Staged paused frame samples do not measure whole-chapter gameplay.",
+    "The close-up uses a diagnostic camera, not the normal gameplay camera.",
+    "The overall art gate, character/creature cohesion and first-time pacing remain open."
+  ],
+  "allAreas": {
+    "rows": [
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 68.09206046573817,
+        "p95Ms": 17.40000000037253
+      },
+      {
+        "sector": 1,
+        "meshes": 609,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 79.06805123611272,
+        "p95Ms": 17.5
+      },
+      {
+        "sector": 2,
+        "meshes": 662,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 80.97165991902834,
+        "p95Ms": 14.5
+      },
+      {
+        "sector": 3,
+        "meshes": 875,
+        "materials": 112,
+        "textures": 62,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 65.74621959237344,
+        "p95Ms": 18.800000000745058
+      },
+      {
+        "sector": 4,
+        "meshes": 552,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 77.66387076730406,
+        "p95Ms": 15.300000000745058
+      },
+      {
+        "sector": 5,
+        "meshes": 600,
+        "materials": 118,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 86.99182276862216,
+        "p95Ms": 14.900000000372529
+      },
+      {
+        "sector": 6,
+        "meshes": 600,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 93.91435011274103,
+        "p95Ms": 14.099999999627471
+      },
+      {
+        "sector": 7,
+        "meshes": 547,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 84.335994602514,
+        "p95Ms": 16.200000001117587
+      },
+      {
+        "sector": 0,
+        "meshes": 651,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 70.35647279549718,
+        "p95Ms": 19.299999998882413
+      }
+    ],
+    "errors": []
+  },
+  "unitTests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "build": {
+    "passed": true
+  },
+  "controlVisibility": {
+    "rows": [
+      {
+        "beat": 0,
+        "name": "behind",
+        "blocked": true,
+        "opacity": 0.22000000000000525,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          29.99999327014895,
+          16.144000261852387,
+          55.199979443364064
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "approach",
+        "blocked": false,
+        "opacity": 0.99999976139619,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          29.999999999997943,
+          16.144000000000077,
+          45.20000305901692
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "beside",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          37.99999755278143,
+          16.14400000000001,
+          55.19999694097773
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "turned",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          30.000002447217817,
+          16.14400000000001,
+          70.79999522792286
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "distant",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          229.99993881953662,
+          16.14400000000001,
+          55.20000477207474
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "return",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          30.000061180445385,
+          16.14400000000001,
+          45.20000305902467
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "behind",
+        "blocked": true,
+        "opacity": 0.22000000000000364,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.00000642394873,
+          18.144000261852387,
+          171.19996170102945
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "approach",
+        "blocked": false,
+        "opacity": 0.99999976139619,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000000000001965,
+          18.144000000000077,
+          161.20000305901146
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "beside",
+        "blocked": false,
+        "opacity": 1,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          24.999997552781437,
+          18.14400000000001,
+          171.1999969409777
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "turned",
+        "blocked": false,
+        "opacity": 1,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000002447217817,
+          18.14400000000001,
+          186.7999952279229
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "distant",
+        "blocked": false,
+        "opacity": 1,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          216.99993881953662,
+          18.14400000000001,
+          171.20000477207472
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "return",
+        "blocked": false,
+        "opacity": 1,
+        "members": 7,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000061180445385,
+          18.14400000000001,
+          161.20000305902465
+        ]
+      }
+    ],
+    "interaction": {
+      "runes": [
+        1,
+        1,
+        0
+      ],
+      "beat": 1
+    },
+    "resources": [
+      {
+        "controls": 8,
+        "members": 54,
+        "meshes": 692,
+        "materials": 104,
+        "textures": 56
+      },
+      {
+        "controls": 8,
+        "members": 54,
+        "meshes": 692,
+        "materials": 104,
+        "textures": 56
+      },
+      {
+        "controls": 8,
+        "members": 54,
+        "meshes": 692,
+        "materials": 104,
+        "textures": 56
+      }
+    ],
+    "errors": []
+  },
+  "preControlCompiled": {
+    "frameSample": {
+      "frames": 942,
+      "seconds": 13.629400000000002,
+      "averageFps": 69.04192407589476,
+      "medianMs": 12.200000000000728,
+      "p95Ms": 18.30000000000291
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "preCullAreas": {
+    "rows": [
+      {
+        "sector": 0,
+        "meshes": 654,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 61.67255982235469,
+        "p95Ms": 21.200000001117587
+      },
+      {
+        "sector": 1,
+        "meshes": 611,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 86.05851979345955,
+        "p95Ms": 14.199999999254942
+      },
+      {
+        "sector": 2,
+        "meshes": 692,
+        "materials": 104,
+        "textures": 56,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 59.606596463341944,
+        "p95Ms": 21
+      },
+      {
+        "sector": 3,
+        "meshes": 878,
+        "materials": 112,
+        "textures": 62,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 59.02490851141776,
+        "p95Ms": 19.699999999254942
+      },
+      {
+        "sector": 4,
+        "meshes": 556,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 67.66815536610747,
+        "p95Ms": 17.800000000745058
+      },
+      {
+        "sector": 5,
+        "meshes": 623,
+        "materials": 118,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 60.35488673402303,
+        "p95Ms": 19.200000001117587
+      },
+      {
+        "sector": 6,
+        "meshes": 602,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 76.67927614766238,
+        "p95Ms": 15.699999999254942
+      },
+      {
+        "sector": 7,
+        "meshes": 549,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 65.54511688879178,
+        "p95Ms": 18.200000001117587
+      },
+      {
+        "sector": 0,
+        "meshes": 654,
+        "materials": 115,
+        "textures": 66,
+        "renderSize": [
+          1036,
+          703
+        ],
+        "averageFps": 69.51846873988589,
+        "p95Ms": 17.299999998882413
+      }
+    ],
+    "errors": []
+  },
+  "controlRenderCost": {
+    "rows": [
+      {
+        "uncull": true,
+        "averageFps": 70.17543859649123,
+        "p95Ms": 17.100000001490116,
+        "visibleControlMeshes": 54
+      },
+      {
+        "uncull": false,
+        "averageFps": 71.40671223098589,
+        "p95Ms": 16.40000000037253,
+        "visibleControlMeshes": 6
+      },
+      {
+        "uncull": false,
+        "averageFps": 74.21281407925055,
+        "p95Ms": 15.300000000745058,
+        "visibleControlMeshes": 6
+      },
+      {
+        "uncull": true,
+        "averageFps": 59.856344772539536,
+        "p95Ms": 20.800000000745058,
+        "visibleControlMeshes": 54
+      }
+    ],
+    "renderSize": [
+      1036,
+      703
+    ]
+  },
+  "compiled": {
+    "frameSample": {
+      "frames": 849,
+      "seconds": 13.829699999999999,
+      "averageFps": 61.31730984764673,
+      "medianMs": 18.099999999998545,
+      "p95Ms": 24.200000000000728
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}
