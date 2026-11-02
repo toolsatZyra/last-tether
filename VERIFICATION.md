@@ -350,3 +350,5 @@ The compiled keyboard check defeated the opening group, advanced the objective, 
 - Reproduce with tools/actor-pool-check.js, tools/actor-pool-route.js and the combat-frame-profile-start/status pair. Structured results: verification/actor-pool-0.2.26.json.
 
 Compiled 0.2.26 ordinary keyboard verification passed: three defeats, watchpost objective, pause freeze, save/reload/resume, no debug hook, no page/console errors or failed responses. A bounded 15.39-second sample averaged 65.87 FPS with p95 18.7 ms; this is not a whole-chapter performance claim.
+
+Public 0.2.26 deployment dpl_9mka4tGGbKtrooTD3uZzWeGJD74S is READY for app commit 2c9b11beb97ca12d1ae4c582ce91fc8b5358223c; the alias serves index-C72MUnWr.js. Public ordinary keyboard combat, pause and save/reload/resume passed without page/console errors or failed responses. Footer reports 0.2.26 and the development hook is absent. Bounded 15.48-second sample: 68.48 FPS average, p95 18.3 ms; not sustained chapter performance.

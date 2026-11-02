@@ -1,6 +1,6 @@
 # Last Tether — working checkpoint
 
-Goal active. Version **0.2.26 is locally verified and awaiting publication**. Public site currently remains 0.2.25 at https://last-tether.vercel.app/.
+Goal active. Version **0.2.26 is published and verified** at https://last-tether.vercel.app/. App commit: 2c9b11beb97ca12d1ae4c582ce91fc8b5358223c. READY deployment: dpl_9mka4tGGbKtrooTD3uZzWeGJD74S. Public bundle: index-C72MUnWr.js. A documentation-only follow-up records live evidence.
 
 The user played the first three waves on 0.2.23 and reported no felt impact in either direction. Published 0.2.25 prioritized combat: directional Kavi recoil through Havok, mass-dependent creature recoil, lethal momentum through collapse, full-weight contact reactions, move-specific hit pauses, pooled contact flashes, unsmoothed directional camera impulse (disabled by Reduce camera effects), optional differentiated impact audio, scenery-blocked attacks/projectiles and local pursuit avoidance. All testing remains silent. Native checks and the full chapter passed. See verification/combat-impact-0.2.25.json and ENGINEERING.md for boundaries: capsule contacts and authored strike volumes/native animation, not articulated ragdolls or exact blade-mesh collision.
 
@@ -10,6 +10,10 @@ The user played the first three waves on 0.2.23 and reported no felt impact in e
 
 Sequential 35-second normal-speed opening profiles: baseline mean interval 23.31 ms, p95 34.5, maximum 133.3; pooled mean 17.55, p95 24.4, maximum 371.1. Model construction fell from a maximum 52.9 ms to zero in active play. Variable machine load prevents attributing the overall difference solely to pooling. Rendering dominates; other hitches remain. Inactive reserves intentionally retain more rigs/textures inside an area. Evidence: verification/actor-pool-0.2.26.json.
 
-Next: finish compiled keyboard/pause/save verification, publish via GitHub main, verify READY SHA/public bundle/live keyboard test, and update this checkpoint. Do not create a duplicate manual Vercel deployment. Then pursue rendering/frame pacing and cohesive hero/creature art. Treat the user's combat feel criticism as an open acceptance gate until their feedback supports improvement. The top-tier visual and first-time 15–20 minute gates remain open.
+Compiled and public ordinary keyboard checks pass: three defeats, watchpost objective, pause freeze, save/reload/resume, no development hook, no page/console errors or failed responses. Public bounded 15.48-second sample averaged 68.48 FPS with p95 18.3 ms; this is not sustained whole-chapter performance. Additional four-second stationary/invulnerable opening and guardian render probes measured about 13.5–13.9 ms scene CPU work, including about 3 ms active-mesh evaluation and 2.3–2.4 ms render targets. GPU timing was disabled.
+
+Next pursue rendering/frame pacing and cohesive hero/creature art. Main auto-deploys; do not create a duplicate manual Vercel deployment. Treat the user's combat feel criticism as an open acceptance gate until their feedback supports improvement. The top-tier visual and first-time 15–20 minute gates remain open.
 
 Fal US$5 pilot remains blocked by exhausted credits: no generation/upload/retry/poll until the user confirms credits. No generation is running. No Supabase/cloud integration or new paid resources. Dev 4173/preview4174 and silent tether-release Chrome are available; verify listeners before restarting.
+
+All verification processes for this pass are terminal; the public test game is paused.

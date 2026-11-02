@@ -1,6 +1,6 @@
 {
   "version": "0.2.26",
-  "status": "locally-verified-awaiting-publication",
+  "status": "published-and-verified",
   "date": "2026-11-02",
   "scope": "Preallocate area-bounded creature rigs behind area loading and reuse them during encounters.",
   "lifecycle": {
@@ -1700,5 +1700,82 @@
   "build": {
     "passed": true,
     "bundle": "index-C72MUnWr.js"
+  },
+  "renderBreakdown": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "fps": 58.861675063556774,
+      "averageViewUpdateMs": 15.033474576328013,
+      "cpu": {
+        "frame": 13.85593220338983,
+        "render": 3.8262711863617525,
+        "targets": 2.3889830508663996,
+        "meshes": 3.142372881235965,
+        "animation": 1.747457627096545,
+        "physics": 0,
+        "particles": 0.05338983035693735
+      },
+      "gpuMs": 0,
+      "drawCalls": 376.98728813559325,
+      "activeMeshes": 176,
+      "sceneMeshes": 711,
+      "shadowMeshes": 98,
+      "reflectionMeshes": 32,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "fps": 61.67752890353838,
+      "averageViewUpdateMs": 15.051417004045566,
+      "cpu": {
+        "frame": 13.522672064768278,
+        "render": 4.16437246956625,
+        "targets": 2.316599190340713,
+        "meshes": 3.039271255012466,
+        "animation": 1.3437246963351603,
+        "physics": 0,
+        "particles": 0.05748987862998657
+      },
+      "gpuMs": 0,
+      "drawCalls": 384.54655870445345,
+      "activeMeshes": 164,
+      "sceneMeshes": 667,
+      "shadowMeshes": 92,
+      "reflectionMeshes": 28,
+      "renderSize": [
+        1036,
+        703
+      ]
+    }
+  ],
+  "renderBreakdownLimits": "Two four-second stationary/invulnerable encounter samples, not a full gameplay benchmark. GPU timing was disabled; gpuMs=0 is not a measured GPU cost.",
+  "deployment": {
+    "state": "READY",
+    "id": "dpl_9mka4tGGbKtrooTD3uZzWeGJD74S",
+    "sha": "2c9b11beb97ca12d1ae4c582ce91fc8b5358223c",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-C72MUnWr.js"
+  },
+  "public": {
+    "version": "LAST TETHER · 0.2.26",
+    "frameSample": {
+      "frames": 1061,
+      "seconds": 15.479399999999998,
+      "averageFps": 68.47810638655245,
+      "medianMs": 12.200000000000728,
+      "p95Ms": 18.30000000000291
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
   }
 }
