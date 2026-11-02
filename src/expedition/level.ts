@@ -64,7 +64,7 @@ export const CHAPTERS: Chapter[] = [
       {
         node: 3,
         title: "Take back the watchpost",
-        hint: "Click or F chains spear attacks. Shift dodges through a committed attack.",
+        hint: "Hold F or click to chain attacks. Stay close to mix in a kick. Shift dodges through attacks.",
         enemies: ["raptor", "raptor", "spitter", "raptor"],
       },
       {

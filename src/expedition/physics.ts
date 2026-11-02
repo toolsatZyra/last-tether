@@ -3,6 +3,7 @@ import wasmUrl from "@babylonjs/havok/lib/esm/HavokPhysics.wasm?url";
 import {
   HavokPlugin,
   PhysicsCharacterController,
+  PhysicsEngineV2,
   PhysicsAggregate,
   PhysicsShapeType,
   Vector3,
@@ -32,6 +33,8 @@ export class PhysicsWorld {
       new HavokPlugin(true, havok),
     );
     this.scene.getPhysicsEngine()!.setTimeStep(1 / 60);
+    // Gameplay owns the fixed clock; rendering must not advance the world again.
+    this.scene.physicsEnabled = false;
   }
   rebuild(meshes: Mesh[], s: Expedition) {
     for (const _ of this.rebuildSteps(meshes, s)) {
@@ -91,6 +94,10 @@ export class PhysicsWorld {
     this.controller.maxSlopeCosine = Math.cos(Math.PI / 3);
     this.controller.keepDistance = 0.02;
     this.controller.keepContactTolerance = 0.08;
+    s.finishPhysicsStep = (dt) => {
+      const engine = this.scene.getPhysicsEngine()! as PhysicsEngineV2;
+      engine.getPhysicsPlugin()!.executeStep(dt, engine.getBodies());
+    };
     s.motion = (p, velocity, dt) => this.move(p, velocity, dt);
     s.enemyMotion = (enemy, velocity, dt) =>
       this.moveEnemy(enemy, velocity, dt);

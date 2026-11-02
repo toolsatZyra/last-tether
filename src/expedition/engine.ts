@@ -1,3 +1,4 @@
+import { MELEE, chooseMelee, type MeleeMove } from "./melee.ts";
 import { quarryTrap, CRANE_IMPACT, CRANE_RADIUS } from "./crane.ts";
 import {
   pressureGates,
@@ -168,6 +169,7 @@ export class Expedition {
     dt: number,
   ) => { p: V; grounded: boolean };
   syncEnemyPhysics?: (enemies: Enemy[]) => void;
+  finishPhysicsStep?: (dt: number) => void;
   motion:
     | ((p: V, velocity: V, dt: number) => { p: V; grounded: boolean })
     | null = null;
@@ -200,6 +202,7 @@ export class Expedition {
   attack = 0;
   attackCooldown = 0;
   attackDuration = 0.35;
+  meleeMove: MeleeMove = "slash";
   attackBuffer = 0;
   swingDelay = -1;
   landTime = 0;
@@ -418,6 +421,7 @@ export class Expedition {
       this.comboWindow =
         0;
     this.swingDelay = -1;
+    this.meleeMove = "slash";
     this.hitstop =
       this.landTime =
       this.dodge =
@@ -498,11 +502,19 @@ export class Expedition {
       return;
     this.combo = this.comboWindow > 0 ? (this.combo + 1) % 3 : 0;
     this.comboWindow = 1.1;
-    this.attackCooldown = [0.35, 0.4, 0.58][this.combo];
+    const target = this.target;
+    this.meleeMove = chooseMelee(
+      this.combo,
+      this.grounded,
+      target ? distance(this.p, target.p) : Infinity,
+      target ? Math.abs(this.p.y - target.p.y) : Infinity,
+    );
+    const move = MELEE[this.meleeMove];
+    this.attackCooldown = move.duration;
     this.attackDuration = this.attackCooldown;
     this.attack = this.attackCooldown;
     this.attackBuffer = 0;
-    this.swingDelay = this.attackDuration * (24 / 62);
+    this.swingDelay = this.attackDuration * move.contact;
     this.event("attack", undefined, this.p, this.combo);
 
     if (
@@ -515,13 +527,18 @@ export class Expedition {
       return;
     }
 
-    const target = this.target;
     if (target && distance(this.p, target.p) < 6)
       this.yaw = Math.atan2(target.p.x - this.p.x, target.p.z - this.p.z);
   }
 
   resolveSwing() {
-    this.event("swing", undefined, this.p, this.combo);
+    const move = MELEE[this.meleeMove];
+    this.event(
+      this.meleeMove === "kick" ? "kick" : "swing",
+      undefined,
+      this.p,
+      this.combo,
+    );
     let connected = false;
     for (const e of this.living) {
       const d = distance(this.p, e.p),
@@ -529,14 +546,18 @@ export class Expedition {
           ((e.p.x - this.p.x) * Math.sin(this.yaw) +
             (e.p.z - this.p.z) * Math.cos(this.yaw)) /
           (d || 1);
-      if (d < 4.2 && Math.abs(this.p.y - e.p.y) < 4 && dot > -0.2) {
-        this.damage(e, [34, 42, 72][this.combo], this.combo === 2 ? 1.8 : 0.4);
+      if (
+        d < move.reach &&
+        Math.abs(this.p.y - e.p.y) < move.height &&
+        dot > move.cone
+      ) {
+        this.damage(e, move.damage, move.knock);
         connected = true;
       }
     }
 
-    this.checkPods(this.p, 6);
-    if (connected) this.hitstop = this.combo === 2 ? 0.055 : 0.035;
+    if (this.meleeMove !== "kick") this.checkPods(this.p, 6);
+    if (connected) this.hitstop = move.hitstop;
   }
 
   checkPods(p: V, r: number) {
@@ -893,13 +914,14 @@ export class Expedition {
         this.p.x + Math.sin(this.yaw) * 0.8,
         this.p.z + Math.cos(this.yaw) * 0.8,
       );
+      const stepTo = MELEE[this.meleeMove].stepTo;
       const advance =
         closeTarget &&
         stepFloor !== null &&
         Math.abs(stepFloor - this.p.y) < 1.5 &&
         reach < 6 &&
-        reach > 2.6
-          ? Math.min(6.5, (reach - 2.6) * 8)
+        reach > stepTo
+          ? Math.min(6.5, (reach - stepTo) * 8)
           : 0;
       this.velocity.x = mix(
         this.velocity.x,
@@ -1021,6 +1043,9 @@ export class Expedition {
       this.escape -= dt;
       if (this.escape <= 0) this.die();
     }
+
+    // Commit native animated collision bodies at the same rate as gameplay.
+    this.finishPhysicsStep?.(dt);
 
     this.recordClock += dt;
     if (this.recordClock > 0.1) {

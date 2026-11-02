@@ -130,6 +130,7 @@ export class Soundscape {
         0.75,
         1 + variation,
       );
+    else if (event === "kick") this.sample("cloth2", 0.6, 1.3);
     else if (event === "hit")
       this.sample("impactPunch_heavy_000", 0.7, 1 + variation);
     else if (["slam", "explode", "burst", "crane-impact"].includes(event)) {

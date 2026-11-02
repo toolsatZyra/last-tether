@@ -22,3 +22,5 @@ The chapter is not an open world. Its traversal is an authored route with arenas
 A new player is intended to take 15–20 minutes while discovering the route, reading tells, solving wheels and recovering from mistakes. Automation with full knowledge is faster. No mandatory idle timer has been inserted to inflate length.
 
 Quarry visual landmarks (0.2.10): the blasting yard sits below the lifting crane; the furnace marks the next approach. Red blasting charges carry a yellow warning diamond. Their attack-triggered blast behaviour is unchanged. From 0.2.19 the crane is a usable one-shot trap. Its ring marks the impact area; a short warning precedes the fall. Retry resets the unsecured yard, while later checkpoints show the spent load as rubble. The lever stays optional and does not gate progress.
+
+Close combat (0.2.21): hold F or left click for the three-hit chain. When a target is close and near ground height, the middle hit becomes a forward kick. It pushes creatures back but has less reach and a narrower hit area than the spear sweep used at greater distance. Step toward an enemy to stay close; dodge remains available to cancel an attack.

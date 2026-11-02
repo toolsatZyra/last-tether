@@ -1,3 +1,4 @@
+import { MELEE } from "./melee";
 import { FootPose } from "./foot-pose";
 import { GuardianMotion } from "./guardian";
 import {
@@ -463,9 +464,12 @@ export class Actor {
       s.landTime > 0 ? Math.sin(Math.PI * (1 - s.landTime / 0.22)) : 0;
     this.root.position.set(s.p.x, s.p.y - this.landing * 0.06, s.p.z);
     const phase = 1 - s.attack / s.attackDuration;
-    this.attackPose = s.attack > 0 && !s.slam && s.grounded ? s.combo : -1;
+    const melee = MELEE[s.meleeMove];
+    this.attackPose =
+      s.attack > 0 && !s.slam && s.grounded && melee.trail ? s.combo : -1;
     this.attackPhase = Math.max(0, Math.min(1, phase));
-    const trailActive = s.attack > 0 && !s.slam && phase > 0.27 && phase < 0.66;
+    const trailActive =
+      s.attack > 0 && !s.slam && melee.trail && phase > 0.27 && phase < 0.66;
     if (trailActive && !this.trailActive) this.weaponTrail?.reset();
     this.trailActive = trailActive;
     if (this.weaponTrail) this.weaponTrail.isVisible = trailActive;
@@ -499,11 +503,7 @@ export class Actor {
     else if (s.throwTime > 0)
       this.playTimed("Punch_Right", 0.4 - s.throwTime, 0.4);
     else if (s.attack > 0)
-      this.playTimed(
-        "Sword_Slash",
-        s.attackDuration - s.attack,
-        s.attackDuration,
-      );
+      this.playTimed(melee.clip, s.attackDuration - s.attack, s.attackDuration);
     else if (!s.grounded) this.play("Idle_Sword");
     else if (s.speed > 0.7) this.play("Run", Math.max(0.6, s.speed / 5.8));
     else this.play("Idle_Sword");

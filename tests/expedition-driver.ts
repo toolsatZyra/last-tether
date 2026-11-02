@@ -1,3 +1,4 @@
+import { connectionTarget } from "./route-connection.ts";
 import { pressureGates } from "../src/expedition/pressure.ts";
 import { Expedition, type Input } from "../src/expedition/engine.ts";
 import { distance, v } from "../src/expedition/level.ts";
@@ -55,6 +56,10 @@ export function drive(s: Expedition, tick: number): Input {
       (p) => p.z > s.p.z + 4 && p.z < s.destination.z,
     );
     if (point) target = { ...point };
+    const to = point ?? s.destination;
+    const from = s.chapter.points[s.chapter.points.indexOf(to) - 1];
+    if (from && !to.gap && s.p.z >= from.z - 3)
+      target = connectionTarget(s.p, from, to);
     if (s.objective.hazard === "pressure") {
       const gates = pressureGates(s.chapter);
       const forward = gates[0].forward;
