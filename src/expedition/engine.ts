@@ -449,7 +449,7 @@ export class Expedition {
 
     if (e.hp <= 0) {
       e.state = "death";
-      e.dead = 1.4;
+      e.dead = e.kind === "guardian" ? 2.4 : 1.4;
       this.kills++;
       this.event("kill", e.kind, e.p);
       this.health = Math.min(100, this.health + 2);
@@ -970,7 +970,11 @@ export class Expedition {
       }
       e.timer -= dt;
       const d = distance(this.p, e.p);
-      e.yaw = Math.atan2(this.p.x - e.p.x, this.p.z - e.p.z);
+      if (
+        e.kind !== "guardian" ||
+        !["windup", "charge", "stunned"].includes(e.state)
+      )
+        e.yaw = Math.atan2(this.p.x - e.p.x, this.p.z - e.p.z);
 
       if (e.kind === "guardian") {
         this.guardian(e, dt);

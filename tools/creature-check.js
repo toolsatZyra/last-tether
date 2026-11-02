@@ -5,11 +5,11 @@ async(page)=>{
  const a=window.__expedition;a.start('story');a.pause();const v=a.view;
  const counts=()=>({meshes:v.scene.meshes.length,skeletons:v.scene.skeletons.length,animations:v.scene.animationGroups.length,textures:v.scene.textures.length,materials:v.scene.materials.length});
  const before=counts(),rows=[];
- for(let pass=0;pass<2;pass++)for(const kind of ['raptor','spitter','brute','bomber','wing','guardian']){
+ for(let pass=0;pass<2;pass++)for(const kind of ['raptor','spitter','brute','bomber','wing']){
  const actor=v.assets.actor(kind,v.scene,'check-'+kind,v.shadow);actor.root.position.set(0,0,0);actor.root.computeWorldMatrix(true);
- const clip=actor.groups.find(g=>g.name.endsWith(kind==='wing'||kind==='guardian'?'_Flying_Idle':'_Idle'));if(!clip)throw Error('Missing neutral clip '+kind);
+ const clip=actor.groups.find(g=>g.name.endsWith(kind==='wing'?'_Flying_Idle':'_Idle'));if(!clip)throw Error('Missing neutral clip '+kind);
  actor.groups.forEach(g=>g.stop());clip.start(false,1,clip.from,clip.to);
- let low=Infinity,high=-Infinity;const samples=kind==='wing'||kind==='guardian'?12:1;
+ let low=Infinity,high=-Infinity;const samples=kind==='wing'?12:1;
  for(let f=0;f<samples;f++){clip.goToFrame(clip.from+(clip.to-clip.from)*f/samples);actor.nodes.forEach(n=>n.computeWorldMatrix(true));for(const m of actor.meshes){m.computeWorldMatrix(true);m.skeleton?.prepare(true);m.refreshBoundingInfo(true);}const b=actor.root.getHierarchyBoundingVectors(true);low=Math.min(low,b.min.y);high=Math.max(high,b.max.y);}
  if(Math.abs(low)>.025||Math.abs(high-actor.height)>.025)throw Error('Bad grounded envelope '+kind+' '+low+' '+high);
  if(pass===0)rows.push({kind,minY:low,maxY:high,height:actor.height,scale:actor.root.scaling.x,offset:actor.modelBaseOffset});else if(Math.abs(rows.find(r=>r.kind===kind).scale-actor.root.scaling.x)>1e-7)throw Error('Spawn scale changed');

@@ -1852,7 +1852,7 @@ export class GameScene {
       const distance = s.grapple
         ? 13
         : bossPresent
-          ? 17
+          ? 13
           : nearbyThreats > 2
             ? 10
             : nearbyThreats
@@ -1861,7 +1861,9 @@ export class GameScene {
       if (bossPresent) target.y += 2.5;
       desired = new Vector3(
         s.p.x - Math.sin(this.yaw) * distance,
-        s.p.y + (bossPresent ? 7 : 2.7) + this.pitch * (bossPresent ? 5 : 3.8),
+        s.p.y +
+          (bossPresent ? 4.8 : 2.7) +
+          this.pitch * (bossPresent ? 4 : 3.8),
         s.p.z - Math.cos(this.yaw) * distance,
       );
       const ray = new Ray(

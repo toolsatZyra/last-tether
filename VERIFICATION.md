@@ -160,3 +160,11 @@ Public 0.2.10 verification: application commit `f475985d22c4c16fcbd03ab4fc56a5b1
 Production preview ordinary keyboard/mouse quarry check: nine defeats, zero recoveries, advanced to the furnace approach and restored that checkpoint after reload. No development hook, page errors or failed asset requests.
 
 Public 0.2.11 deployment dpl_2utkhGutBWQL8Pr4FxbfHWkfd2xy is READY at last-tether.vercel.app (application commit f638408). The same ordinary-input quarry check passed live: nine defeats, zero recoveries, furnace approach checkpoint restored after reload, no development hook, no page errors or failed asset requests.
+
+## Guardian replacement — 0.2.12
+
+26 tests, 83 asset hashes and production build pass. Native PBR maps are present; wind-up changes the neck pose; exposed armour hides; phase three retains three plates. Three repeated create/dispose runs retain 629 meshes, 102 materials, 48 animation groups and two skeletons. A one-time EffectLayerMainRTT_prePassRTT allocation raises textures from 44 to 45; later iterations stay at 45. The sampled collapse body minimum is 0.021 m below the floor.
+
+The accelerated rendered full route completes all 32 objectives, 188 defeats, one quarry recovery, the guardian and escape in 681.72 simulated seconds. Ordinary production keyboard controls traverse the approach and dodge a guardian charge with zero recoveries; the new model loads successfully and no page/asset errors occur. This is a bounded encounter check, not a native-input full boss victory.
+
+Four-second Balanced samples at 1036×703 after two seconds settling: opening 42.1 FPS, forest 45.6, guardian 46.7; p95 30.5/36.1/30.3 ms. Performance remains below the target. Evidence: verification/guardian-0.2.12.json.

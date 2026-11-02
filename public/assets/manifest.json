@@ -756,5 +756,15 @@
     "assetPage": "https://polyhaven.com/a/fine_grained_wood",
     "licensePage": "https://polyhaven.com/license",
     "modifications": "Original 1K JPG map retained unchanged."
+  },
+  {
+    "path": "assets/guardian/slateback.glb",
+    "source": "https://bake3d.ai/samples/free/bake3d-trex-animated.glb",
+    "sha256": "4af56af4df66fa2ca7c922e9d3e5d4642f9a668475ae6ef1b1f5a520fb225816",
+    "bytes": 6591912,
+    "author": "Bake3D",
+    "license": "CC-BY-4.0",
+    "licenseSource": "https://bake3d.ai/free-3d-models",
+    "modifications": "Geometry simplified. Runtime armour, positioning and skeletal combat accents added."
   }
 ]

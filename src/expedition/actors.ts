@@ -1,3 +1,4 @@
+import { GuardianMotion } from "./guardian";
 import {
   Scene,
   BoundingInfo,
@@ -33,6 +34,7 @@ import { characterSurface, softenCharacterSurface } from "./character-finish";
 export class Actor {
   instance: InstantiatedEntries;
   height: number;
+  guardian?: GuardianMotion;
   modelBaseOffset = 0;
   visibilityBounds: BoundingInfo;
   occlusionAlpha = 1;
@@ -152,9 +154,19 @@ export class Actor {
     for (const node of instance.rootNodes)
       if (node instanceof TransformNode)
         node.position.y -= this.modelBaseOffset;
+    if (kind === "guardian")
+      for (const node of instance.rootNodes)
+        if (node instanceof TransformNode) node.position.z -= 2;
+    const modelOffset = new Vector3(
+      0,
+      this.modelBaseOffset,
+      kind === "guardian" ? 2 : 0,
+    );
     this.visibilityBounds = new BoundingInfo(
-      bounds.min.subtract(new Vector3(0, this.modelBaseOffset, 0)),
-      bounds.max.subtract(new Vector3(0, this.modelBaseOffset, 0)),
+      bounds.min.subtract(modelOffset),
+      bounds.max
+        .subtract(modelOffset)
+        .add(new Vector3(0, kind === "guardian" ? 0.5 : 0, 0)),
     );
     this.root.scaling.setAll(height / Math.max(0.1, h));
     this.meshes.forEach((m) => {
@@ -171,11 +183,16 @@ export class Actor {
             id,
             m.name.includes("Backpack"),
           );
-        } else {
+        } else if (kind !== "guardian") {
           m.material = creatureSurface(scene, m.material, kind);
         }
       }
     });
+    if (kind === "guardian") {
+      this.guardian = new GuardianMotion(scene, this.root, this.nodes);
+      this.meshes.push(...this.guardian.plates);
+      this.guardian.plates.forEach((m) => shadows.addShadowCaster(m));
+    }
     this.groups.forEach((g) => g.stop());
     this.play(hero ? "Idle_Sword" : "Idle");
     const observer = scene.onAfterAnimationsObservable.add(() => {
@@ -483,7 +500,21 @@ export class Actor {
     this.root.position.set(e.p.x, e.p.y, e.p.z);
     this.root.rotation.y = e.yaw;
     this.root.setEnabled(e.hp > 0 || e.dead > 0);
-    const flying = e.kind === "wing" || e.kind === "guardian";
+    if (this.guardian) {
+      this.guardian.update(e);
+      this.play(
+        e.state === "charge" && e.hp > 0 ? "Walk" : "Idle",
+        e.state === "charge" ? 4.2 : 1,
+      );
+      const fall = e.hp <= 0 ? Math.min(1, (2.4 - e.dead) / 1.1) : 0;
+      this.root.rotation.z = -Math.PI * 0.48 * (fall * fall * (3 - 2 * fall));
+      this.root.position.y +=
+        Math.sin((fall * Math.PI) / 2) * this.height * 0.4;
+      this.root.scaling.y = this.root.scaling.x;
+      this.update(dt);
+      return;
+    }
+    const flying = e.kind === "wing";
     let anim = flying ? "Flying_Idle" : "Idle";
     if (e.hp <= 0) anim = "Death";
     else if (e.flash > 0) anim = "HitReact";
@@ -503,6 +534,7 @@ export class Actor {
     (this.contact.material as StandardMaterial).diffuseTexture?.dispose();
     this.contact.dispose(false, true);
     this.removePose?.();
+    this.guardian?.dispose();
     this.weaponTrail?.dispose(false, true);
     this.instance.dispose();
     this.root.dispose(false, false);
@@ -731,7 +763,7 @@ export class Assets {
       brute: 3.7,
       bomber: 2,
       wing: 2.4,
-      guardian: 8,
+      guardian: 5.6,
     };
     return new Actor(
       this.containers.get(key)!,

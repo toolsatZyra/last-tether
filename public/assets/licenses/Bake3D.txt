@@ -1,0 +1,3 @@
+T. rex by Bake3D (https://bake3d.ai), licensed under Creative Commons Attribution 4.0 International: https://creativecommons.org/licenses/by/4.0/
+Source: https://bake3d.ai/free-3d-models
+Modified for Last Tether: geometry reduced, scale/origin adjusted, runtime armour and skeletal combat accents added. No endorsement implied.

@@ -229,3 +229,24 @@ test("the melee closing step moves through collision, never by teleporting", () 
   assert.ok(free.s.p.z > origin.z + 0.2 && free.s.p.z < origin.z + 1);
   assert.ok(free.enemy.hp < free.enemy.max);
 });
+
+test("guardian commits its facing to the charge instead of tracking a dodging player", () => {
+  const s = new Expedition();
+  s.loadSector(6, 1);
+  s.addEnemy("guardian", { ...s.destination });
+  const e = s.enemies.at(-1)!;
+  e.state = "idle";
+  e.timer = 0;
+  s.p = { x: e.p.x + 10, y: e.p.y, z: e.p.z };
+  s.updateEnemies(1 / 60);
+  const yaw = e.yaw;
+  e.state = "charge";
+  e.timer = 1;
+  s.p = { x: e.p.x, y: e.p.y, z: e.p.z + 10 };
+  s.updateEnemies(1 / 60);
+  assert.equal(e.yaw, yaw);
+  assert.ok(e.dir.x > 0.99);
+  e.armour = false;
+  s.damage(e, 9999);
+  assert.equal(e.dead, 2.4);
+});
