@@ -1,6 +1,6 @@
 # Last Tether — working checkpoint
 
-Goal active. 0.2.28 is locally verified and being published through the GitHub-connected Vercel pipeline. Previous public 0.2.27 app commit c071b33dba6028280676bc8b61652a80a44e5b29; evidence commit 1cfb1c9. Verify new deployment SHA and public keyboard smoke check before calling this release published.
+Goal active. **0.2.28 is published and verified** at https://last-tether.vercel.app/. App commit efebef4560086ded6511c92dc3d405dfe84ad16c; READY deployment dpl_3dRvpf1xmmvaxxjJEUbWNd5Zyx1K; public bundle index-Cu6lX-fk.js. Documentation-only follow-up records live evidence.
 
 0.2.28 removes the duplicate GlowLayer and unnecessary canvas retained buffer/MSAA. Main pipeline bloom and FXAA remain; High retains pipeline MSAA4 and SSAO. No geometry, texture, shadow resolution or material reductions. Fixed opening ABBA: 406 versus 278 draw calls; GPU means both/pipeline/pipeline/both 18.46/13.14/14.14/16.49 ms. Contact-shadow materials were also feeding white emission to the extra glow, lightening the ground under actors; removal restores grounding. Canvas ABBA has matching visible detail but no meaningful speed difference.
 
@@ -15,3 +15,5 @@ Preserve 0.2.25 directional Havok recoil, mass differences, lethal momentum, nat
 Quality goal remains open: mixed/low-detail hero and creature art, occasional frame hitches, human enjoyment and first-time 15–20 minute pacing are unverified. Next prioritize cohesive hero/creature art and remaining real contact/animation weaknesses. Do not keep repeating broad route tests without relevant changes.
 
 Fal US$5 pilot remains blocked by exhausted credits: no generation/upload/retry/poll until user confirms credits. All tests are silent. No Supabase/cloud integration. No subagents. Main auto-deploys; no duplicate manual deployment. Owned Chrome session tether-release uses research/qa-release.config.json. Do not change unrelated user browser/audio/system GPU preferences.
+
+Public keyboard combat/pause/save/reload passes: three defeats, zero recoveries, correct 0.2.28 footer, no development hook/errors/failed responses. Bounded 15.39-second sample averaged 85.87 FPS, p95 18.1 ms. This is not sustained performance. All current checks are terminal; owned silent browser is paused on the public game.

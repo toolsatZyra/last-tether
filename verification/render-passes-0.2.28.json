@@ -1,6 +1,6 @@
 {
   "version": "0.2.28",
-  "status": "local-verification-passed",
+  "status": "published-and-verified",
   "date": "2026-11-02",
   "glowAblation": [
     {
@@ -1748,5 +1748,29 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "public": {
+    "version": "LAST TETHER · 0.2.28",
+    "frameSample": {
+      "frames": 1323,
+      "seconds": 15.394599999999999,
+      "averageFps": 85.8742676003274,
+      "medianMs": 12.100000000002183,
+      "p95Ms": 18.099999999998545
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_3dRvpf1xmmvaxxjJEUbWNd5Zyx1K",
+    "state": "READY",
+    "appCommit": "efebef4560086ded6511c92dc3d405dfe84ad16c",
+    "bundle": "index-Cu6lX-fk.js",
+    "url": "https://last-tether.vercel.app/"
   }
 }

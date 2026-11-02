@@ -378,3 +378,5 @@ Retained/multisampled versus direct/unretained canvas ABBA comparison confirms a
 A 35.0035-second normal-speed opening combat sample reached seven defeats. Mean interval 11.93 ms, p95 14.8 ms, maximum 514.1 ms; runtime creature construction remains zero. The long hitch prevents calling the game consistently smooth. Different host load and earlier inconsistent timings prevent attributing this overall result solely to the renderer change. Structured evidence: verification/render-passes-0.2.28.json.
 
 Compiled 0.2.28 ordinary keyboard combat, pause and save/reload/resume pass, with three defeats and zero recoveries, no development hook, page/console errors or failed responses. Bounded 14.85-second sample: 78.56 FPS average, p95 18.3 ms; not a whole-chapter claim.
+
+Public 0.2.28 deployment dpl_3dRvpf1xmmvaxxjJEUbWNd5Zyx1K is READY for app commit efebef4560086ded6511c92dc3d405dfe84ad16c; the alias serves index-Cu6lX-fk.js. Public ordinary keyboard combat/pause/save/reload passes: three defeats, zero recoveries, no development hook/errors/failed responses. Bounded 15.39-second sample averaged 85.87 FPS with p95 18.1 ms; not sustained whole-chapter performance.
