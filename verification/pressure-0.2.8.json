@@ -276,5 +276,20 @@
     "The full run recovered twice in the quarry; the pressure sequence itself completed without a recovery.",
     "Stationary six-second performance sample is not a sustained 60 FPS claim.",
     "Top-tier visual quality and first-time enjoyment remain unverified."
-  ]
+  ],
+  "live": {
+    "applicationCommit": "5c811d5bfbc45ab42a95658b590d3196b6c54e7d",
+    "deployment": "dpl_uSnZUxxaJ4Y6qpyWhBdTuwEPGeKW",
+    "status": "READY",
+    "url": "https://last-tether.vercel.app/",
+    "check": {
+      "initial": "Cross the pressure channel",
+      "objective": "Release the crown lock",
+      "meta": "2 defeated · 0 recoveries",
+      "noDebug": true,
+      "errors": [],
+      "bad": [],
+      "resumed": "Release the crown lock"
+    }
+  }
 }
