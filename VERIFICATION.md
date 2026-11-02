@@ -146,3 +146,15 @@ The full accelerated rendered chapter completes all 32 objectives, guardian and 
 Final close-combat Balanced samples at 1036×703 average 50.1, 51.5 and 52.5 FPS for the first three quarry encounters. The same harness against the published 0.2.9 source measured 48.0, 50.7 and 48.1 FPS. Earlier development samples varied from 55–58 FPS; no sustained 60 FPS claim follows from these short measurements. The final approach, blasting yard, furnace and ambush captures were inspected. Evidence: verification/quarry-0.2.10.json.
 
 Public 0.2.10 verification: application commit `f475985d22c4c16fcbd03ab4fc56a5b106df2d29`, Vercel deployment `dpl_D62wv2CdMaFgMJAPcf2CD7LeLXFn`, reached READY and served the public alias. The ordinary-input prepared-checkpoint blasting-yard test recorded nine defeats, zero recoveries and advancement to Survive the furnace approach, then saved/reloaded/resumed that objective. No development hook, browser errors or failed responses were present.
+
+## Creature pass — 0.2.11
+
+- 25 behaviour/geometry tests pass, including finite camera sight lines, wide wings, camera overlap, objects behind the camera/player, and frame-rate-independent opacity.
+- All six animated reference envelopes start at zero and reach their intended heights within 0.001 m. Twelve create/dispose checks keep 629 meshes, 2 skeletons, 48 animation groups, 44 textures and 103 materials unchanged. Flying contact shadow measured on floor 8 at y=8.045 with reduced opacity 0.310.
+- 72 imported source geometry fingerprints unchanged through four area rebuilds.
+- Accelerated rendered chapter: all 32 objectives, 188 defeats, one quarry recovery, finished checkpoint and ending visible; 681.72 simulated seconds. This is a knowledgeable policy run, not a first-time 15–20 minute result.
+- Bounded four-second Balanced samples at 1036×703 after two seconds settling: opening 49.5 FPS / p95 30.3 ms; forest 49.2 / 24.4 ms; guardian 49.2 / 24.3 ms. These samples do not establish stable 60 FPS or sustained play.
+- Close-up and normal gameplay camera images inspected. Creature silhouettes remain a material art limitation.
+- Detailed evidence: verification/creatures-0.2.11.json. Production/public ordinary-input checks are recorded below when complete.
+
+Production preview ordinary keyboard/mouse quarry check: nine defeats, zero recoveries, advanced to the furnace approach and restored that checkpoint after reload. No development hook, page errors or failed asset requests.

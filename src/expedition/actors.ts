@@ -1,5 +1,6 @@
 import {
   Scene,
+  BoundingInfo,
   SceneLoader,
   AssetContainer,
   TransformNode,
@@ -20,8 +21,11 @@ import {
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import "@babylonjs/loaders/OBJ";
-import { PBRCustomMaterial } from "@babylonjs/materials/custom/pbrCustomMaterial";
-const creatureMaterials = new Map<number, PBRCustomMaterial>();
+import { creatureSurface } from "./creature-finish";
+const creatureBounds = new WeakMap<
+  AssetContainer,
+  { min: Vector3; max: Vector3 }
+>();
 import { ASSETS, type Kind } from "./level";
 import type { Expedition, Enemy } from "./engine";
 import { weatheredStone } from "./surfaces";
@@ -29,6 +33,9 @@ import { characterSurface, softenCharacterSurface } from "./character-finish";
 export class Actor {
   instance: InstantiatedEntries;
   height: number;
+  modelBaseOffset = 0;
+  visibilityBounds: BoundingInfo;
+  occlusionAlpha = 1;
   contact: Mesh;
   cloak?: Mesh;
   cloakRest: number[] = [];
@@ -58,6 +65,7 @@ export class Actor {
     height: number,
     shadows: ShadowGenerator,
     hero = false,
+    kind: Kind = "raptor",
   ) {
     this.height = height;
     const contactMat = new StandardMaterial(id + "-contact", scene);
@@ -101,8 +109,53 @@ export class Actor {
     this.meshes = this.root
       .getChildMeshes()
       .filter((m) => m instanceof Mesh) as Mesh[];
-    const bounds = this.root.getHierarchyBoundingVectors(true),
-      h = bounds.max.y - bounds.min.y;
+    let bounds = hero ? undefined : creatureBounds.get(container);
+    if (!bounds && !hero) {
+      // Sample the complete rig, including its animated root, once per source.
+      // Flying exports carry altitude in both their bind pose and animation.
+      this.groups.forEach((g) => g.stop());
+      const neutral =
+        this.groups.find((g) => g.name.endsWith("_Flying_Idle")) ||
+        this.groups.find((g) => g.name.endsWith("_Idle"));
+      if (neutral) {
+        neutral.start(false, 1, neutral.from, neutral.to);
+        neutral.goToFrame(neutral.from);
+      }
+      const min = new Vector3(Infinity, Infinity, Infinity);
+      const max = new Vector3(-Infinity, -Infinity, -Infinity);
+      const samples = neutral?.name.endsWith("_Flying_Idle") ? 12 : 1;
+      for (let sample = 0; sample < samples; sample++) {
+        if (neutral)
+          neutral.goToFrame(
+            neutral.from + ((neutral.to - neutral.from) * sample) / samples,
+          );
+        this.nodes.forEach((n) => n.computeWorldMatrix(true));
+        this.meshes.forEach((m) => {
+          m.computeWorldMatrix(true);
+          m.skeleton?.prepare(true);
+          m.refreshBoundingInfo(true);
+        });
+        const sampled = this.root.getHierarchyBoundingVectors(true);
+        min.minimizeInPlace(sampled.min);
+        max.maximizeInPlace(sampled.max);
+      }
+      bounds = { min, max };
+      creatureBounds.set(container, {
+        min: bounds.min.clone(),
+        max: bounds.max.clone(),
+      });
+      this.groups.forEach((g) => g.stop());
+    }
+    bounds ||= this.root.getHierarchyBoundingVectors(true);
+    const h = bounds.max.y - bounds.min.y;
+    this.modelBaseOffset = hero ? 0 : bounds.min.y;
+    for (const node of instance.rootNodes)
+      if (node instanceof TransformNode)
+        node.position.y -= this.modelBaseOffset;
+    this.visibilityBounds = new BoundingInfo(
+      bounds.min.subtract(new Vector3(0, this.modelBaseOffset, 0)),
+      bounds.max.subtract(new Vector3(0, this.modelBaseOffset, 0)),
+    );
     this.root.scaling.setAll(height / Math.max(0.1, h));
     this.meshes.forEach((m) => {
       m.receiveShadows = true;
@@ -119,39 +172,7 @@ export class Actor {
             m.name.includes("Backpack"),
           );
         } else {
-          const original = m.material;
-          let appearance = creatureMaterials.get(original.uniqueId);
-          if (!appearance) {
-            appearance = new PBRCustomMaterial(
-              original.name + "-valley",
-              scene,
-            );
-            appearance.albedoTexture = original.albedoTexture;
-            appearance.backFaceCulling = original.backFaceCulling;
-            const tint =
-              height > 7
-                ? "0.65,0.78,0.85"
-                : height > 3
-                  ? "0.75,0.8,0.78"
-                  : height === 2.1
-                    ? "0.7,0.85,0.5"
-                    : height === 2
-                      ? "0.95,0.7,0.4"
-                      : "0.85,0.66,0.48";
-            appearance.Fragment_Custom_Albedo(
-              "float valleyLuma=dot(surfaceAlbedo,vec3(0.299,0.587,0.114));surfaceAlbedo=mix(surfaceAlbedo,vec3(valleyLuma)*vec3(" +
-                tint +
-                "),0.76*(1.0-smoothstep(0.65,0.95,valleyLuma)));",
-            );
-            creatureMaterials.set(original.uniqueId, appearance);
-          }
-          m.material = appearance;
-        }
-        const mat = m.material as PBRMaterial;
-        if (!hero) {
-          mat.roughness = 0.83;
-          mat.metallic = 0;
-          mat.albedoColor = new Color3(0.62, 0.68, 0.57);
+          m.material = creatureSurface(scene, m.material, kind);
         }
       }
     });
@@ -719,6 +740,7 @@ export class Assets {
       heights[key],
       shadows,
       key === "hero",
+      key === "hero" ? "raptor" : key,
     );
   }
   prop(

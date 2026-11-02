@@ -1,0 +1,319 @@
+{
+  "version": "0.2.11",
+  "scope": "Creature animated-reference normalization, full-body camera fading, grounded contact shadows and bind-space material detail",
+  "creatures": {
+    "rows": [
+      {
+        "kind": "raptor",
+        "minY": 2.7677582448148996e-11,
+        "maxY": 2.399999936967788,
+        "height": 2.4,
+        "scale": 0.7910958736378754,
+        "offset": -0.003326921258121729
+      },
+      {
+        "kind": "spitter",
+        "minY": 1.4314682772464948e-10,
+        "maxY": 2.099999928492025,
+        "height": 2.1,
+        "scale": 0.8376949119283578,
+        "offset": -0.014732766896486282
+      },
+      {
+        "kind": "brute",
+        "minY": -1.89524618221526e-10,
+        "maxY": 3.7000000115434943,
+        "height": 3.7,
+        "scale": 1.4012294963271494,
+        "offset": -0.010765766724944115
+      },
+      {
+        "kind": "bomber",
+        "minY": -6.951883513295343e-11,
+        "maxY": 2.0000000213893827,
+        "height": 2,
+        "scale": 0.5855787929648029,
+        "offset": -0.010805970057845116
+      },
+      {
+        "kind": "wing",
+        "minY": -7.583587091630761e-9,
+        "maxY": 2.4000000387333387,
+        "height": 2.4,
+        "scale": 0.9836767722073994,
+        "offset": 0.7436522841453552
+      },
+      {
+        "kind": "guardian",
+        "minY": 4.22309653913544e-8,
+        "maxY": 8.00000036688499,
+        "height": 8,
+        "scale": 2.5319677755899836,
+        "offset": 0.701850175857544
+      }
+    ],
+    "repeatedSpawnStable": true,
+    "resources": {
+      "before": {
+        "meshes": 629,
+        "skeletons": 2,
+        "animations": 48,
+        "textures": 44,
+        "materials": 103
+      },
+      "after": {
+        "meshes": 629,
+        "skeletons": 2,
+        "animations": 48,
+        "textures": 44,
+        "materials": 103
+      }
+    },
+    "airborneShadow": {
+      "y": 8.045,
+      "floor": 8,
+      "opacity": 0.30952380952380953
+    },
+    "errors": []
+  },
+  "geometry": {
+    "sourceMeshes": 72,
+    "sectorsRebuilt": 4,
+    "sharedGeometryUnchanged": true
+  },
+  "fullRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 49,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 681.7166666663753,
+    "kills": 188,
+    "deaths": 1,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 12.23333333333352,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 32.5666666666661,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 48.833333333331844,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 88.4833333333296,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 110.84999999999499,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 143.38333333333958,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 175.9166666666988,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 192.1833333333784,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 228.78333333340754,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 256.23333333342896,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 279.616666666741,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 284.70000000006974,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 311.133333333379,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 331.46666666669387,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 353.8333333333402,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 367.04999999999484,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 391.44999999997265,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 419.83333333328017,
+        "deaths": 1
+      },
+      {
+        "key": "5-0",
+        "seconds": 451.34999999991817,
+        "deaths": 1
+      },
+      {
+        "key": "5-1",
+        "seconds": 465.58333333323856,
+        "deaths": 1
+      },
+      {
+        "key": "5-2",
+        "seconds": 480.8333333332247,
+        "deaths": 1
+      },
+      {
+        "key": "5-3",
+        "seconds": 517.4333333331914,
+        "deaths": 1
+      },
+      {
+        "key": "6-0",
+        "seconds": 538.783333333172,
+        "deaths": 1
+      },
+      {
+        "key": "6-1",
+        "seconds": 555.0499999998239,
+        "deaths": 1
+      },
+      {
+        "key": "6-2",
+        "seconds": 599.7833333331165,
+        "deaths": 1
+      },
+      {
+        "key": "6-3",
+        "seconds": 626.2166666664258,
+        "deaths": 1
+      },
+      {
+        "key": "7-0",
+        "seconds": 644.5166666664092,
+        "deaths": 1
+      },
+      {
+        "key": "7-1",
+        "seconds": 645.5333333330749,
+        "deaths": 1
+      },
+      {
+        "key": "7-2",
+        "seconds": 657.7333333330638,
+        "deaths": 1
+      },
+      {
+        "key": "7-3",
+        "seconds": 669.9333333330527,
+        "deaths": 1
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 681.7166666663753,
+      "deaths": 1,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "frameSamples": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 49.480455219823156,
+      "medianFrameMs": 18.20000000001164,
+      "p95FrameMs": 30.29999999998836,
+      "frames": 209
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 49.24491135891857,
+      "medianFrameMs": 18.20000000001164,
+      "p95FrameMs": 24.39999999999418,
+      "frames": 208
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 49.164208456003536,
+      "medianFrameMs": 18.20000000001164,
+      "p95FrameMs": 24.300000000017462,
+      "frames": 210
+    }
+  ],
+  "unitTests": 25,
+  "assets": 82,
+  "limitations": [
+    "Accelerated full route is not first-time human pacing",
+    "Short frame samples do not establish sustained performance",
+    "Creature source silhouettes remain too cartoonish for the requested visual standard",
+    "No foot IK or per-bone hit detection",
+    "Public deployment verification pending"
+  ],
+  "production": {
+    "initial": "Clear the blasting yard",
+    "objective": "Survive the furnace approach",
+    "meta": "9 defeated · 0 recoveries",
+    "noDebug": true,
+    "errors": [],
+    "bad": [],
+    "resumed": "Survive the furnace approach"
+  }
+}

@@ -1,3 +1,4 @@
+import { actorSight, actorOpacity } from "./actor-visibility";
 import {
   Engine,
   Scene,
@@ -1675,6 +1676,14 @@ export class GameScene {
         this.actors.set(e.id, a);
       }
       a.enemy(e, actorDt);
+      const contactFloor = floorAt(s.chapter, e.p.x, e.p.z);
+      if (contactFloor === null) a.contact.visibility = 0;
+      else {
+        const altitude = Math.max(0, e.p.y - contactFloor);
+        a.contact.position.y = contactFloor + 0.045;
+        a.contact.visibility *= 1 / (1 + altitude * 0.22);
+        a.contact.scaling.setAll(1 + Math.min(0.6, altitude * 0.08));
+      }
     }
     for (const [id, a] of this.actors)
       if (!s.enemies.some((e) => e.id === id)) {
@@ -1897,12 +1906,15 @@ export class GameScene {
         ) < radius
       );
     };
+    const actorBlocksPlayer = actorSight(
+      this.camera.position,
+      new Vector3(s.p.x, s.p.y + 1.15, s.p.z),
+    );
     for (const actor of this.actors.values()) {
-      const center = actor.root.position.add(
-        new Vector3(0, actor.height * 0.5, 0),
-      );
-      const alpha = occludes(center, actor.height * 0.45) ? 0.22 : 1;
-      actor.meshes.forEach((m) => (m.visibility = alpha));
+      actor.visibilityBounds.update(actor.root.computeWorldMatrix());
+      const blocked = actorBlocksPlayer(actor.visibilityBounds.boundingBox);
+      actor.occlusionAlpha = actorOpacity(actor.occlusionAlpha, blocked, dt);
+      actor.meshes.forEach((m) => (m.visibility = actor.occlusionAlpha));
     }
     for (const plant of this.foliageViews) {
       const blocked =
