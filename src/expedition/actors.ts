@@ -1,3 +1,4 @@
+import { SILKSPITTER } from "./silkspitter";
 import { SpearThrust } from "./spear-thrust";
 import { reactionEnvelope, type HitReaction } from "./combat-impact";
 import { MELEE } from "./melee";
@@ -57,6 +58,7 @@ export class Actor {
   speed = 1;
   nodes: TransformNode[];
   hero: boolean;
+  spider: boolean;
   removePose: (() => void) | null = null;
   lastReaction = -1;
   lastAttack = 0;
@@ -80,6 +82,7 @@ export class Actor {
     kind: Kind = "raptor",
   ) {
     this.height = height;
+    this.spider = !hero && kind === "spitter";
     const contactMat = new StandardMaterial(id + "-contact", scene);
     const contactTexture = new DynamicTexture(
       id + "-contact-map",
@@ -102,7 +105,10 @@ export class Actor {
     contactMat.disableDepthWrite = true;
     this.contact = MeshBuilder.CreateGround(
       id + "-contact",
-      { width: height * 0.75, height: height * 0.55 },
+      {
+        width: this.spider ? 1.5 : height * 0.75,
+        height: this.spider ? 1.7 : height * 0.55,
+      },
       scene,
     );
     this.contact.material = contactMat;
@@ -193,7 +199,7 @@ export class Actor {
             id,
             m.name.includes("Backpack"),
           );
-        } else if (kind !== "guardian") {
+        } else if (kind !== "guardian" && !this.spider) {
           m.material = creatureSurface(scene, m.material, kind);
         }
       }
@@ -611,6 +617,10 @@ export class Actor {
       this.update(dt);
       return;
     }
+    if (this.spider) {
+      this.spiderEnemy(e, dt);
+      return;
+    }
     const flying = e.kind === "wing";
     let anim = flying ? "Flying_Idle" : "Idle";
     if (e.hp <= 0) anim = "Death";
@@ -657,6 +667,40 @@ export class Actor {
       : 0;
     this.root.scaling.y =
       this.root.scaling.x * (e.hp <= 0 ? Math.min(1, e.dead * 2) : 1);
+    this.update(dt);
+  }
+  /** Native spider clips share the attack clock, including the exact spit pose. */
+  spiderEnemy(e: Enemy, dt: number) {
+    this.root.scaling.y = this.root.scaling.x;
+    this.root.rotation.x = this.root.rotation.z = 0;
+    if (e.hp <= 0) {
+      this.playTimed("Death", 1.4 - e.dead, SILKSPITTER.deathDuration);
+      for (const [group] of this.weights) {
+        const weight = group.name === this.active ? 1 : 0;
+        group.setWeightForAllAnimatables(weight);
+        this.weights.set(group, weight);
+      }
+    } else if (e.reaction) this.hitReaction("Hit", e.reaction);
+    else if (e.state === "windup")
+      this.playTimed(
+        "WebSpit",
+        (Math.max(0, SILKSPITTER.windup - e.timer) / SILKSPITTER.windup) *
+          SILKSPITTER.clipContact,
+        SILKSPITTER.clipDuration,
+      );
+    else if (e.state === "recover" && this.active.endsWith("_WebSpit"))
+      this.playTimed(
+        "WebSpit",
+        SILKSPITTER.clipContact +
+          (Math.max(0, SILKSPITTER.recovery - e.timer) / SILKSPITTER.recovery) *
+            (SILKSPITTER.clipDuration - SILKSPITTER.clipContact),
+        SILKSPITTER.clipDuration,
+      );
+    else if (e.state === "stunned" || e.state === "falling")
+      this.playTimed("Hit", 0.35, 0.5);
+    else if (this.enemyMoveSpeed > 0.4)
+      this.play("Walk", Math.max(0.5, Math.min(2.2, this.enemyMoveSpeed / 2)));
+    else this.play("Idle");
     this.update(dt);
   }
   park() {
@@ -961,7 +1005,7 @@ export class Assets {
     const heights = {
       hero: 2.1,
       raptor: 2.4,
-      spitter: 2.1,
+      spitter: SILKSPITTER.height,
       brute: 3.7,
       bomber: 2,
       wing: 2.4,

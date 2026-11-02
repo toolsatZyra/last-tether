@@ -1,3 +1,4 @@
+import { SILKSPITTER, silkspitterShotOrigin } from "./silkspitter.ts";
 import {
   BODY_WEIGHT,
   impactDirection,
@@ -552,7 +553,12 @@ export class Expedition {
       fatal: e.hp <= 0,
       contact: v(
         e.p.x - direction.x * radius,
-        e.p.y + (e.kind === "brute" ? 1.4 : 1.1),
+        e.p.y +
+          (e.kind === "brute"
+            ? 1.4
+            : e.kind === "spitter"
+              ? SILKSPITTER.impactHeight
+              : 1.1),
         e.p.z - direction.z * radius,
       ),
     });
@@ -1299,22 +1305,18 @@ export class Expedition {
         }
       } else if (e.state === "windup" && e.timer <= 0) {
         if (e.kind === "spitter") {
+          const origin = silkspitterShotOrigin(e.p, e.yaw);
           for (const a of [-0.16, 0, 0.16]) {
             const dir = norm(
-              v(e.p.x, e.p.y + 1.2, e.p.z),
+              { ...origin },
               v(this.p.x, this.p.y + 1, this.p.z),
             );
             const x = dir.x * Math.cos(a) - dir.z * Math.sin(a),
               z = dir.x * Math.sin(a) + dir.z * Math.cos(a);
-            this.projectile(
-              v(e.p.x, e.p.y + 1.2, e.p.z),
-              v(x, dir.y, z),
-              15,
-              13,
-            );
+            this.projectile({ ...origin }, v(x, dir.y, z), 15, 13);
           }
           e.state = "recover";
-          e.timer = 1.6;
+          e.timer = SILKSPITTER.recovery;
         } else if (e.kind === "brute") {
           this.rings.push({
             id: ++this.serial,

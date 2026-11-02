@@ -1,3 +1,4 @@
+import { SILKSPITTER } from "./silkspitter";
 import HavokPhysics from "@babylonjs/havok";
 import wasmUrl from "@babylonjs/havok/lib/esm/HavokPhysics.wasm?url";
 import {
@@ -140,7 +141,12 @@ export class PhysicsWorld {
   moveEnemy(e: Enemy, velocity: V, dt: number) {
     let body = this.enemyControllers.get(e);
     if (!body) {
-      const height = e.kind === "brute" ? 3 : 1.8;
+      const height =
+        e.kind === "brute"
+          ? 3
+          : e.kind === "spitter"
+            ? SILKSPITTER.height
+            : 1.8;
       const radius = e.kind === "brute" ? 0.9 : 0.55;
       const controller = new PhysicsCharacterController(
         new Vector3(e.p.x, e.p.y + height / 2, e.p.z),

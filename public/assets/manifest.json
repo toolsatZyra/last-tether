@@ -854,5 +854,23 @@
     "sha256": "51b305eae2344854e975dca85f2532930f75373827cb9937a7a6b6b798fd10c1",
     "bytes": 6292,
     "modifications": "Unmodified source file; materials connected in Babylon at runtime."
+  },
+  {
+    "path": "assets/insects/silkspitter.glb",
+    "source": "https://github.com/danielgruginski/Insectoids/blob/3f9939fd57c977934b9a5e0dc5a954ad765cf15f/export/godot/Spider/Spider.glb",
+    "sha256": "471552c7e8b546a883b22be8a98f45fcd989d92dc82944dc5fb012cb79ffec7b",
+    "bytes": 2727320,
+    "author": "Daniel Gruginski (algumacoisaqq)",
+    "license": "CC0-1.0",
+    "modifications": "Original colour texture embedded; source smoothness alpha converted to glTF roughness green; opaque body. Mesh, rig and all ten clips retained. Source generated procedurally with an AI coding assistant, as disclosed by creator."
+  },
+  {
+    "path": "assets/licenses/insectoids.txt",
+    "source": "https://github.com/danielgruginski/Insectoids/blob/3f9939fd57c977934b9a5e0dc5a954ad765cf15f/LICENSE",
+    "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+    "bytes": 7048,
+    "author": "Daniel Gruginski (algumacoisaqq)",
+    "license": "CC0-1.0",
+    "modifications": "Unmodified source licence"
   }
 ]

@@ -380,3 +380,19 @@ A 35.0035-second normal-speed opening combat sample reached seven defeats. Mean 
 Compiled 0.2.28 ordinary keyboard combat, pause and save/reload/resume pass, with three defeats and zero recoveries, no development hook, page/console errors or failed responses. Bounded 14.85-second sample: 78.56 FPS average, p95 18.3 ms; not a whole-chapter claim.
 
 Public 0.2.28 deployment dpl_3dRvpf1xmmvaxxjJEUbWNd5Zyx1K is READY for app commit efebef4560086ded6511c92dc3d405dfe84ad16c; the alias serves index-Cu6lX-fk.js. Public ordinary keyboard combat/pause/save/reload passes: three defeats, zero recoveries, no development hook/errors/failed responses. Bounded 15.39-second sample averaged 85.87 FPS with p95 18.1 ms; not sustained whole-chapter performance.
+
+## Silkspitter native art and contact, 0.2.29
+
+58 behaviour tests, 93 asset hash/byte checks and the production build pass (index-DNfABdAl.js). Source has 5,012 triangles, 58 joints and ten clips; source hashes, pinned commit and retained licence accompany the reproducible preparation.
+
+Four-facing native gameplay-step checks release three projectiles after 51 fixed steps, at source frame 40.2000/96.0000 (.67/1.6 of WebSpit). Maximum visible spinneret/origin discrepancy is .000653 world units; paused pose drift is zero. Body controller height is 1.45. Hit uses the native Hit clip; Death retains uniform model scale. The test initially used a nonexistent test method; corrected retained checks call the engine's real damage method.
+
+Real F-key cut/kick/thrust against a controlled 1,000-health spider reaches 852 health at 1.3167 seconds, with Spear_Thrust active at phase .545977; no page errors. This controlled check confirms action/contact integration and does not establish player enjoyment.
+
+Full native input-driven route: 729.3167 simulated seconds (12m09s), 188 defeats, zero recoveries, all 32 objectives, valid saved ending and visible ending screen. Forty rigs prepared and disposed, zero reserve misses, no page errors. The quicker automated run does not prove first-time 15–20 minute pacing.
+
+Native interruption/reuse check: damage during the wind-up cancels the volley (zero projectiles), switches to Hit, then full-volume Death. Released rig is disabled with all groups stopped; reacquisition uses the same rig, Idle, uniform scale, cleared reaction ID and retained texture. No reserve misses.
+
+Before the user-requested pause, a final 35.0576-second normal-speed opening sample reached the watchpost with the silkspitter present: four defeats, no recoveries, mean frame interval 29.07 ms, p95 59.2 and maximum 447.9 ms. Host load varies; no performance gain is claimed. Final visual gallery at retained scale, compiled/public smoke checks and publication remain outstanding.
+
+After the user resumed, final-size idle, wind-up, release, recovery and death were rendered again without browser errors and visually inspected. Compiled 0.2.29 keyboard combat/pause/save/reload passes: three defeats, zero recoveries, no development hook, no console/page errors or failed responses. Bounded 15.44-second sample averaged 75.05 FPS with p95 18.3 ms; this does not supersede the earlier hitch evidence or establish sustained chapter performance.

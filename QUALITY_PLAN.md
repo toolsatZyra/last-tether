@@ -117,3 +117,7 @@ Rendered phase checks and real F-key combat demonstrate the intended contact and
 ## Rendering and ground contact, 0.2.28
 
 A duplicate glow layer was washing out the contact shadows beneath actors and adding 128 draw calls in the controlled opening view. Removing it retains scene bloom and restores darker grounding. The canvas buffer comparison preserved the rendered detail but did not establish a meaningful speed gain. This pass removes measured redundant work; it does not close the overall art, combat-feel, sustained-performance or first-time pacing gates.
+
+## Silkspitter art and action pass, 0.2.29
+
+One regular creature now has a distinct articulated spider silhouette, mottled source texture, variable surface roughness, a readable raised-abdomen wind-up and a full-volume curled death. Its projectile release is aligned to the native source socket. This improves the ranged enemy's anatomy and action language; the hero and several other creature families remain mixed/low-detail and the overall art gate is open. The same pack's wasp is only a research candidate because some inspection poses disappeared.

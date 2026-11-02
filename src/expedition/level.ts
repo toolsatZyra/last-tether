@@ -491,7 +491,7 @@ export function floorAt(ch: Chapter, x: number, z: number): number | null {
 export const ASSETS = {
   hero: "/assets/hero/Adventurer.gltf",
   raptor: "/assets/creatures/Dino.gltf",
-  spitter: "/assets/creatures/Frog.gltf",
+  spitter: "/assets/insects/silkspitter.glb",
   brute: "/assets/creatures/Yeti.gltf",
   bomber: "/assets/creatures/MushroomKing.gltf",
   wing: "/assets/flying/Dragon.gltf",

@@ -1,0 +1,1074 @@
+{
+  "version": "0.2.29",
+  "status": "local-verification-passed",
+  "date": "2026-11-02",
+  "source": {
+    "repository": "https://github.com/danielgruginski/Insectoids",
+    "commit": "3f9939fd57c977934b9a5e0dc5a954ad765cf15f",
+    "author": "Daniel Gruginski",
+    "license": "CC0-1.0",
+    "triangles": 5012,
+    "joints": 58,
+    "clips": 10,
+    "bytes": 2727320,
+    "preparation": "tools/prepare-silkspitter.mjs",
+    "disclosure": "Creator describes procedural asset production through an AI coding assistant."
+  },
+  "contact": {
+    "rows": [
+      {
+        "yaw": 0,
+        "frames": 51,
+        "shots": 3,
+        "socketError": 0.0006527896710480036,
+        "contactFrame": 40.20000059902668,
+        "pauseDrift": 0,
+        "hitClip": "reserve-spitter-9_Hit",
+        "deathClip": "reserve-spitter-9_Death",
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "pose": [
+          true
+        ]
+      },
+      {
+        "yaw": 1.5707963267948966,
+        "frames": 51,
+        "shots": 3,
+        "socketError": 0.0006494323499948576,
+        "contactFrame": 40.20000059902668,
+        "pauseDrift": 0,
+        "hitClip": "reserve-spitter-9_Hit",
+        "deathClip": "reserve-spitter-9_Death",
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "pose": [
+          true
+        ]
+      },
+      {
+        "yaw": 3.141592653589793,
+        "frames": 51,
+        "shots": 3,
+        "socketError": 0.0006527896710480036,
+        "contactFrame": 40.20000059902668,
+        "pauseDrift": 0,
+        "hitClip": "reserve-spitter-9_Hit",
+        "deathClip": "reserve-spitter-9_Death",
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "pose": [
+          true
+        ]
+      },
+      {
+        "yaw": 4.71238898038469,
+        "frames": 51,
+        "shots": 3,
+        "socketError": 0.0006494323499948576,
+        "contactFrame": 40.20000059902668,
+        "pauseDrift": 0,
+        "hitClip": "reserve-spitter-9_Hit",
+        "deathClip": "reserve-spitter-9_Death",
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "pose": [
+          true
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "keyboard": {
+    "hit": {
+      "phase": 0.5459770114942532,
+      "health": 852,
+      "clip": "kavi_Spear_Thrust",
+      "seconds": 1.3166666666666669
+    },
+    "errors": []
+  },
+  "route": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 61,
+      "animationGroups": 50
+    },
+    "actorPool": {
+      "created": 40,
+      "disposed": 40,
+      "misses": 0,
+      "inUse": 0
+    },
+    "finished": true,
+    "seconds": 729.316666666332,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 13.250000000000238,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 38.666666666665755,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 51.88333333333167,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 77.2999999999969,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 97.63333333332908,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 119.99999999999447,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 157.61666666668424,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 191.16666666671094,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 206.41666666672307,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 243.0166666667522,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 275.55000000007806,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 304.01666666671883,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 309.10000000004754,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 337.5666666666883,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 366.0333333333291,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 390.4333333333069,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 404.6666666666273,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 429.0666666666051,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 452.44999999991717,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 491.08333333321536,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 508.366666666533,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 524.6333333331849,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 563.266666666483,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 585.6333333331294,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 600.8833333331155,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 646.6333333330739,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 675.0999999997147,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 692.3833333330323,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 693.399999999698,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 705.5999999996869,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 716.7833333330101,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 729.316666666332,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "unitTests": {
+    "passed": 58,
+    "failed": 0
+  },
+  "assets": {
+    "verified": 93
+  },
+  "build": {
+    "passed": true,
+    "bundle": "index-DNfABdAl.js"
+  },
+  "limits": [
+    "Only the spitter asset family is replaced; other mixed/low-detail art remains.",
+    "Automated route is accelerated and route-informed, not first-time human chapter pacing.",
+    "Core Havok capsule remains an approximation; legs are not independent colliders.",
+    "Wasp candidate is not integrated; some inspection poses disappeared.",
+    "Final 35.06-second normal-speed sample measured mean interval 29.07 ms, p95 59.2 ms and maximum 447.9 ms. This does not meet consistent smoothness; variable host load prevents attributing the difference from previous samples to the new asset."
+  ],
+  "lifecycle": {
+    "interrupted": {
+      "shots": 0,
+      "clip": "reserve-spitter-9_Hit"
+    },
+    "dead": {
+      "clip": "reserve-spitter-9_Death",
+      "ratio": 1
+    },
+    "parked": {
+      "enabled": false,
+      "animations": false
+    },
+    "reuse": {
+      "same": true,
+      "clip": "reserve-spitter-9_Idle",
+      "ratio": 1,
+      "reaction": -1,
+      "colour": true,
+      "misses": 0
+    }
+  },
+  "normalSpeedCombat": {
+    "status": "sample-complete",
+    "resources": {
+      "actors": 3,
+      "skeletons": 16,
+      "groups": 224,
+      "textures": 79
+    },
+    "completedWallSeconds": 35.05760000000149,
+    "wallSeconds": 176.266,
+    "frames": 1206,
+    "game": {
+      "sector": 0,
+      "beat": 1,
+      "p": {
+        "x": 15.655454371218147,
+        "y": 12.10404324469172,
+        "z": 157.51025465181516
+      },
+      "health": 100,
+      "seconds": 31.54999999999949,
+      "deaths": 0,
+      "kills": 4,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "raptor",
+          "p": {
+            "x": 16.13765147755737,
+            "y": 12.03562501432479,
+            "z": 153.21231800460185
+          },
+          "hp": 110,
+          "state": "recover"
+        },
+        {
+          "kind": "spitter",
+          "p": {
+            "x": 12.661690550853429,
+            "y": 12,
+            "z": 171.14044680258735
+          },
+          "hp": 115,
+          "state": "recover"
+        },
+        {
+          "kind": "raptor",
+          "p": {
+            "x": 15.751115343595528,
+            "y": 12.065365334522184,
+            "z": 151.95145968078177
+          },
+          "hp": 110,
+          "state": "recover"
+        }
+      ],
+      "fps": 48.41833440947125,
+      "meshes": 716,
+      "animation": "kavi_Idle_Sword"
+    },
+    "stats": {
+      "dt": {
+        "mean": 29.06932006633623,
+        "median": 22,
+        "p95": 59.19999999925494,
+        "max": 447.8999999985099
+      },
+      "cpu": {
+        "mean": 23.234825870630704,
+        "median": 19.699999999254942,
+        "p95": 44.69999999925494,
+        "max": 120.19999999925494
+      },
+      "idle": {
+        "mean": 5.834494195705524,
+        "median": 0.8999999985098839,
+        "p95": 21.199999999254942,
+        "max": 428.5999999977648
+      },
+      "simulation": {
+        "mean": 1.5359867329973338,
+        "median": 0.9000000022351742,
+        "p95": 4.199999999254942,
+        "max": 44.80000000074506
+      },
+      "view": {
+        "mean": 21.14709784406211,
+        "median": 18.099999997764826,
+        "p95": 40.69999999925494,
+        "max": 106.09999999776483
+      },
+      "render": {
+        "mean": 17.84502487567255,
+        "median": 15.300000000745058,
+        "p95": 34.19999999925494,
+        "max": 85.5
+      },
+      "enemyPhysics": {
+        "mean": 0.3896351575659925,
+        "median": 0.19999999925494194,
+        "p95": 1.3999999985098839,
+        "max": 13.899999998509884
+      },
+      "worldPhysics": {
+        "mean": 0.40140961851325396,
+        "median": 0.20000000298023224,
+        "p95": 0.8000000007450581,
+        "max": 39.80000000074506
+      },
+      "cameraRays": {
+        "mean": 1.2992537312710017,
+        "median": 1.0999999977648258,
+        "p95": 2.600000001490116,
+        "max": 20.800000000745058
+      },
+      "combatRays": {
+        "mean": 0.07379767823204472,
+        "median": 0,
+        "p95": 0.30000000074505806,
+        "max": 9.200000002980232
+      },
+      "actorCreation": {
+        "mean": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "armIK": {
+        "mean": 0.03963515755548999,
+        "median": 0,
+        "p95": 0.30000000074505806,
+        "max": 5.5
+      },
+      "heroPose": {
+        "mean": 0.914096185752186,
+        "median": 0.3999999985098839,
+        "p95": 1.8999999985098839,
+        "max": 61.100000001490116
+      },
+      "enemyPose": {
+        "mean": 0.28407960196348464,
+        "median": 0.10000000149011612,
+        "p95": 1,
+        "max": 16.699999999254942
+      },
+      "eventEffects": {
+        "mean": 0.02794361526569719,
+        "median": 0,
+        "p95": 0,
+        "max": 26
+      }
+    },
+    "worst": [
+      {
+        "wall": 20742.5,
+        "dt": 447.8999999985099,
+        "cpu": 19.300000000745058,
+        "idle": 428.5999999977648,
+        "game": 19.033333333333534,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 835188314,
+        "worldPhysics": 0.30000000074505806,
+        "simulation": 0.5,
+        "heroPose": 0.3999999985098839,
+        "cameraRays": 2.2000000029802322,
+        "render": 15.5,
+        "view": 18.599999997764826
+      },
+      {
+        "wall": 29817.60000000149,
+        "dt": 398.30000000074506,
+        "cpu": 21.700000002980232,
+        "idle": 376.5999999977648,
+        "game": 26.783333333333093,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 851303390,
+        "combatRays": 0.10000000149011612,
+        "enemyPhysics": 1.6000000014901161,
+        "worldPhysics": 0.5,
+        "simulation": 3.199999999254942,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0,
+        "cameraRays": 1.1000000014901161,
+        "render": 16.199999999254942,
+        "view": 18.200000002980232
+      },
+      {
+        "wall": 11294.699999999255,
+        "dt": 318.5,
+        "cpu": 41.19999999925494,
+        "idle": 277.30000000074506,
+        "game": 10.500000000000101,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 845520528,
+        "enemyPhysics": 2.1999999955296516,
+        "combatRays": 0.6999999992549419,
+        "worldPhysics": 1.7000000029802322,
+        "simulation": 8.5,
+        "heroPose": 1.0999999977648258,
+        "enemyPose": 0.6999999992549419,
+        "cameraRays": 1.699999999254942,
+        "render": 27.600000001490116,
+        "view": 32
+      },
+      {
+        "wall": 26500.5,
+        "dt": 316.1000000014901,
+        "cpu": 15.300000000745058,
+        "idle": 300.80000000074506,
+        "game": 24.199999999999907,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 845570838,
+        "worldPhysics": 0.20000000298023224,
+        "simulation": 0.8000000007450581,
+        "heroPose": 0.6000000014901161,
+        "cameraRays": 1.2999999970197678,
+        "render": 12.199999999254942,
+        "view": 14.300000000745058
+      },
+      {
+        "wall": 26095,
+        "dt": 281.69999999925494,
+        "cpu": 32.80000000074506,
+        "idle": 248.89999999850988,
+        "game": 24.03333333333325,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 842752706,
+        "worldPhysics": 0.29999999701976776,
+        "simulation": 1.199999999254942,
+        "heroPose": 0.30000000074505806,
+        "cameraRays": 2.7000000029802322,
+        "render": 26.5,
+        "view": 30.899999998509884
+      },
+      {
+        "wall": 34257,
+        "dt": 198.69999999925494,
+        "cpu": 29,
+        "idle": 169.69999999925494,
+        "game": 30.833333333332863,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 859998518,
+        "enemyPhysics": 1.9000000022351742,
+        "combatRays": 0.10000000149011612,
+        "worldPhysics": 0.4999999962747097,
+        "simulation": 3.5,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.8000000007450581,
+        "cameraRays": 1.1000000014901161,
+        "render": 22.199999999254942,
+        "view": 25
+      },
+      {
+        "wall": 364.8999999985099,
+        "dt": 192.79999999701977,
+        "cpu": 75.09999999776483,
+        "idle": 117.69999999925494,
+        "game": 0.5333333333333333,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 828265867,
+        "worldPhysics": 39.80000000074506,
+        "simulation": 41.19999999925494,
+        "heroPose": 1.1000000014901161,
+        "cameraRays": 1.199999999254942,
+        "render": 30.399999998509884,
+        "view": 33.5
+      },
+      {
+        "wall": 3162.89999999851,
+        "dt": 170.29999999701977,
+        "cpu": 28.899999998509884,
+        "idle": 141.39999999850988,
+        "game": 3.0666666666666607,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 827075236,
+        "combatRays": 0.5999999977648258,
+        "enemyPhysics": 1.6000000052154064,
+        "worldPhysics": 0.6999999992549419,
+        "simulation": 3.800000000745058,
+        "heroPose": 0.5,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 0.7999999970197678,
+        "render": 21.5,
+        "view": 25.099999997764826
+      },
+      {
+        "wall": 17557.10000000149,
+        "dt": 164.40000000223517,
+        "cpu": 17.700000002980232,
+        "idle": 146.69999999925494,
+        "game": 16.333333333333687,
+        "beat": 0,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 839568802,
+        "enemyPhysics": 0.10000000149011612,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 0.9000000022351742,
+        "heroPose": 0.6999999992549419,
+        "enemyPose": 0.5999999977648258,
+        "cameraRays": 1,
+        "armIK": 0.29999999701976776,
+        "render": 12.699999999254942,
+        "view": 16.5
+      },
+      {
+        "wall": 8280.10000000149,
+        "dt": 160.90000000223517,
+        "cpu": 46.400000002235174,
+        "idle": 114.5,
+        "game": 7.833333333333311,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 832821896,
+        "enemyPhysics": 2.5999999940395355,
+        "worldPhysics": 1.0000000037252903,
+        "simulation": 4.800000000745058,
+        "heroPose": 2.5,
+        "enemyPose": 0,
+        "cameraRays": 1.6000000014901161,
+        "render": 35.400000002235174,
+        "view": 41
+      },
+      {
+        "wall": 27977.39999999851,
+        "dt": 130.39999999850988,
+        "cpu": 38.19999999925494,
+        "idle": 92.19999999925494,
+        "game": 25.366666666666507,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 839362338,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 0.8999999947845936,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 2.599999997764826,
+        "heroPose": 0.9000000022351742,
+        "enemyPose": 0.29999999701976776,
+        "cameraRays": 4.399999998509884,
+        "render": 28.900000002235174,
+        "view": 35.100000001490116
+      },
+      {
+        "wall": 32990.699999999255,
+        "dt": 127,
+        "cpu": 54.5,
+        "idle": 72.5,
+        "game": 29.816666666666254,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 862626594,
+        "simulation": 0,
+        "heroPose": 0.8000000007450581,
+        "enemyPose": 0.29999999701976776,
+        "cameraRays": 1.800000000745058,
+        "armIK": 0.3999999985098839,
+        "render": 50.600000001490116,
+        "view": 54
+      },
+      {
+        "wall": 15814.39999999851,
+        "dt": 123.79999999701977,
+        "cpu": 25.399999998509884,
+        "idle": 98.39999999850988,
+        "game": 14.783333333333648,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 839910932,
+        "enemyPhysics": 0.6000000014901161,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 1.699999999254942,
+        "heroPose": 0.9000000022351742,
+        "enemyPose": 0.3999999985098839,
+        "cameraRays": 1,
+        "render": 20.699999999254942,
+        "view": 23.600000001490116
+      },
+      {
+        "wall": 27797.199999999255,
+        "dt": 120.89999999850988,
+        "cpu": 120.19999999925494,
+        "idle": 0.6999999992549419,
+        "game": 25.266666666666513,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 864396766,
+        "combatRays": 0.8999999947845936,
+        "enemyPhysics": 7.100000001490116,
+        "worldPhysics": 1.6000000014901161,
+        "simulation": 14.100000001490116,
+        "heroPose": 0.29999999701976776,
+        "enemyPose": 1.5999999977648258,
+        "cameraRays": 1.6000000014901161,
+        "render": 66.70000000298023,
+        "view": 106.09999999776483
+      },
+      {
+        "wall": 8650.89999999851,
+        "dt": 119.79999999701977,
+        "cpu": 25.199999999254942,
+        "idle": 94.59999999776483,
+        "game": 8.149999999999984,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 839371740,
+        "enemyPhysics": 2.699999999254942,
+        "worldPhysics": 0.6999999992549419,
+        "simulation": 4.599999997764826,
+        "eventEffects": 0,
+        "heroPose": 2.900000002235174,
+        "enemyPose": 0,
+        "cameraRays": 1.1000000014901161,
+        "render": 15.900000002235174,
+        "view": 20.400000002235174
+      },
+      {
+        "wall": 35057.60000000149,
+        "dt": 119.20000000298023,
+        "cpu": 38.5,
+        "idle": 80.70000000298023,
+        "game": 31.54999999999949,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 853357706,
+        "enemyPhysics": 3.0000000074505806,
+        "combatRays": 0.6999999992549419,
+        "worldPhysics": 0.9000000022351742,
+        "simulation": 5.9000000059604645,
+        "heroPose": 0.3999999985098839,
+        "enemyPose": 1.5000000037252903,
+        "cameraRays": 2.800000000745058,
+        "render": 26.5,
+        "view": 32.30000000074506
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 24226.300000000745,
+        "duration": 57
+      },
+      {
+        "start": 24646,
+        "duration": 51
+      },
+      {
+        "start": 24873.5,
+        "duration": 65
+      },
+      {
+        "start": 25123.5,
+        "duration": 52
+      },
+      {
+        "start": 25479.800000000745,
+        "duration": 50
+      },
+      {
+        "start": 26992.60000000149,
+        "duration": 53
+      },
+      {
+        "start": 27233.800000000745,
+        "duration": 75
+      },
+      {
+        "start": 27428.5,
+        "duration": 82
+      },
+      {
+        "start": 27677,
+        "duration": 120
+      },
+      {
+        "start": 27797.800000000745,
+        "duration": 70
+      },
+      {
+        "start": 28386.199999999255,
+        "duration": 74
+      },
+      {
+        "start": 28575.699999999255,
+        "duration": 50
+      },
+      {
+        "start": 30031,
+        "duration": 52
+      },
+      {
+        "start": 30525.199999999255,
+        "duration": 57
+      },
+      {
+        "start": 31115.300000000745,
+        "duration": 54
+      },
+      {
+        "start": 32321.89999999851,
+        "duration": 50
+      },
+      {
+        "start": 32474,
+        "duration": 66
+      },
+      {
+        "start": 32935.89999999851,
+        "duration": 57
+      },
+      {
+        "start": 33287.39999999851,
+        "duration": 61
+      },
+      {
+        "start": 34008.39999999851,
+        "duration": 52
+      }
+    ]
+  },
+  "finalVisual": {
+    "rows": [
+      {
+        "state": "idle",
+        "timer": 1,
+        "clip": "reserve-spitter-9_Idle",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          -0.002758026123046875,
+          0.792816162109375,
+          1.541961669921875
+        ],
+        "frame": 20.658000000044705,
+        "from": 0,
+        "to": 180,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      },
+      {
+        "state": "windup",
+        "timer": 0.85,
+        "clip": "reserve-spitter-9_WebSpit",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          0,
+          0.7901086807250977,
+          1.540252685546875
+        ],
+        "frame": 0,
+        "from": 0,
+        "to": 96.00000143051147,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      },
+      {
+        "state": "windup",
+        "timer": 0.425,
+        "clip": "reserve-spitter-9_WebSpit",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          0,
+          2.475398063659668,
+          -0.1609344482421875
+        ],
+        "frame": 20.10000029951334,
+        "from": 0,
+        "to": 96.00000143051147,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      },
+      {
+        "state": "recover",
+        "timer": 1.6,
+        "clip": "reserve-spitter-9_WebSpit",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          0,
+          2.344578742980957,
+          -0.620574951171875
+        ],
+        "frame": 40.20000059902668,
+        "from": 0,
+        "to": 96.00000143051147,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      },
+      {
+        "state": "recover",
+        "timer": 0.5,
+        "clip": "reserve-spitter-9_WebSpit",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          0,
+          2.392632484436035,
+          0.4114837646484375
+        ],
+        "frame": 78.56250117067249,
+        "from": 0,
+        "to": 96.00000143051147,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      },
+      {
+        "state": "death",
+        "timer": 0,
+        "clip": "reserve-spitter-9_Death",
+        "height": 1.45,
+        "scale": [
+          1.5961196361696146,
+          1.5961196361696146,
+          1.5961196361696146
+        ],
+        "socket": [
+          0.229339599609375,
+          0.24458789825439453,
+          1.595458984375
+        ],
+        "frame": 104.34782608695652,
+        "from": 0,
+        "to": 120,
+        "textures": [
+          {
+            "name": "reserve-spitter-9_SpiderBody",
+            "albedo": true,
+            "roughness": true
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "compiled": {
+    "version": "LAST TETHER · 0.2.29",
+    "frameSample": {
+      "frames": 1160,
+      "seconds": 15.443299999999999,
+      "averageFps": 75.04872663226125,
+      "medianMs": 12.19999999999709,
+      "p95Ms": 18.299999999999272
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

@@ -1,0 +1,13 @@
+# Silkspitter source and integration
+
+The 0.2.29 spitter replaces the palette-textured frog with Daniel Gruginski's Spider from Insectoids, commit 3f9939fd57c977934b9a5e0dc5a954ad765cf15f. Source: https://github.com/danielgruginski/Insectoids . Creator's pack: https://algumacoisaqq.itch.io/fantasy-creatures-wolf-giant-rat-spider-wasp-centipede . The repository and pack both identify CC0 1.0; the original licence is included at public/assets/licenses/insectoids.txt. The creator discloses procedural production through an AI coding assistant; this is not hand-sculpted or motion-captured art.
+
+The source glTF has 5,012 triangles, 58 joints and ten clips. The separate 1024px colour texture stores smoothness in alpha. tools/prepare-silkspitter.mjs verifies pinned source hashes, embeds opaque colour and converts smoothness to glTF roughness green. Geometry, rig and all clips are retained; output is 2,727,320 bytes. The existing generic creature shader is bypassed to preserve source colour and PBR roughness. No paid asset, generation, application or dependency was used.
+
+The authored silhouette is 1.45 units high in neutral pose, with a 1.45-high Havok body capsule and a wider contact shadow. The legs are visual articulated appendages; collision still uses the core capsule, not per-leg rigid bodies. Native Walk uses measured movement speed. WebSpit reaches its source .67-second release pose at the end of the .85-second gameplay warning, then continues through recovery. Shot origin is measured from the spinneret in that pose: 2.345 units above the feet and .62 forward. Native Hit and Death replace generic duck/hit and scale-flattening behaviour. Death remains full volume while existing corpse recoil hits scenery.
+
+Initial in-scene material/pose inspection was at 1.1 height; the retained 1.45 scale better exposes the abdomen to spear-height combat. Four-facing native tests at final scale verify three shots after 51 fixed steps, spinneret-to-origin error below .00066 units, zero paused-pose drift, native Hit and full-volume Death. The first test invocation called a nonexistent test API (hit instead of damage); this harness error was corrected before the retained checks.
+
+A Wasp from the same pack was downloaded and inspected separately. Some poses disappeared in the research viewer; it remains unintegrated pending animated-bounds/pose inspection. Research files are under research/creature-assets/fantasy-creatures.
+
+The spider improves one creature's silhouette, surface and action readability. The remaining hero/creature art and whole-game visual quality are still below the requested final bar.
