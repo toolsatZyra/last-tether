@@ -494,6 +494,6 @@ export const ASSETS = {
   spitter: "/assets/insects/silkspitter.glb",
   brute: "/assets/creatures/Yeti.gltf",
   bomber: "/assets/creatures/MushroomKing.gltf",
-  wing: "/assets/flying/Dragon.gltf",
+  wing: "/assets/insects/stormwing.glb",
   guardian: "/assets/guardian/slateback.glb",
 };

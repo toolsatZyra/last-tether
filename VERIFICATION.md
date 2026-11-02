@@ -398,3 +398,13 @@ Before the user-requested pause, a final 35.0576-second normal-speed opening sam
 After the user resumed, final-size idle, wind-up, release, recovery and death were rendered again without browser errors and visually inspected. Compiled 0.2.29 keyboard combat/pause/save/reload passes: three defeats, zero recoveries, no development hook, no console/page errors or failed responses. Bounded 15.44-second sample averaged 75.05 FPS with p95 18.3 ms; this does not supersede the earlier hitch evidence or establish sustained chapter performance.
 
 Public 0.2.29 deployment dpl_C1vRr8eQGDpozNcEmxPmVGdV1KR1 is READY for app commit 89e0f987e4befad1a85ad90e07adf8bcc16d8282, alias bundle index-DNfABdAl.js. Public silkspitter GLB is byte-identical to the locally tested 2,727,320-byte model (SHA256 471552c7e8b546a883b22be8a98f45fcd989d92dc82944dc5fb012cb79ffec7b). Public keyboard combat, pause and save/reload/resume pass: three defeats, zero recoveries, no debug hook/errors/failed responses. Bounded 17.91-second sample averaged 69.95 FPS, p95 18.3 ms; not a sustained-performance claim.
+
+## 0.2.30 stormwing collision and animation
+
+Evidence: verification/stormwing-0.2.30.json. Sixty-two regression tests, TypeScript/Vite build and 94 asset hashes pass. Native wall fixture: dive stops before the wall with one impact and zero through-wall damage; knockback also stops with one impact. Unforced death falls six units and settles at floor + .02000007. A dive hits at 1.05 seconds after .85 seconds of warning. Real keyboard R in the unlocked flyer section deals 48 damage with native Hit and 13.75-unit recoil; incoming contact selects Kavi's native HitRecieve. The initial ranged harness ran before R was unlocked and was corrected to the relevant chapter beat.
+
+Interrupted dive, paused frame, full-volume death, parked groups and clean same-rig reuse pass. All 708 source frames informed the fixed mesh envelopes. Eleven final death-pose phases have bottom clearance within .027 units of the controller foot; final clearance is .000045. Close idle/dive/death and grounded corpse screenshots were visually inspected.
+
+The full native input-driver route completes in 742.1833 simulated seconds with 188 defeats, zero recoveries, all 32 objectives, visible/saved ending and zero pool misses; forty rigs created/disposed. It is accelerated and route-informed, not human first-time pacing or a sustained rendering benchmark.
+
+Compiled ordinary-keyboard combat, pause, save/reload and resume pass with no debug hook, browser errors or failed responses. The bounded 15.64-second sample averaged 45.39 FPS with p95 30.3 ms; consistent smoothness remains unresolved. This opening sample does not isolate the new flyer.

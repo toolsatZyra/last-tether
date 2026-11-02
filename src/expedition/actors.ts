@@ -1,3 +1,4 @@
+import { STORMWING, STORMWING_BOUNDS, stormwingDeathOffset } from "./stormwing";
 import { SILKSPITTER } from "./silkspitter";
 import { SpearThrust } from "./spear-thrust";
 import { reactionEnvelope, type HitReaction } from "./combat-impact";
@@ -59,6 +60,7 @@ export class Actor {
   nodes: TransformNode[];
   hero: boolean;
   spider: boolean;
+  wasp: boolean;
   removePose: (() => void) | null = null;
   lastReaction = -1;
   lastAttack = 0;
@@ -83,6 +85,7 @@ export class Actor {
   ) {
     this.height = height;
     this.spider = !hero && kind === "spitter";
+    this.wasp = !hero && kind === "wing";
     const contactMat = new StandardMaterial(id + "-contact", scene);
     const contactTexture = new DynamicTexture(
       id + "-contact-map",
@@ -186,6 +189,18 @@ export class Actor {
     );
     this.root.scaling.setAll(height / Math.max(0.1, h));
     this.meshes.forEach((m) => {
+      if (this.wasp) {
+        const envelope = STORMWING_BOUNDS.find((b) =>
+          m.name.endsWith("_" + b.mesh),
+        );
+        if (envelope)
+          m.setBoundingInfo(
+            new BoundingInfo(
+              Vector3.FromArray(envelope.min),
+              Vector3.FromArray(envelope.max),
+            ),
+          );
+      }
       m.receiveShadows = true;
       m.isPickable = false;
       shadows.addShadowCaster(m);
@@ -199,7 +214,7 @@ export class Actor {
             id,
             m.name.includes("Backpack"),
           );
-        } else if (kind !== "guardian" && !this.spider) {
+        } else if (kind !== "guardian" && !this.spider && !this.wasp) {
           m.material = creatureSurface(scene, m.material, kind);
         }
       }
@@ -599,7 +614,7 @@ export class Actor {
     }
     (this.enemyPosition ??= new Vector3()).set(e.p.x, e.p.y, e.p.z);
     this.contact.position.set(e.p.x, e.p.y + 0.045, e.p.z);
-    this.contact.visibility = e.hp > 0 ? 0.65 : 0;
+    this.contact.visibility = e.hp > 0 && !this.wasp ? 0.65 : 0;
     this.root.position.set(e.p.x, e.p.y, e.p.z);
     this.root.rotation.y = e.yaw;
     this.root.setEnabled(e.hp > 0 || e.dead > 0);
@@ -619,6 +634,10 @@ export class Actor {
     }
     if (this.spider) {
       this.spiderEnemy(e, dt);
+      return;
+    }
+    if (this.wasp) {
+      this.waspEnemy(e, dt);
       return;
     }
     const flying = e.kind === "wing";
@@ -703,6 +722,52 @@ export class Actor {
     else this.play("Idle");
     this.update(dt);
   }
+  waspEnemy(e: Enemy, dt: number) {
+    if (e.hp <= 0)
+      this.root.position.y -= stormwingDeathOffset(
+        STORMWING.deathLife - e.dead,
+      );
+    this.root.scaling.y = this.root.scaling.x;
+    this.root.rotation.x = this.root.rotation.z = 0;
+    if (e.hp <= 0) {
+      this.playTimed(
+        "Death",
+        STORMWING.deathLife - e.dead,
+        STORMWING.deathDuration,
+      );
+      for (const [group] of this.weights) {
+        const weight = group.name === this.active ? 1 : 0;
+        group.setWeightForAllAnimatables(weight);
+        this.weights.set(group, weight);
+      }
+    } else if (e.reaction) this.hitReaction("Hit", e.reaction);
+    else if (e.state === "windup")
+      this.playTimed(
+        "Dive",
+        (Math.max(0, STORMWING.windup - e.timer) / STORMWING.windup) *
+          STORMWING.clipLaunch,
+        STORMWING.clipDuration,
+      );
+    else if (e.state === "lunge")
+      this.playTimed(
+        "Dive",
+        STORMWING.clipLaunch +
+          (Math.max(0, STORMWING.lunge - e.timer) / STORMWING.lunge) *
+            (STORMWING.clipRecover - STORMWING.clipLaunch),
+        STORMWING.clipDuration,
+      );
+    else if (e.state === "recover" && this.active.endsWith("_Dive"))
+      this.playTimed(
+        "Dive",
+        STORMWING.clipRecover +
+          (Math.max(0, STORMWING.recovery - e.timer) / STORMWING.recovery) *
+            (STORMWING.clipDuration - STORMWING.clipRecover),
+        STORMWING.clipDuration,
+      );
+    else if (e.state === "stunned") this.playTimed("Hit", 0.3, 0.5);
+    else this.play(this.enemyMoveSpeed > 0.4 ? "Fly" : "Idle");
+    this.update(dt);
+  }
   park() {
     this.clearPose();
     if (this.guardian) {
@@ -729,7 +794,7 @@ export class Actor {
   activate(kind: Kind) {
     this.root.setEnabled(true);
     this.contact.setEnabled(true);
-    this.play(kind === "wing" ? "Flying_Idle" : "Idle");
+    this.play("Idle");
     const group = this.groups.find((g) => g.name === this.active);
     if (group) {
       group.setWeightForAllAnimatables(1);
@@ -1008,7 +1073,7 @@ export class Assets {
       spitter: SILKSPITTER.height,
       brute: 3.7,
       bomber: 2,
-      wing: 2.4,
+      wing: STORMWING.height,
       guardian: 5.6,
     };
     return new Actor(

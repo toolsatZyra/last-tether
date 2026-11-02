@@ -1,0 +1,1 @@
+async(page)=>{await page.goto('http://127.0.0.1:4173/');await page.waitForFunction(()=>window.__expedition,null,{timeout:90000});return await page.evaluate(async()=>{const a=window.__expedition;a.pause();const {sample}=await import('/tools/stormwing-bounds.ts');return await sample(a.view.scene);});}

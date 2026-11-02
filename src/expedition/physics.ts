@@ -1,3 +1,4 @@
+import { STORMWING } from "./stormwing";
 import { SILKSPITTER } from "./silkspitter";
 import HavokPhysics from "@babylonjs/havok";
 import wasmUrl from "@babylonjs/havok/lib/esm/HavokPhysics.wasm?url";
@@ -146,14 +147,16 @@ export class PhysicsWorld {
           ? 3
           : e.kind === "spitter"
             ? SILKSPITTER.height
-            : 1.8;
+            : e.kind === "wing"
+              ? STORMWING.bodyHeight
+              : 1.8;
       const radius = e.kind === "brute" ? 0.9 : 0.55;
       const controller = new PhysicsCharacterController(
         new Vector3(e.p.x, e.p.y + height / 2, e.p.z),
         { capsuleHeight: height, capsuleRadius: radius },
         this.scene,
       );
-      controller.maxStepHeight = 0.45;
+      controller.maxStepHeight = e.kind === "wing" ? 0 : 0.45;
       controller.maxSlopeCosine = Math.cos(Math.PI / 3);
       controller.keepDistance = 0.02;
       controller.keepContactTolerance = 0.08;
@@ -163,7 +166,15 @@ export class PhysicsWorld {
     // Collapsing bodies still hit scenery but never leave an upright invisible obstacle.
     body.controller.shape.filterMembershipMask = e.hp > 0 ? 2 : 4;
     body.controller.shape.filterCollideMask = e.hp > 0 ? 3 : 1;
-    return this.moveController(body.controller, body.height, e.p, velocity, dt);
+    return this.moveController(
+      body.controller,
+      body.height,
+      e.p,
+      velocity,
+      dt,
+      e.kind === "wing" && e.hp > 0 ? 0 : -28,
+      e.kind === "wing" && e.hp <= 0,
+    );
   }
   move(p: V, velocity: V, dt: number) {
     return this.moveController(this.controller!, 2.1, p, velocity, dt);
@@ -174,20 +185,35 @@ export class PhysicsWorld {
     p: V,
     velocity: V,
     dt: number,
+    gravity = -28,
+    settling = false,
   ) {
     const expected = new Vector3(p.x, p.y + height / 2, p.z);
     if (Vector3.Distance(cc.getPosition(), expected) > 0.2)
       cc.setPosition(expected);
     const support = cc.checkSupport(dt, new Vector3(0, -1, 0));
+    // A predictive support plane can precede actual landing after a fast fall.
+    // Keep sweeping the corpse down until a native ray confirms nearby ground.
+    const nearGround = () => {
+      const at = cc.getPosition();
+      const hit = (this.scene.getPhysicsEngine()! as PhysicsEngineV2).raycast(
+        at,
+        new Vector3(at.x, at.y - height / 2 - 0.1, at.z),
+        { collideWith: 1, shouldHitTriggers: false },
+      );
+      return hit.hasHit && hit.hitNormalWorld.y > 0.5;
+    };
+    if (settling && !nearGround())
+      support.supportedState = CharacterSupportedState.UNSUPPORTED;
     cc.setVelocity(new Vector3(velocity.x, velocity.y, velocity.z));
-    cc.integrate(dt, support, new Vector3(0, -28, 0));
+    cc.integrate(dt, support, new Vector3(0, gravity, 0));
     const position = cc.getPosition();
     const supported =
       cc.checkSupport(dt, new Vector3(0, -1, 0)).supportedState ===
       CharacterSupportedState.SUPPORTED;
     return {
       p: { x: position.x, y: position.y - height / 2, z: position.z },
-      grounded: supported && velocity.y <= 0,
+      grounded: supported && velocity.y <= 0 && (!settling || nearGround()),
     };
   }
 }

@@ -419,7 +419,7 @@ function hud() {
         v(e.p.x, e.p.y + (e.kind === "brute" ? 4.4 : 3), e.p.z),
       );
       return p.visible
-        ? `<div class="enemy-bar ${e.state === "windup" ? "warning" : ""}" style="left:${p.x}%;top:${p.y}%"><span>${e.state === "windup" ? "!" : e.kind === "spitter" ? "SILKSPITTER" : e.kind.toUpperCase()}</span><i style="width:${(e.hp / e.max) * 100}%"></i></div>`
+        ? `<div class="enemy-bar ${e.state === "windup" ? "warning" : ""}" style="left:${p.x}%;top:${p.y}%"><span>${e.state === "windup" ? "!" : e.kind === "spitter" ? "SILKSPITTER" : e.kind === "wing" ? "STORMWING" : e.kind.toUpperCase()}</span><i style="width:${(e.hp / e.max) * 100}%"></i></div>`
         : "";
     })
     .join("");
@@ -652,7 +652,7 @@ $("narrow-dismiss").onclick = () => {
 $("credits").onclick = () =>
   modal(
     "The people behind the valley.",
-    `<p>Created by Zyra. Original world, encounters, gameplay, interface and environment composition.</p><p>Character, creatures, ruins and vegetation: <a href="https://quaternius.com" target="_blank" rel="noreferrer">Quaternius</a> · CC0.<br>Stone and timber: Rob Tuytel and Amal Kumar. Rock scan: Rico Cilliers. Sky: Greg Zaal and Jarod Guest, <a href="https://polyhaven.com" target="_blank" rel="noreferrer">Poly Haven</a> · CC0.<br>Silkspitter: <a href="https://github.com/danielgruginski/Insectoids" target="_blank" rel="noreferrer">Daniel Gruginski</a> · CC0. Procedurally authored mesh, textures and clips; materials adapted for this game.<br>Guardian: “T. rex” by <a href="https://bake3d.ai/free-3d-models" target="_blank" rel="noreferrer">Bake3D</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Geometry reduced; armour and combat poses added.<br>Foley and impact recordings: <a href="https://kenney.nl/assets" target="_blank" rel="noreferrer">Kenney</a> · CC0.</p><p>Powered by Babylon.js and Havok Physics for the web. License records accompany the source.</p><p class="fine">Sound starts only when enabled in settings.</p>`,
+    `<p>Created by Zyra. Original world, encounters, gameplay, interface and environment composition.</p><p>Character, creatures, ruins and vegetation: <a href="https://quaternius.com" target="_blank" rel="noreferrer">Quaternius</a> · CC0.<br>Stone and timber: Rob Tuytel and Amal Kumar. Rock scan: Rico Cilliers. Sky: Greg Zaal and Jarod Guest, <a href="https://polyhaven.com" target="_blank" rel="noreferrer">Poly Haven</a> · CC0.<br>Silkspitter and stormwing: <a href="https://github.com/danielgruginski/Insectoids" target="_blank" rel="noreferrer">Daniel Gruginski</a> · CC0. Procedurally authored mesh, textures and clips; materials adapted for this game.<br>Guardian: “T. rex” by <a href="https://bake3d.ai/free-3d-models" target="_blank" rel="noreferrer">Bake3D</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Geometry reduced; armour and combat poses added.<br>Foley and impact recordings: <a href="https://kenney.nl/assets" target="_blank" rel="noreferrer">Kenney</a> · CC0.</p><p>Powered by Babylon.js and Havok Physics for the web. License records accompany the source.</p><p class="fine">Sound starts only when enabled in settings.</p>`,
   );
 async function boot() {
   try {

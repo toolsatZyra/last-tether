@@ -872,5 +872,14 @@
     "author": "Daniel Gruginski (algumacoisaqq)",
     "license": "CC0-1.0",
     "modifications": "Unmodified source licence"
+  },
+  {
+    "path": "assets/insects/stormwing.glb",
+    "source": "https://github.com/danielgruginski/Insectoids/blob/3f9939fd57c977934b9a5e0dc5a954ad765cf15f/export/godot/Wasp/Wasp.glb",
+    "sha256": "4a8833ff03a129f1b6da6d3afe6fbb788a61e490c6becab84f2a07ae50c271f9",
+    "bytes": 1925608,
+    "author": "Daniel Gruginski (algumacoisaqq)",
+    "license": "CC0-1.0",
+    "modifications": "Source colour and translucent wing textures embedded; smoothness alpha converted to glTF roughness green. Non-flight Body translation tracks held at bind position so Havok owns dives and falls. Original articulated rotations, geometry and eight clips retained. Source procedurally produced with an AI coding assistant as disclosed by creator."
   }
 ]

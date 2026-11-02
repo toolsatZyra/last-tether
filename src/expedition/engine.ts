@@ -1,3 +1,4 @@
+import { STORMWING } from "./stormwing.ts";
 import { SILKSPITTER, silkspitterShotOrigin } from "./silkspitter.ts";
 import {
   BODY_WEIGHT,
@@ -565,8 +566,13 @@ export class Expedition {
     if (e.hp <= 0) {
       e.pull = undefined;
       e.state = "death";
-      e.dead = e.kind === "guardian" ? 2.4 : 1.4;
-      e.corpseMotion = !!knock && e.kind !== "guardian";
+      e.dead =
+        e.kind === "guardian"
+          ? 2.4
+          : e.kind === "wing"
+            ? STORMWING.deathLife
+            : 1.4;
+      e.corpseMotion = e.kind === "wing" || (!!knock && e.kind !== "guardian");
       this.kills++;
       this.event("kill", e.kind, e.p);
       this.health = Math.min(100, this.health + 2);
@@ -1224,8 +1230,7 @@ export class Expedition {
       if (e.hp <= 0) {
         e.dead = Math.max(0, e.dead - dt);
         if (e.dead > 0 && e.corpseMotion) {
-          if (e.kind === "wing") this.moveFlyingRecoil(e, dt);
-          else this.moveGroundEnemy(e, e.fallVelocity || v(), dt);
+          this.moveGroundEnemy(e, e.fallVelocity || v(), dt);
         }
         continue;
       }
@@ -1268,17 +1273,15 @@ export class Expedition {
               : stats[e.kind].range;
 
         const returning = distance(e.p, this.destination) > 21;
-        const occluded =
-          e.kind !== "wing" &&
-          !!this.combatTrace?.(
-            v(e.p.x, e.p.y + 1.1, e.p.z),
-            v(this.p.x, this.p.y + 1.1, this.p.z),
-          );
+        const occluded = !!this.combatTrace?.(
+          v(e.p.x, e.p.y + 1.1, e.p.z),
+          v(this.p.x, this.p.y + 1.1, this.p.z),
+        );
         if (d > range || returning || occluded) {
           const direct = norm(e.p, returning ? this.destination : this.p);
           const dir =
             e.kind === "wing"
-              ? direct
+              ? this.avoidFlyingObstacle(e, direct, dt)
               : this.avoidGroundObstacle(e, direct, dt);
           velocity.x = dir.x * stats[e.kind].speed;
           velocity.z = dir.z * stats[e.kind].speed;
@@ -1286,8 +1289,6 @@ export class Expedition {
 
         if (e.kind !== "wing" && (velocity.x || velocity.z) && !e.reaction)
           e.yaw = Math.atan2(velocity.x, velocity.z);
-        if (e.kind === "wing")
-          e.p.y = e.home.y + Math.sin(this.time * 2 + e.id) * 1.2;
 
         if (d < stats[e.kind].range && e.timer <= 0 && !occluded) {
           e.state = "windup";
@@ -1338,10 +1339,8 @@ export class Expedition {
           this.event("explode", undefined, e.p);
         } else {
           e.state = "lunge";
-          e.timer = 0.55;
-          if (e.kind === "wing") {
-            e.dir = norm(e.p, v(this.p.x, this.p.y + 1, this.p.z));
-          }
+          e.timer = e.kind === "wing" ? STORMWING.lunge : 0.55;
+          if (e.kind === "wing") e.dir = norm(e.p, this.p);
         }
       } else if (e.state === "lunge") {
         velocity.x = e.dir.x * 17;
@@ -1356,6 +1355,15 @@ export class Expedition {
         e.timer = 0.7;
       }
       if (e.hp <= 0) continue;
+      if (
+        e.kind === "wing" &&
+        ["idle", "recover"].includes(e.state) &&
+        !e.reaction
+      ) {
+        // Smooth ascent on the collision clock, never teleport back to cruising altitude.
+        const altitude = e.home.y + Math.sin(this.time * 2 + e.id) * 0.35;
+        velocity.y = clamp((altitude - e.p.y) * 3, -4, 4);
+      }
       if (e.pull) {
         const remaining = Math.max(dt, e.pull.remaining);
         const delta = norm(e.p, e.pull.to);
@@ -1366,14 +1374,11 @@ export class Expedition {
         e.pull.remaining -= dt;
         if (e.pull.remaining <= 0) e.pull = undefined;
       }
-      if (e.kind === "wing") {
-        e.p.x += velocity.x * dt;
-        e.p.y += velocity.y * dt;
-        e.p.z += velocity.z * dt;
-        this.moveFlyingRecoil(e, dt);
-      } else this.moveGroundEnemy(e, velocity, dt);
+      if (e.kind === "wing") this.moveFlyingEnemy(e, velocity, dt);
+      else this.moveGroundEnemy(e, velocity, dt);
       if (
         e.state === "lunge" &&
+        (e.kind !== "wing" || e.timer < STORMWING.lunge - 0.08) &&
         distance(e.p, this.p) < (e.kind === "wing" ? 2 : 1.75) &&
         Math.abs(this.p.y - e.p.y) < 2 &&
         !this.combatTrace?.(
@@ -1433,12 +1438,105 @@ export class Expedition {
     return v();
   }
 
-  moveFlyingRecoil(e: Enemy, dt: number) {
-    if (!e.knockVelocity) return;
-    e.p.x += e.knockVelocity.x * dt;
-    e.p.z += e.knockVelocity.z * dt;
-    e.knockVelocity.x *= Math.exp(-6.5 * dt);
-    e.knockVelocity.z *= Math.exp(-6.5 * dt);
+  /** Steering probes choose a clear side; Havok remains the collision authority. */
+  avoidFlyingObstacle(e: Enemy, direct: V, dt: number) {
+    if (!this.combatTrace) return direct;
+    const clear = (dir: V) =>
+      ![-0.4, 0.4].some((side) => {
+        const from = v(
+          e.p.x + dir.z * side,
+          e.p.y + STORMWING.bodyHeight / 2,
+          e.p.z - dir.x * side,
+        );
+        return this.combatTrace!(
+          from,
+          v(from.x + dir.x * 1.7, from.y, from.z + dir.z * 1.7),
+        );
+      });
+    e.avoidRemaining = Math.max(0, (e.avoidRemaining || 0) - dt);
+    if (e.avoidRemaining > 0 && e.avoidDirection && clear(e.avoidDirection))
+      return e.avoidDirection;
+    if (clear(direct)) return direct;
+    const side = e.id % 2 ? 1 : -1;
+    for (const turn of [
+      (side * Math.PI) / 2,
+      (-side * Math.PI) / 2,
+      side * Math.PI * 0.75,
+      -side * Math.PI * 0.75,
+    ]) {
+      const dir = v(
+        direct.x * Math.cos(turn) - direct.z * Math.sin(turn),
+        0,
+        direct.x * Math.sin(turn) + direct.z * Math.cos(turn),
+      );
+      if (clear(dir)) {
+        e.avoidDirection = dir;
+        e.avoidRemaining = 0.55;
+        return dir;
+      }
+    }
+    return v();
+  }
+  moveFlyingEnemy(e: Enemy, travel: V, dt: number) {
+    const before = { ...e.p };
+    const velocity = v(
+      travel.x + (e.knockVelocity?.x || 0),
+      travel.y,
+      travel.z + (e.knockVelocity?.z || 0),
+    );
+    const speed = Math.hypot(velocity.x, velocity.y, velocity.z);
+    if (e.knockVelocity) {
+      e.knockVelocity.x *= Math.exp(-6.5 * dt);
+      e.knockVelocity.z *= Math.exp(-6.5 * dt);
+    }
+    e.p = this.enemyMotion
+      ? this.enemyMotion(e, velocity, dt).p
+      : v(
+          e.p.x + velocity.x * dt,
+          e.p.y + velocity.y * dt,
+          e.p.z + velocity.z * dt,
+        );
+    const intended = speed * dt,
+      travelled = length3(before, e.p);
+    if (
+      speed > 4 &&
+      intended > 0.02 &&
+      travelled < intended * 0.3 &&
+      !e.wallImpactCooldown
+    ) {
+      const from = v(before.x, before.y + STORMWING.bodyHeight / 2, before.z);
+      const contact = this.combatTrace?.(
+        from,
+        v(
+          from.x + velocity.x / speed,
+          from.y + velocity.y / speed,
+          from.z + velocity.z / speed,
+        ),
+      );
+      if (contact) {
+        e.knockVelocity = undefined;
+        e.pull = undefined;
+        e.state = "stunned";
+        e.timer = 0.45;
+        e.wallImpactCooldown = 0.3;
+        const direction = impactDirection(
+          before,
+          v(before.x + velocity.x, before.y, before.z + velocity.z),
+        );
+        e.reaction = {
+          id: ++this.serial,
+          elapsed: 0,
+          duration: 0.4,
+          direction,
+          strength: Math.min(1, speed / 18),
+        };
+        this.event("body-impact", undefined, e.p, speed, {
+          direction,
+          strength: Math.min(1, speed / 18),
+          contact: contact.p,
+        });
+      }
+    }
   }
 
   moveGroundEnemy(e: Enemy, horizontal: V, dt: number) {
@@ -1505,7 +1603,11 @@ export class Expedition {
     if (e.hp <= 0) {
       if (result.grounded) {
         e.verticalSpeed = 0;
-        if (!e.knockVelocity || knockSpeed < 0.2) e.corpseMotion = false;
+        if (
+          (!e.knockVelocity || knockSpeed < 0.2) &&
+          Math.abs(e.p.y - before.y) < 0.01
+        )
+          e.corpseMotion = false;
       }
       return;
     }

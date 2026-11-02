@@ -121,3 +121,7 @@ A duplicate glow layer was washing out the contact shadows beneath actors and ad
 ## Silkspitter art and action pass, 0.2.29
 
 One regular creature now has a distinct articulated spider silhouette, mottled source texture, variable surface roughness, a readable raised-abdomen wind-up and a full-volume curled death. Its projectile release is aligned to the native source socket. This improves the ranged enemy's anatomy and action language; the hero and several other creature families remain mixed/low-detail and the overall art gate is open. The same pack's wasp is only a research candidate because some inspection poses disappeared.
+
+## Stormwing flight and contact, 0.2.30
+
+The research Wasp is now integrated after resolving its animated bounds. Its articulated dive, interrupt reaction, wing material and folded death are coherent with the silkspitter family. The larger practical change is physical: dives, tether pulls, knockback and falling deaths respect Havok scenery contact. Both controller settlement and visual corpse clearance were checked and corrected. Full native completion and real keyboard impacts pass. The hero, remaining creature art, whole-chapter frame pacing, player-approved combat feel and first-time 15–20 minute pacing remain open quality gates.

@@ -1,29 +1,21 @@
 # Last Tether — active checkpoint
 
-User resumed work. Goal active. **0.2.29 is published and verified** at https://last-tether.vercel.app/. App commit 89e0f987e4befad1a85ad90e07adf8bcc16d8282; READY deployment dpl_C1vRr8eQGDpozNcEmxPmVGdV1KR1; alias bundle index-DNfABdAl.js. A documentation-only follow-up records live evidence.
+User resumed; goal remains active. Version 0.2.30 is locally validated and ready for Git-connected production deployment. Public was 0.2.29 at last verification.
 
-## Silkspitter release
+## This release
 
-The spitter now uses Daniel Gruginski's CC0 Spider from Insectoids, pinned commit 3f9939fd57c977934b9a5e0dc5a954ad765cf15f. 5,012 triangles, 58 joints, ten source clips, 2,727,320-byte prepared GLB. Source licence retained; manifest verifies 93 files. tools/prepare-silkspitter.mjs checks source hashes, embeds colour and converts smoothness alpha into glTF roughness. Details and AI-production disclosure: docs/creatures/silkspitter.md. No paid generation or new dependency.
+Stormwing replaces the Dragon with Daniel Gruginski's CC0 Insectoids Wasp. 4,280 triangles, 44 joints, eight clips, embedded PBR body and translucent wing textures. Prepared asset 1,925,608 bytes. Native Dive/Hit/Death share the gameplay clock. Body translation is controller-owned; 708-frame sampled mesh bounds keep wings visible. Folded death has a measured foot-clearance correction, preserving volume.
 
-Native Walk, Hit, WebSpit and Death replace generic frog clips; curled death retains model volume. Generic palette shader bypassed. Neutral height/body collider 1.45; release socket .62 forward/2.345 up; impact height .95. Native WebSpit source contact .67 seconds aligns with .85 gameplay wind-up; recovery 1.6. UI names SILKSPITTER and credits creator. Existing encounter kind/save identity retained. Preserve existing recoil, rig pooling, native physics clock and supported spear thrust.
+Flight, tether and recoil now go through native Havok; alive zero-gravity capsule, falling scenery-only corpse, local obstacle probes and wall-impact stun. Recovery climbs smoothly rather than snapping home. Native support is confirmed near ground before corpse settlement. Details: docs/creatures/stormwing.md and ENGINEERING.md.
 
-## Verification
+## Checks
 
-58 tests, build and 93 asset hashes pass. Four-facing native release: three shots after 51 steps, socket error below .00066 units, zero pause drift, native Hit/Death, body height 1.45. Real F-key controlled-spider combo reaches 852 from 1,000 health at 1.3167 seconds, thrust phase .545977. Native interruption cancels volley; pooled rig stops, parks and reuses cleanly with native Idle, reset reaction/scale and retained textures.
+62 tests, build and 94 asset hashes pass. Wall dive and recoil stop with one impact; no through-wall damage. Unforced death settles at floor + .02. Real incoming hit uses Kavi HitRecieve; keyboard R deals 48 with native Hit/recoil. Pause, interruption and pool reset pass. Final folded-pose clearance under .027 units across 11 phases. Full native route: 742.1833 simulated seconds, 188 defeats, zero recoveries, all 32 objectives, valid visible/saved ending, zero pool misses, 40 rigs created/disposed. Accelerated, route-informed; not first-time pacing.
 
-Full native route: 729.3167 simulated seconds, 188 defeats, zero recoveries, all 32 objectives, valid saved/visible ending, zero pool misses, forty rigs created/disposed, no page errors. Accelerated and route-informed; not first-time pacing.
-
-Final 1.45-scale visual gallery rerun after resume: output/spider-native-final.txt, six spider-game screenshots. Idle, warning/release and curled death inspected in gameplay view. Initial output/spider-native.txt is the older 1.1-scale probe; do not confuse it with final results. Compiled ordinary keyboard/pause/save/reload passes with no debug hook/errors/failed responses. Bounded 15.44-second sample: 75.05 FPS average, p95 18.3 ms.
-
-Pre-pause normal-speed 35.0576-second combat profile reached the watchpost with spitter present, four kills, mean frame 29.07 ms, p95 59.2, maximum 447.9. Do not claim smoothness or attribute varied whole-game timing to the new asset. All evidence: verification/silkspitter-0.2.29.json.
+Compiled ordinary controls/pause/save/reload pass with no debug hook/errors/failed requests. Bounded 15.64-second opening sample: 45.39 FPS, p95 30.3 ms. Consistent performance unresolved. Bundle index-CHLqMMis.js. Evidence: verification/stormwing-0.2.30.json.
 
 ## Next
 
-Continue cohesive hero/creature art and remaining contact/frame-pacing weaknesses. Wasp from same pack is research-only because some preview poses disappeared; inspect animated bounds/pose before integration. Research files: research/creature-assets/fantasy-creatures. Do not rerun broad completed checks without relevant changes.
+Finish publishing this tested release and verify public alias/asset/ordinary input. Then address remaining hero/creature art and frame pacing/contact weaknesses. Whole goal unfinished: top-tier visual quality, human combat enjoyment and first-time 15–20 minute pacing unverified. Preserve supported thrust, directional impacts, rig pool, native fixed physics clock and bloom-only renderer.
 
-Overall goal unfinished: hero and other creatures still mixed/low-detail, occasional hitches, human enjoyment and first-time 15–20 minute pacing unverified. Fal approved US$5 pilot remains blocked by exhausted credits: do not generate/upload/retry/poll until user confirms credits. No Supabase/cloud integration. No subagents. Main auto-deploys; no duplicate manual deployment.
-
-At resume, local servers/browser were absent and were restarted: dev4173, preview4174, owned tether-release Chrome using research/qa-release.config.json (--mute-audio). Leave unrelated browser/audio/GPU settings alone.
-
-Public keyboard combat/pause/save/reload passes with correct 0.2.29 footer, no debug hook/errors/failed responses. Public model byte-equals tested local model. Bounded 69.95 FPS average / p95 18.3 ms over 17.91 seconds; not a whole-chapter claim. All final visual/compiled/public checks are terminal. Owned silent browser is paused on the public game.
+Fal US$5 pilot remains blocked by exhausted credits: no generation/upload/retry/poll until user confirms credits. No new paid resources. No Supabase/cloud integration. No subagents. Main auto-deploys; do not create a duplicate manual deployment. Owned silent Playwright tether-release and local dev4173/preview4174 are running. Leave unrelated browser/audio/system settings alone.

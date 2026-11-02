@@ -1,0 +1,15 @@
+# Stormwing integration — 0.2.30
+
+Stormwing replaces the generic Dragon flying enemy with Daniel Gruginski's Wasp from [Insectoids](https://github.com/danielgruginski/Insectoids), pinned commit 3f9939fd57c977934b9a5e0dc5a954ad765cf15f. The source is CC0; the original licence is retained at public/assets/licenses/insectoids.txt. The creator discloses procedural production through an AI coding assistant. This is licensed stylized art, not hand-sculpted or motion-captured work. Existing wing encounter/save identity is preserved.
+
+The prepared GLB contains 4,280 triangles, 44 joints and eight native clips, with opaque body colour/roughness and translucent veined wings. tools/prepare-stormwing.mjs checks the pinned source hashes, converts smoothness alpha to glTF roughness and embeds the textures. Non-flight Body translation is held at bind position: Havok owns world travel while the source rig supplies articulated pose. The asset is 1,925,608 bytes. No purchase, generation, new application or dependency was needed.
+
+Idle/Fly, timed Dive, Hit and full-volume Death replace generic dragon motions and death scaling. The 1.8-second source dive maps onto .85 seconds of anticipation, .55 seconds of committed travel and .9 seconds of recovery. The flyer tracks during anticipation and commits its direction on launch. Damage is gated until .08 seconds after launch. Hit reactions interrupt the dive. Recovery ascends at a bounded speed through collision rather than resetting altitude. Native clips follow pause and hitstop clocks. A measured clearance curve aligns the folded death pose with the controller foot; it preserves body volume and removes the half-unit visual hover exposed by the landing inspection.
+
+The 1.9-unit silhouette uses a 1.4-high, .55-radius core capsule. Wings and legs are visual appendages, not independent rigid bodies. Flight, tether and recoil use Babylon's Havok character controller with zero gravity while alive; dead flyers fall with gravity even when the fatal hit had no pushback. Corpses collide only with scenery. Native ray confirmation prevents a predictive support plane from parking a body above its landing surface. Flyers do not use ground step-up.
+
+Fast blocked dives/recoil produce one body-impact event, native Hit reaction and a short stun. Scenery blocks attack sight and damage; local side probes steer pursuit around obstacles. This is local steering, not a global navigation mesh. No bespoke physics engine was introduced.
+
+All 708 authored animation frames were sampled through Babylon skinning to generate conservative per-mesh visibility bounds, with a .12-unit source-space margin. tools/stormwing-bounds.ts and tools/stormwing-bounds.js reproduce the measurement. The baked bounds avoid both disappearing wing poses and per-frame CPU skinning. Culling remains enabled.
+
+Validation evidence is retained in verification/stormwing-0.2.30.json. This release improves the flying creature's cohesion, animation and physical contact; it does not establish the requested final visual quality or human first-time pacing.

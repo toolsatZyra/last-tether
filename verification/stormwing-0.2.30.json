@@ -1,0 +1,414 @@
+{
+  "version": "0.2.30",
+  "status": "local-validation-complete-publication-pending",
+  "date": "2026-11-02",
+  "source": {
+    "repository": "https://github.com/danielgruginski/Insectoids",
+    "commit": "3f9939fd57c977934b9a5e0dc5a954ad765cf15f",
+    "license": "CC0-1.0",
+    "author": "Daniel Gruginski",
+    "triangles": 4280,
+    "joints": 44,
+    "clips": 8,
+    "bytes": 1925608,
+    "sha256": "4a8833ff03a129f1b6da6d3afe6fbb788a61e490c6becab84f2a07ae50c271f9",
+    "preparation": "tools/prepare-stormwing.mjs",
+    "disclosure": "Creator describes procedural production through an AI coding assistant."
+  },
+  "animatedBounds": {
+    "samples": 708,
+    "bounds": [
+      {
+        "mesh": "WaspBody_primitive0",
+        "min": [
+          -0.9699269485473633,
+          0.7160633850097656,
+          -1.1423708152770997
+        ],
+        "max": [
+          0.9357906532287598,
+          2.574118251800537,
+          1.0427849245071412
+        ]
+      },
+      {
+        "mesh": "WaspBody_primitive1",
+        "min": [
+          -1.1803066682815553,
+          0.6646892476081848,
+          -1.0712801170349122
+        ],
+        "max": [
+          1.182042236328125,
+          2.9405337524414064,
+          0.6532690477371216
+        ]
+      }
+    ]
+  },
+  "physics": {
+    "rows": [
+      {
+        "case": "dive-wall",
+        "maxZ": -1.1666666666666679,
+        "wallHits": 1,
+        "health": 100,
+        "clipState": "stunned",
+        "body": 1.4
+      },
+      {
+        "case": "knock-wall",
+        "p": {
+          "x": 0,
+          "y": 83,
+          "z": -1.3122184415533222
+        },
+        "impacts": 1
+      },
+      {
+        "case": "unforced-death",
+        "minY": 80.02000006675723,
+        "p": {
+          "x": 0,
+          "y": 80.02000006675723,
+          "z": -6
+        },
+        "settled": true
+      },
+      {
+        "case": "dive-player",
+        "hitAt": 1.05,
+        "health": 89.5,
+        "p": {
+          "x": 0,
+          "y": 80.48452405257729,
+          "z": -12.260515184364174
+        }
+      }
+    ],
+    "errors": []
+  },
+  "keyboard": {
+    "hits": [
+      {
+        "type": "incoming",
+        "health": 89.5,
+        "seconds": 1.0666666666666678,
+        "enemyState": "lunge",
+        "playerClip": "kavi_HitRecieve"
+      },
+      {
+        "type": "outgoing",
+        "health": 952,
+        "seconds": 1.9666666666666646,
+        "clip": "reserve-wing-14_Hit",
+        "recoil": {
+          "x": 0,
+          "y": 0,
+          "z": 13.75
+        },
+        "body": 1.4
+      }
+    ],
+    "errors": []
+  },
+  "lifecycle": {
+    "interrupted": {
+      "health": 100,
+      "clip": "reserve-wing-14_Hit",
+      "pauseFrame": 14.117646684833645
+    },
+    "dead": {
+      "clip": "reserve-wing-14_Death",
+      "ratio": 1
+    },
+    "parked": {
+      "enabled": false,
+      "animations": false
+    },
+    "reuse": {
+      "same": true,
+      "clip": "reserve-wing-14_Idle",
+      "ratio": 1,
+      "reaction": -1,
+      "colour": true,
+      "misses": 0
+    }
+  },
+  "landing": {
+    "rows": [
+      {
+        "phase": 0,
+        "clearance": 0.00017285889476426064
+      },
+      {
+        "phase": 0.1,
+        "clearance": -0.02639433774864841
+      },
+      {
+        "phase": 0.2,
+        "clearance": 0.00002274595758677833
+      },
+      {
+        "phase": 0.3,
+        "clearance": 0.00001280508843848338
+      },
+      {
+        "phase": 0.4,
+        "clearance": -0.000007636385525700007
+      },
+      {
+        "phase": 0.5,
+        "clearance": 0.000017161828601786056
+      },
+      {
+        "phase": 0.6,
+        "clearance": 0.00001616198938592106
+      },
+      {
+        "phase": 0.7,
+        "clearance": 0.000018191443338366753
+      },
+      {
+        "phase": 0.8,
+        "clearance": -0.000018468468930166182
+      },
+      {
+        "phase": 0.9,
+        "clearance": -0.00003510368440373668
+      },
+      {
+        "phase": 1,
+        "clearance": 0.00004535307414954559
+      }
+    ]
+  },
+  "route": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 61,
+      "animationGroups": 50
+    },
+    "actorPool": {
+      "created": 40,
+      "disposed": 40,
+      "misses": 0,
+      "inUse": 0
+    },
+    "finished": true,
+    "seconds": 742.183333332987,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 13.250000000000238,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 38.666666666665755,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 51.88333333333167,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 78.31666666666351,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 98.64999999999569,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 124.06666666666091,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 160.66666666668667,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 194.21666666671337,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 210.48333333339298,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 246.06666666675463,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 282.66666666673825,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 311.133333333379,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 316.21666666670774,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 344.6833333333485,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 373.1499999999893,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 398.56666666663284,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 412.79999999995323,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 437.19999999993104,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 463.63333333324033,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 503.28333333320427,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 521.5833333331876,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 538.8666666665052,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 576.4833333331377,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 597.8333333331183,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 612.0666666664387,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 659.8499999997285,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 687.2999999997036,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 704.5833333330212,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 706.6166666663527,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 717.7999999996758,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 729.9999999996647,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 742.183333332987,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "unitTests": {
+    "passed": 62,
+    "failed": 0
+  },
+  "assets": {
+    "verified": 94
+  },
+  "build": {
+    "passed": true,
+    "bundle": "index-CHLqMMis.js"
+  },
+  "limits": [
+    "Hero and remaining creature families still fall below the requested final art quality.",
+    "Body capsules approximate collisions; wings and legs are not separate rigid bodies.",
+    "Pursuit uses local avoidance, not a global navigation mesh.",
+    "Automated native route was accelerated and route-informed, not a first-time human pacing result.",
+    "Whole-chapter frame pacing and human enjoyment remain unverified."
+  ],
+  "compiled": {
+    "version": "LAST TETHER · 0.2.30",
+    "frameSample": {
+      "frames": 711,
+      "seconds": 15.643199999999997,
+      "averageFps": 45.3871330674031,
+      "medianMs": 18.5,
+      "p95Ms": 30.299999999999272
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}
