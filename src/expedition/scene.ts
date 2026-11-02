@@ -40,6 +40,12 @@ import { terraceStructure, bridgeStructure } from "./structures";
 import { landmarks } from "./landmarks";
 import { landscapeHeight, LANDSCAPES } from "./landscape";
 import { fadeFoliage, type FoliageView } from "./foliage";
+import {
+  quarryMaterials,
+  quarryBench,
+  quarryYard,
+  quarryCharge,
+} from "./quarry";
 import { PressureGallery } from "./pressure-gallery";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
@@ -66,6 +72,7 @@ export class GameScene {
   dials: { beat: number; index: number; hand: TransformNode }[] = [];
   blades: TransformNode[] = [];
   pressureGallery?: PressureGallery;
+  quarrySmoke?: ParticleSystem;
   chargeMarks = new Map<number, Mesh>();
   flood!: Mesh;
   physics!: PhysicsWorld;
@@ -847,6 +854,8 @@ export class GameScene {
   }
   *buildSteps(s: Expedition): Generator<void> {
     this.current = s;
+    this.quarrySmoke?.dispose(false);
+    this.quarrySmoke = undefined;
     this.pressureGallery?.dispose();
     this.pressureGallery = undefined;
     this.particleBursts.forEach((p) => p.system.dispose(false));
@@ -879,6 +888,7 @@ export class GameScene {
     this.effects.forEach((e) => e.mesh.dispose());
     this.effects = [];
     const ch = s.chapter;
+    if (s.sector === 4) quarryMaterials(this);
     const climates = [
       [0.32, 0.85, 0],
       [0.85, 0.2, 0],
@@ -920,7 +930,8 @@ export class GameScene {
         0.5,
         "edge",
       );
-      terraceStructure(this, p);
+      if (s.sector === 4) quarryBench(this, p);
+      else terraceStructure(this, p);
       yield;
       if (i % 2) {
         for (const side of [-1, 1]) {
@@ -998,7 +1009,7 @@ export class GameScene {
         this.anchors.push(anchor);
         this.arch(v(p.x, p.y, p.z - 8), 11, 10);
       }
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < (s.sector === 4 ? 0 : 5); j++) {
         const side = j % 2 ? 1 : -1,
           x = p.x + side * ((p.arena ? 21 : 11) - rand() * 3),
           z = p.z - 20 + rand() * 40;
@@ -1197,13 +1208,13 @@ export class GameScene {
       this.arch(v(p.x, p.y, p.z + 28), 48, 32);
     }
     if (s.sector === 4)
-      for (let i = 0; i < 3; i++)
-        this.pods.push(this.cylinder("charge-pod", s.pod(i), 1.7, 2.6, "red"));
+      for (let i = 0; i < 3; i++) this.pods.push(quarryCharge(this, s.pod(i)));
     const last = ch.points[7];
     this.arch(v(last.x, last.y, last.z + 23), 22, 22);
     this.arch(v(last.x, last.y, last.z + 34), 26, 30);
     yield* this.dressSteps(s);
     landmarks(this);
+    if (s.sector === 4) this.quarrySmoke = quarryYard(this);
     if (s.sector === 5) this.pressureGallery = new PressureGallery(this);
     yield;
     yield* this.batchStaticSteps();
@@ -1259,6 +1270,7 @@ export class GameScene {
       ...this.gates,
       ...this.pointers,
       ...this.pods,
+      ...this.pods.flatMap((pod) => pod.getChildMeshes()),
       ...this.cacheMeshes,
       ...(this.pressureGallery?.dynamicMeshes || []),
     ]);
@@ -1373,7 +1385,7 @@ export class GameScene {
     for (let i = 0; i < 8; i++) {
       const p = ch.points[i];
       const wide = p.arena ? 21 : 11;
-      if (i % 2) {
+      if (i % 2 && s.sector !== 4) {
         for (const side of [-1, 1]) {
           this.architecture(
             "Wall_ArchRound_Overgrown_Broken",
@@ -1411,7 +1423,7 @@ export class GameScene {
             false,
           );
         }
-      } else {
+      } else if (s.sector !== 4) {
         for (const side of [-1, 1]) {
           this.architecture(
             "Rail_Straight",
@@ -1457,7 +1469,7 @@ export class GameScene {
           );
         }
       }
-      if (i % 2) {
+      if (i % 2 && s.sector !== 4) {
         const ring = MeshBuilder.CreateTorus(
           "terrace-inlay",
           { diameter: 32, thickness: 0.045, tessellation: 80 },
@@ -1517,39 +1529,6 @@ export class GameScene {
             );
           }
         }
-      }
-      if (s.sector === 4) {
-        for (const side of [-1, 1]) {
-          this.box(
-            "rail",
-            v(p.x + side * 2, p.y + 0.06, p.z),
-            v(0.12, 0.12, p.arena ? 38 : 26),
-            "metal",
-            false,
-          );
-          this.box(
-            "quarry-gantry",
-            v(p.x + side * (p.arena ? 14 : 10), p.y + 8, p.z + 5),
-            v(1.2, 16, 1.2),
-            "wood",
-          );
-          for (let j = 0; j < 3; j++) {
-            const ore = this.rock(
-              v(p.x + side * (p.arena ? 19 : 11), p.y + 1.2, p.z - 10 + j * 8),
-              v(1, 2.5, 1.2),
-              j + 0.3,
-              "red",
-            );
-            ore.rotation.z = side * 0.3;
-          }
-        }
-        this.box(
-          "gantry-crossbeam",
-          v(p.x, p.y + 16, p.z + 5),
-          v(p.arena ? 30 : 22, 1.2, 1.2),
-          "wood",
-          false,
-        );
       }
       if (s.sector === 5 && i % 2) {
         const frame = new TransformNode("pressure-wheel", this.scene);
@@ -1825,6 +1804,7 @@ export class GameScene {
       });
     this.motes.emitter = new Vector3(s.p.x, s.p.y + 1, s.p.z);
     this.motes.updateSpeed = dt > 0 ? 1 / 60 : 0;
+    if (this.quarrySmoke) this.quarrySmoke.updateSpeed = dt > 0 ? 1 / 60 : 0;
     this.rain.emitter = new Vector3(s.p.x, s.p.y + 20, s.p.z);
     this.rain.emitRate = [0, 7].includes(s.sector)
       ? this.quality === "low"

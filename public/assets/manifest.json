@@ -723,5 +723,38 @@
         "bytes": 1183552
       }
     ]
+  },
+  {
+    "path": "assets/materials/quarry-wood-diff.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/fine_grained_wood/fine_grained_wood_col_1k.jpg",
+    "sha256": "d171f45ef01bc6e239b00dfaa4961bcd27f7d8e93e3962da3bd3d0ce703d802c",
+    "bytes": 336305,
+    "author": "Rob Tuytel / Poly Haven",
+    "license": "CC0-1.0",
+    "assetPage": "https://polyhaven.com/a/fine_grained_wood",
+    "licensePage": "https://polyhaven.com/license",
+    "modifications": "Original 1K JPG map retained unchanged."
+  },
+  {
+    "path": "assets/materials/quarry-wood-normal.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/fine_grained_wood/fine_grained_wood_nor_gl_1k.jpg",
+    "sha256": "ba95eadc009818e161d0f753191f1bacc3fc861e593be0bc6d82b437f9ec8044",
+    "bytes": 193626,
+    "author": "Rob Tuytel / Poly Haven",
+    "license": "CC0-1.0",
+    "assetPage": "https://polyhaven.com/a/fine_grained_wood",
+    "licensePage": "https://polyhaven.com/license",
+    "modifications": "Original 1K JPG map retained unchanged."
+  },
+  {
+    "path": "assets/materials/quarry-wood-rough.jpg",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/fine_grained_wood/fine_grained_wood_rough_1k.jpg",
+    "sha256": "f281f682e62fe322303dfeaa13dac18b5cb9e113617fe0aca43605b49161d82b",
+    "bytes": 215155,
+    "author": "Rob Tuytel / Poly Haven",
+    "license": "CC0-1.0",
+    "assetPage": "https://polyhaven.com/a/fine_grained_wood",
+    "licensePage": "https://polyhaven.com/license",
+    "modifications": "Original 1K JPG map retained unchanged."
   }
 ]

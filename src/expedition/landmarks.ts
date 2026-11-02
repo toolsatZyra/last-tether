@@ -86,6 +86,11 @@ function rockBanks(view: GameScene) {
         false,
         65 + (i % 2) * 8,
       );
+      if (
+        view.sector === 4 &&
+        ((i === 1 && side === 1) || (i === 5 && side === -1))
+      )
+        rock.position.x += side * 35;
       // Compress depth so the scanned masses remain well outside the traversable deck.
       rock.scaling.z *= 42 / ((p.y + 52 + (i % 3) * 8) * 1.823);
       for (let attempt = 0; attempt < 16; attempt++) {

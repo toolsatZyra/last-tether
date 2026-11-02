@@ -1,0 +1,5 @@
+Fine Grained Wood — Rob Tuytel / Poly Haven
+Source: https://polyhaven.com/a/fine_grained_wood
+License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+License policy: https://polyhaven.com/license
+Original 1K diffuse, OpenGL normal and roughness JPG maps retained unchanged. Source URLs, byte counts and SHA-256 hashes are in assets/manifest.json.

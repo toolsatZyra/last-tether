@@ -1,0 +1,421 @@
+{
+  "version": "0.2.10",
+  "date": "2026-11-02",
+  "change": "Distinct quarry composition, crane and furnace, textured timber, stepped extraction benches and detailed interactive charge props.",
+  "checks": {
+    "smokePaused": true,
+    "samples": 1515,
+    "quarryBounds": 123,
+    "routeObstructions": 0,
+    "chargeChildren": [
+      3,
+      3,
+      3
+    ],
+    "explodedHidden": true,
+    "restored": true,
+    "before": {
+      "meshes": 529,
+      "textures": 49,
+      "materials": 106,
+      "stencils": 1,
+      "smoke": 1
+    },
+    "after": {
+      "meshes": 529,
+      "textures": 49,
+      "materials": 106,
+      "stencils": 1,
+      "smoke": 1
+    }
+  },
+  "fullChapter": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 49,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 681.7166666663753,
+    "kills": 188,
+    "deaths": 1,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 12.23333333333352,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 32.5666666666661,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 48.833333333331844,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 88.4833333333296,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 110.84999999999499,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 143.38333333333958,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 175.9166666666988,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 192.1833333333784,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 228.78333333340754,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 256.23333333342896,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 279.616666666741,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 284.70000000006974,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 311.133333333379,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 331.46666666669387,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 353.8333333333402,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 367.04999999999484,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 391.44999999997265,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 419.83333333328017,
+        "deaths": 1
+      },
+      {
+        "key": "5-0",
+        "seconds": 451.34999999991817,
+        "deaths": 1
+      },
+      {
+        "key": "5-1",
+        "seconds": 465.58333333323856,
+        "deaths": 1
+      },
+      {
+        "key": "5-2",
+        "seconds": 480.8333333332247,
+        "deaths": 1
+      },
+      {
+        "key": "5-3",
+        "seconds": 517.4333333331914,
+        "deaths": 1
+      },
+      {
+        "key": "6-0",
+        "seconds": 538.783333333172,
+        "deaths": 1
+      },
+      {
+        "key": "6-1",
+        "seconds": 555.0499999998239,
+        "deaths": 1
+      },
+      {
+        "key": "6-2",
+        "seconds": 599.7833333331165,
+        "deaths": 1
+      },
+      {
+        "key": "6-3",
+        "seconds": 626.2166666664258,
+        "deaths": 1
+      },
+      {
+        "key": "7-0",
+        "seconds": 644.5166666664092,
+        "deaths": 1
+      },
+      {
+        "key": "7-1",
+        "seconds": 645.5333333330749,
+        "deaths": 1
+      },
+      {
+        "key": "7-2",
+        "seconds": 657.7333333330638,
+        "deaths": 1
+      },
+      {
+        "key": "7-3",
+        "seconds": 669.9333333330527,
+        "deaths": 1
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 681.7166666663753,
+      "deaths": 1,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "production": {
+    "initial": "Clear the blasting yard",
+    "objective": "Survive the furnace approach",
+    "meta": "9 defeated · 0 recoveries",
+    "noDebug": true,
+    "errors": [],
+    "bad": [],
+    "resumed": "Survive the furnace approach"
+  },
+  "performance": {
+    "method": "Desktop Chrome, AMD Radeon integrated graphics, Balanced at 1036x703. Protected stationary player placed 15 metres before the encounter centre. Seven-second settling and four-second instrumentation during active nearby enemies. Published source was temporarily restored locally for comparison, then the new source restored.",
+    "before": [
+      {
+        "sector": 4,
+        "beat": 0,
+        "fps": 47.99160146974279,
+        "averageViewUpdateMs": 19.499479166852932,
+        "cpu": {
+          "frame": 16.168750000108655,
+          "render": 5.264062500209548,
+          "targets": 2.528124999642993,
+          "meshes": 3.202083333201396,
+          "animation": 2.385416666744277,
+          "physics": 0.15052083355840296,
+          "particles": 0.06302083322467904
+        },
+        "gpuMs": 9.953600312499999,
+        "drawCalls": 374.9791666666667,
+        "activeMeshes": 174,
+        "sceneMeshes": 625,
+        "shadowMeshes": 177,
+        "reflectionMeshes": 35,
+        "renderSize": [
+          1036,
+          703
+        ]
+      },
+      {
+        "sector": 4,
+        "beat": 1,
+        "fps": 50.71703392787134,
+        "averageViewUpdateMs": 18.45123152695413,
+        "cpu": {
+          "frame": 16.04926108337682,
+          "render": 5.060098522328978,
+          "targets": 2.5576354677747624,
+          "meshes": 3.0674876846703403,
+          "animation": 2.2665024627312063,
+          "physics": 0.1576354679435932,
+          "particles": 0.06157635493671953
+        },
+        "gpuMs": 9.55609665024631,
+        "drawCalls": 377.86206896551727,
+        "activeMeshes": 159,
+        "sceneMeshes": 631,
+        "shadowMeshes": 186,
+        "reflectionMeshes": 35,
+        "renderSize": [
+          1036,
+          703
+        ]
+      },
+      {
+        "sector": 4,
+        "beat": 2,
+        "fps": 48.08171400092513,
+        "averageViewUpdateMs": 19.53989637311104,
+        "cpu": {
+          "frame": 18.01658031070325,
+          "render": 5.464766839625304,
+          "targets": 2.8507772020879805,
+          "meshes": 3.6124352331760634,
+          "animation": 2.726943004702657,
+          "physics": 0.16062176173523918,
+          "particles": 0.0569948186142457
+        },
+        "gpuMs": 10.508390207253886,
+        "drawCalls": 412.4611398963731,
+        "activeMeshes": 185,
+        "sceneMeshes": 636,
+        "shadowMeshes": 209,
+        "reflectionMeshes": 35,
+        "renderSize": [
+          1036,
+          703
+        ]
+      }
+    ],
+    "after": [
+      {
+        "sector": 4,
+        "beat": 0,
+        "fps": 50.138441966586974,
+        "averageViewUpdateMs": 18.70945273617755,
+        "cpu": {
+          "frame": 15.209452736437024,
+          "render": 5.071144278703341,
+          "targets": 2.302985075064263,
+          "meshes": 2.7009950247570056,
+          "animation": 2.2965174127944668,
+          "physics": 0.15174129334700048,
+          "particles": 0.08059701505140286
+        },
+        "gpuMs": 9.027680298507462,
+        "drawCalls": 402.70646766169153,
+        "activeMeshes": 168,
+        "sceneMeshes": 554,
+        "shadowMeshes": 163,
+        "reflectionMeshes": 41,
+        "renderSize": [
+          1036,
+          703
+        ]
+      },
+      {
+        "sector": 4,
+        "beat": 1,
+        "fps": 51.541257905444546,
+        "averageViewUpdateMs": 18.17729468571679,
+        "cpu": {
+          "frame": 16.15217391271954,
+          "render": 5.084057970863322,
+          "targets": 2.417391304448607,
+          "meshes": 2.9990338166626755,
+          "animation": 2.3454106278033646,
+          "physics": 0.1526570048381165,
+          "particles": 0.07294685998256656
+        },
+        "gpuMs": 9.433441690821255,
+        "drawCalls": 382.6473429951691,
+        "activeMeshes": 143,
+        "sceneMeshes": 556,
+        "shadowMeshes": 180,
+        "reflectionMeshes": 41,
+        "renderSize": [
+          1036,
+          703
+        ]
+      },
+      {
+        "sector": 4,
+        "beat": 2,
+        "fps": 52.49999999992179,
+        "averageViewUpdateMs": 17.835238095621268,
+        "cpu": {
+          "frame": 16.33904761909729,
+          "render": 4.9619047619757195,
+          "targets": 2.242380952196462,
+          "meshes": 3.0533333335249195,
+          "animation": 3.0100000001490117,
+          "physics": 0.1509523810020515,
+          "particles": 0.09428571434248062
+        },
+        "gpuMs": 8.631828000000006,
+        "drawCalls": 393.1714285714286,
+        "activeMeshes": 153,
+        "sceneMeshes": 564,
+        "shadowMeshes": 188,
+        "reflectionMeshes": 41,
+        "renderSize": [
+          1036,
+          703
+        ]
+      }
+    ],
+    "limits": "Short stationary close-combat samples; not a sustained whole-chapter frame-rate guarantee. Earlier development iteration samples varied from 55 to 58 FPS."
+  },
+  "sourceGeometry": {
+    "sourceMeshes": 72,
+    "rebuilds": 4,
+    "unchanged": true
+  },
+  "validation": {
+    "behaviourTests": 23,
+    "assetHashes": 82,
+    "productionBuild": true
+  },
+  "visualReview": {
+    "views": [
+      "quarry approach",
+      "blasting yard",
+      "furnace",
+      "ambush",
+      "compiled encounter completion"
+    ],
+    "corrections": [
+      "Restored detailed paving after the first floor material appeared flat.",
+      "Moved crane into the approach sightline.",
+      "Replaced unsupported rock-topped deck experiment with continuous stepped quarry benches.",
+      "Moved furnace six metres farther from the route after two clearance samples hit a buttress."
+    ]
+  },
+  "assets": {
+    "newFiles": 3,
+    "bytes": 745086,
+    "source": "https://polyhaven.com/a/fine_grained_wood",
+    "author": "Rob Tuytel / Poly Haven",
+    "license": "CC0-1.0"
+  },
+  "limits": [
+    "Crane is environmental scenery, not a player-operated mechanism.",
+    "New quarry structure and props do not close the full-game art-quality gate.",
+    "First-time 15–20 minute pacing and human enjoyment remain unverified."
+  ]
+}

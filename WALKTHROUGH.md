@@ -20,3 +20,5 @@ Each sector has four objectives and a short narrative arrival/exit. Optional rou
 The chapter is not an open world. Its traversal is an authored route with arenas and crossings. Tether crossings are assisted arcs; releasing early is possible, but this is not a rope-physics climbing simulator. Creatures have six different behaviour patterns, not six cosmetic versions of one attack. Defeating all waves unlocks the next objective.
 
 A new player is intended to take 15–20 minutes while discovering the route, reading tells, solving wheels and recovering from mistakes. Automation with full knowledge is faster. No mandatory idle timer has been inserted to inflate length.
+
+Quarry visual landmarks (0.2.10): the blasting yard sits below the lifting crane; the furnace marks the next approach. Red blasting charges carry a yellow warning diamond. Their attack-triggered blast behaviour is unchanged. The crane and its suspended stone are scenery.
