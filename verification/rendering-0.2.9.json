@@ -472,5 +472,20 @@
     "No sustained 60 FPS guarantee; High quality and other devices are not covered by these Balanced samples.",
     "Area loading remains visible and is not seamless.",
     "Visual quality, first-time 15–20 minute pacing and human enjoyment remain unvalidated."
-  ]
+  ],
+  "public": {
+    "url": "https://last-tether.vercel.app/",
+    "applicationCommit": "ebfa632d888a9cdc533e84d261134e1cb6792650",
+    "deployment": "dpl_4z1VZZwBihAWRT9ytd2ffdwpcikH",
+    "ready": true,
+    "verification": {
+      "initial": "Cross the pressure channel",
+      "objective": "Release the crown lock",
+      "meta": "2 defeated · 0 recoveries",
+      "noDebug": true,
+      "errors": [],
+      "bad": [],
+      "resumed": "Release the crown lock"
+    }
+  }
 }
