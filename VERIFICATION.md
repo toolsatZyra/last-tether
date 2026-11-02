@@ -168,3 +168,5 @@ Public 0.2.11 deployment dpl_2utkhGutBWQL8Pr4FxbfHWkfd2xy is READY at last-tethe
 The accelerated rendered full route completes all 32 objectives, 188 defeats, one quarry recovery, the guardian and escape in 681.72 simulated seconds. Ordinary production keyboard controls traverse the approach and dodge a guardian charge with zero recoveries; the new model loads successfully and no page/asset errors occur. This is a bounded encounter check, not a native-input full boss victory.
 
 Four-second Balanced samples at 1036×703 after two seconds settling: opening 42.1 FPS, forest 45.6, guardian 46.7; p95 30.5/36.1/30.3 ms. Performance remains below the target. Evidence: verification/guardian-0.2.12.json.
+
+Public 0.2.12 deployment dpl_CnJ5J6BvTDtPQ8XHDRMkA3wL4Kwk is READY (application commit f81d561). Ordinary keyboard controls reached the guardian and exercised its charge with zero recoveries; the new GLB returned 200, no development hook was exposed, and no page or failed asset requests were observed. This remains a bounded encounter check.

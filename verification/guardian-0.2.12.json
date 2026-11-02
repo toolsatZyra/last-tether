@@ -340,7 +340,23 @@
     "Authored skeletal accents and root collapse, not a physics ragdoll",
     "Other creatures and hero remain stylistically simpler",
     "First-time 15–20 minute pacing remains unvalidated",
-    "Short frame samples remain below the target and do not prove sustained performance",
-    "Public deployment verification pending"
-  ]
+    "Short frame samples remain below the target and do not prove sustained performance"
+  ],
+  "public": {
+    "objective": "Defeat the Slateback",
+    "meta": "0 defeated · 0 recoveries",
+    "noDebug": true,
+    "assets": [
+      200,
+      200
+    ],
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_CnJ5J6BvTDtPQ8XHDRMkA3wL4Kwk",
+    "commit": "f81d561cbb8b4d69f5b61eb444c87d90ad86b1f3",
+    "state": "READY",
+    "url": "https://last-tether.vercel.app/"
+  }
 }
