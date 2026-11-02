@@ -228,3 +228,5 @@ Published commit b30fa662a3f447406de1ab89f8aebfe9d8e2b986 is READY as dpl_En7Gcz
 Evidence: verification/actor-lifetime-0.2.17.json. Reproduce lifetime checks with tools/expired-actors-check.js; frame instrumentation with frame-cost-start.js and frame-cost-status.js. The native renderer counters follow Babylon's [instrumentation guidance](https://doc.babylonjs.com/features/featuresDeepDive/scene/optimize_your_scene#instrumentation).
 
 Compiled preview ordinary-keyboard check passes: three defeats, watchpost objective, pause, save/reload/resume, no page errors or failed assets, and no development hook.
+
+Published 0.2.17 commit 59609f30fed8aca3be5195947ce95e7120989462 is READY as dpl_6DzhSZ2dyp82Ei2y2ekdBjz1fYJ1. The public alias serves index-IM9V8srC.js. Ordinary keyboard opening combat (three defeats), watchpost progression, pause/save/reload/resume pass with no page errors, failed asset responses or development hook.
