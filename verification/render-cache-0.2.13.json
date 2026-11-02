@@ -1,0 +1,376 @@
+{
+  "version": "0.2.13",
+  "tests": 26,
+  "assets": 83,
+  "build": "passed",
+  "changes": [
+    "Cache static environment PBR readiness using Babylon freeze/unfreeze",
+    "Keep shadow caster world cache area-owned and deduplicate active list"
+  ],
+  "pixelParity": {
+    "bytes": 2913232,
+    "nonzero": 2913232,
+    "materials": 23,
+    "caching": {
+      "changed": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "duplicates": {
+      "changed": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "errors": []
+  },
+  "shadowRebuilds": {
+    "rebuilds": 9,
+    "rows": [
+      {
+        "sector": 0,
+        "shadowEntries": 93,
+        "cachedWorld": 518,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 3,
+        "shadowEntries": 63,
+        "cachedWorld": 523,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 6,
+        "shadowEntries": 85,
+        "cachedWorld": 474,
+        "heroEntries": 20,
+        "actorEntries": 6
+      },
+      {
+        "sector": 0,
+        "shadowEntries": 93,
+        "cachedWorld": 518,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 3,
+        "shadowEntries": 63,
+        "cachedWorld": 523,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 6,
+        "shadowEntries": 85,
+        "cachedWorld": 474,
+        "heroEntries": 20,
+        "actorEntries": 6
+      },
+      {
+        "sector": 0,
+        "shadowEntries": 93,
+        "cachedWorld": 518,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 3,
+        "shadowEntries": 63,
+        "cachedWorld": 523,
+        "heroEntries": 20,
+        "actorEntries": 1
+      },
+      {
+        "sector": 6,
+        "shadowEntries": 85,
+        "cachedWorld": 474,
+        "heroEntries": 20,
+        "actorEntries": 6
+      }
+    ]
+  },
+  "quality": {
+    "rows": [
+      {
+        "sector": 0,
+        "quality": "high",
+        "cached": 24,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 0,
+        "quality": "low",
+        "cached": 24,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 0,
+        "quality": "balanced",
+        "cached": 24,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 3,
+        "quality": "high",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 3,
+        "quality": "low",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 3,
+        "quality": "balanced",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 6,
+        "quality": "high",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 6,
+        "quality": "low",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      },
+      {
+        "sector": 6,
+        "quality": "balanced",
+        "cached": 23,
+        "ready": true,
+        "frozen": true
+      }
+    ],
+    "errors": []
+  },
+  "details": {
+    "initial": {
+      "lights": 2,
+      "lampPositions": 32,
+      "chests": 3,
+      "lidMeshes": 2
+    },
+    "opened": {
+      "secret": true,
+      "flasks": 2,
+      "lid": 1.149782788289945,
+      "glimmer": false
+    },
+    "restored": {
+      "lid": 1.15,
+      "glimmer": false
+    },
+    "foliage": {
+      "faded": true,
+      "restored": true
+    },
+    "errors": []
+  },
+  "transitions": {
+    "results": [
+      {
+        "sector": 1,
+        "wallMs": 2294.5000000014898,
+        "frames": 195,
+        "maxMs": 175.89999999999964,
+        "p95Ms": 30.200000000000728,
+        "gameFrozen": true,
+        "paused": true,
+        "physicsBodies": 52,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 2,
+        "wallMs": 2823.5000000029795,
+        "frames": 301,
+        "maxMs": 157.6999999999989,
+        "p95Ms": 19.19999999999891,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 61,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 3,
+        "wallMs": 2058.5000000029795,
+        "frames": 195,
+        "maxMs": 151.59999999999854,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 54,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 4,
+        "wallMs": 2405.2000000000007,
+        "frames": 264,
+        "maxMs": 169.90000000000146,
+        "p95Ms": 18.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 42,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 5,
+        "wallMs": 2922.9000000014894,
+        "frames": 329,
+        "maxMs": 194.09999999999854,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 6,
+        "wallMs": 2119.7000000000007,
+        "frames": 198,
+        "maxMs": 169.90000000000146,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 74,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 7,
+        "wallMs": 1947.2000000029802,
+        "frames": 180,
+        "maxMs": 163.79999999999927,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      }
+    ],
+    "errors": []
+  },
+  "materialAB": [
+    {
+      "sector": 0,
+      "frozen": false,
+      "materials": 26,
+      "fps": 47.99417450015125,
+      "cpu": 18.073793103417447,
+      "render": 5.606206896387298,
+      "meshes": 3.7668965515905413,
+      "draws": 358.3379310344828
+    },
+    {
+      "sector": 0,
+      "frozen": true,
+      "materials": 26,
+      "fps": 52.47600385266861,
+      "cpu": 16.391772152125082,
+      "render": 4.343037974749562,
+      "meshes": 3.754430380190098,
+      "draws": 358.49367088607596
+    },
+    {
+      "sector": 0,
+      "frozen": false,
+      "materials": 26,
+      "fps": 49.167801734112956,
+      "cpu": 17.46554054042979,
+      "render": 5.272972972811879,
+      "meshes": 3.8128378381700934,
+      "draws": 358.3310810810811
+    },
+    {
+      "sector": 0,
+      "frozen": true,
+      "materials": 26,
+      "fps": 50.56217151220809,
+      "cpu": 17.021710526247166,
+      "render": 4.601973684259543,
+      "meshes": 4.02960526291281,
+      "draws": 358.7171052631579
+    },
+    {
+      "sector": 6,
+      "frozen": false,
+      "materials": 25,
+      "fps": 50.96602265159094,
+      "cpu": 16.45947712367656,
+      "render": 5.5405228756416856,
+      "meshes": 3.3424836592931375,
+      "draws": 382.9019607843137
+    },
+    {
+      "sector": 6,
+      "frozen": true,
+      "materials": 25,
+      "fps": 54.045092838142835,
+      "cpu": 15.322699386512209,
+      "render": 4.501840490779262,
+      "meshes": 3.349079754592085,
+      "draws": 382.840490797546
+    },
+    {
+      "sector": 6,
+      "frozen": false,
+      "materials": 25,
+      "fps": 49.893560404519945,
+      "cpu": 16.761333333402874,
+      "render": 5.649333333174388,
+      "meshes": 3.4380000001688797,
+      "draws": 382.82666666666665
+    },
+    {
+      "sector": 6,
+      "frozen": true,
+      "materials": 25,
+      "fps": 53.24282053836519,
+      "cpu": 15.446874999674037,
+      "render": 4.605624999757856,
+      "meshes": 3.331875000195578,
+      "draws": 382.70625
+    }
+  ],
+  "production": {
+    "objective": "Defeat the Slateback",
+    "meta": "0 defeated · 0 recoveries",
+    "noDebug": true,
+    "assets": [
+      200,
+      200
+    ],
+    "errors": [],
+    "bad": []
+  },
+  "normalSpeed": "render-cache-0.2.13-realtime.json",
+  "limits": [
+    "Expert input policy on Explorer, not first-time human pacing",
+    "No consistent 60 FPS",
+    "Native Babylon already suppresses duplicate shadow draws; list fix does not reduce GPU draw calls",
+    "Pixel comparison excludes time-varying water and pauses animation/particles",
+    "A 537 ms interval during the escape coincides with screenshot capture; retained in reported statistics",
+    "Top-tier art, cohesive hero/creatures, enjoyment and first-time 15–20 minute pacing remain open"
+  ]
+}

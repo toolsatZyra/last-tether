@@ -1,0 +1,1 @@
+async(page)=>({state:await page.evaluate(()=>({visibility:document.visibilityState,focus:document.hasFocus(),a:window.__expedition?.snapshot(),ready:window.__expedition?.view.loaded})),url:page.url()})

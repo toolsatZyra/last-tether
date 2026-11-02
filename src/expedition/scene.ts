@@ -123,6 +123,8 @@ export class GameScene {
   ghostActor: Actor | null = null;
   ghostFrames: any[] = [];
   ghostEnabled = true;
+  worldMaterials = new Set<PBRMaterial>();
+  pendingWorldFreeze = 0;
   frameTimes: number[] = [];
   frameNow = 0;
   current!: Expedition;
@@ -824,6 +826,7 @@ export class GameScene {
     for (const _ of this.buildSteps(s)) {
       /* synchronous developer/load path */
     }
+    this.freezeWorldMaterials();
   }
   async buildAsync(s: Expedition) {
     let slice = performance.now();
@@ -852,9 +855,21 @@ export class GameScene {
       }
     }
     await this.scene.whenReadyAsync();
+    this.freezeWorldMaterials();
+  }
+  freezeWorldMaterials() {
+    if (!this.root) return;
+    for (const mesh of this.root.getChildMeshes()) {
+      const material = mesh.material;
+      if (material instanceof PBRMaterial) this.worldMaterials.add(material);
+    }
+    this.worldMaterials.forEach((m) => m.freeze());
+    this.pendingWorldFreeze = 0;
   }
   *buildSteps(s: Expedition): Generator<void> {
     this.current = s;
+    this.worldMaterials.forEach((m) => m.unfreeze());
+    this.worldMaterials.clear();
     this.quarrySmoke?.dispose(false);
     this.quarrySmoke = undefined;
     this.pressureGallery?.dispose();
@@ -1241,7 +1256,11 @@ export class GameScene {
       .filter((n) => n.metadata?.wheel);
     for (const n of this.foliage)
       for (const m of n.getChildMeshes()) this.shadow.addShadowCaster(m);
-    this.shadowCasters = [...(this.shadow.getShadowMap()?.renderList || [])];
+    // This cache owns only the current environment. Characters are added once
+    // below, otherwise every rebuild carries another copy of the hero forward.
+    this.shadowCasters = [
+      ...new Set(this.shadow.getShadowMap()?.renderList || []),
+    ].filter((m) => m.isDescendantOf(this.root));
     this.river.reflect([
       this.scene.getMeshByName("sky")!,
       ...this.staticDraws.filter(
@@ -1963,17 +1982,21 @@ export class GameScene {
           Math.hypot(n.position.x - s.p.x, n.position.z - s.p.z) < 145,
         );
       this.shadow.getShadowMap()!.renderList = [
-        ...this.shadowCasters.filter(
-          (m) =>
-            !m.isDisposed() &&
-            Vector3.Distance(
-              m.getBoundingInfo().boundingBox.centerWorld,
-              V(s.p),
-            ) < 80,
-        ),
-        ...this.hero.meshes,
-        ...[...this.actors.values()].flatMap((a) => a.meshes),
-      ];
+        ...new Set([
+          ...this.shadowCasters.filter(
+            (m) =>
+              !m.isDisposed() &&
+              Vector3.Distance(
+                m.getBoundingInfo().boundingBox.centerWorld,
+                V(s.p),
+              ) < 80,
+          ),
+          ...this.hero.meshes,
+          ...[...this.actors.values()].flatMap((a) => a.meshes),
+        ]),
+      ].filter(
+        (m) => !m.isDisposed() && m.isEnabled() && m.getTotalVertices() > 0,
+      );
       for (const m of this.staticDraws) {
         const b = m.getBoundingInfo().boundingBox,
           center = b.centerWorld;
@@ -1983,13 +2006,23 @@ export class GameScene {
           Math.hypot(center.x - s.p.x, center.z - s.p.z) < 150 + radius;
       }
     }
-    if (render) this.scene.render();
+    if (render) {
+      this.scene.render();
+      if (
+        this.pendingWorldFreeze > 0 &&
+        this.scene.isReady() &&
+        --this.pendingWorldFreeze === 0
+      )
+        this.freezeWorldMaterials();
+    }
     if (dt > 0) {
       this.frameTimes.push(dt * 1000);
       if (this.frameTimes.length > 600) this.frameTimes.shift();
     }
   }
   setQuality(q: string) {
+    this.worldMaterials.forEach((m) => m.unfreeze());
+    this.pendingWorldFreeze = 2;
     this.quality = q;
     this.engine.setHardwareScalingLevel(
       q === "low" ? 1.8 : q === "balanced" ? 1.25 : 1,

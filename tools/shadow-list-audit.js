@@ -1,0 +1,1 @@
+async(page)=>page.evaluate(()=>{const a=window.__expedition,v=a.view;return{sector:a.game.sector,list:v.shadow.getShadowMap().renderList.length,unique:new Set(v.shadow.getShadowMap().renderList).size,cached:v.shadowCasters.length,cachedUnique:new Set(v.shadowCasters).size,duplicates:v.shadow.getShadowMap().renderList.filter((m,i,all)=>all.indexOf(m)!==i).map(m=>m.name)};})
