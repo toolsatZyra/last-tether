@@ -1,6 +1,6 @@
 {
   "version": "0.2.29",
-  "status": "local-verification-passed",
+  "status": "published-and-verified",
   "date": "2026-11-02",
   "source": {
     "repository": "https://github.com/danielgruginski/Insectoids",
@@ -1070,5 +1070,34 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "public": {
+    "version": "LAST TETHER · 0.2.29",
+    "frameSample": {
+      "frames": 1254,
+      "seconds": 17.911799999999996,
+      "averageFps": 69.95388514833799,
+      "medianMs": 12.200000000000728,
+      "p95Ms": 18.30000000000291
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "publicAsset": {
+    "bytes": 2727320,
+    "sha256": "471552c7e8b546a883b22be8a98f45fcd989d92dc82944dc5fb012cb79ffec7b",
+    "matchesLocal": true
+  },
+  "deployment": {
+    "id": "dpl_C1vRr8eQGDpozNcEmxPmVGdV1KR1",
+    "state": "READY",
+    "appCommit": "89e0f987e4befad1a85ad90e07adf8bcc16d8282",
+    "bundle": "index-DNfABdAl.js",
+    "url": "https://last-tether.vercel.app/"
   }
 }

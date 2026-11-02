@@ -1,6 +1,6 @@
 # Last Tether — active checkpoint
 
-User resumed work. Goal active. **0.2.29 is locally verified and being published.** Public release was 0.2.28 at start of this pass; verify new deployment SHA, alias bundle and live keyboard check before calling 0.2.29 published. Build: index-DNfABdAl.js.
+User resumed work. Goal active. **0.2.29 is published and verified** at https://last-tether.vercel.app/. App commit 89e0f987e4befad1a85ad90e07adf8bcc16d8282; READY deployment dpl_C1vRr8eQGDpozNcEmxPmVGdV1KR1; alias bundle index-DNfABdAl.js. A documentation-only follow-up records live evidence.
 
 ## Silkspitter release
 
@@ -20,8 +20,10 @@ Pre-pause normal-speed 35.0576-second combat profile reached the watchpost with 
 
 ## Next
 
-Finish publication/public verification, then continue cohesive hero/creature art and remaining contact/frame-pacing weaknesses. Wasp from same pack is research-only because some preview poses disappeared; inspect animated bounds/pose before integration. Research files: research/creature-assets/fantasy-creatures. Do not rerun broad completed checks without relevant changes.
+Continue cohesive hero/creature art and remaining contact/frame-pacing weaknesses. Wasp from same pack is research-only because some preview poses disappeared; inspect animated bounds/pose before integration. Research files: research/creature-assets/fantasy-creatures. Do not rerun broad completed checks without relevant changes.
 
 Overall goal unfinished: hero and other creatures still mixed/low-detail, occasional hitches, human enjoyment and first-time 15–20 minute pacing unverified. Fal approved US$5 pilot remains blocked by exhausted credits: do not generate/upload/retry/poll until user confirms credits. No Supabase/cloud integration. No subagents. Main auto-deploys; no duplicate manual deployment.
 
 At resume, local servers/browser were absent and were restarted: dev4173, preview4174, owned tether-release Chrome using research/qa-release.config.json (--mute-audio). Leave unrelated browser/audio/GPU settings alone.
+
+Public keyboard combat/pause/save/reload passes with correct 0.2.29 footer, no debug hook/errors/failed responses. Public model byte-equals tested local model. Bounded 69.95 FPS average / p95 18.3 ms over 17.91 seconds; not a whole-chapter claim. All final visual/compiled/public checks are terminal. Owned silent browser is paused on the public game.
