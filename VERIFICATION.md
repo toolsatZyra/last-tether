@@ -230,3 +230,11 @@ Evidence: verification/actor-lifetime-0.2.17.json. Reproduce lifetime checks wit
 Compiled preview ordinary-keyboard check passes: three defeats, watchpost objective, pause, save/reload/resume, no page errors or failed assets, and no development hook.
 
 Published 0.2.17 commit 59609f30fed8aca3be5195947ce95e7120989462 is READY as dpl_6DzhSZ2dyp82Ei2y2ekdBjz1fYJ1. The public alias serves index-IM9V8srC.js. Ordinary keyboard opening combat (three defeats), watchpost progression, pause/save/reload/resume pass with no page errors, failed asset responses or development hook.
+
+## Boot deformation correction — 0.2.18
+
+The current hero has feet animated under Root independently of the legs. Before correction, the extra airborne pose displaced the expected left/right ankle attachment by 0.818/0.307 world units while the boots stayed behind; the landing accent measured 0.347/0.351. Staged close-ups confirmed visible boot stretching. After correction, 240 cycles across airborne, landing, blended and neutral poses plus varying headings retained the boot-to-lower-leg transforms within 4.18e-7 matrix component error. Original foot transforms and parent links restored without drift.
+
+Four real keyboard jumps, dodge and melee recorded 259 airborne frames and 56 landing frames, no invalid transforms, and a grounded restored pose at the end. Existing character checks passed for 15 meshes, all three strikes, source geometry/weights, normals and camera widening. All 34 tests and production build passed. Compiled keyboard opening combat, watchpost progression, pause/save/reload/resume passed with no page errors or failed assets, and no development hook.
+
+Evidence: verification/foot-pose-0.2.18.json. Reproduce with tools/foot-pose-check.js; tools/foot-pose-gallery.js records explicitly staged before/after views. Landing remains an authored pose rather than terrain-aware sole IK. No new full-chapter timing or sustained performance claim is made.

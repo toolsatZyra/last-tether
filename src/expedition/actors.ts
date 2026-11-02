@@ -1,3 +1,4 @@
+import { FootPose } from "./foot-pose";
 import { GuardianMotion } from "./guardian";
 import {
   Scene,
@@ -62,6 +63,7 @@ export class Actor {
   enemyPosition?: Vector3;
   enemyMoveSpeed = 0;
   poseBases = new Map<TransformNode, Quaternion>();
+  footPoses: FootPose[] = [];
   constructor(
     container: AssetContainer,
     scene: Scene,
@@ -197,7 +199,23 @@ export class Actor {
     }
     this.groups.forEach((g) => g.stop());
     this.play(hero ? "Idle_Sword" : "Idle");
+    if (hero)
+      for (const side of ["L", "R"]) {
+        const lower = this.nodes.find((n) =>
+          n.name.endsWith("LowerLeg." + side),
+        );
+        const foot = this.nodes.find((n) => n.name.endsWith("Foot." + side));
+        if (
+          lower &&
+          foot?.rotationQuaternion &&
+          foot.parent &&
+          !foot.isDescendantOf(lower)
+        )
+          this.footPoses.push(new FootPose(lower, foot));
+      }
     const observer = scene.onAfterAnimationsObservable.add(() => {
+      const poseLegs = this.air > 0.01 || this.landing > 0.01;
+      if (poseLegs) this.footPoses.forEach((foot) => foot.capture());
       if (this.air > 0.01 || this.landing > 0.01 || this.attackPose >= 0) {
         for (const n of this.nodes) {
           if (!n.rotationQuaternion) continue;
@@ -239,6 +257,7 @@ export class Actor {
           }
         }
       }
+      if (poseLegs) this.footPoses.forEach((foot) => foot.apply());
       if (scene.animationsEnabled && this.trailActive)
         this.weaponTrail?.update();
     });
@@ -425,6 +444,7 @@ export class Actor {
     }
   }
   clearPose() {
+    this.footPoses.forEach((foot) => foot.restore());
     for (const [node, base] of this.poseBases)
       node.rotationQuaternion?.copyFrom(base);
     this.poseBases.clear();

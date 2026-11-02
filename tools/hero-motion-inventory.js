@@ -1,0 +1,1 @@
+async(page)=>{return page.evaluate(()=>{const h=window.__expedition.view.hero;return h.groups.map(g=>({name:g.name,from:g.from,to:g.to,targets:g.targetedAnimations.filter(t=>/Foot|LowerLeg|UpperLeg|Body/.test(t.target.name)).map(t=>({node:t.target.name,property:t.animation.targetProperty}))}));});}

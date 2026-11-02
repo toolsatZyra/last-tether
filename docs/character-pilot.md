@@ -21,3 +21,7 @@ Sources: https://fal.ai/models/meshy/v7.1/image-to-3d ; https://fal.ai/models/fa
 ## Approved pilot execution
 
 The user approved up to US$5 total on 2 November 2026. The first reference-image submission to fal-ai/flux-2-pro was rejected with HTTP 403 balance_exhausted on the Zyra account. No request ID or generated output was returned. No subsequent generation or upload was submitted. The workflow is preserved pending the user confirming added credits; then check account readiness before resuming. The approved cap remains US$5, with no subscription or automatic top-up.
+
+## Original reference prepared
+
+The built-in image tool produced [Kavi reference v1](character-pilot/kavi-reference-v1.png) on 2 November 2026. The exact prompt and visual review are saved in [reference-v1.md](character-pilot/reference-v1.md). This is reference artwork only; no 3D character or rig has been generated. No fal upload, generation retry, top-up or subscription was performed.

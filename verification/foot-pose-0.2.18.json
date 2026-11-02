@@ -1,0 +1,172 @@
+{
+  "version": "0.2.18",
+  "date": "2026-11-02",
+  "change": "Carry independently animated boot nodes with additional lower-leg poses using native Babylon transforms; restore their authored transforms before the next update.",
+  "baseline": {
+    "airAttachmentErrorWorldUnits": {
+      "left": 0.8180549004398057,
+      "right": 0.3072145731708583
+    },
+    "landingAttachmentErrorWorldUnits": {
+      "left": 0.3470679435077597,
+      "right": 0.3505140452317108
+    }
+  },
+  "pose": {
+    "cycles": 240,
+    "maxMatrixError": 4.172325134277344e-7,
+    "restored": true,
+    "checkElapsedMs": 35.19999999552965,
+    "samples": [
+      {
+        "air": 1,
+        "landing": 0,
+        "feet": [
+          {
+            "side": "L",
+            "matrixError": 2.980232238769531e-7
+          },
+          {
+            "side": "R",
+            "matrixError": 1.1920928955078125e-7
+          }
+        ]
+      },
+      {
+        "air": 0,
+        "landing": 1,
+        "feet": [
+          {
+            "side": "L",
+            "matrixError": 1.7881393432617188e-7
+          },
+          {
+            "side": "R",
+            "matrixError": 1.7881393432617188e-7
+          }
+        ]
+      },
+      {
+        "air": 0.4,
+        "landing": 0.6,
+        "feet": [
+          {
+            "side": "L",
+            "matrixError": 1.7881393432617188e-7
+          },
+          {
+            "side": "R",
+            "matrixError": 1.1920928955078125e-7
+          }
+        ]
+      },
+      {
+        "air": 0,
+        "landing": 0,
+        "feet": [
+          {
+            "side": "L",
+            "matrixError": 5.960464477539063e-8
+          },
+          {
+            "side": "R",
+            "matrixError": 1.4901161193847656e-8
+          }
+        ]
+      }
+    ],
+    "motion": {
+      "airFrames": 259,
+      "landingFrames": 56,
+      "invalid": 0,
+      "grounded": true,
+      "restored": true
+    },
+    "errors": []
+  },
+  "character": {
+    "checkedMeshes": 15,
+    "strikes": {
+      "0": {
+        "phase": 0.33333333333333326,
+        "pose": 0,
+        "arm": [
+          -0.6339225083885774,
+          -0.2120488148182501,
+          0.06854774661382586,
+          0.7405935411879349
+        ],
+        "tip": [
+          -1.4455617666244507,
+          10.216682434082031,
+          0.4962054193019867
+        ]
+      },
+      "1": {
+        "phase": 0.33333333333333326,
+        "pose": 1,
+        "arm": [
+          -0.5765221311858124,
+          -0.3382967318205417,
+          -0.08575113825780079,
+          0.7387992481740965
+        ],
+        "tip": [
+          -1.1140531301498413,
+          9.876443862915039,
+          1.4160348176956177
+        ]
+      },
+      "2": {
+        "phase": 0.3448275862068969,
+        "pose": 2,
+        "arm": [
+          -0.5775766677173488,
+          -0.3286669303692332,
+          -0.097370001119684,
+          0.740879442109092
+        ],
+        "tip": [
+          -1.3330719470977783,
+          10.122117042541504,
+          1.088832974433899
+        ]
+      }
+    },
+    "poseReset": true,
+    "duplicatePack": false,
+    "idleCameraDistance": 7.800002682088299,
+    "combatCameraDistance": 9.999989377568777,
+    "errors": []
+  },
+  "production": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "tests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "build": "pass",
+  "visualReview": {
+    "staged": true,
+    "images": [
+      "output/playwright/air-before.png",
+      "output/playwright/air-after.png",
+      "output/playwright/landing-before.png",
+      "output/playwright/landing-after.png"
+    ],
+    "finding": "The before jump capture visibly stretches boots from displaced calves toward the old foot positions; the after capture retains their boot shape at the posed leg ends."
+  },
+  "limits": [
+    "This is a detached-node pose correction, not terrain foot IK or a new character model.",
+    "Landing remains an authored short pose, without measured terrain-aware sole contact.",
+    "Kavi reference v1 is concept artwork only; fal 3D conversion remains pending credits.",
+    "No new sustained-frame-rate or first-time-human pacing claim."
+  ]
+}
