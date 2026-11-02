@@ -338,5 +338,20 @@
     "Short stationary Balanced samples at 1036x703, not sustained combat performance.",
     "Scenery is outside playable floors; scanned cliffs are not new traversable surfaces.",
     "Top-tier visual parity and human enjoyment remain unverified."
-  ]
+  ],
+  "live": {
+    "applicationCommit": "2a33db1c92f02a09f554ba3099f2bf1f0293ddce",
+    "deployment": "dpl_D69D9RYYzyb9ZBFdF9PbAqsXe1so",
+    "status": "READY",
+    "url": "https://last-tether.vercel.app/",
+    "check": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
+  }
 }
