@@ -1,5 +1,5 @@
 {
-  "status": "local release checks passed; publication pending",
+  "status": "published and live-verified",
   "nativeCollision": {
     "collisions": [
       {
@@ -671,5 +671,19 @@
       "rope": false,
       "pull": false
     }
+  },
+  "live": {
+    "url": "https://last-tether.vercel.app/",
+    "deployment": "dpl_8QaEw5Bv4bPZpsC74dh1GaZ8E6JU",
+    "applicationCommit": "707de8be1ec9532a3b81bab604c7036932b34ba9",
+    "bundle": "index-BNsvBG4r.js",
+    "browser": "Fresh isolated headless Chrome, ordinary keyboard events, silent",
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
   }
 }
