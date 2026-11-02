@@ -1,7 +1,7 @@
 {
   "version": "0.2.24",
   "date": "2026-11-02",
-  "status": "local checks passed; not yet published",
+  "status": "included in published and verified 0.2.25",
   "change": "Responsive waterworks handwheels, three lifting sluice gates, flowing spills and channel machinery; clear spillway canyon volume.",
   "unitTests": {
     "passed": 45,
@@ -1412,5 +1412,12 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "deployment": {
+    "url": "https://last-tether.vercel.app/",
+    "commit": "6f8d2ab9129d14878d9de9bc959860b975dbd0dc",
+    "id": "dpl_2SPk5WbHtsR6S7pygbJnDqHw1QJy",
+    "state": "READY",
+    "bundle": "index-BELsr166.js"
   }
 }

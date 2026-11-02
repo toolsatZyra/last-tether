@@ -1,7 +1,7 @@
 {
   "version": "0.2.25",
   "date": "2026-11-02",
-  "status": "validated locally; publication pending",
+  "status": "published and verified",
   "trigger": "User played the first three waves on 0.2.23 and reported no felt impact for outgoing or incoming attacks.",
   "changes": [
     "Directional player recoil and weight-sensitive enemy recoil through Havok capsule sweeps.",
@@ -1124,5 +1124,29 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "live": {
+    "version": "LAST TETHER · 0.2.25",
+    "frameSample": {
+      "frames": 946,
+      "seconds": 15.382399999999997,
+      "averageFps": 61.43384647389225,
+      "medianMs": 18,
+      "p95Ms": 24.299999999995634
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "url": "https://last-tether.vercel.app/",
+    "commit": "6f8d2ab9129d14878d9de9bc959860b975dbd0dc",
+    "id": "dpl_2SPk5WbHtsR6S7pygbJnDqHw1QJy",
+    "state": "READY",
+    "bundle": "index-BELsr166.js"
   }
 }
