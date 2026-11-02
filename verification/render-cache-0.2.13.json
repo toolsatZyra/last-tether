@@ -372,5 +372,24 @@
     "Pixel comparison excludes time-varying water and pauses animation/particles",
     "A 537 ms interval during the escape coincides with screenshot capture; retained in reported statistics",
     "Top-tier art, cohesive hero/creatures, enjoyment and first-time 15–20 minute pacing remain open"
-  ]
+  ],
+  "public": {
+    "applicationCommit": "ad2936c19f43302e02f7d26a34c3c83c0983abde",
+    "deployment": "dpl_7HN4gSjrrdPd6qGaChbTgk3WKzZo",
+    "state": "READY",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "/assets/index-DMA5fanh.js",
+    "matchesLocalBuild": true,
+    "guardian": {
+      "objective": "Defeat the Slateback",
+      "meta": "0 defeated · 0 recoveries",
+      "noDebug": true,
+      "assets": [
+        200,
+        200
+      ],
+      "errors": [],
+      "bad": []
+    }
+  }
 }
