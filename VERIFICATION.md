@@ -158,3 +158,5 @@ Public 0.2.10 verification: application commit `f475985d22c4c16fcbd03ab4fc56a5b1
 - Detailed evidence: verification/creatures-0.2.11.json. Production/public ordinary-input checks are recorded below when complete.
 
 Production preview ordinary keyboard/mouse quarry check: nine defeats, zero recoveries, advanced to the furnace approach and restored that checkpoint after reload. No development hook, page errors or failed asset requests.
+
+Public 0.2.11 deployment dpl_2utkhGutBWQL8Pr4FxbfHWkfd2xy is READY at last-tether.vercel.app (application commit f638408). The same ordinary-input quarry check passed live: nine defeats, zero recoveries, furnace approach checkpoint restored after reload, no development hook, no page errors or failed asset requests.

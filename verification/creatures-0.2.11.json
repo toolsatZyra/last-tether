@@ -304,8 +304,7 @@
     "Accelerated full route is not first-time human pacing",
     "Short frame samples do not establish sustained performance",
     "Creature source silhouettes remain too cartoonish for the requested visual standard",
-    "No foot IK or per-bone hit detection",
-    "Public deployment verification pending"
+    "No foot IK or per-bone hit detection"
   ],
   "production": {
     "initial": "Clear the blasting yard",
@@ -315,5 +314,20 @@
     "errors": [],
     "bad": [],
     "resumed": "Survive the furnace approach"
+  },
+  "public": {
+    "initial": "Clear the blasting yard",
+    "objective": "Survive the furnace approach",
+    "meta": "9 defeated · 0 recoveries",
+    "noDebug": true,
+    "errors": [],
+    "bad": [],
+    "resumed": "Survive the furnace approach"
+  },
+  "deployment": {
+    "id": "dpl_2utkhGutBWQL8Pr4FxbfHWkfd2xy",
+    "commit": "f638408d6e7adc2a7f11f5947ac7f15e51737c74",
+    "url": "https://last-tether.vercel.app/",
+    "state": "READY"
   }
 }
