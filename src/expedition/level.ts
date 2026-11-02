@@ -1,3 +1,5 @@
+export const EXIT_GATE_OFFSET = 23;
+export const EXIT_GATE_CLEARANCE = 0.7;
 export type V = { x: number; y: number; z: number };
 export const v = (x = 0, y = 0, z = 0): V => ({ x, y, z });
 export type Kind =

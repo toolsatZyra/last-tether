@@ -6,6 +6,8 @@ import {
 } from "./pressure.ts";
 import {
   CHAPTERS,
+  EXIT_GATE_OFFSET,
+  EXIT_GATE_CLEARANCE,
   distance,
   length3,
   floorAt,
@@ -954,8 +956,9 @@ export class Expedition {
         }
       }
 
-      if (this.p.z > this.destination.z + 23 && !this.clear) {
-        this.p.z = this.destination.z + 23;
+      const stopZ = this.destination.z + EXIT_GATE_OFFSET - EXIT_GATE_CLEARANCE;
+      if (this.p.z > stopZ && !this.clear) {
+        this.p.z = stopZ;
         this.velocity.z = 0;
       }
     }

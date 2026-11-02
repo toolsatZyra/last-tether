@@ -121,3 +121,9 @@ The current hero export animates Foot.L/R under Root, outside the UpperLeg/Lower
 crane.ts shares the load/lever positions, 0.5-second warning, 0.64-second fall and 5.2-unit impact radius between the game state and scene. A nearby grounded E press releases it once. At impact, the damage check runs once, respects height and player invulnerability, and can trigger the charge beneath the load. Checkpoint retries rearm the unsecured first yard; later checkpoints show spent rubble. The existing save format remains unchanged.
 
 The load, ropes, lever, warning ring and shallow rubble are excluded from static mesh batches. Their transforms derive from game time, so pause freezes the mechanism. The authored falling pose is not a new rigid-body simulation. Camera distance and target height blend with proximity to the load; yaw remains under player control. Existing native Havok movement, Babylon particle effects and licensed audio samples are retained.
+
+## Encounter boundary presentation — 0.2.20
+
+The apparent horizontal cyan fog band was the old 44×6 translucent route-seal box. Water/fog/sky isolation and a gate-hidden capture identified it; no water or atmospheric tuning was required. EncounterGate replaces each panel with two merged metal/brass meshes under one moving root. Bars, rails, rivets, collars and finials remain opaque, with empty space between them. Only the current closed gate is shown at rest. Clearing the encounter retracts it below the deck over 0.45 seconds; retry restores it. These meshes are excluded from static batches and disposed with the sector root.
+
+EXIT_GATE_OFFSET and EXIT_GATE_CLEARANCE share the visual boundary and the player stop plane. The existing encounter movement clamp now stops the player 0.7 units before the bars, and releases when clear. This is an authored encounter boundary, not a newly simulated rigid gate or a replacement for Havok locomotion. Native movement checks verify stop/release and retry.

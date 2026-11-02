@@ -1,3 +1,4 @@
+import { EncounterGate } from "./encounter-gate";
 import { actorSight, actorOpacity } from "./actor-visibility";
 import {
   Engine,
@@ -111,7 +112,7 @@ export class GameScene {
   loaded = false;
   anchors: Mesh[] = [];
   devices: TransformNode[] = [];
-  gates: Mesh[] = [];
+  gates: EncounterGate[] = [];
   pointers: Mesh[] = [];
   pods: Mesh[] = [];
   cacheMeshes: AbstractMesh[] = [];
@@ -1212,15 +1213,7 @@ export class GameScene {
           link.rotation.y = Math.atan2(next.x - q.x, next.z - q.z);
         }
       }
-      const gate = this.box(
-        "route-seal",
-        v(p.x, p.y + 3, p.z + 23),
-        v(44, 6, 0.2),
-        "cyan",
-        false,
-      );
-      gate.visibility = 0.12;
-      this.gates.push(gate);
+      this.gates.push(new EncounterGate(this, p, i === s.beat && !s.clear));
       if (b.hazard === "blades") {
         this.cylinder("turbine", v(p.x, p.y - 1, p.z), 9, 3, "metal");
       }
@@ -1315,7 +1308,7 @@ export class GameScene {
   *batchStaticSteps(): Generator<void> {
     const keep = new Set<AbstractMesh>([
       ...this.anchors,
-      ...this.gates,
+      ...this.gates.flatMap((gate) => gate.meshes),
       ...this.pointers,
       ...this.pods,
       ...this.pods.flatMap((pod) => pod.getChildMeshes()),
@@ -1809,7 +1802,7 @@ export class GameScene {
         m.dispose();
         this.chargeMarks.delete(id);
       }
-    this.gates.forEach((m, i) => m.setEnabled(i === s.beat && !s.clear));
+    this.gates.forEach((gate, i) => gate.update(i === s.beat && !s.clear, dt));
     this.pointers.forEach((m, i) => {
       if (i === s.beat) m.rotation.z = (-s.deviceTurn * Math.PI) / 2;
     });

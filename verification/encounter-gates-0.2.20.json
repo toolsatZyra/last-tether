@@ -1,0 +1,305 @@
+{
+  "version": "0.2.20",
+  "date": "2026-11-02",
+  "change": "Replace broad translucent encounter panels with retracting opaque metalwork and keep the player stop point clear of the bars.",
+  "diagnosis": {
+    "waterDisabled": "band remains",
+    "fogDisabled": "band remains",
+    "skyDisabled": "band remains",
+    "gateHidden": "band disappears",
+    "source": "scene.ts route-seal box, formerly 44 by 6 with cyan material and visibility 0.12"
+  },
+  "gateState": {
+    "closed": {
+      "amount": 1,
+      "y": 14,
+      "enabled": true,
+      "meshes": 2
+    },
+    "opening": {
+      "amount": 0.5555555555555556,
+      "y": 11.956652949245541,
+      "enabled": true
+    },
+    "pauseHolds": true,
+    "open": {
+      "amount": 0,
+      "enabled": false
+    },
+    "reclosed": {
+      "amount": 1,
+      "enabled": true
+    },
+    "transparentWalls": 0,
+    "errors": []
+  },
+  "nativeMovement": {
+    "nativeMotion": true,
+    "stopped": {
+      "z": 80.3,
+      "gateZ": 81,
+      "clearance": 0.7000000000000028,
+      "grounded": true
+    },
+    "released": {
+      "z": 81.46695761680452,
+      "clear": true
+    },
+    "reset": true
+  },
+  "resources": {
+    "before": {
+      "meshes": 635,
+      "textures": 59,
+      "materials": 110,
+      "shadowEntries": 115,
+      "gates": 4,
+      "gateMeshes": 8,
+      "visibleGateMeshes": 2
+    },
+    "warm": {
+      "meshes": 635,
+      "textures": 63,
+      "materials": 113,
+      "shadowEntries": 115,
+      "gates": 4,
+      "gateMeshes": 8,
+      "visibleGateMeshes": 2
+    },
+    "after": {
+      "meshes": 635,
+      "textures": 63,
+      "materials": 113,
+      "shadowEntries": 115,
+      "gates": 4,
+      "gateMeshes": 8,
+      "visibleGateMeshes": 2
+    },
+    "pausedSample": {
+      "sector": 0,
+      "renderSize": [
+        1036,
+        703
+      ],
+      "fps": 72.18324058378793,
+      "p95Ms": 18.200000002980232,
+      "maxMs": 20.5
+    }
+  },
+  "initialResourceComparison": "Cold scene comparison reported 53 versus 59 textures after first visiting other sectors. Subsequent explicit warm-cache cycles return to identical counts; the cold comparison was not counted as a leak-free pass.",
+  "fullRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 63,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 677.3999999997126,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 10.200000000000086,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 44.76666666666541,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 70.18333333333064,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 86.44999999999638,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 108.81666666666177,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 142.3666666666721,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 169.81666666669395,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 187.10000000004104,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 221.6666666667352,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 250.13333333342453,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 274.5333333334123,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 280.63333333340677,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 305.0333333333846,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 329.4333333333624,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 353.8333333333402,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 369.0833333333263,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 396.53333333330136,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 420.93333333327917,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 452.44999999991717,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 465.6666666665718,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 480.91666666655794,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 514.4666666665274,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 534.7999999998423,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 551.0666666664941,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 595.7999999997868,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 621.2166666664303,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 639.5166666664137,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 641.5499999997452,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 652.7333333330683,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 664.9333333330572,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 677.3999999997126,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "compiledKeyboard": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "tests": {
+    "passed": 40,
+    "failed": 0
+  },
+  "build": "pass",
+  "images": [
+    "output/playwright/gate-before.png",
+    "output/playwright/gate-after.png",
+    "output/playwright/gate-open.png",
+    "output/playwright/gate-sector-0.png",
+    "output/playwright/gate-sector-2.png",
+    "output/playwright/gate-sector-3.png",
+    "output/playwright/gate-sector-6.png"
+  ],
+  "limits": [
+    "The gallery uses staged positions with the normal gameplay camera, not a human playthrough.",
+    "The short 179-frame performance sample is paused, without active combat; it does not establish sustained 60 FPS.",
+    "Gate motion is an authored visual transition. Existing encounter movement restrictions remain, with 0.7-unit visual clearance.",
+    "Modular environment composition, simple hero/creature art and first-time 15–20 minute pacing remain open."
+  ]
+}
