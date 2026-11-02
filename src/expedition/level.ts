@@ -16,7 +16,7 @@ export type Beat = {
   reinforcements?: Kind[][];
   device?: "valve" | "rune" | "wheel" | "beacon";
   story?: string;
-  hazard?: "blades" | "surge" | "rocks";
+  hazard?: "blades" | "surge" | "rocks" | "pressure";
 };
 export type Chapter = {
   title: string;
@@ -300,9 +300,12 @@ export const CHAPTERS: Chapter[] = [
       {
         node: 3,
         title: "Cross the pressure channel",
-        hint: "The gold anchor crosses the spill. Land beyond the sweeping arm.",
-        enemies: ["wing", "wing", "bomber", "spitter"],
-        hazard: "blades",
+        hint: "Amber warns of steam. Follow the cyan gaps or Shift through a burst. Q crosses the spill; E closes the far valve.",
+        enemies: ["wing", "wing"],
+        hazard: "pressure",
+        device: "valve",
+        story:
+          "KAVI: There’s the cutoff wheel. Clear the flyers, then shut this down.",
       },
       {
         node: 5,
@@ -436,7 +439,7 @@ const waves: Record<number, Kind[][][]> = {
   ],
   5: [
     [["bomber", "raptor", "wing"]],
-    [["raptor", "raptor", "spitter"]],
+    [],
     [["brute", "wing", "bomber"]],
     [["wing", "raptor", "spitter", "bomber"]],
   ],

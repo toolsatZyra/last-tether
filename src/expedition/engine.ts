@@ -1,4 +1,9 @@
 import {
+  pressureGates,
+  pressurePhase,
+  insidePressureLane,
+} from "./pressure.ts";
+import {
   CHAPTERS,
   distance,
   length3,
@@ -291,6 +296,7 @@ export class Expedition {
     this.shots = [];
     this.rings = [];
     this.deviceTurn = 0;
+    this.hazardClock = 0;
     this.podUsed.clear();
     this.grapple = null;
     this.resetActions();
@@ -419,6 +425,7 @@ export class Expedition {
     this.wave = 0;
     this.runes = [0, 0, 0];
     this.deviceTurn = 0;
+    this.hazardClock = 0;
     this.escape = 110;
     this.podUsed.clear();
     this.event("save");
@@ -611,6 +618,7 @@ export class Expedition {
       this.wave = 0;
       this.runes = [0, 0, 0];
       this.deviceTurn = 0;
+      this.hazardClock = 0;
       this.podUsed.clear();
     } else if (this.sector === 7 || this.mode === "daily") {
       this.finished = true;
@@ -1233,6 +1241,15 @@ export class Expedition {
   }
 
   updateHazards(dt: number) {
+    if (this.objective.hazard === "pressure") {
+      for (const gate of pressureGates(this.chapter))
+        if (
+          pressurePhase(this.time, gate.index).active &&
+          insidePressureLane(gate, this.p)
+        )
+          this.hurt(24);
+      return;
+    }
     if (!this.objective.hazard || distance(this.p, this.destination) > 35)
       return;
     this.hazardClock += dt;

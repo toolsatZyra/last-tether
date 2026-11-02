@@ -4,7 +4,7 @@
 
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-Version 0.2.7 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Framed lanterns light nearby surfaces, weathered paving varies by area, foreground plants fade when they obscure the view, and memory chests visibly open and retain their state. The hero has smoother surface shading, a unified outfit palette, and restrained combo/turning accents; the exploration camera moves closer and widens for groups of enemies. The canyon now uses optimized scanned rock masses and terrain shaped around the route. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
+Version 0.2.8 replaces the original procedural prototype with a Babylon.js / Havok chapter, licensed animated characters, authored ruins, textured surfaces, combat effects and recorded foley. Framed lanterns light nearby surfaces, weathered paving varies by area, foreground plants fade when they obscure the view, and memory chests visibly open and retain their state. The hero has smoother surface shading, a unified outfit palette, and restrained combo/turning accents; the exploration camera moves closer and widens for groups of enemies. The turbine approach adds alternating steam lanes and a shutdown valve. The canyon now uses optimized scanned rock masses and terrain shaped around the route. Eight connected sectors contain 32 objectives, six creature behaviours, linked-wheel puzzles, a three-phase guardian and a timed escape. This is a substantial playable build; parity with leading commercial games and first-time human enjoyment are **not established**.
 
 ## Run and verify
 
@@ -52,7 +52,7 @@ Cloud transfer, public leaderboards and multiplayer are not connected. No suitab
 - `actors.ts`, `scene.ts`, `water.ts`: models, animation, lighting, materials, camera, scenery, particles and water. `structures.ts` and `landmarks.ts` build bridge arcades, the bell tower and reservoir.
 - `app.ts`, `profile.ts`, `markup.ts`, `style.css`: controls, local storage, settings and interface.
 - `audio.ts`: opt-in recorded effects and a quiet synthesized bed.
-- `tests/`: 19 behaviour and geometry checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
+- `tests/`: 23 behaviour and geometry checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
 - `public/assets/manifest.json`: 79 source/license/hash records covering approximately 23.0 MB of uncompressed source assets (not the compressed network transfer size).
 
 The rejected prototype remains recoverable at Git commit `e8ef61d`. Its unused source and tests were removed from the current build so old checks cannot be mistaken for v2 validation.

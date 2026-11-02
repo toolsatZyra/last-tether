@@ -11,7 +11,7 @@ The valley depends on an old high-level reservoir. A storm has broken its spillw
 | Drowned gardens | Fight around relief valves, turn machinery, and solve two linked-wheel arrangements. Turning any wheel also turns its neighbour. All blue hands must meet their gold notches. |
 | Hanging forest | Chain assisted grapples across suspended terraces, use jump attacks against packs, survive falling debris and earn the hunt burst. This sector also serves as the replay trial. |
 | Ember quarry | Draw enemies toward red blasting charges and strike the charges. Mix ranged attacks with close combat while avoiding falling stone and advancing through the quarry. |
-| Turbine gallery | Jump moving sweep arms, avoid pressure waves, fight amid machinery and solve another linked-wheel arrangement. |
+| Turbine gallery | Jump the first turbine sweep, then weave through three alternating steam lanes or dodge through bursts. Amber lamps warn of pressure and cyan strips mark the clear gaps. Grapple to the far bank, defeat two flyers, and turn the cutoff valve before tackling the linked crown-lock wheels. |
 | Crown guardian | Clear the approach, bait the Slateback into a striped support, use Q while it is stunned to tear off armour, then attack during the exposure window. At lower health it adds attacks and reinforcements. Clear the final defenders and release the crown. |
 | Flood escape | Cross the final rising route before the flood timer ends, take the grapple crossings and reach safety. Completion records the expedition summary. |
 

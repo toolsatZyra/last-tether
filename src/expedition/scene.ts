@@ -37,6 +37,7 @@ import { weatheredStone, pavingMaterial } from "./surfaces";
 import { terraceStructure, bridgeStructure } from "./structures";
 import { landmarks } from "./landmarks";
 import { landscapeHeight, LANDSCAPES } from "./landscape";
+import { PressureGallery } from "./pressure-gallery";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
 import { Expedition, clamp, type Event } from "./engine";
@@ -62,6 +63,7 @@ export class GameScene {
   visibilityTick = 0;
   dials: { beat: number; index: number; hand: TransformNode }[] = [];
   blades: TransformNode[] = [];
+  pressureGallery?: PressureGallery;
   chargeMarks = new Map<number, Mesh>();
   flood!: Mesh;
   physics!: PhysicsWorld;
@@ -801,6 +803,8 @@ export class GameScene {
   }
   *buildSteps(s: Expedition): Generator<void> {
     this.current = s;
+    this.pressureGallery?.dispose();
+    this.pressureGallery = undefined;
     this.particleBursts.forEach((p) => p.system.dispose(false));
     this.particleBursts = [];
     this.sector = s.sector;
@@ -1156,6 +1160,7 @@ export class GameScene {
     this.arch(v(last.x, last.y, last.z + 34), 26, 30);
     yield* this.dressSteps(s);
     landmarks(this);
+    if (s.sector === 5) this.pressureGallery = new PressureGallery(this);
     yield;
     yield* this.batchStaticSteps();
     this.foregroundProps = this.root
@@ -1210,6 +1215,7 @@ export class GameScene {
       ...this.pointers,
       ...this.pods,
       ...this.cacheMeshes,
+      ...(this.pressureGallery?.dynamicMeshes || []),
     ]);
     const groups = new Map<string, Mesh[]>();
     for (const m of this.root.getChildMeshes()) {
@@ -1623,6 +1629,7 @@ export class GameScene {
     }
     this.particleBursts = this.particleBursts.filter((p) => p.life > 0);
     this.time += dt;
+    this.pressureGallery?.update(s, dt);
     this.cascadeTexture.vOffset = (this.cascadeTexture.vOffset - dt * 0.7) % 1;
     const actorDt = s.hitstop > 0 ? 0 : dt;
     this.hero.player(s, actorDt);

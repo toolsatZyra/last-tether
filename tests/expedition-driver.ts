@@ -1,3 +1,4 @@
+import { pressureGates } from "../src/expedition/pressure.ts";
 import { Expedition, type Input } from "../src/expedition/engine.ts";
 import { distance, v } from "../src/expedition/level.ts";
 export function drive(s: Expedition, tick: number): Input {
@@ -54,6 +55,27 @@ export function drive(s: Expedition, tick: number): Input {
       (p) => p.z > s.p.z + 4 && p.z < s.destination.z,
     );
     if (point) target = { ...point };
+    if (s.objective.hazard === "pressure") {
+      const gates = pressureGates(s.chapter);
+      const forward = gates[0].forward;
+      const waypoints = gates.flatMap((gate) =>
+        [-2, 2].map((along) => ({
+          x:
+            gate.p.x -
+            Math.sign(gate.offset) * 3.4 * gate.across.x +
+            forward.x * along,
+          y: gate.p.y,
+          z:
+            gate.p.z -
+            Math.sign(gate.offset) * 3.4 * gate.across.z +
+            forward.z * along,
+        })),
+      );
+      const next = waypoints.find(
+        (p) => (p.x - s.p.x) * forward.x + (p.z - s.p.z) * forward.z > 0.25,
+      );
+      if (next) target = next;
+    }
     if (s.anchor) i.grapple = true;
     if (s.clear && s.objective.device === "rune") {
       const solution = solve(s.runes, s.runeTargets);
@@ -77,7 +99,7 @@ export function drive(s: Expedition, tick: number): Input {
     );
   }
   const d = distance(s.p, target);
-  if (d > 2) {
+  if (d > (s.objective.hazard === "pressure" ? 0.3 : 2)) {
     i.x = (target.x - s.p.x) / d;
     i.z = (target.z - s.p.z) / d;
   }
