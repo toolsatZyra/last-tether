@@ -1,7 +1,7 @@
 {
   "version": "0.2.23",
   "date": "2026-11-02",
-  "status": "local validation passed; public verification pending",
+  "status": "published and verified",
   "change": "World-space normal detail on structural masonry and imported stone ruins using the existing licensed stone-normal.jpg map.",
   "method": "PBRCustomMaterial Fragment_Before_Lights; project and blend the normal-map slopes onto the actual surface tangent plane at the same world-space coordinates as albedo.",
   "baseline": {
@@ -681,5 +681,30 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "public": {
+    "frameSample": {
+      "frames": 1020,
+      "seconds": 13.938799999999999,
+      "averageFps": 73.10528883404598,
+      "medianMs": 12.200000000000728,
+      "p95Ms": 18.299999999999272
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_J9HhBK5FTo5vrRNdsgagFHKfBkMe",
+    "state": "READY",
+    "commit": "fe104c55cbae692e282cb6d940be33db75f15e0d",
+    "project": "prj_WtbzNkygG6fAqp66QmLgz40gr0NP",
+    "team": "team_pwTpdWGJnbaaUJHUGUtCMxVG",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-DyFxEaJl.js"
   }
 }
