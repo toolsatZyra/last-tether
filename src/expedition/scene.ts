@@ -1,3 +1,4 @@
+import { ActorPool } from "./actor-pool";
 import { CombatFeedback } from "./combat-feedback";
 import { Waterworks } from "./waterworks";
 import { stormSpur, stormGrapple } from "./storm-road";
@@ -117,6 +118,7 @@ export class GameScene {
   quality = "high";
   reduced = false;
   loaded = false;
+  actorPool!: ActorPool;
   anchors: Mesh[] = [];
   devices: TransformNode[] = [];
   gates: EncounterGate[] = [];
@@ -335,6 +337,7 @@ export class GameScene {
     });
     this.ghostActor.root.setEnabled(false);
     this.ghostActor.contact.setEnabled(false);
+    this.actorPool = new ActorPool(this.assets, this.scene, this.shadow);
     this.loaded = true;
   }
   async warmup() {
@@ -864,8 +867,9 @@ export class GameScene {
     this.pods = [];
     this.cacheMeshes = [];
     this.memoryCaches = [];
-    this.actors.forEach((a) => a.dispose());
+    this.actors.forEach((a) => this.actorPool.release(a));
     this.actors.clear();
+    yield* this.actorPool.prepare(s.chapter);
     this.shots.forEach((m) => m.dispose());
     this.shots.clear();
     this.rings.forEach((m) => m.dispose());
@@ -1674,10 +1678,15 @@ export class GameScene {
     this.hero.player(s, actorDt);
     const visibleEnemies = s.enemies.filter((e) => e.hp > 0 || e.dead > 0);
     const visibleEnemyIds = new Set(visibleEnemies.map((e) => e.id));
+    for (const [id, a] of this.actors)
+      if (!visibleEnemyIds.has(id)) {
+        this.actorPool.release(a);
+        this.actors.delete(id);
+      }
     for (const e of visibleEnemies) {
       let a = this.actors.get(e.id);
       if (!a) {
-        a = this.assets.actor(e.kind, this.scene, "enemy-" + e.id, this.shadow);
+        a = this.actorPool.acquire(e.kind);
         this.actors.set(e.id, a);
       }
       a.enemy(e, actorDt);
@@ -1690,11 +1699,6 @@ export class GameScene {
         a.contact.scaling.setAll(1 + Math.min(0.6, altitude * 0.08));
       }
     }
-    for (const [id, a] of this.actors)
-      if (!visibleEnemyIds.has(id)) {
-        a.dispose();
-        this.actors.delete(id);
-      }
     this.foliage.forEach(
       (n) =>
         (n.rotation.z = Math.sin(this.time * 0.8 + n.metadata.phase) * 0.012),

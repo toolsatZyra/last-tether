@@ -103,3 +103,7 @@ Two bounded normal-speed waterworks samples measured 59.45 and 53.81 FPS on inte
 User play of the first three waves on 0.2.23 found no felt impact in either direction. This is a failed feel gate, regardless of prior automated completion. Prioritize visible contact and recovery, force through real collision, weight differences and usable dodge timing. The revision addresses missing player recoil, cancelled lethal momentum, slow hit blending, softened camera impulse and through-wall attacks. A reproduced prop obstruction also led to local enemy avoidance instead of repeated blocked attacks.
 
 Review the opening through ordinary play again after publication. Automated native tests demonstrate mechanics and bounded timing; they cannot certify satisfaction or modern commercial-game feel. Mixed creature/hero art and variable frame pacing remain major limits.
+
+## Combat allocation pass, 0.2.26
+
+Creature model/rig creation now occurs during area preparation and rigs are reused during waves. Native lifecycle and full-route checks establish clean reuse, bounded retained resources and zero reserve shortages in the authored chapter. The normal-speed profile confirms no model construction in active opening combat. It still includes a 371 ms frame, so smoothness is not closed; rendering and system scheduling remain material. This implementation supports the preceding impact revision without establishing player-approved combat feel, visual quality or pacing.

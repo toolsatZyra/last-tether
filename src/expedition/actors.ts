@@ -639,6 +639,40 @@ export class Actor {
       this.root.scaling.x * (e.hp <= 0 ? Math.min(1, e.dead * 2) : 1);
     this.update(dt);
   }
+  park() {
+    this.clearPose();
+    if (this.guardian) {
+      this.guardian.restore();
+      this.guardian.enemy = undefined;
+    }
+    for (const group of this.groups) {
+      group.stop();
+      group.setWeightForAllAnimatables(0);
+    }
+    this.weights.clear();
+    this.active = "";
+    this.lastReaction = -1;
+    this.enemyPosition = undefined;
+    this.enemyMoveSpeed = 0;
+    this.occlusionAlpha = 1;
+    this.root.rotation.set(0, 0, 0);
+    this.root.scaling.setAll(this.root.scaling.x);
+    this.meshes.forEach((mesh) => (mesh.visibility = 1));
+    this.root.setEnabled(false);
+    this.contact.setEnabled(false);
+    this.contact.scaling.setAll(1);
+  }
+  activate(kind: Kind) {
+    this.root.setEnabled(true);
+    this.contact.setEnabled(true);
+    this.play(kind === "wing" ? "Flying_Idle" : "Idle");
+    const group = this.groups.find((g) => g.name === this.active);
+    if (group) {
+      group.setWeightForAllAnimatables(1);
+      this.weights.set(group, 1);
+      group.goToFrame(group.from);
+    }
+  }
   dispose() {
     (this.contact.material as StandardMaterial).diffuseTexture?.dispose();
     this.contact.dispose(false, true);
