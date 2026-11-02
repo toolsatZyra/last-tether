@@ -14,7 +14,7 @@ A previous frame-rate readout was invalid because rendering bypassed the engine'
 
 All game state is local. Profile readers bound and validate records before rendering them, including date strings, finite numbers, chronological ghost samples and supported sectors. Difficulty changes from camp preserve the existing checkpoint. Storage failures are reported without pretending a daily record was saved. Audio requires a user gesture and defaults off on reload.
 
-The production bundle excludes the development hook. Vercel serves static files; it is not running a real-time game server. Static asset names use revalidation to avoid serving stale revisions. No paid subscription, generated media, purchase or paid backend was authorized or used.
+The production bundle excludes the development hook. Vercel serves static files; it is not running a real-time game server. Static asset names use revalidation to avoid serving stale revisions. A one-time US$5 character pilot is authorized; its first generation was rejected for an empty fal balance. No paid subscription, generated output or paid backend has been added.
 
 Sources: [Babylon capabilities](https://www.babylonjs.com/specifications/), [Babylon Havok character controller documentation](https://github.com/BabylonJS/Documentation/blob/master/content/features/featuresDeepDive/physics/v2/characterController.md). Installed package source was also inspected for the exact APIs in use.
 
@@ -87,3 +87,11 @@ The world shadow cache contains only descendants of the current area root. The a
 Raptors retain their captured facing through anticipation and the lunge. Flyers can track during anticipation, then retain their release direction during the dive. Guardian facing rules remain unchanged. Movement, attack range, damage and timing are unchanged.
 
 Actor locomotion reads actual horizontal displacement between view updates, with exponential smoothing and a bounded rate. Stationary creatures use their idle clip; moving spitters now use their native Run instead of sliding in Idle. Ground gait playback scales with measured movement. Paused frames preserve the speed estimate and animation selection. This improves movement/pose correspondence but does not provide foot IK, root-motion attacks or replace the underlying character art.
+
+## Ground-creature collision and continuous tether — 0.2.15
+
+Raptors, spitters, brutes and bombers now use Babylon/Havok character controllers for scenery sweeps, support and gravity. Controllers are created lazily and disposed on death, retry and area rebuild. The guardian retains its bounded charge/support mechanic; flyers retain airborne steering. This is capsule collision, not crowd navigation or ragdoll physics.
+
+Ground knockback is a decaying velocity, with momentum transferred once when support is lost. Unsupported creatures fall, can land on a lower surface and recover, or count as defeated after dropping 18 metres below their last support. Falling creatures use the imported Jump_Idle clip and are excluded from tether targeting.
+
+Combat tethering captures a destination and pulls over 0.3 seconds, displaying the line while it travels. Ground pulls use the same Havok sweep and stop at solid geometry; they never teleport at completion. Flyers move continuously but remain outside ground-capsule collision. A living pulled creature is stunned for 0.65 seconds; a lethal tether hit cannot revive it. Existing guardian armour interaction is retained.

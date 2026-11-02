@@ -1821,12 +1821,15 @@ export class GameScene {
     }
     this.effects = this.effects.filter((e) => e.life > 0);
     const g = s.grapple;
-    this.rope.setEnabled(!!g);
-    if (g)
+    const pulled = s.living.find((e) => e.pull);
+    this.rope.setEnabled(!!g || !!pulled);
+    if (g || pulled)
       MeshBuilder.CreateLines("line", {
         points: [
           new Vector3(s.p.x, s.p.y + 1.5, s.p.z),
-          new Vector3(g.to.x, g.to.y + 6, g.to.z),
+          g
+            ? new Vector3(g.to.x, g.to.y + 6, g.to.z)
+            : new Vector3(pulled!.p.x, pulled!.p.y + 1, pulled!.p.z),
         ],
         instance: this.rope,
       });

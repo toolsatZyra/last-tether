@@ -289,3 +289,124 @@ test("flyer follows during anticipation but commits its dive once released", () 
   assert.equal(e.p.z, origin.z);
   assert.ok(e.p.x > origin.x);
 });
+
+test("a missed edge lunge falls and credits one defeat instead of hovering or snapping home", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.p = { x: c.x + 22, y: c.y, z: c.z };
+  s.addEnemy("raptor", { x: c.x + 21, y: c.y, z: c.z });
+  const e = s.enemies[0];
+  e.timer = 0;
+  let falling = false;
+  for (let i = 0; i < 240; i++) {
+    s.updateEnemies(1 / 60);
+    falling ||= e.state === "falling";
+    if (e.state === "falling") assert.notEqual(s.target, e);
+  }
+  assert.ok(falling);
+  assert.equal(e.hp, 0);
+  assert.equal(s.kills, 1);
+  assert.ok(e.p.y < c.y - 18);
+  const end = { ...e.p };
+  for (let i = 0; i < 120; i++) s.updateEnemies(1 / 60);
+  assert.deepEqual(e.p, end);
+  assert.equal(s.kills, 1);
+  assert.equal(s.events.filter((e) => e.type === "environmentkill").length, 1);
+});
+
+test("ground knockback is offered to collision as velocity rather than teleporting the creature", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.p = { x: c.x, y: c.y, z: c.z - 4 };
+  s.addEnemy("raptor", { ...c });
+  const e = s.enemies[0],
+    start = { ...e.p };
+  let swept = 0;
+  s.enemyMotion = (enemy, velocity, dt) => {
+    swept++;
+    assert.ok(velocity.z > 0);
+    assert.equal(dt, 1 / 60);
+    return { p: { ...enemy.p }, grounded: true };
+  };
+  s.damage(e, 1, 2);
+  assert.deepEqual(e.p, start);
+  s.updateEnemies(1 / 60);
+  assert.equal(swept, 1);
+  assert.deepEqual(e.p, start);
+});
+
+test("a creature that lands on a lower surface recovers without being counted as defeated", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.addEnemy("raptor", { x: c.x, y: c.y + 2, z: c.z });
+  const e = s.enemies[0];
+  e.state = "falling";
+  e.fallVelocity = { x: 0, y: 0, z: 0 };
+  for (let i = 0; i < 60 && e.state === "falling"; i++)
+    s.moveGroundEnemy(e, e.fallVelocity!, 1 / 60);
+  assert.equal(e.state, "recover");
+  assert.equal(e.p.y, c.y);
+  assert.equal(e.verticalSpeed, 0);
+  assert.equal(s.kills, 0);
+});
+
+test("combat tether pulls over time and respects the same collision sweep as locomotion", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.p = { ...c };
+  s.addEnemy("raptor", { ...c, z: c.z + 10 });
+  const e = s.enemies[0],
+    start = { ...e.p };
+  s.useGrapple();
+  assert.deepEqual(e.p, start);
+  assert.equal(e.hp, e.max - 22);
+  for (let i = 0; i < 20; i++) s.updateEnemies(1 / 60);
+  assert.ok(Math.abs(e.p.z - c.z - 3) < 0.1);
+  assert.equal(e.pull, undefined);
+  const blocked = new Expedition();
+  blocked.p = { ...blocked.destination };
+  blocked.addEnemy("raptor", { ...blocked.p, z: blocked.p.z + 10 });
+  const b = blocked.enemies[0],
+    origin = { ...b.p };
+  let sweeps = 0;
+  blocked.enemyMotion = (enemy, velocity, dt) => {
+    sweeps++;
+    assert.ok(velocity.z <= 0);
+    return { p: { ...enemy.p }, grounded: true };
+  };
+  blocked.useGrapple();
+  for (let i = 0; i < 30; i++) blocked.updateEnemies(1 / 60);
+  assert.ok(sweeps >= 18);
+  assert.deepEqual(b.p, origin);
+  assert.equal(b.pull, undefined);
+});
+
+test("a fatal tether hit cannot revive or keep dragging a defeated creature", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.p = { ...c };
+  s.addEnemy("raptor", { ...c, z: c.z + 10 });
+  const e = s.enemies[0];
+  e.hp = 20;
+  s.useGrapple();
+  assert.equal(e.hp, 0);
+  assert.equal(e.state, "death");
+  assert.equal(e.pull, undefined);
+  assert.equal(s.kills, 1);
+});
+
+test("knockback momentum is transferred into a fall once", () => {
+  const s = new Expedition(),
+    c = s.destination;
+  s.addEnemy("raptor", { ...c, x: c.x + 25 });
+  const e = s.enemies[0];
+  e.verticalSpeed = -4;
+  e.knockVelocity = v(12, 0, 0);
+  const start = e.p.x;
+  s.moveGroundEnemy(e, v(), 1 / 60);
+  const first = e.p.x - start;
+  assert.equal(e.state, "falling");
+  assert.equal(e.knockVelocity, undefined);
+  s.moveGroundEnemy(e, e.fallVelocity!, 1 / 60);
+  assert.ok(Math.abs(e.p.x - start - first * 2) < 1e-8);
+});

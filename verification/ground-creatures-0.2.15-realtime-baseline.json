@@ -1,0 +1,391 @@
+{
+  "status": "complete",
+  "errors": [],
+  "wallSeconds": 749.839400000006,
+  "game": {
+    "sector": 7,
+    "beat": 3,
+    "p": {
+      "x": -1.2602463180166492,
+      "y": 43.079250380831105,
+      "z": 401.1506900890484
+    },
+    "health": 100,
+    "seconds": 680.3499999997099,
+    "deaths": 0,
+    "kills": 188,
+    "finished": true,
+    "paused": false,
+    "transitioning": false,
+    "playing": false,
+    "enemies": [],
+    "fps": 64.82281763222475,
+    "meshes": 543,
+    "animation": "kavi_Idle_Neutral"
+  },
+  "frameStats": {
+    "frames": 34063,
+    "averageFps": 45.42708501424973,
+    "medianMs": 19.600000001490116,
+    "p95Ms": 27,
+    "maxMs": 3602.4000000059605,
+    "over50Ms": 130
+  },
+  "sectorStats": {
+    "0": {
+      "frames": 3827,
+      "averageFps": 52.74219444463586,
+      "medianMs": 18.299999997019768,
+      "p95Ms": 23.600000001490116,
+      "maxMs": 139.39999999850988,
+      "over50Ms": 14
+    },
+    "1": {
+      "frames": 6581,
+      "averageFps": 59.737449326191744,
+      "medianMs": 15.600000001490116,
+      "p95Ms": 21.399999998509884,
+      "maxMs": 2315.9000000059605,
+      "over50Ms": 17
+    },
+    "2": {
+      "frames": 5074,
+      "averageFps": 48.219380123428614,
+      "medianMs": 19.600000001490116,
+      "p95Ms": 26.5,
+      "maxMs": 2849.0999999940395,
+      "over50Ms": 9
+    },
+    "3": {
+      "frames": 3363,
+      "averageFps": 43.39091693794304,
+      "medianMs": 21.899999998509884,
+      "p95Ms": 27.700000002980232,
+      "maxMs": 2519.89999999851,
+      "over50Ms": 4
+    },
+    "4": {
+      "frames": 4587,
+      "averageFps": 44.12061751551003,
+      "medianMs": 21.30000000447035,
+      "p95Ms": 28.299999997019768,
+      "maxMs": 3437.60000000149,
+      "over50Ms": 14
+    },
+    "5": {
+      "frames": 3770,
+      "averageFps": 43.546913424806554,
+      "medianMs": 21.700000002980232,
+      "p95Ms": 28.599999994039536,
+      "maxMs": 3602.4000000059605,
+      "over50Ms": 10
+    },
+    "6": {
+      "frames": 4745,
+      "averageFps": 30.79884879160855,
+      "medianMs": 21.399999998509884,
+      "p95Ms": 28.900000005960464,
+      "maxMs": 2576.7999999970198,
+      "over50Ms": 61
+    },
+    "7": {
+      "frames": 2116,
+      "averageFps": 53.194564903151196,
+      "medianMs": 17.200000002980232,
+      "p95Ms": 24.19999999552965,
+      "maxMs": 2112.3000000044703,
+      "over50Ms": 1
+    }
+  },
+  "objectives": [
+    {
+      "key": "0-0",
+      "wallSeconds": 0.11610000000149012,
+      "gameSeconds": 0.05,
+      "deaths": 0
+    },
+    {
+      "key": "0-1",
+      "wallSeconds": 11.38310000000149,
+      "gameSeconds": 11.133333333333466,
+      "deaths": 0
+    },
+    {
+      "key": "0-2",
+      "wallSeconds": 33.76590000000596,
+      "gameSeconds": 33.41666666666605,
+      "deaths": 0
+    },
+    {
+      "key": "0-3",
+      "wallSeconds": 47.45340000000596,
+      "gameSeconds": 47.01666666666528,
+      "deaths": 0
+    },
+    {
+      "key": "1-0",
+      "wallSeconds": 74.87640000000596,
+      "gameSeconds": 71.79999999999721,
+      "deaths": 0
+    },
+    {
+      "key": "1-1",
+      "wallSeconds": 91.489,
+      "gameSeconds": 87.29999999999633,
+      "deaths": 0
+    },
+    {
+      "key": "1-2",
+      "wallSeconds": 114.036,
+      "gameSeconds": 109.78333333332839,
+      "deaths": 0
+    },
+    {
+      "key": "1-3",
+      "wallSeconds": 147.4275,
+      "gameSeconds": 142.91666666667254,
+      "deaths": 0
+    },
+    {
+      "key": "2-0",
+      "wallSeconds": 185.575,
+      "gameSeconds": 178.2333333333673,
+      "deaths": 0
+    },
+    {
+      "key": "2-1",
+      "wallSeconds": 202.383700000003,
+      "gameSeconds": 195.016666666714,
+      "deaths": 0
+    },
+    {
+      "key": "2-2",
+      "wallSeconds": 238.01340000000596,
+      "gameSeconds": 230.58333333340897,
+      "deaths": 0
+    },
+    {
+      "key": "2-3",
+      "wallSeconds": 265.90390000000593,
+      "gameSeconds": 258.4500000000936,
+      "deaths": 0
+    },
+    {
+      "key": "3-0",
+      "wallSeconds": 290.473200000003,
+      "gameSeconds": 280.43333333340695,
+      "deaths": 0
+    },
+    {
+      "key": "3-1",
+      "wallSeconds": 294.854700000003,
+      "gameSeconds": 284.783333333403,
+      "deaths": 0
+    },
+    {
+      "key": "3-2",
+      "wallSeconds": 317.5361000000015,
+      "gameSeconds": 307.45000000004904,
+      "deaths": 0
+    },
+    {
+      "key": "3-3",
+      "wallSeconds": 343.59090000000595,
+      "gameSeconds": 333.50000000002535,
+      "deaths": 0
+    },
+    {
+      "key": "4-0",
+      "wallSeconds": 368.8956000000015,
+      "gameSeconds": 355.36666666667213,
+      "deaths": 0
+    },
+    {
+      "key": "4-1",
+      "wallSeconds": 381.83220000000296,
+      "gameSeconds": 368.2333333333271,
+      "deaths": 0
+    },
+    {
+      "key": "4-2",
+      "wallSeconds": 408.736,
+      "gameSeconds": 395.116666666636,
+      "deaths": 0
+    },
+    {
+      "key": "4-3",
+      "wallSeconds": 435.6613000000045,
+      "gameSeconds": 421.86666666661165,
+      "deaths": 0
+    },
+    {
+      "key": "5-0",
+      "wallSeconds": 473.02540000000596,
+      "gameSeconds": 455.6333333332476,
+      "deaths": 0
+    },
+    {
+      "key": "5-1",
+      "wallSeconds": 487.88780000000446,
+      "gameSeconds": 470.43333333323415,
+      "deaths": 0
+    },
+    {
+      "key": "5-2",
+      "wallSeconds": 503.12460000000146,
+      "gameSeconds": 485.6833333332203,
+      "deaths": 0
+    },
+    {
+      "key": "5-3",
+      "wallSeconds": 536.3307000000029,
+      "gameSeconds": 518.7833333331902,
+      "deaths": 0
+    },
+    {
+      "key": "6-0",
+      "wallSeconds": 558.5731000000015,
+      "gameSeconds": 538.4666666665056,
+      "deaths": 0
+    },
+    {
+      "key": "6-1",
+      "wallSeconds": 576.2549000000059,
+      "gameSeconds": 556.0999999998229,
+      "deaths": 0
+    },
+    {
+      "key": "6-2",
+      "wallSeconds": 659.4429000000059,
+      "gameSeconds": 600.0999999997829,
+      "deaths": 0
+    },
+    {
+      "key": "6-3",
+      "wallSeconds": 692.419700000003,
+      "gameSeconds": 625.0833333330935,
+      "deaths": 0
+    },
+    {
+      "key": "7-0",
+      "wallSeconds": 712.1728000000045,
+      "gameSeconds": 642.7333333330774,
+      "deaths": 0
+    },
+    {
+      "key": "7-1",
+      "wallSeconds": 713.679900000006,
+      "gameSeconds": 644.2166666664094,
+      "deaths": 0
+    },
+    {
+      "key": "7-2",
+      "wallSeconds": 725.4008000000044,
+      "gameSeconds": 655.9333333330654,
+      "deaths": 0
+    },
+    {
+      "key": "7-3",
+      "wallSeconds": 737.2073000000045,
+      "gameSeconds": 667.7499999997214,
+      "deaths": 0
+    }
+  ],
+  "longFrames": [
+    {
+      "ms": 3602.4000000059605,
+      "sector": 5,
+      "beat": 0,
+      "gameSeconds": 455.6333333332476
+    },
+    {
+      "ms": 3437.60000000149,
+      "sector": 4,
+      "beat": 0,
+      "gameSeconds": 355.36666666667213
+    },
+    {
+      "ms": 2849.0999999940395,
+      "sector": 2,
+      "beat": 0,
+      "gameSeconds": 178.2333333333673
+    },
+    {
+      "ms": 2576.7999999970198,
+      "sector": 6,
+      "beat": 0,
+      "gameSeconds": 538.4666666665056
+    },
+    {
+      "ms": 2519.89999999851,
+      "sector": 3,
+      "beat": 0,
+      "gameSeconds": 280.43333333340695
+    },
+    {
+      "ms": 2315.9000000059605,
+      "sector": 1,
+      "beat": 0,
+      "gameSeconds": 71.79999999999721
+    },
+    {
+      "ms": 2112.3000000044703,
+      "sector": 7,
+      "beat": 0,
+      "gameSeconds": 642.7333333330774
+    },
+    {
+      "ms": 1027,
+      "sector": 6,
+      "beat": 1,
+      "gameSeconds": 599.999999999783
+    },
+    {
+      "ms": 1008.3999999985099,
+      "sector": 6,
+      "beat": 2,
+      "gameSeconds": 600.3999999997826
+    },
+    {
+      "ms": 1007.5,
+      "sector": 6,
+      "beat": 1,
+      "gameSeconds": 598.9999999997839
+    },
+    {
+      "ms": 1005.2999999970198,
+      "sector": 6,
+      "beat": 1,
+      "gameSeconds": 599.5999999997833
+    },
+    {
+      "ms": 1005.2999999970198,
+      "sector": 6,
+      "beat": 2,
+      "gameSeconds": 600.4999999997825
+    }
+  ],
+  "visibilityChanges": [],
+  "renderSize": [
+    1036,
+    703
+  ],
+  "quality": "balanced",
+  "endingVisible": true,
+  "saved": {
+    "version": 2,
+    "sector": 7,
+    "beat": 3,
+    "seconds": 680.3499999997099,
+    "deaths": 0,
+    "kills": 188,
+    "secrets": [],
+    "finished": true,
+    "difficulty": "explorer"
+  },
+  "resources": {
+    "skeletons": 2,
+    "textures": 49,
+    "animationGroups": 48
+  }
+}

@@ -533,6 +533,7 @@ export class Actor {
     const flying = e.kind === "wing";
     let anim = flying ? "Flying_Idle" : "Idle";
     if (e.hp <= 0) anim = "Death";
+    else if (e.state === "falling") anim = "Jump_Idle";
     else if (e.flash > 0) anim = "HitReact";
     else if (e.state === "windup" || e.state === "pulse" || e.state === "roar")
       anim = flying ? "No" : "Duck";

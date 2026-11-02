@@ -1,0 +1,675 @@
+{
+  "status": "local release checks passed; publication pending",
+  "nativeCollision": {
+    "collisions": [
+      {
+        "kind": "raptor",
+        "p": {
+          "x": 18,
+          "y": 10.020000410278637,
+          "z": 61.93000065167744
+        },
+        "verticalSpeed": 0,
+        "controllers": 1
+      },
+      {
+        "kind": "spitter",
+        "p": {
+          "x": 18,
+          "y": 10.020000410278637,
+          "z": 61.93000065167744
+        },
+        "verticalSpeed": 0,
+        "controllers": 1
+      },
+      {
+        "kind": "brute",
+        "p": {
+          "x": 18,
+          "y": 10.000260416666666,
+          "z": 61.59999999999999
+        },
+        "verticalSpeed": 0,
+        "controllers": 1
+      },
+      {
+        "kind": "bomber",
+        "p": {
+          "x": 18,
+          "y": 10.020000410278637,
+          "z": 61.93000065167744
+        },
+        "verticalSpeed": 0,
+        "controllers": 1
+      }
+    ],
+    "knockbacks": [
+      {
+        "kind": "raptor",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 61.930001001159724
+        }
+      },
+      {
+        "kind": "spitter",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 61.930001001159724
+        }
+      },
+      {
+        "kind": "brute",
+        "p": {
+          "x": 18,
+          "y": 10,
+          "z": 61.58000057220459
+        }
+      },
+      {
+        "kind": "bomber",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 61.930001001159724
+        }
+      }
+    ],
+    "pulls": [
+      {
+        "kind": "raptor",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 64.07000001192092
+        },
+        "hp": 88,
+        "activePull": false
+      },
+      {
+        "kind": "spitter",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 64.07000001192092
+        },
+        "hp": 93,
+        "activePull": false
+      },
+      {
+        "kind": "brute",
+        "p": {
+          "x": 18,
+          "y": 10.019999980926514,
+          "z": 64.41999997615814
+        },
+        "hp": 318,
+        "activePull": false
+      },
+      {
+        "kind": "bomber",
+        "p": {
+          "x": 18,
+          "y": 10.0200003606081,
+          "z": 64.07000001192092
+        },
+        "hp": 43,
+        "activePull": false
+      }
+    ],
+    "edges": [
+      {
+        "angle": 0,
+        "falling": true,
+        "minY": -8.21619471246176,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 60.74346452918381,
+          "y": -8.21619471246176,
+          "z": 57.68710494162439
+        }
+      },
+      {
+        "angle": 0.39269908169872414,
+        "falling": true,
+        "minY": -8.243275551688106,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 59.38932563716615,
+          "y": -8.243275551688106,
+          "z": 75.14421776995563
+        }
+      },
+      {
+        "angle": 0.7853981633974483,
+        "falling": false,
+        "minY": 10,
+        "hp": 110,
+        "state": "lunge",
+        "p": {
+          "x": 36.17971534430621,
+          "y": 10,
+          "z": 76.17971534430622
+        }
+      },
+      {
+        "angle": 1.1780972450961724,
+        "falling": true,
+        "minY": -8.224663355321056,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 35.111051872484396,
+          "y": -8.224663355321056,
+          "z": 99.30867285789263
+        }
+      },
+      {
+        "angle": 1.5707963267948966,
+        "falling": true,
+        "minY": -8.229241088125297,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 18,
+          "y": -8.229241088125297,
+          "z": 100.81613018540934
+        }
+      },
+      {
+        "angle": 1.9634954084936207,
+        "falling": true,
+        "minY": -8.224662605825658,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 0.8889482327396276,
+          "y": -8.224662605825658,
+          "z": 99.30867281430955
+        }
+      },
+      {
+        "angle": 2.356194490192345,
+        "falling": false,
+        "minY": 10,
+        "hp": 110,
+        "state": "lunge",
+        "p": {
+          "x": -0.17971534430617175,
+          "y": 10,
+          "z": 76.17971534430622
+        }
+      },
+      {
+        "angle": 2.748893571891069,
+        "falling": true,
+        "minY": -8.221598140618141,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": -23.12676809952877,
+          "y": -8.221598140618141,
+          "z": 75.03579081367148
+        }
+      },
+      {
+        "angle": 3.141592653589793,
+        "falling": true,
+        "minY": -8.214120409818419,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": -24.80029685534979,
+          "y": -8.214120409818419,
+          "z": 57.738333273929605
+        }
+      },
+      {
+        "angle": 3.5342917352885173,
+        "falling": true,
+        "minY": -8.23444408383633,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": -23.346833835352122,
+          "y": -8.23444408383633,
+          "z": 41.0914929753962
+        }
+      },
+      {
+        "angle": 3.9269908169872414,
+        "falling": false,
+        "minY": 10,
+        "hp": 110,
+        "state": "lunge",
+        "p": {
+          "x": -0.1797153443061562,
+          "y": 10,
+          "z": 39.82028465569379
+        }
+      },
+      {
+        "angle": 4.319689898685965,
+        "falling": false,
+        "minY": 9.515327017053067,
+        "hp": 110,
+        "state": "lunge",
+        "p": {
+          "x": 7.9367146399173665,
+          "y": 9.909893034910697,
+          "z": 33.676875051371816
+        }
+      },
+      {
+        "angle": 4.71238898038469,
+        "falling": true,
+        "minY": -8.232168951801416,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 17.999988587175554,
+          "y": -8.232168951801416,
+          "z": 15.18407711118302
+        }
+      },
+      {
+        "angle": 5.105088062083414,
+        "falling": true,
+        "minY": -8.233522932505316,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 35.03578076957168,
+          "y": -8.233522932505316,
+          "z": 16.872620279643733
+        }
+      },
+      {
+        "angle": 5.497787143782138,
+        "falling": false,
+        "minY": 10,
+        "hp": 110,
+        "state": "lunge",
+        "p": {
+          "x": 36.380062265642394,
+          "y": 10,
+          "z": 39.61993773435759
+        }
+      },
+      {
+        "angle": 5.890486225480862,
+        "falling": true,
+        "minY": -8.23444408383633,
+        "hp": 0,
+        "state": "death",
+        "p": {
+          "x": 59.35374443434005,
+          "y": -8.23444408383633,
+          "z": 41.0826300411246
+        }
+      }
+    ],
+    "controllersAfterClear": 0,
+    "errors": []
+  },
+  "pairedPerformance": {
+    "rows": [
+      {
+        "native": false,
+        "fps": 37.28468096742699,
+        "enemyUpdateMs": 0.023770491913205287,
+        "moveEnemyMs": 0,
+        "totalMoveMsPerUpdate": 0,
+        "p95": 31,
+        "controllers": 0
+      },
+      {
+        "native": true,
+        "fps": 36.144277986942065,
+        "enemyUpdateMs": 0.5493827160187219,
+        "moveEnemyMs": 0.06507201644174233,
+        "totalMoveMsPerUpdate": 0.5205761315339387,
+        "p95": 36.20000000000073,
+        "controllers": 8
+      },
+      {
+        "native": false,
+        "fps": 39.27319728567524,
+        "enemyUpdateMs": 0.02345679007439947,
+        "moveEnemyMs": 0,
+        "totalMoveMsPerUpdate": 0,
+        "p95": 30.400000000001455,
+        "controllers": 0
+      },
+      {
+        "native": true,
+        "fps": 37.167302751419655,
+        "enemyUpdateMs": 0.502904564575041,
+        "moveEnemyMs": 0.060321576792854985,
+        "totalMoveMsPerUpdate": 0.4825726143428399,
+        "p95": 31.10000000000582,
+        "controllers": 8
+      }
+    ],
+    "renderSize": [
+      1036,
+      703
+    ],
+    "errors": []
+  },
+  "acceleratedRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 49,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 672.7833333330501,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 10.200000000000086,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 44.76666666666541,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 70.18333333333064,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 86.44999999999638,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 108.81666666666177,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 142.3666666666721,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 170.83333333336142,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 188.1166666667085,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 224.71666666673764,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 253.18333333342696,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 277.58333333340954,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 282.66666666673825,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 304.01666666671883,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 331.46666666669387,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 355.8666666666717,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 372.13333333332355,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 392.4666666666384,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 413.81666666661897,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 443.2999999999255,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 459.56666666657736,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 476.849999999895,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 508.366666666533,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 528.6999999998478,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 546.9999999998312,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 591.7333333331238,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 618.1666666664331,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 635.4499999997507,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 636.4666666664165,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 648.6666666664054,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 660.8666666663943,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 672.7833333330501,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "limits": [
+    "Scripted scenarios and expert input policy, not first-time play.",
+    "Eight-creature paired sample uses stationary stunned actors in one scene.",
+    "Flyers and guardian retain existing movement.",
+    "Collision does not provide navigation or ragdoll.",
+    "Art-quality, sustained 60 FPS and first-time pacing gates remain open.",
+    "Normal-speed pre-tether baseline includes one-second browser animation gaps. The older headed session also timed out during production loading with requestAnimationFrame measured at ~1 Hz; a fresh headless Chrome completed the production check. Cause is not established."
+  ],
+  "lifecycle": {
+    "rows": [
+      {
+        "area": 0,
+        "before": 0,
+        "during": 1,
+        "after": 0
+      },
+      {
+        "area": 1,
+        "before": 0,
+        "during": 1,
+        "after": 0
+      },
+      {
+        "area": 0,
+        "before": 0,
+        "during": 1,
+        "after": 0
+      },
+      {
+        "area": 6,
+        "before": 0,
+        "during": 1,
+        "after": 0
+      },
+      {
+        "area": 0,
+        "before": 0,
+        "during": 1,
+        "after": 0
+      }
+    ],
+    "errors": []
+  },
+  "fallCapture": {
+    "done": true,
+    "enemy": {
+      "id": 1,
+      "kind": "raptor",
+      "p": {
+        "x": 49.629993741439414,
+        "y": 6.636667040675191,
+        "z": 57.5269357930316
+      },
+      "home": {
+        "x": 38,
+        "y": 10,
+        "z": 58
+      },
+      "hp": 110,
+      "max": 110,
+      "state": "falling",
+      "timer": -0.18333333333333326,
+      "dir": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "yaw": 1.5707963267948966,
+      "flash": 0,
+      "dead": 0,
+      "phase": 1,
+      "armour": false,
+      "exposed": 0,
+      "attackCount": 0,
+      "verticalSpeed": -13.533333333333335,
+      "groundY": 10.020000374008525,
+      "fallVelocity": {
+        "x": 17,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "health": 100,
+    "hero": {
+      "x": 40,
+      "y": 10,
+      "z": 66.2729026759009
+    },
+    "target": null
+  },
+  "tests": 34,
+  "assetHashes": 83,
+  "productionBundle": "index-BNsvBG4r.js",
+  "productionCheck": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": [],
+    "browser": "Fresh isolated headless Chrome, silent, ordinary keyboard events"
+  },
+  "tetherPresentation": {
+    "start": {
+      "x": 18,
+      "y": 10,
+      "z": 64,
+      "width": 10,
+      "gap": false,
+      "arena": true
+    },
+    "mid": {
+      "x": 18,
+      "y": 10,
+      "z": 61
+    },
+    "remaining": 0.2,
+    "rope": true,
+    "health": 100,
+    "ended": {
+      "rope": false,
+      "pull": false
+    }
+  }
+}

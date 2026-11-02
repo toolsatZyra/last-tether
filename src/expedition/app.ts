@@ -363,6 +363,7 @@ function events(immediate = false) {
         "bossphase",
         "falling",
         "reinforcement",
+        "environmentkill",
       ].includes(e.type)
     )
       toast(e.text || "");

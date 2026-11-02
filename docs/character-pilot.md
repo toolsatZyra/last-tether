@@ -1,6 +1,6 @@
-# Kavi custom character pilot — awaiting spending approval
+# Kavi custom character pilot — approved up to US$5 total
 
-Purpose: replace the visibly simple hero with an original, coherent textured explorer and a reusable humanoid rig. No generation, upload or purchase has been submitted. This is a proposed experiment, not proof that generated skinning or animation will meet the game quality bar.
+Purpose: replace the visibly simple hero with an original, coherent textured explorer and a reusable humanoid rig. The user approved the one-time US$5 cap on 2 November 2026. Generation and rigging are now authorized within that total. This remains an experiment, not proof that generated skinning or animation will meet the game quality bar.
 
 ## Design brief
 Kavi, an adult South Asian routefinder, lean athletic proportions, warm brown skin, short practical dark hair, alert expressive face. Weathered deep teal canvas field jacket over an ochre shirt, dark fitted climbing trousers with articulated knees, worn leather boots and bracers, a compact brass tether mechanism on the left forearm. Handcrafted alpine exploration clothing with believable stitching, seams, layered fabric and worn edges; restrained stylised realism with carefully modeled anatomy. No oversized head, cartoon eyes, modern military equipment, rigid cape, logos or weapons fused into the body. Weapon, backpack and short cloak remain separate game attachments.
@@ -17,3 +17,7 @@ Reference prompt: A single full-body 3D production character reference of Kavi a
 Request a one-time maximum US$5 total for the pilot, not a recurring subscription. Live fal pricing on 2 November 2026 lists image-to-3D at US$0.80 per generation and multi-animation at US$0.08 per generation; configuration-dependent billing still needs checking before submission. Reserve within the cap for a single corrective retry only if justified. Do not submit a job whose upper cost cannot be established within the remaining cap. No automatic top-up or subscription purchase.
 
 Sources: https://fal.ai/models/meshy/v7.1/image-to-3d ; https://fal.ai/models/fal-ai/meshy/rigging/multi-animation ; https://docs.meshy.ai/en/api/animation-library . Schemas obtained through connected fal tools. The account identified itself as Zyra; no balance check or account change was performed.
+
+## Approved pilot execution
+
+The user approved up to US$5 total on 2 November 2026. The first reference-image submission to fal-ai/flux-2-pro was rejected with HTTP 403 balance_exhausted on the Zyra account. No request ID or generated output was returned. No subsequent generation or upload was submitted. The workflow is preserved pending the user confirming added credits; then check account readiness before resuming. The approved cap remains US$5, with no subscription or automatic top-up.

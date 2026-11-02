@@ -45,6 +45,11 @@ export type Enemy = {
   armour: boolean;
   exposed: number;
   attackCount: number;
+  verticalSpeed?: number;
+  groundY?: number;
+  fallVelocity?: V;
+  knockVelocity?: V;
+  pull?: { to: V; remaining: number };
 };
 
 export type Shot = {
@@ -154,6 +159,12 @@ const stats: Record<
 };
 
 export class Expedition {
+  enemyMotion?: (
+    enemy: Enemy,
+    velocity: V,
+    dt: number,
+  ) => { p: V; grounded: boolean };
+  syncEnemyPhysics?: (enemies: Enemy[]) => void;
   motion:
     | ((p: V, velocity: V, dt: number) => { p: V; grounded: boolean })
     | null = null;
@@ -364,7 +375,7 @@ export class Expedition {
   get target() {
     return (
       this.living
-        .filter((e) => distance(this.p, e.p) < 32)
+        .filter((e) => e.state !== "falling" && distance(this.p, e.p) < 32)
         .sort((a, b) => distance(this.p, a.p) - distance(this.p, b.p))[0] ||
       null
     );
@@ -442,18 +453,25 @@ export class Expedition {
     this.hunt = clamp(this.hunt + amount * 0.1, 0, 100);
     if (knock && e.kind !== "guardian") {
       const d = norm(this.p, e.p);
-      e.p.x += d.x * knock;
-      e.p.z += d.z * knock;
+      if (e.kind === "wing") {
+        e.p.x += d.x * knock;
+        e.p.z += d.z * knock;
+      } else e.knockVelocity = v(d.x * knock * 12, 0, d.z * knock * 12);
     }
     this.event("hit", undefined, e.p, amount);
 
     if (e.hp <= 0) {
+      e.pull = undefined;
       e.state = "death";
       e.dead = e.kind === "guardian" ? 2.4 : 1.4;
       this.kills++;
       this.event("kill", e.kind, e.p);
       this.health = Math.min(100, this.health + 2);
-    } else if (e.kind !== "guardian" && e.kind !== "brute") {
+    } else if (
+      e.kind !== "guardian" &&
+      e.kind !== "brute" &&
+      e.state !== "falling"
+    ) {
       e.state = "stunned";
       e.timer = 0.28;
     }
@@ -565,12 +583,16 @@ export class Expedition {
     }
 
     const d = norm(this.p, e.p);
-    e.p.x = this.p.x + d.x * 3;
-    e.p.z = this.p.z + d.z * 3;
-    e.p.y = this.p.y;
-    e.state = "stunned";
-    e.timer = 1.6;
     this.damage(e, 22);
+    if (e.hp > 0) {
+      e.pull = {
+        to: v(this.p.x + d.x * 3, this.p.y, this.p.z + d.z * 3),
+        remaining: 0.3,
+      };
+      e.knockVelocity = undefined;
+      e.state = "stunned";
+      e.timer = 0.65;
+    }
     this.grappleCooldown = 2;
     this.event("pull", undefined, e.p);
   }
@@ -962,6 +984,7 @@ export class Expedition {
   }
 
   updateEnemies(dt: number) {
+    this.syncEnemyPhysics?.(this.enemies);
     for (const e of this.enemies) {
       e.flash = Math.max(0, e.flash - dt);
       if (e.hp <= 0) {
@@ -971,6 +994,7 @@ export class Expedition {
       e.timer -= dt;
       const d = distance(this.p, e.p);
       const committedFacing =
+        e.state === "falling" ||
         e.state === "lunge" ||
         (e.kind === "raptor" && e.state === "windup") ||
         (e.kind === "guardian" &&
@@ -983,15 +1007,19 @@ export class Expedition {
         continue;
       }
 
+      const velocity = v();
+      if (e.state === "falling") {
+        e.pull = undefined;
+        this.moveGroundEnemy(e, e.fallVelocity || velocity, dt);
+        continue;
+      }
+
       if (e.state === "stunned") {
         if (e.timer <= 0) {
           e.state = "idle";
           e.timer = 0.2;
         }
-        continue;
-      }
-
-      if (e.state === "idle") {
+      } else if (e.state === "idle") {
         const range =
           e.kind === "spitter"
             ? 15
@@ -999,24 +1027,15 @@ export class Expedition {
               ? 13
               : stats[e.kind].range;
 
-        if (d > range) {
-          const dir = norm(e.p, this.p),
-            step = stats[e.kind].speed * dt;
-          e.p.x += dir.x * step;
-          e.p.z += dir.z * step;
+        const returning = distance(e.p, this.destination) > 21;
+        if (d > range || returning) {
+          const dir = norm(e.p, returning ? this.destination : this.p);
+          velocity.x = dir.x * stats[e.kind].speed;
+          velocity.z = dir.z * stats[e.kind].speed;
         }
 
         if (e.kind === "wing")
           e.p.y = e.home.y + Math.sin(this.time * 2 + e.id) * 1.2;
-        else e.p.y = floorAt(this.chapter, e.p.x, e.p.z) ?? e.home.y;
-
-        const maxRadius = 21,
-          hd = distance(e.p, this.destination);
-        if (hd > maxRadius) {
-          const n = norm(this.destination, e.p);
-          e.p.x = this.destination.x + n.x * maxRadius;
-          e.p.z = this.destination.z + n.z * maxRadius;
-        }
 
         if (d < stats[e.kind].range && e.timer <= 0) {
           e.state = "windup";
@@ -1076,11 +1095,9 @@ export class Expedition {
           }
         }
       } else if (e.state === "lunge") {
-        e.p.x += e.dir.x * 17 * dt;
-        e.p.z += e.dir.z * 17 * dt;
-        if (e.kind === "wing") e.p.y += e.dir.y * 17 * dt;
-        if (distance(e.p, this.p) < 2.4 && Math.abs(this.p.y - e.p.y) < 3)
-          this.hurt(stats[e.kind].damage);
+        velocity.x = e.dir.x * 17;
+        velocity.z = e.dir.z * 17;
+        velocity.y = e.dir.y * 17;
         if (e.timer <= 0) {
           e.state = "recover";
           e.timer = 0.9;
@@ -1089,6 +1106,81 @@ export class Expedition {
         e.state = "idle";
         e.timer = 0.7;
       }
+      if (e.hp <= 0) continue;
+      if (e.pull) {
+        const remaining = Math.max(dt, e.pull.remaining);
+        const delta = norm(e.p, e.pull.to);
+        const speed = Math.min(70, length3(e.p, e.pull.to) / remaining);
+        velocity.x = delta.x * speed;
+        velocity.y = delta.y * speed;
+        velocity.z = delta.z * speed;
+        e.pull.remaining -= dt;
+        if (e.pull.remaining <= 0) e.pull = undefined;
+      }
+      if (e.kind === "wing") {
+        e.p.x += velocity.x * dt;
+        e.p.y += velocity.y * dt;
+        e.p.z += velocity.z * dt;
+      } else this.moveGroundEnemy(e, velocity, dt);
+      if (
+        e.state === "lunge" &&
+        distance(e.p, this.p) < 2.4 &&
+        Math.abs(this.p.y - e.p.y) < 3
+      )
+        this.hurt(stats[e.kind].damage);
+    }
+  }
+
+  moveGroundEnemy(e: Enemy, horizontal: V, dt: number) {
+    e.verticalSpeed = Math.max(-40, (e.verticalSpeed || 0) - 28 * dt);
+    const velocity = v(
+      horizontal.x + (e.knockVelocity?.x || 0),
+      e.verticalSpeed,
+      horizontal.z + (e.knockVelocity?.z || 0),
+    );
+    if (e.knockVelocity) {
+      const decay = Math.exp(-12 * dt);
+      e.knockVelocity.x *= decay;
+      e.knockVelocity.z *= decay;
+    }
+    let result: { p: V; grounded: boolean };
+    if (this.enemyMotion) result = this.enemyMotion(e, velocity, dt);
+    else {
+      // Logic-only route tests use the authored floor. Browser play uses Havok.
+      const p = v(
+        e.p.x + velocity.x * dt,
+        e.p.y + velocity.y * dt,
+        e.p.z + velocity.z * dt,
+      );
+      let floor = floorAt(this.chapter, p.x, p.z);
+      if (floor !== null && floor > e.p.y + 0.5) {
+        p.x = e.p.x;
+        p.z = e.p.z;
+        floor = floorAt(this.chapter, p.x, p.z);
+      }
+      const grounded =
+        floor !== null && e.p.y >= floor - 0.5 && p.y <= floor + 0.05;
+      if (grounded) p.y = floor!;
+      result = { p, grounded };
+    }
+    e.p = result.p;
+    if (result.grounded) {
+      e.verticalSpeed = 0;
+      e.groundY = e.p.y;
+      if (e.state === "falling") {
+        e.state = "recover";
+        e.timer = 0.6;
+        e.fallVelocity = undefined;
+      }
+    } else if (e.verticalSpeed < -4 && e.state !== "falling") {
+      e.state = "falling";
+      e.fallVelocity = v(velocity.x, 0, velocity.z);
+      e.knockVelocity = undefined;
+      e.pull = undefined;
+    }
+    if (e.p.y < (e.groundY ?? e.home.y) - 18) {
+      this.damage(e, e.hp);
+      this.event("environmentkill", "Lost to the gorge.", e.p);
     }
   }
 
