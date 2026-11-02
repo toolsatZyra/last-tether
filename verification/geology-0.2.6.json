@@ -1,0 +1,342 @@
+{
+  "version": "0.2.6",
+  "date": "2026-11-02",
+  "unitTests": 19,
+  "assetFiles": 79,
+  "sourceAssetBytes": 23048220,
+  "fullRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 45,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 683.7666666663735,
+    "kills": 193,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 12.23333333333352,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 32.5666666666661,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 48.833333333331844,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 88.4833333333296,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 110.84999999999499,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 143.38333333333958,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 175.9166666666988,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 192.1833333333784,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 228.78333333340754,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 256.23333333342896,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 278.6000000000753,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 283.683333333404,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 305.0333333333846,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 328.41666666669664,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 355.8666666666717,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 370.09999999999206,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 396.53333333330136,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 418.8999999999477,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 455.4999999999144,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 469.7333333332348,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 489.0499999998839,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 520.5666666665219,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 540.8999999998367,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 555.1333333331571,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 600.8833333331155,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 628.3333333330905,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 646.6333333330739,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 647.6499999997396,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 659.8499999997285,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 671.0333333330517,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 683.7666666663735,
+      "deaths": 0,
+      "kills": 193,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "endingVisible": true
+  },
+  "geometry": {
+    "sourceMeshes": 72,
+    "sectorsRebuilt": 4,
+    "sharedGeometryUnchanged": true
+  },
+  "foliage": {
+    "checked": 125,
+    "bad": []
+  },
+  "transitions": {
+    "results": [
+      {
+        "sector": 1,
+        "wallMs": 2153.89999999851,
+        "frames": 214,
+        "maxMs": 157.60000000000036,
+        "p95Ms": 24.199999999999818,
+        "gameFrozen": true,
+        "paused": true,
+        "physicsBodies": 52,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 2,
+        "wallMs": 2225.6999999955297,
+        "frames": 234,
+        "maxMs": 157.70000000000073,
+        "p95Ms": 18.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 61,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 3,
+        "wallMs": 2324.099999997019,
+        "frames": 225,
+        "maxMs": 150.59999999999854,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 54,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 4,
+        "wallMs": 2084.3999999999996,
+        "frames": 215,
+        "maxMs": 133.5,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 78,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 5,
+        "wallMs": 2128.699999994038,
+        "frames": 217,
+        "maxMs": 145.6999999999971,
+        "p95Ms": 24.100000000000364,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 57,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 6,
+        "wallMs": 2050.499999994041,
+        "frames": 208,
+        "maxMs": 151.60000000000218,
+        "p95Ms": 18.399999999997817,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 74,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 7,
+        "wallMs": 2072.3999999955304,
+        "frames": 197,
+        "maxMs": 151.60000000000218,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      }
+    ],
+    "errors": []
+  },
+  "stationaryRenderingSamples": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 48.68549172381954,
+      "medianFrameMs": 24.100000000000364,
+      "p95FrameMs": 24.399999999999636,
+      "frames": 186
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 49.099836333878834,
+      "medianFrameMs": 18.299999999999272,
+      "p95FrameMs": 24.400000000001455,
+      "frames": 198
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 52.548607462039406,
+      "medianFrameMs": 18.200000000000728,
+      "p95FrameMs": 24.30000000000291,
+      "frames": 204
+    }
+  ],
+  "productionOpening": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "kills": 3,
+    "pauseAndReloadResume": true,
+    "errors": [],
+    "badResponses": []
+  },
+  "clearance": {
+    "areas": 8,
+    "rocksPerArea": 16,
+    "samplesPerArea": 15648,
+    "minimumSampledHorizontalDistance": 5.434702898358694
+  },
+  "limits": [
+    "Accelerated input-driven route uses known route and puzzle state; not first-time human pacing.",
+    "Short stationary Balanced samples at 1036x703, not sustained combat performance.",
+    "Scenery is outside playable floors; scanned cliffs are not new traversable surfaces.",
+    "Top-tier visual parity and human enjoyment remain unverified."
+  ]
+}

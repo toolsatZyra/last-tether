@@ -98,3 +98,11 @@ Four-second Balanced samples during the art pass, at 1036 × 703, reported 49.2,
 The final compiled opening passed ordinary movement/combat, three defeats, watchpost progression, pause and save/reload/resume. No development hook, page errors or failed responses were recorded. The requested modern-game visual bar, human enjoyment and first-time duration remain open.
 
 Public 0.2.5 verification: application commit `5024ba75c5c725de25063079b38f0e338feb7067`, Vercel deployment `dpl_4Pup6a9JdoF421pQm8CpWFb2rDz3`, reached READY. The public ordinary-keyboard opening passed three defeats, watchpost progression, pause, new-game/resume transitions and save/reload/resume, with no development hook, page errors or failed responses.
+
+## Canyon environment — 0.2.6
+
+19 unit checks, 79 asset hashes/lengths and the production build pass. The accelerated input-driven route completes all 32 objectives in 683.77 simulated seconds, with 193 defeats, zero recoveries, visible ending and finished save. It retains 2 skeletons and 48 animation groups. Four rebuilds leave all 72 source meshes unchanged; 125 nearby plants remain grounded.
+
+All eight areas pass conservative scanned-rock clearance checks (16 rocks and 15,648 sampled positions per area; minimum sampled horizontal route distance 5.43 m). Terrain tests keep sampled walkable floors and crossings clear. Seven area transitions preserve the held clock/input and pause state, with 2.05–2.32 s total loads, largest frame interval 133.5–157.7 ms, and no browser errors.
+
+Three short stationary Balanced samples at 1036×703 measured engine FPS readings of 48.7, 49.1 and 52.5; 95th-percentile frame intervals were 24.3–24.4 ms. These are local samples, not a sustained 60 FPS or combat benchmark. Ordinary production keyboard input passes three defeats, watchpost progression, pause and save/reload/resume, with no debug hook, browser errors or failed responses. Visuals were inspected at the storm road, reservoir and hanging forest. Evidence: `verification/geology-0.2.6.json`.

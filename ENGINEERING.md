@@ -33,3 +33,9 @@ Version 0.2.4 shares generator-based construction between synchronous developer 
 Version 0.2.5 adds an original framed-lantern mesh, merged into one opaque frame and one luminous core per lamp. Two persistent Babylon PointLights illuminate the nearest lamps; the lights do not cast additional shadows. Paving uses the existing licensed surface maps plus world-space joints, color variation, moss and damp roughness through PBRCustomMaterial. Garden channels use bordered PBR water surfaces with environment lighting, not a new water simulation.
 
 The existing CC0 chest asset now represents routefinder memories. Its authored top meshes rotate around a back-edge hinge, the glimmer disappears on collection, and saved secret IDs restore the open lid. Nearby planting was moved or omitted to leave the caches clear. Cached foliage bounds drive temporary foreground visibility fades, without modifying shared materials.
+
+## Canyon scenery — 0.2.6
+
+The route-aware landscape has area-specific height, moss and ochre profiles. Terrain remains below the sampled playable floors. Sixteen solid scanned rock masses per area are pushed outside a clearance corridor, with their bases below the river. They block the camera but are scenery, not additional walkable Havok bodies. `tools/geology-check.js` samples their conservative world bounds across all eight areas.
+
+Boulder 01 by Rico Cilliers / Poly Haven (CC0) is processed by `node tools/prepare-geology.mjs`. glTF Transform and Meshoptimizer reduce its 66,122 triangles to 16,530 using normal/UV-aware permissive collapse. Its original 1K maps remain embedded unchanged in a 3,440,296-byte GLB. Source hashes, license and modifications are recorded in the manifest. These packages run offline during asset preparation, not in the game. The earlier open rock-face experiment is excluded from runtime assets.

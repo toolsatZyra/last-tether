@@ -2,6 +2,7 @@ import { MeshBuilder, Vector3 } from "@babylonjs/core";
 import type { GameScene } from "./scene";
 import { block, stoneArch } from "./structures";
 import { v, type V } from "./level";
+import { routeClearance } from "./landscape";
 
 function bellTower(view: GameScene, p: V) {
   block(
@@ -73,7 +74,38 @@ function reservoir(view: GameScene, p: V) {
   for (const x of [-8, 0, 8])
     view.addCascade(v(p.x + x, 24, p.z - 14.2), 4.8, 31.1);
 }
+function rockBanks(view: GameScene) {
+  for (let i = 0; i < 8; i++) {
+    const p = view.current.chapter.points[i];
+    for (const side of [-1, 1]) {
+      const rock = view.architecture(
+        "Rock_Mass",
+        v(p.x + side * ((p.arena ? 23 : 13) + 40), -24, p.z + (i % 2 ? 8 : -7)),
+        p.y + 52 + (i % 3) * 8,
+        (side * Math.PI) / 2 + (i % 2) * 0.25,
+        false,
+        65 + (i % 2) * 8,
+      );
+      // Compress depth so the scanned masses remain well outside the traversable deck.
+      rock.scaling.z *= 42 / ((p.y + 52 + (i % 3) * 8) * 1.823);
+      for (let attempt = 0; attempt < 16; attempt++) {
+        const bounds = rock.getHierarchyBoundingVectors(true);
+        let close = false;
+        for (let x = bounds.min.x; x <= bounds.max.x; x += 3)
+          for (let z = bounds.min.z; z <= bounds.max.z; z += 3)
+            if (routeClearance(view.current.chapter, x, z) < 6) close = true;
+        if (!close) break;
+        rock.position.x += side * 8;
+      }
+      for (const mesh of rock.getChildMeshes()) {
+        mesh.metadata = { geology: true, cameraSolid: true, physics: false };
+        mesh.isPickable = true;
+      }
+    }
+  }
+}
 export function landmarks(view: GameScene) {
+  rockBanks(view);
   const p = view.current.chapter.points[1];
   if (view.sector === 0) {
     bellTower(view, v(p.x - 48, p.y - 8, p.z + 30));

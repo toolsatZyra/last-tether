@@ -36,6 +36,7 @@ import { createRiver } from "./water";
 import { weatheredStone, pavingMaterial } from "./surfaces";
 import { terraceStructure, bridgeStructure } from "./structures";
 import { landmarks } from "./landmarks";
+import { landscapeHeight, LANDSCAPES } from "./landscape";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
 import { Expedition, clamp, type Event } from "./engine";
@@ -43,6 +44,7 @@ const c = (s: string) => Color3.FromHexString(s);
 const V = (p: V) => new Vector3(p.x, p.y, p.z);
 export class GameScene {
   surfaceClimate = new Vector3(0.3, 0.8, 0);
+  landscapeClimate = new Vector3(0.42, 0, 0);
   lampPositions: Vector3[] = [];
   lampLights: PointLight[] = [];
   cascadeTexture!: DynamicTexture;
@@ -376,6 +378,7 @@ export class GameScene {
       stone.albedoTexture as Texture,
       "#899383",
       0.13,
+      this.landscapeClimate,
     );
     this.materials.masonry = weatheredStone(
       "structural-stone",
@@ -426,21 +429,17 @@ export class GameScene {
     }
   }
   terrainHeight(x: number, z: number) {
-    const center = Math.sin(z * 0.011 + this.sector) * 14;
-    const width = 64 + Math.sin(z * 0.013 + this.sector * 0.8) * 12;
-    const ridge = clamp((Math.abs(x - center) - width) / 150, 0, 1);
-    const shoulder = ridge * ridge * (3 - 2 * ridge);
-    const grain =
-      Math.sin(x * 0.037 + z * 0.019) * 18 +
-      Math.sin(x * 0.081 - z * 0.044) * 9 +
-      Math.sin(x * 0.17 + z * 0.093) * 3;
-    const end = clamp((z - 470) / 150, 0, 1);
-    return -18 + shoulder * (120 + grain) + end * end * (80 + grain * 0.5);
+    return landscapeHeight(
+      CHAPTERS[this.sector < 0 ? 0 : this.sector],
+      this.sector < 0 ? 0 : this.sector,
+      x,
+      z,
+    );
   }
   makeLandscape() {
     const terrain = MeshBuilder.CreateGround(
       "river-gorge",
-      { width: 720, height: 1000, subdivisions: 120, updatable: true },
+      { width: 720, height: 1000, subdivisions: 180, updatable: true },
       this.scene,
     );
     terrain.position.z = 230;
@@ -845,6 +844,11 @@ export class GameScene {
     this.surfaceClimate.copyFromFloats(
       ...(climates[s.sector] as [number, number, number]),
     );
+    const landscape = LANDSCAPES[s.sector];
+    this.landscapeClimate.set(landscape.moss, landscape.ochre, 0);
+    (this.materials.terrain as PBRMaterial).albedoColor = c(
+      landscape.color,
+    ).toLinearSpace();
     this.scene.fogColor = c(ch.sky);
     this.scene.clearColor = new Color4(
       ...(c(ch.sky).asArray() as [number, number, number]),

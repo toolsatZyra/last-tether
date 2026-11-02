@@ -8,12 +8,14 @@ export function weatheredStone(
   texture: Texture,
   color: string,
   scale = 0.5,
+  landscape?: Vector3,
 ) {
   const material = new PBRCustomMaterial(name, scene);
   material.albedoColor = Color3.FromHexString(color).toLinearSpace();
   material.metallic = 0;
   material.roughness = 0.92;
   material.AddUniform("weatherTexture", "sampler2D", texture);
+  if (landscape) material.AddUniform("landscapeStyle", "vec3", landscape);
   material.Fragment_Custom_Albedo(
     "vec3 weatherWeights=pow(abs(normalize(vNormalW)),vec3(4.0));weatherWeights/=max(0.001,weatherWeights.x+weatherWeights.y+weatherWeights.z);vec3 weatherGrain=texture2D(weatherTexture,vPositionW.yz*" +
       scale.toFixed(3) +
@@ -21,7 +23,10 @@ export function weatheredStone(
       scale.toFixed(3) +
       ").rgb*weatherWeights.y+texture2D(weatherTexture,vPositionW.xy*" +
       scale.toFixed(3) +
-      ").rgb*weatherWeights.z;surfaceAlbedo*=mix(vec3(0.85),weatherGrain*1.65,0.65);",
+      ").rgb*weatherWeights.z;surfaceAlbedo*=mix(vec3(0.85),weatherGrain*1.65,0.65);" +
+      (landscape
+        ? "float ledgeGrass=smoothstep(0.55,0.9,normalize(vNormalW).y)*landscapeStyle.x;surfaceAlbedo=mix(surfaceAlbedo,vec3(0.075,0.13,0.042),ledgeGrass*0.65);surfaceAlbedo*=mix(vec3(1.0),vec3(1.12,0.86,0.68),landscapeStyle.y);surfaceAlbedo*=0.93+0.07*sin(vPositionW.y*0.48+weatherGrain.r*2.0);"
+        : ""),
   );
   return material;
 }

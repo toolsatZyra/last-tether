@@ -1,0 +1,6 @@
+Boulder 01 — Rico Cilliers / Poly Haven
+https://polyhaven.com/a/boulder_01
+CC0 1.0: https://polyhaven.com/license
+Original 1K texture maps; mesh simplified with glTF Transform and Meshoptimizer.
+Reproducible processing: tools/prepare-geology.mjs
+Source hashes and modifications: public/assets/manifest.json

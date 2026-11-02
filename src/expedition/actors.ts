@@ -512,6 +512,12 @@ export class Assets {
     }
   }
   async loadArchitecture(scene: Scene) {
+    const rock = await SceneLoader.LoadAssetContainerAsync(
+      "/assets/geology/",
+      "boulder_01.glb",
+      scene,
+    );
+    this.containers.set("Rock_Mass", rock);
     const stoneTexture = new Texture("/assets/materials/stone.jpg", scene);
     const paletteMaterials = new Map<string, PBRMaterial>();
     const names = [

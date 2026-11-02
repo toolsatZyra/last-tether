@@ -1,0 +1,1 @@
+async(page)=>{return page.evaluate(()=>{const a=window.__expedition;a.start('story');a.pause();return a.view.staticDraws.filter(m=>m.metadata?.geology).map(m=>{const b=m.getBoundingInfo().boundingBox;return{min:b.minimumWorld.asArray(),max:b.maximumWorld.asArray(),vertices:m.getTotalVertices(),material:m.material.name};});});}

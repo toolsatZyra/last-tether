@@ -678,5 +678,50 @@
     "licenseSource": "https://quaternius.com/packs/ultimatemodularruins.html",
     "sha256": "34649aec779adde617568fc89e6ed24277d2bc5b254f592cdf26627f29fe63e0",
     "bytes": 118749
+  },
+  {
+    "path": "assets/geology/boulder_01.glb",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/boulder_01/boulder_01_1k.gltf",
+    "sha256": "36a9b2d5cea5fb0c5e908db085b348c1c1a9127f669b246a11e5e71c1e12614f",
+    "bytes": 3440296,
+    "author": "Rico Cilliers / Poly Haven",
+    "license": "CC0-1.0",
+    "assetPage": "https://polyhaven.com/a/boulder_01",
+    "licensePage": "https://polyhaven.com/license",
+    "modifications": "Mesh welded and simplified with glTF Transform and Meshoptimizer; ratio 0.25, error 0.01, attribute-aware permissive collapse. Original 1K textures embedded unchanged.",
+    "originalTriangles": 66122,
+    "triangles": 16530,
+    "sourceFiles": [
+      {
+        "name": "boulder_01_1k.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/boulder_01/boulder_01_1k.gltf",
+        "sha256": "51487934db898b4c24072780a451e34eca5c02e3ada24a62bbc600bbc4019e92",
+        "bytes": 2773
+      },
+      {
+        "name": "textures/boulder_01_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_arm_1k.jpg",
+        "sha256": "c57187c5746b6be913fa53846cb44ff78743e7ca5000f131c9627b99563c2b87",
+        "bytes": 659386
+      },
+      {
+        "name": "textures/boulder_01_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_diff_1k.jpg",
+        "sha256": "c38f0e918f6dc16b8d386ba3cdd89805c78320c119a1ceec85856f82b09a65b8",
+        "bytes": 987467
+      },
+      {
+        "name": "boulder_01.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/boulder_01/boulder_01.bin",
+        "sha256": "7f5b06503d62bd95bfe9c6b8a354a5cc8ff04a4d271a8cf87a3e3125db4232d7",
+        "bytes": 2938808
+      },
+      {
+        "name": "textures/boulder_01_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_nor_gl_1k.jpg",
+        "sha256": "0810cf6e89d89bb6eb065b4d2e2855288f5dcbd2c15c6e40ab90d462021b50aa",
+        "bytes": 1183552
+      }
+    ]
   }
 ]
