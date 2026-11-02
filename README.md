@@ -4,7 +4,9 @@
 
 An original solo browser adventure about Kavi, a routefinder who learns to hunt while trying to save the valley below a failing spillway.
 
-Version 0.2.24 is a desktop-browser adventure built with Babylon.js and Havok. Eight connected areas contain 32 objectives: storm-road traversal, predator encounters, linked waterworks controls, forest crossings, a usable quarry crane trap, steam lanes, a three-phase guardian and a timed escape. Kavi uses blended native animation, a spear combo with a contextual close-range kick, ranged throws, dodges and an assisted tether crossing.
+Version 0.2.25 is a desktop-browser adventure built with Babylon.js and Havok. Eight connected areas contain 32 objectives: storm-road traversal, predator encounters, linked waterworks controls, forest crossings, a usable quarry crane trap, steam lanes, a three-phase guardian and a timed escape. Kavi uses blended native animation, a spear combo with a contextual close-range kick, ranged throws, dodges and an assisted tether crossing.
+
+Hits now drive immediate directional reactions and collision-swept recoil. Heavy bodies resist light cuts, kicks and finishers can interrupt a brute, and lethal force carries through the collapse. Solid scenery blocks melee and projectiles; ground enemies can sidestep a blocked pursuit line. A short buffered dodge lets Kavi escape after the initial recoil. Contact flashes are pooled, camera impulses bypass ordinary camera smoothing, and opt-in audio distinguishes flesh, heavy impacts and metal contact.
 
 The waterworks now has solid handwheel housings, rotating indicators, lifting sluice gates and animated spillways that respond to progress. Channels, screens and pipes replace its generic garden dressing. Elsewhere, the chapter uses licensed textured rock and foliage, masonry surface detail, timber crossings, retracting encounter gates and a textured guardian. Scene batching, bounded shadow lists and camera obstruction fading support readability and frame performance. Native Havok bodies advance with gameplay independently of rendering.
 
@@ -56,7 +58,7 @@ Cloud transfer, public leaderboards and multiplayer are not connected. No suitab
 - `actors.ts`, `scene.ts`, `water.ts`: models, animation, lighting, materials, camera, scenery, particles and water. `structures.ts` and `landmarks.ts` build bridge arcades and the bell tower; `waterworks.ts` builds the reservoir, channels and animated controls.
 - `app.ts`, `profile.ts`, `markup.ts`, `style.css`: controls, local storage, settings and interface.
 - `audio.ts`: opt-in recorded effects and a quiet synthesized bed.
-- `tests/`: 45 behaviour and geometry checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
+- `tests/`: 53 behaviour and geometry checks, including a full input-driven route. `tools/`: reproducible browser and pacing checks.
 - `public/assets/manifest.json`: 91 source/license/hash records covering approximately 32.6 MB of uncompressed source assets (not the compressed network transfer size).
 
 The rejected prototype remains recoverable at Git commit `e8ef61d`. Its unused source and tests were removed from the current build so old checks cannot be mistaken for v2 validation.

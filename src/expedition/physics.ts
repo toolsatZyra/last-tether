@@ -85,11 +85,14 @@ export class PhysicsWorld {
       );
       yield;
     }
+    for (const body of this.bodies) body.shape.filterMembershipMask = 1;
     this.controller = new PhysicsCharacterController(
       new Vector3(s.p.x, s.p.y + 1.05, s.p.z),
       { capsuleHeight: 2.1, capsuleRadius: 0.38 },
       this.scene,
     );
+    this.controller.shape.filterMembershipMask = 2;
+    this.controller.shape.filterCollideMask = 3;
     this.controller.maxStepHeight = 0.45;
     this.controller.maxSlopeCosine = Math.cos(Math.PI / 3);
     this.controller.keepDistance = 0.02;
@@ -98,11 +101,35 @@ export class PhysicsWorld {
       const engine = this.scene.getPhysicsEngine()! as PhysicsEngineV2;
       engine.getPhysicsPlugin()!.executeStep(dt, engine.getBodies());
     };
+    s.combatTrace = (from, to) => {
+      const engine = this.scene.getPhysicsEngine()! as PhysicsEngineV2;
+      const result = engine.raycast(
+        new Vector3(from.x, from.y, from.z),
+        new Vector3(to.x, to.y, to.z),
+        { collideWith: 1, shouldHitTriggers: false },
+      );
+      return result.hasHit
+        ? {
+            p: {
+              x: result.hitPointWorld.x,
+              y: result.hitPointWorld.y,
+              z: result.hitPointWorld.z,
+            },
+            normal: {
+              x: result.hitNormalWorld.x,
+              y: result.hitNormalWorld.y,
+              z: result.hitNormalWorld.z,
+            },
+          }
+        : null;
+    };
     s.motion = (p, velocity, dt) => this.move(p, velocity, dt);
     s.enemyMotion = (enemy, velocity, dt) =>
       this.moveEnemy(enemy, velocity, dt);
     s.syncEnemyPhysics = (enemies) => {
-      const living = new Set(enemies.filter((e) => e.hp > 0));
+      const living = new Set(
+        enemies.filter((e) => e.hp > 0 || (e.dead > 0 && e.corpseMotion)),
+      );
       for (const [e, body] of this.enemyControllers)
         if (!living.has(e)) {
           body.controller.dispose();
@@ -127,6 +154,9 @@ export class PhysicsWorld {
       body = { controller, height };
       this.enemyControllers.set(e, body);
     }
+    // Collapsing bodies still hit scenery but never leave an upright invisible obstacle.
+    body.controller.shape.filterMembershipMask = e.hp > 0 ? 2 : 4;
+    body.controller.shape.filterCollideMask = e.hp > 0 ? 3 : 1;
     return this.moveController(body.controller, body.height, e.p, velocity, dt);
   }
   move(p: V, velocity: V, dt: number) {

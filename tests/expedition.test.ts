@@ -60,7 +60,8 @@ test("assisted grapple clears an authored gap and lands on the marked terrace", 
   assert.ok(target);
   s.step(1 / 60, { x: 0, z: 0, grapple: true });
   assert.ok(s.grapple);
-  step(s, 220);
+  // Inspect the landing itself; later enemy attacks can now physically displace Kavi.
+  for (let i = 0; i < 220 && s.grapple; i++) step(s, 1);
   assert.equal(s.grapple, null);
   assert.ok(distance(s.p, target) < 0.1);
   assert.ok(s.grounded);
@@ -209,7 +210,7 @@ test("a late attack press carries through recovery and melee takes priority over
 
 test("the melee closing step moves through collision, never by teleporting", () => {
   const { s, enemy } = meleeEncounter();
-  enemy.p.z = s.p.z + 4.8;
+  enemy.p.z = s.p.z + 3.9;
   const origin = { ...s.p };
   let sweeps = 0;
   s.motion = (p, velocity, dt) => {
@@ -223,7 +224,7 @@ test("the melee closing step moves through collision, never by teleporting", () 
   assert.deepEqual(s.p, origin);
   assert.equal(enemy.hp, enemy.max);
   const free = meleeEncounter();
-  free.enemy.p.z = free.s.p.z + 4.8;
+  free.enemy.p.z = free.s.p.z + 3.9;
   free.s.step(1 / 60, { x: 0, z: 0, attack: true });
   step(free.s, 12);
   assert.ok(free.s.p.z > origin.z + 0.2 && free.s.p.z < origin.z + 1);

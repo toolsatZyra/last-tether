@@ -1,3 +1,4 @@
+import { reactionEnvelope, type HitReaction } from "./combat-impact";
 import { MELEE } from "./melee";
 import { FootPose } from "./foot-pose";
 import { GuardianMotion } from "./guardian";
@@ -56,6 +57,7 @@ export class Actor {
   nodes: TransformNode[];
   hero: boolean;
   removePose: (() => void) | null = null;
+  lastReaction = -1;
   lastAttack = 0;
   lastDodge = 0;
   attackPose = -1;
@@ -432,6 +434,27 @@ export class Actor {
           Math.max(0, Math.min(0.999, elapsed / duration)),
     );
   }
+  /** Put contact on screen immediately, then play the recovery once on the gameplay clock. */
+  hitReaction(name: string, hit: HitReaction) {
+    this.play(name, 1, false);
+    if (this.lastReaction !== hit.id) {
+      this.lastReaction = hit.id;
+      for (const [group] of this.weights) {
+        const weight = group.name === this.active ? 1 : 0;
+        group.setWeightForAllAnimatables(weight);
+        this.weights.set(group, weight);
+      }
+    }
+    const contact = this.hero ? 0.35 : 0.25;
+    this.playTimed(
+      name,
+      Math.min(
+        hit.duration,
+        hit.duration * contact + hit.elapsed * (1 - contact),
+      ),
+      hit.duration,
+    );
+  }
   update(dt: number) {
     for (const [g, w] of this.weights) {
       const target = g.name === this.active ? 1 : 0;
@@ -499,8 +522,13 @@ export class Actor {
     if (s.finished) this.play("Idle_Neutral");
     else if (s.death > 0) this.play("Death", 1, false);
     else if (s.dodge > 0) this.playTimed("Roll", 0.28 - s.dodge, 0.28);
-    else if (s.hurtTime > 0) this.play("HitRecieve", 1.8, false);
-    else if (s.throwTime > 0)
+    else if (s.hurtTime > 0 && s.reaction) {
+      const rear =
+        s.reaction.direction.x * Math.sin(s.yaw) +
+          s.reaction.direction.z * Math.cos(s.yaw) >
+        0;
+      this.hitReaction(rear ? "HitRecieve_2" : "HitRecieve", s.reaction);
+    } else if (s.throwTime > 0)
       this.playTimed("Punch_Right", 0.4 - s.throwTime, 0.4);
     else if (s.attack > 0)
       this.playTimed(melee.clip, s.attackDuration - s.attack, s.attackDuration);
@@ -512,7 +540,20 @@ export class Actor {
         ? Math.max(-0.12, Math.min(0.12, -delta * 0.16))
         : 0;
     this.turnLean += (lean - this.turnLean) * (1 - Math.exp(-dt * 12));
-    this.root.rotation.z = this.turnLean;
+    const recoil = reactionEnvelope(s.reaction) * (s.reaction?.strength || 0);
+    const direction = s.reaction?.direction;
+    this.root.rotation.x = direction
+      ? (direction.x * Math.sin(s.yaw) + direction.z * Math.cos(s.yaw)) *
+        recoil *
+        0.14
+      : 0;
+    this.root.rotation.z =
+      this.turnLean -
+      (direction
+        ? (direction.x * Math.cos(s.yaw) - direction.z * Math.sin(s.yaw)) *
+          recoil *
+          0.14
+        : 0);
     this.update(dt);
   }
   enemy(e: Enemy, dt: number) {
@@ -554,7 +595,7 @@ export class Actor {
     let anim = flying ? "Flying_Idle" : "Idle";
     if (e.hp <= 0) anim = "Death";
     else if (e.state === "falling") anim = "Jump_Idle";
-    else if (e.flash > 0) anim = "HitReact";
+    else if (e.reaction) anim = "HitReact";
     else if (e.state === "windup" || e.state === "pulse" || e.state === "roar")
       anim = flying ? "No" : "Duck";
     else if (["lunge", "charge"].includes(e.state))
@@ -562,13 +603,38 @@ export class Actor {
     else if (e.state === "idle" && this.enemyMoveSpeed > 0.4)
       anim = flying ? "Fast_Flying" : "Run";
     else if (e.state === "stunned") anim = "HitReact";
-    this.play(
-      anim,
-      anim === "Run"
-        ? Math.max(0.6, Math.min(1.8, this.enemyMoveSpeed / 4.2))
-        : 1,
-      e.hp > 0,
-    );
+    if (e.hp <= 0) {
+      this.playTimed("Death", 1.4 - e.dead, 0.72);
+      const group = this.groups.find((g) => g.name === this.active);
+      if (group) {
+        for (const [g] of this.weights) {
+          const weight = g === group ? 1 : 0;
+          g.setWeightForAllAnimatables(weight);
+          this.weights.set(g, weight);
+        }
+      }
+    } else if (e.reaction) this.hitReaction("HitReact", e.reaction);
+    else
+      this.play(
+        anim,
+        anim === "Run"
+          ? Math.max(0.6, Math.min(1.8, this.enemyMoveSpeed / 4.2))
+          : 1,
+        true,
+      );
+    const recoil =
+      e.hp > 0 ? reactionEnvelope(e.reaction) * (e.reaction?.strength || 0) : 0;
+    const direction = e.reaction?.direction;
+    this.root.rotation.x = direction
+      ? (direction.x * Math.sin(e.yaw) + direction.z * Math.cos(e.yaw)) *
+        recoil *
+        0.2
+      : 0;
+    this.root.rotation.z = direction
+      ? -(direction.x * Math.cos(e.yaw) - direction.z * Math.sin(e.yaw)) *
+        recoil *
+        0.2
+      : 0;
     this.root.scaling.y =
       this.root.scaling.x * (e.hp <= 0 ? Math.min(1, e.dead * 2) : 1);
     this.update(dt);
@@ -677,7 +743,10 @@ export class Assets {
     );
     this.containers.set("Rock_Mass", rock);
     const stoneTexture = new Texture("/assets/materials/stone.jpg", scene);
-    const stoneNormal = new Texture("/assets/materials/stone-normal.jpg", scene);
+    const stoneNormal = new Texture(
+      "/assets/materials/stone-normal.jpg",
+      scene,
+    );
     const paletteMaterials = new Map<string, PBRMaterial>();
     const names = [
       "Arch_Gothic_RoundColumn",

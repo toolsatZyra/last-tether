@@ -1,0 +1,1128 @@
+{
+  "version": "0.2.25",
+  "date": "2026-11-02",
+  "status": "validated locally; publication pending",
+  "trigger": "User played the first three waves on 0.2.23 and reported no felt impact for outgoing or incoming attacks.",
+  "changes": [
+    "Directional player recoil and weight-sensitive enemy recoil through Havok capsule sweeps.",
+    "Lethal momentum retained through authored collapse; settled/expired native bodies released.",
+    "Immediate contact-weight animation, move-dependent hitstop and pooled surface contact flashes.",
+    "Static-scene occlusion for melee, lunges and projectiles; smaller forward melee reach.",
+    "Short recoil commitment with buffered dodge; repeated input does not bypass invulnerability.",
+    "Local ground-enemy avoidance for a reproduced solid-prop pursuit obstruction."
+  ],
+  "unitTests": {
+    "passed": 53,
+    "failed": 0
+  },
+  "build": {
+    "passed": true,
+    "bundle": "index-BELsr166.js"
+  },
+  "native": {
+    "pushes": [
+      {
+        "kind": "raptor",
+        "unchanged": true,
+        "distance": 0.8911482744718455,
+        "state": "idle"
+      },
+      {
+        "kind": "spitter",
+        "unchanged": true,
+        "distance": 0.9901647494131538,
+        "state": "idle"
+      },
+      {
+        "kind": "brute",
+        "unchanged": true,
+        "distance": 0.2784838357724482,
+        "state": "stunned"
+      },
+      {
+        "kind": "bomber",
+        "unchanged": true,
+        "distance": 1.1881976992957846,
+        "state": "idle"
+      }
+    ],
+    "blocked": {
+      "hp": 110,
+      "expected": 110,
+      "cues": 1
+    },
+    "wallStop": {
+      "z": 52.77999900788604,
+      "start": 52.4,
+      "wall": 53.6,
+      "events": 1
+    },
+    "lethal": {
+      "distance": 2.4149611986179806,
+      "hp": 0,
+      "state": "death",
+      "controller": true,
+      "clip": "enemy-13_Death",
+      "disposed": true
+    },
+    "hurt": {
+      "distance": 0.70600837576524,
+      "health": 82.5,
+      "noTeleport": true
+    },
+    "protection": {
+      "health": 100,
+      "recoil": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "playerWallStop": {
+      "x": 17.54999928046031,
+      "origin": 18,
+      "wall": 16.9
+    },
+    "projectileBlock": {
+      "hp": 110,
+      "shots": 0,
+      "cues": 1
+    },
+    "ledges": [
+      {
+        "side": -1,
+        "fell": true,
+        "hp": 0,
+        "y": -8.232449087774457
+      },
+      {
+        "side": 1,
+        "fell": true,
+        "hp": 0,
+        "y": -8.234449455888317
+      }
+    ],
+    "countsBefore": {
+      "meshes": 670,
+      "materials": 107,
+      "textures": 57
+    },
+    "countsAfter": {
+      "meshes": 670,
+      "materials": 107,
+      "textures": 57
+    },
+    "errors": []
+  },
+  "gallery": {
+    "frames": [
+      {
+        "name": "before",
+        "player": {
+          "p": {
+            "x": 18,
+            "y": 10,
+            "z": 51
+          },
+          "clip": "kavi_Idle_Sword",
+          "frame": 89.91200238425284,
+          "weights": [
+            [
+              "kavi_Idle_Sword",
+              0.999999991798445
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 18,
+            "y": 10,
+            "z": 53.4
+          },
+          "hp": 110,
+          "clip": "enemy-1_Idle",
+          "frame": 0,
+          "weights": [
+            [
+              "enemy-1_Idle",
+              0.999999991718947
+            ]
+          ]
+        },
+        "hitstop": 0,
+        "cameraImpulse": [
+          0,
+          0,
+          0
+        ],
+        "flashCount": 0
+      },
+      {
+        "name": "contact",
+        "player": {
+          "p": {
+            "x": 18,
+            "y": 10.00219345589479,
+            "z": 51
+          },
+          "clip": "kavi_Sword_Slash",
+          "frame": 23.61904689243861,
+          "weights": [
+            [
+              "kavi_Idle_Sword",
+              0.0836394956347089
+            ],
+            [
+              "kavi_Sword_Slash",
+              0.9163605036793171
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 18,
+            "y": 10.002197297414144,
+            "z": 53.50333333333333
+          },
+          "hp": 76,
+          "clip": "enemy-1_HitReact",
+          "frame": 10.304348235544952,
+          "weights": [
+            [
+              "enemy-1_HitReact",
+              1
+            ]
+          ]
+        },
+        "hitstop": 0.055,
+        "cameraImpulse": [
+          0,
+          0.020940118045433977,
+          0.05982890870123993
+        ],
+        "flashCount": 1
+      },
+      {
+        "name": "recoil",
+        "player": {
+          "p": {
+            "x": 18,
+            "y": 10.003481866916026,
+            "z": 51
+          },
+          "clip": "kavi_Sword_Slash",
+          "frame": 41.33333206176757,
+          "weights": [
+            [
+              "kavi_Idle_Sword",
+              0.009539407210095002
+            ],
+            [
+              "kavi_Sword_Slash",
+              0.9904605927116671
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 17.998828675160897,
+            "y": 10.020029682545015,
+            "z": 53.93120637840693
+          },
+          "hp": 76,
+          "clip": "enemy-1_HitReact",
+          "frame": 18.130435503047448,
+          "weights": [
+            [
+              "enemy-1_HitReact",
+              1
+            ]
+          ]
+        },
+        "hitstop": 0,
+        "cameraImpulse": [
+          0,
+          0.0008418827380611279,
+          0.0024053792516032227
+        ],
+        "flashCount": 0
+      },
+      {
+        "name": "recover",
+        "player": {
+          "p": {
+            "x": 18,
+            "y": 10.006651870906355,
+            "z": 51
+          },
+          "clip": "kavi_Idle_Sword",
+          "frame": 0,
+          "weights": [
+            [
+              "kavi_Sword_Slash",
+              0.03294905132295068
+            ],
+            [
+              "kavi_Idle_Sword",
+              0.967015060858421
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 17.998828675160897,
+            "y": 10.020029682545015,
+            "z": 54.33559490259901
+          },
+          "hp": 76,
+          "clip": "enemy-1_Run",
+          "frame": 0,
+          "weights": [
+            [
+              "enemy-1_HitReact",
+              0.21208362139917694
+            ],
+            [
+              "enemy-1_Run",
+              0.787916378600823
+            ]
+          ]
+        },
+        "hitstop": 0,
+        "cameraImpulse": [
+          0,
+          0,
+          0
+        ],
+        "flashCount": 0
+      },
+      {
+        "name": "hurt",
+        "player": {
+          "p": {
+            "x": 18,
+            "y": 10.006651870906355,
+            "z": 51
+          },
+          "clip": "kavi_HitRecieve",
+          "frame": 11.899999916553497,
+          "weights": [
+            [
+              "kavi_HitRecieve",
+              1
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 17.998828675160897,
+            "y": 10.020029682545015,
+            "z": 54.33559490259901
+          },
+          "hp": 76,
+          "clip": "enemy-1_Run",
+          "frame": 0,
+          "weights": [
+            [
+              "enemy-1_HitReact",
+              0.21208362139917694
+            ],
+            [
+              "enemy-1_Run",
+              0.787916378600823
+            ]
+          ]
+        },
+        "hitstop": 0.075,
+        "cameraImpulse": [
+          -0.1349985632233106,
+          0.04724949712815871,
+          0
+        ],
+        "flashCount": 1
+      },
+      {
+        "name": "hurt-recoil",
+        "player": {
+          "p": {
+            "x": 17.46086013978569,
+            "y": 10.008062180876735,
+            "z": 51
+          },
+          "clip": "kavi_HitRecieve",
+          "frame": 20.66984112489791,
+          "weights": [
+            [
+              "kavi_HitRecieve",
+              1
+            ]
+          ]
+        },
+        "enemy": {
+          "p": {
+            "x": 17.998828675160897,
+            "y": 10.020029682545015,
+            "z": 54.37996890388321
+          },
+          "hp": 76,
+          "clip": "enemy-1_Duck",
+          "frame": 0,
+          "weights": [
+            [
+              "enemy-1_HitReact",
+              0.006995565344777516
+            ],
+            [
+              "enemy-1_Run",
+              0.10705829327433541
+            ],
+            [
+              "enemy-1_Idle",
+              0.28031651175125744
+            ],
+            [
+              "enemy-1_Duck",
+              0.6056296296296296
+            ]
+          ]
+        },
+        "hitstop": 0,
+        "cameraImpulse": [
+          0,
+          0,
+          0
+        ],
+        "flashCount": 0
+      }
+    ],
+    "errors": []
+  },
+  "incomingKeyboard": {
+    "start": {
+      "x": 18,
+      "y": 10,
+      "z": 50
+    },
+    "hit": {
+      "health": 90.9,
+      "hitstop": 6.938893903907228e-18,
+      "recoil": {
+        "x": -0.01891408507830152,
+        "y": 0,
+        "z": -4.483293436209973
+      },
+      "reaction": {
+        "id": 2,
+        "elapsed": 0,
+        "duration": 0.34,
+        "direction": {
+          "x": -0.0042187550360523835,
+          "y": 0,
+          "z": -0.9999911010133768
+        },
+        "strength": 0.3611111111111111
+      },
+      "clip": "kavi_HitRecieve"
+    },
+    "escape": {
+      "p": {
+        "x": 21.973861164514794,
+        "y": 10.031119809354468,
+        "z": 49.63190101410617
+      },
+      "dodge": 0.046666666666666745,
+      "hurtTime": 0,
+      "clip": "kavi_Roll",
+      "health": 90.9
+    },
+    "errors": []
+  },
+  "pursuit": {
+    "initiallyBlocked": true,
+    "cleared": true,
+    "close": true,
+    "elapsed": 1.2500000000000004,
+    "origin": {
+      "x": 20.905467058502786,
+      "y": 20.06256817573058,
+      "z": 282.58841019760285
+    },
+    "final": {
+      "x": 19.23522160280024,
+      "y": 20.035624440028755,
+      "z": 282.7225932016526
+    },
+    "route": [
+      {
+        "p": {
+          "x": 20.9105097101422,
+          "y": 20.0547903979528,
+          "z": 282.5769422780662
+        },
+        "state": "idle",
+        "avoiding": 0.55
+      },
+      {
+        "p": {
+          "x": 19.78055509269266,
+          "y": 20.03562443925686,
+          "z": 281.31755766416035
+        },
+        "state": "idle",
+        "avoiding": 0.050000000000000044
+      },
+      {
+        "p": {
+          "x": 19.78055509269266,
+          "y": 20.03562443925686,
+          "z": 281.31755766416035
+        },
+        "state": "windup",
+        "avoiding": 0.050000000000000044
+      }
+    ],
+    "errors": []
+  },
+  "normalSpeedOpening": {
+    "wallSeconds": 90.01769999999925,
+    "snapshot": {
+      "sector": 1,
+      "beat": 0,
+      "p": {
+        "x": -19.107925539455216,
+        "y": 14.039247474858099,
+        "z": 40.143403658596235
+      },
+      "health": 94.9,
+      "seconds": 82.58333333332993,
+      "deaths": 0,
+      "kills": 20,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "raptor",
+          "p": {
+            "x": -21.140274095024246,
+            "y": 14.017442960998723,
+            "z": 44.50231483948245
+          },
+          "hp": 4,
+          "state": "idle"
+        },
+        {
+          "kind": "raptor",
+          "p": {
+            "x": -13.478481312049507,
+            "y": 14.067079186456821,
+            "z": 41.74466454253331
+          },
+          "hp": 110,
+          "state": "recover"
+        },
+        {
+          "kind": "spitter",
+          "p": {
+            "x": -28.46430916093133,
+            "y": 14,
+            "z": 45.34617901333261
+          },
+          "hp": 115,
+          "state": "recover"
+        }
+      ],
+      "fps": 51.47563486626168,
+      "meshes": 644,
+      "animation": "kavi_Sword_Slash"
+    },
+    "frames": 4992,
+    "averageFps": 55.455760367128256,
+    "medianMs": 16.09999999962747,
+    "p95Ms": 33.399999998509884,
+    "maxMs": 175,
+    "slow": [
+      {
+        "ms": 115.59999999962747,
+        "seconds": 2.7833333333333283,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 86.20000000111759,
+        "seconds": 8.066666666666647,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 98.09999999962747,
+        "seconds": 8.266666666666657,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0.25000000000000006,
+        "hitstop": 0.055
+      },
+      {
+        "ms": 141.2000000011176,
+        "seconds": 8.366666666666662,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0.21666666666666673,
+        "hitstop": 0
+      },
+      {
+        "ms": 127,
+        "seconds": 9.966666666666741,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0.20666666666666672,
+        "hitstop": 0.04833333333333334
+      },
+      {
+        "ms": 91.20000000111759,
+        "seconds": 10.050000000000079,
+        "sector": 0,
+        "beat": 0,
+        "attack": 0.1733333333333334,
+        "hitstop": 0
+      },
+      {
+        "ms": 98.09999999962747,
+        "seconds": 18.93333333333354,
+        "sector": 0,
+        "beat": 1,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 131.40000000037253,
+        "seconds": 24.666666666666547,
+        "sector": 0,
+        "beat": 1,
+        "attack": 0.4,
+        "hitstop": 0
+      },
+      {
+        "ms": 87.19999999925494,
+        "seconds": 26.71666666666643,
+        "sector": 0,
+        "beat": 1,
+        "attack": 0.37333333333333335,
+        "hitstop": 0
+      },
+      {
+        "ms": 102.40000000037253,
+        "seconds": 42.93333333333218,
+        "sector": 0,
+        "beat": 2,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 102.19999999925494,
+        "seconds": 46.066666666665334,
+        "sector": 0,
+        "beat": 2,
+        "attack": 0.3633333333333331,
+        "hitstop": 0.05166666666666668
+      },
+      {
+        "ms": 123.39999999850988,
+        "seconds": 46.48333333333198,
+        "sector": 0,
+        "beat": 2,
+        "attack": 0.01333333333333319,
+        "hitstop": 0
+      },
+      {
+        "ms": 87.20000000111759,
+        "seconds": 59.58333333333123,
+        "sector": 0,
+        "beat": 3,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 89.90000000037253,
+        "seconds": 65.84999999999755,
+        "sector": 0,
+        "beat": 3,
+        "attack": 0.11666666666666675,
+        "hitstop": 0
+      },
+      {
+        "ms": 137.90000000037253,
+        "seconds": 69.09999999999737,
+        "sector": 0,
+        "beat": 3,
+        "attack": 0.2566666666666667,
+        "hitstop": 0
+      },
+      {
+        "ms": 86.69999999925494,
+        "seconds": 72.78333333333049,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 175,
+        "seconds": 72.78333333333049,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 89.90000000037253,
+        "seconds": 75.79999999999698,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 134,
+        "seconds": 75.91666666666364,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0,
+        "hitstop": 0
+      },
+      {
+        "ms": 112.69999999925494,
+        "seconds": 80.08333333333007,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0.25000000000000006,
+        "hitstop": 0
+      },
+      {
+        "ms": 105.80000000074506,
+        "seconds": 80.13333333333007,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0.20000000000000007,
+        "hitstop": 0
+      },
+      {
+        "ms": 121.5,
+        "seconds": 80.18333333333007,
+        "sector": 1,
+        "beat": 0,
+        "attack": 0.15000000000000008,
+        "hitstop": 0
+      }
+    ],
+    "objectives": [
+      {
+        "key": "0-0",
+        "seconds": 0,
+        "kills": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 11.216666666666804,
+        "kills": 3
+      },
+      {
+        "key": "0-2",
+        "seconds": 32.5666666666661,
+        "kills": 9
+      },
+      {
+        "key": "0-3",
+        "seconds": 47.733333333331906,
+        "kills": 11
+      },
+      {
+        "key": "1-0",
+        "seconds": 72.78333333333049,
+        "kills": 18
+      }
+    ],
+    "counts": {
+      "story": 4,
+      "tell": 28,
+      "attack": 54,
+      "swing": 41,
+      "hit": 65,
+      "kill": 20,
+      "hurt": 6,
+      "pull": 10,
+      "kick": 10,
+      "secured": 4,
+      "save": 4,
+      "grapple": 2,
+      "land": 3,
+      "weapon-block": 2,
+      "dodge": 4,
+      "reinforcement": 2,
+      "cast": 6,
+      "falling": 1,
+      "device": 1,
+      "sector": 1
+    },
+    "contacts": [
+      {
+        "type": "hit",
+        "seconds": 5.933333333333318,
+        "strength": 0.4722222222222222,
+        "blocked": false,
+        "source": {
+          "x": 0.9717008710197682,
+          "y": 0,
+          "z": 0.23621476935074115
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 6.383333333333316,
+        "strength": 0.5833333333333334,
+        "blocked": false,
+        "source": {
+          "x": 0.9997003265046011,
+          "y": 0,
+          "z": 0.02447973011684921
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 6.933333333333314,
+        "strength": 1,
+        "blocked": false,
+        "source": {
+          "x": 0.9225689564437213,
+          "y": 0,
+          "z": -0.38583224412475325
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 7.533333333333312,
+        "strength": 0.4722222222222222,
+        "blocked": false,
+        "source": {
+          "x": -0.12147817922677365,
+          "y": 0,
+          "z": 0.9925941023256927
+        }
+      },
+      {
+        "type": "hurt",
+        "seconds": 7.699999999999978,
+        "strength": 0.3611111111111111,
+        "blocked": false,
+        "source": {
+          "x": 0.6975579660201848,
+          "y": 0,
+          "z": 0.7165283553647983
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 8.266666666666657,
+        "strength": 0.5833333333333334,
+        "blocked": false,
+        "source": {
+          "x": -0.17858721333445765,
+          "y": 0,
+          "z": 0.9839240861130664
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 8.816666666666684,
+        "strength": 1,
+        "blocked": false,
+        "source": {
+          "x": -0.18114756170414056,
+          "y": 0,
+          "z": 0.9834559272731263
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 8.933333333333357,
+        "strength": 0.3055555555555556,
+        "blocked": false,
+        "source": {
+          "x": 0.5768253441856404,
+          "y": 0,
+          "z": -0.8168675059672269
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 9.416666666666714,
+        "strength": 0.4722222222222222,
+        "blocked": false,
+        "source": {
+          "x": 0.488968428714032,
+          "y": 0,
+          "z": -0.8723014821269826
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 9.950000000000074,
+        "strength": 0.5833333333333334,
+        "blocked": false,
+        "source": {
+          "x": 0.48892163545713135,
+          "y": 0,
+          "z": -0.8723277104287838
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 10.450000000000099,
+        "strength": 1,
+        "blocked": false,
+        "source": {
+          "x": 0.475410971800575,
+          "y": 0,
+          "z": -0.8797638364309098
+        }
+      },
+      {
+        "type": "hit",
+        "seconds": 21.81666666666671,
+        "strength": 0.3055555555555556,
+        "blocked": false,
+        "source": {
+          "x": 0.9622031216257189,
+          "y": 0,
+          "z": 0.27233279775620467
+        }
+      }
+    ],
+    "renderSize": [
+      1036,
+      703
+    ],
+    "renderer": {
+      "vendor": "Google Inc. (AMD)",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "errors": []
+  },
+  "limits": [
+    "The native scenarios use controlled setups but real Havok geometry and controllers. No mock physics is used in that browser evidence.",
+    "The 90-second opening sample uses a route-aware input driver and predates the final dodge buffer and local avoidance refinement. It records 65 hit events, 6 hurt events, 20 defeats and zero recoveries; 55.46 FPS average, 33.4 ms p95 and 175 ms maximum on integrated AMD graphics at Balanced 1036x703.",
+    "Character collision uses capsules and authored reactions/death clips. Articulated ragdolls, exact animated-weapon mesh sweeps and global navigation meshes are not implemented.",
+    "Flying recoil remains continuous authored movement; native ground-body collision tests cover raptor, spitter, brute and bomber.",
+    "Audio changes use existing licensed recordings and synthesis. Testing was silent; the audible mix is not validated.",
+    "Automated completion and poses do not establish the player-approved feel gate, top-tier art or first-time 15-20 minute pacing."
+  ],
+  "fullRoute": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 65,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 722.1333333330052,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 14.266666666666955,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 35.61666666666593,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 48.833333333331844,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 76.28333333333029,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 97.63333333332908,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 118.98333333332786,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 154.5666666666818,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 186.08333333337356,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 203.36666666672065,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 242.00000000008473,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 274.5333333334123,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 299.95000000005587,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 304.01666666671883,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 329.4333333333624,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 354.85000000000593,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 380.2666666666495,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 397.5499999999671,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 426.0166666666079,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 452.44999999991717,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 488.03333333321814,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 501.2499999998728,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 521.5833333331876,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 555.1333333331571,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 576.4833333331377,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 592.7499999997896,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 639.5166666664137,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 666.9666666663887,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 684.2499999997063,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 686.2833333330378,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 697.466666666361,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 709.6666666663499,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 722.1333333330052,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "production": {
+    "frameSample": {
+      "frames": 876,
+      "seconds": 14.842099999999999,
+      "averageFps": 58.95392161486583,
+      "medianMs": 18.100000000002183,
+      "p95Ms": 24.200000000000728
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

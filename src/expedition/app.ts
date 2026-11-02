@@ -342,7 +342,7 @@ async function crossArea() {
 }
 function events(immediate = false) {
   for (const e of game.events) {
-    sound.play(e.type);
+    sound.play(e.type, e.value, e.impact?.blocked);
     view.event(e, game);
     if (e.type === "sector") {
       if (immediate) view.build(game);

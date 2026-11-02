@@ -97,3 +97,9 @@ The waterworks inspection revealed a separate readability issue: the foreground 
 The area now communicates machinery and progress through physical handwheel assemblies, raised sluice gates, widening spills and changing channel levels. Camera views exposed rock intrusion into the third spillway; its full face and falling-water volume now remain clear. Native input checks cover collision, continuous turns, pause and saved state. Water is still stylized shader work, and the route still contains repeated masonry decks. This pass improves one area; it does not close the hero/creature art, overall composition, sustained-performance or first-time pacing gates.
 
 Two bounded normal-speed waterworks samples measured 59.45 and 53.81 FPS on integrated AMD graphics, with maximum frame intervals of 284 and 267 ms. The latter uses natural render frames for warm-up instead of synchronous render calls. Do not select the faster result as a sustained-performance claim or attribute the hitch solely to test setup.
+
+## Player feedback: combat weight, 0.2.25
+
+User play of the first three waves on 0.2.23 found no felt impact in either direction. This is a failed feel gate, regardless of prior automated completion. Prioritize visible contact and recovery, force through real collision, weight differences and usable dodge timing. The revision addresses missing player recoil, cancelled lethal momentum, slow hit blending, softened camera impulse and through-wall attacks. A reproduced prop obstruction also led to local enemy avoidance instead of repeated blocked attacks.
+
+Review the opening through ordinary play again after publication. Automated native tests demonstrate mechanics and bounded timing; they cannot certify satisfaction or modern commercial-game feel. Mixed creature/hero art and variable frame pacing remain major limits.

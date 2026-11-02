@@ -34,7 +34,11 @@ test("kick damage arrives at extension once, with stronger forward pushback", ()
   assert.equal(s.meleeMove, "kick");
   for (let i = 0; i < 3; i++) s.step(1 / 60, { x: 0, z: 0 });
   assert.equal(e.hp, hp - 42);
-  assert.ok(e.knockVelocity && e.knockVelocity.z > 4);
+  const light = setup();
+  light.s.damage(light.e, 34, 0.4);
+  assert.ok(
+    e.knockVelocity && e.knockVelocity.z > light.e.knockVelocity!.z * 1.6,
+  );
   for (let i = 0; i < 30; i++) s.step(1 / 60, { x: 0, z: 0 });
   assert.equal(e.hp, hp - 42);
   assert.equal(s.events.filter((e) => e.type === "kick").length, 1);

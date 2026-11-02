@@ -1,3 +1,4 @@
+import { CombatFeedback } from "./combat-feedback";
 import { Waterworks } from "./waterworks";
 import { stormSpur, stormGrapple } from "./storm-road";
 import { EncounterGate } from "./encounter-gate";
@@ -107,6 +108,8 @@ export class GameScene {
   menu = true;
   time = 0;
   shake = 0;
+  combatFeedback: CombatFeedback;
+  cameraImpactOffset = Vector3.Zero();
   landingKick = 0;
   craneFraming = 0;
   ao: SSAO2RenderingPipeline;
@@ -249,6 +252,7 @@ export class GameScene {
     glow.intensity = 0.3;
     this.makeMaterials();
     this.makeWater();
+    this.combatFeedback = new CombatFeedback(this.scene);
     this.sparkTexture = new DynamicTexture(
       "spark-texture",
       { width: 32, height: 32 },
@@ -334,6 +338,7 @@ export class GameScene {
     this.loaded = true;
   }
   async warmup() {
+    await this.combatFeedback.warmup();
     const samples = (
       ["raptor", "spitter", "brute", "bomber", "wing", "guardian"] as const
     ).map((kind) =>
@@ -836,6 +841,7 @@ export class GameScene {
     this.pressureGallery?.dispose();
     this.pressureGallery = undefined;
     this.waterworks = undefined;
+    this.combatFeedback.clear();
     this.particleBursts.forEach((p) => p.system.dispose(false));
     this.particleBursts = [];
     this.sector = s.sector;
@@ -1631,11 +1637,8 @@ export class GameScene {
     });
   }
   event(e: Event, s: Expedition) {
-    if (
-      ["hit", "kill", "armour", "secured", "heal", "grapple", "stun"].includes(
-        e.type,
-      )
-    )
+    this.combatFeedback.event(e);
+    if (["armour", "secured", "heal", "grapple", "stun"].includes(e.type))
       this.burst(
         e.p || s.p,
         e.type === "heal" ? "cyan" : "glow",
@@ -1649,13 +1652,10 @@ export class GameScene {
       this.burst(e.p || s.p, "stone", 38);
       this.shake = 0.4;
     }
-    if (e.type === "hurt") this.shake = 0.2;
     if (e.type === "land") {
       this.landingKick = 0.22;
       this.burst(e.p || s.p, "glow", 5);
     }
-    if (e.type === "hit")
-      this.shake = Math.max(this.shake, (e.value || 0) >= 70 ? 0.12 : 0.055);
   }
   update(s: Expedition, dt: number, render = true) {
     if (!this.loaded) return;
@@ -1915,10 +1915,22 @@ export class GameScene {
       desired.x += (Math.random() - 0.5) * this.shake * 0.8;
       desired.y += (Math.random() - 0.5) * this.shake * 0.6;
     }
+    // Remove the previous impulse before smoothing the base camera; impact itself stays crisp.
+    this.camera.position.subtractInPlace(this.cameraImpactOffset);
     this.camera.position = Vector3.Lerp(
       this.camera.position,
       desired,
       1 - Math.exp(-dt * 10),
+    );
+    this.combatFeedback.update(dt, this.reduced);
+    this.cameraImpactOffset.copyFrom(this.combatFeedback.offset);
+    this.camera.position.addInPlace(this.cameraImpactOffset);
+    const hurt = this.combatFeedback.hurtLife / 0.28;
+    this.pipeline.imageProcessing.vignetteColor.set(
+      0.02 + hurt * 0.22,
+      0.05 * (1 - hurt * 0.6),
+      0.07 * (1 - hurt * 0.6),
+      1,
     );
     this.camera.setTarget(target);
     const sight = target.subtract(this.camera.position),

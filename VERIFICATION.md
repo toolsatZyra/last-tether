@@ -321,3 +321,19 @@ Two 30-second normal-speed waterworks samples measured **59.45 / 53.81 FPS**, me
 Reproduction: tools/waterworks-state-check.js, waterworks-gallery.js, waterworks-rock-clearance.js, waterworks-play-sample.js; existing control-visibility-check.js and kick-route-audit.js. Detailed results: verification/waterworks-0.2.24.json.
 
 The compiled 0.2.24 preview passed ordinary keyboard combat, pause and save/reload/resume, with no development hook, page errors or failed requests. Its bounded opening sample measured 39.05 FPS and p95 36.4 ms; performance remains variable. This local checkpoint has not yet been published.
+
+## Combat weight and collision response, 0.2.25
+
+User feedback on 0.2.23 identified weak incoming and outgoing impact. The revision adds directional recoil through Havok, weight-sensitive enemy response, retained lethal momentum, immediate timed hit reactions, move-dependent impact pause, pooled contact flashes and a short buffered dodge. Weapon, lunge and projectile contacts respect solid scenery. Ground enemies sidestep a blocked pursuit line.
+
+**53 tests and the production build pass.** Controlled native Havok scenarios show light-hit displacement after 20 steps of 0.891 units for raptor, 0.990 for spitter, 0.278 for brute and 1.188 for bomber. The initial hit does not teleport the victim. A wall arrests a finisher once; damage cannot pass through it. A fatal hit moves the body 2.415 units during collapse and its controller is later released. Incoming force moves Kavi 0.706 units in open space and stops at a wall; invulnerability suppresses both damage and force. Projectiles stop at the tested solid obstacle. Both tested arena edges allow physical knockback falls and a single defeat. Two hundred contact cues leave mesh/material/texture counts unchanged.
+
+Staged contact-frame checks show the native HitReact/HitRecieve clips at full weight immediately, with a visible surface flash and camera impulse; the flash expires during recovery. A live enemy lunge causes damage and backward recoil. An ordinary D + Shift input then rolls Kavi sideways, clears hurt recovery and preserves remaining health. The pending input is retained through the brief impact commitment.
+
+Stricter contact checking exposed a pursuit stall at a real waterworks prop. The reproduced native scene initially has a blocked attack line. Local avoidance moves the raptor around it and into a clear attack position in 1.25 seconds. The final full native input-driven chapter run passes all 32 objectives, boss and escape in **722.1333 simulated seconds (12m02s), 188 defeats, zero recoveries**, with a valid finished save and no page errors. It uses route and puzzle knowledge and is not a first-time pacing measurement.
+
+A 90-second normal-speed opening sample records 65 hit events, six hurt events, twenty defeats and zero recoveries, reaches the second area and exercises all four opening objectives. Balanced 1036×703 on AMD Radeon integrated graphics: **55.46 FPS average, 16.1 ms median, 33.4 ms p95, 175 ms maximum**. This sample precedes the final dodge buffer/local avoidance refinement and does not establish sustained 60 FPS. Sound remained muted; new impact-audio layering has not had an audible mix review.
+
+Reproduction: tools/combat-impact-native.js, combat-impact-gallery.js, combat-incoming-keyboard.js, combat-pursuit-check.js, combat-opening-sample.js and kick-route-audit.js. Detailed evidence: verification/combat-impact-0.2.25.json. Local diagnostic obstacle/stuck inspection scripts preserve the reproduced stall investigation.
+
+The compiled keyboard check defeated the opening group, advanced the objective, paused and held the timer, then saved/reloaded/resumed correctly. No development hook, page errors or failed requests. Its bounded opening sample averaged 58.95 FPS with p95 24.2 ms. The camp footer now imports the package version instead of retaining a stale hardcoded label. Public verification follows publication.

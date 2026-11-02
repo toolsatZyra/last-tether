@@ -121,7 +121,7 @@ export class Soundscape {
       volume.disconnect();
     };
   }
-  play(event: string) {
+  play(event: string, damage = 0, blocked = false) {
     if (!this.enabled) return;
     const variation = (this.variant++ % 3) * 0.045;
     if (event === "swing")
@@ -131,8 +131,18 @@ export class Soundscape {
         1 + variation,
       );
     else if (event === "kick") this.sample("cloth2", 0.6, 1.3);
-    else if (event === "hit")
-      this.sample("impactPunch_heavy_000", 0.7, 1 + variation);
+    else if (event === "weapon-block" || (event === "hit" && blocked))
+      this.sample("impactMetal_heavy_000", 0.5, 1.15 + variation);
+    else if (event === "hit") {
+      const heavy = damage >= 65;
+      this.sample(
+        "impactPunch_heavy_000",
+        heavy ? 0.85 : 0.62,
+        (heavy ? 0.82 : 1.08) + variation,
+      );
+      this.tone(heavy ? 100 : 135, 40, heavy ? 0.14 : 0.09, heavy ? 0.2 : 0.1);
+    } else if (event === "body-impact")
+      this.sample("impactMining_000", 0.55, 0.9);
     else if (["slam", "explode", "burst", "crane-impact"].includes(event)) {
       this.sample("impactMining_000", 0.9, 0.72);
       this.tone(70, 25, 0.38, 0.3);

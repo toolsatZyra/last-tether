@@ -1,3 +1,10 @@
+import {
+  BODY_WEIGHT,
+  impactDirection,
+  impactStrength,
+  type HitReaction,
+  type ImpactCue,
+} from "./combat-impact.ts";
 import { MELEE, chooseMelee, type MeleeMove } from "./melee.ts";
 import { quarryTrap, CRANE_IMPACT, CRANE_RADIUS } from "./crane.ts";
 import {
@@ -30,7 +37,13 @@ export type Input = {
   burst?: boolean;
 };
 
-export type Event = { type: string; text?: string; p?: V; value?: number };
+export type Event = {
+  type: string;
+  text?: string;
+  p?: V;
+  value?: number;
+  impact?: ImpactCue;
+};
 
 export type Enemy = {
   id: number;
@@ -53,6 +66,11 @@ export type Enemy = {
   groundY?: number;
   fallVelocity?: V;
   knockVelocity?: V;
+  reaction?: HitReaction;
+  corpseMotion?: boolean;
+  wallImpactCooldown?: number;
+  avoidDirection?: V;
+  avoidRemaining?: number;
   pull?: { to: V; remaining: number };
 };
 
@@ -170,6 +188,7 @@ export class Expedition {
   ) => { p: V; grounded: boolean };
   syncEnemyPhysics?: (enemies: Enemy[]) => void;
   finishPhysicsStep?: (dt: number) => void;
+  combatTrace?: (from: V, to: V) => { p: V; normal: V } | null;
   motion:
     | ((p: V, velocity: V, dt: number) => { p: V; grounded: boolean })
     | null = null;
@@ -198,6 +217,7 @@ export class Expedition {
   invuln = 0;
   dodge = 0;
   dodgeCooldown = 0;
+  dodgeBuffer = 0;
   dodgeDir = v();
   attack = 0;
   attackCooldown = 0;
@@ -212,6 +232,9 @@ export class Expedition {
   throwTime = 0;
   throwCooldown = 0;
   hurtTime = 0;
+  hurtDuration = 0.36;
+  reaction?: HitReaction;
+  recoil = v();
   slam = false;
   death = 0;
   time = 0;
@@ -301,8 +324,20 @@ export class Expedition {
     };
   }
 
-  event(type: string, text?: string, p?: V, value?: number) {
-    this.events.push({ type, text, p: p ? { ...p } : undefined, value });
+  event(
+    type: string,
+    text?: string,
+    p?: V,
+    value?: number,
+    impact?: ImpactCue,
+  ) {
+    this.events.push({
+      type,
+      text,
+      p: p ? { ...p } : undefined,
+      value,
+      impact,
+    });
   }
 
   loadSector(sector: number, beat = 0) {
@@ -391,18 +426,42 @@ export class Expedition {
     );
   }
 
-  hurt(damage: number) {
+  hurt(damage: number, source?: V) {
     if (this.invuln > 0 || this.death > 0 || this.finished) return;
     this.health = Math.max(
       0,
       this.health - damage * (this.difficulty === "explorer" ? 0.7 : 1),
     );
     this.invuln = 0.65;
-    this.hurtTime = 0.3;
+    this.hurtDuration = damage >= 25 ? 0.42 : 0.34;
+    this.hurtTime = this.hurtDuration;
+    const direction = source
+      ? impactDirection(source, this.p, this.yaw + Math.PI)
+      : v(-Math.sin(this.yaw), 0, -Math.cos(this.yaw));
+    const strength = impactStrength(damage * 2);
+    this.reaction = {
+      id: ++this.serial,
+      elapsed: 0,
+      duration: this.hurtDuration,
+      direction,
+      strength,
+    };
+    this.recoil = v(
+      direction.x * (3.4 + strength * 3),
+      0,
+      direction.z * (3.4 + strength * 3),
+    );
+    this.velocity.x *= 0.2;
+    this.velocity.z *= 0.2;
+    this.hitstop = Math.max(this.hitstop, damage >= 25 ? 0.075 : 0.05);
     this.swingDelay = -1;
     this.attack = this.attackBuffer = 0;
     this.hunt = Math.max(0, this.hunt - 8);
-    this.event("hurt", undefined, this.p);
+    this.event("hurt", undefined, this.p, damage, {
+      direction,
+      strength,
+      contact: v(this.p.x, this.p.y + 1.1, this.p.z),
+    });
     if (this.health <= 0) this.die();
   }
 
@@ -429,6 +488,9 @@ export class Expedition {
       this.hurtTime =
         0;
     this.slam = false;
+    this.recoil = v();
+    this.reaction = undefined;
+    this.dodgeBuffer = 0;
     this.bufferedActions = {};
   }
 
@@ -455,38 +517,59 @@ export class Expedition {
     this.event("save");
   }
 
-  damage(e: Enemy, amount: number, knock = 0) {
+  damage(e: Enemy, amount: number, knock = 0, source = this.p) {
     if (e.hp <= 0) return;
-    if (e.kind === "guardian" && e.armour) {
+    const blocked = e.kind === "guardian" && e.armour;
+    if (blocked) {
       amount *= 0.08;
       this.event("armoured", "Armoured: bait a charge into a striped support.");
     }
+    const direction = impactDirection(source, e.p, this.yaw);
+    const strength = impactStrength(amount);
     e.hp = Math.max(0, e.hp - amount);
     e.flash = 0.18;
     this.hunt = clamp(this.hunt + amount * 0.1, 0, 100);
+    if (!blocked)
+      e.reaction = {
+        id: ++this.serial,
+        elapsed: 0,
+        duration: 0.26 + strength * 0.18,
+        direction,
+        strength,
+      };
     if (knock && e.kind !== "guardian") {
-      const d = norm(this.p, e.p);
-      if (e.kind === "wing") {
-        e.p.x += d.x * knock;
-        e.p.z += d.z * knock;
-      } else e.knockVelocity = v(d.x * knock * 12, 0, d.z * knock * 12);
+      const speed = Math.min(22, (3 + knock * 8) / BODY_WEIGHT[e.kind]);
+      e.knockVelocity = v(direction.x * speed, 0, direction.z * speed);
+      e.pull = undefined;
+      e.avoidRemaining = 0;
     }
-    this.event("hit", undefined, e.p, amount);
-
+    const radius =
+      e.kind === "guardian" ? 2.5 : e.kind === "brute" ? 0.9 : 0.55;
+    this.event("hit", undefined, e.p, amount, {
+      direction,
+      strength,
+      blocked,
+      fatal: e.hp <= 0,
+      contact: v(
+        e.p.x - direction.x * radius,
+        e.p.y + (e.kind === "brute" ? 1.4 : 1.1),
+        e.p.z - direction.z * radius,
+      ),
+    });
     if (e.hp <= 0) {
       e.pull = undefined;
       e.state = "death";
       e.dead = e.kind === "guardian" ? 2.4 : 1.4;
+      e.corpseMotion = !!knock && e.kind !== "guardian";
       this.kills++;
       this.event("kill", e.kind, e.p);
       this.health = Math.min(100, this.health + 2);
-    } else if (
-      e.kind !== "guardian" &&
-      e.kind !== "brute" &&
-      e.state !== "falling"
-    ) {
-      e.state = "stunned";
-      e.timer = 0.28;
+    } else if (e.kind !== "guardian" && e.state !== "falling") {
+      // Heavy bodies keep their commitment through light cuts; a finisher or kick breaks it.
+      if (e.kind !== "brute" || knock >= 1.1) {
+        e.state = "stunned";
+        e.timer = e.kind === "brute" ? 0.22 : 0.24 + strength * 0.18;
+      }
     }
   }
 
@@ -539,7 +622,8 @@ export class Expedition {
       this.p,
       this.combo,
     );
-    let connected = false;
+    let connected = false,
+      struckWall = false;
     for (const e of this.living) {
       const d = distance(this.p, e.p),
         dot =
@@ -551,13 +635,29 @@ export class Expedition {
         Math.abs(this.p.y - e.p.y) < move.height &&
         dot > move.cone
       ) {
+        const wall = this.combatTrace?.(
+          v(this.p.x, this.p.y + 1.1, this.p.z),
+          v(e.p.x, e.p.y + 1.1, e.p.z),
+        );
+        if (wall) {
+          if (!struckWall)
+            this.event("weapon-block", undefined, wall.p, 0, {
+              contact: wall.p,
+              direction: wall.normal,
+              strength: 0.4,
+              blocked: true,
+            });
+          struckWall = true;
+          continue;
+        }
         this.damage(e, move.damage, move.knock);
         connected = true;
       }
     }
 
     if (this.meleeMove !== "kick") this.checkPods(this.p, 6);
-    if (connected) this.hitstop = move.hitstop;
+    if (connected) this.hitstop = Math.max(this.hitstop, move.hitstop);
+    else if (struckWall) this.hitstop = Math.max(this.hitstop, 0.045);
   }
 
   checkPods(p: V, r: number) {
@@ -568,7 +668,7 @@ export class Expedition {
       if (distance(p, pod) < r) {
         this.podUsed.add(i);
         for (const e of this.living)
-          if (distance(e.p, pod) < 12) this.damage(e, 180, 3);
+          if (distance(e.p, pod) < 12) this.damage(e, 180, 3, pod);
         this.event("explode", undefined, pod);
       }
     }
@@ -587,6 +687,9 @@ export class Expedition {
     const anchor = this.anchor;
 
     if (anchor) {
+      this.recoil = v();
+      this.reaction = undefined;
+      this.hurtTime = 0;
       this.grapple = {
         from: { ...this.p },
         to: { ...anchor },
@@ -707,9 +810,9 @@ export class Expedition {
     const p = quarryTrap(this.chapter).load;
     for (const e of this.living)
       if (distance(e.p, p) < CRANE_RADIUS && Math.abs(e.p.y - p.y) < 4)
-        this.damage(e, 360, 2);
+        this.damage(e, 360, 2, p);
     if (distance(this.p, p) < CRANE_RADIUS && Math.abs(this.p.y - p.y) < 3)
-      this.hurt(35);
+      this.hurt(35, p);
     // The first-yard charge sits below the load: a surviving charge chains the impact.
     if (this.beat === 0) this.checkPods(p, 2);
     this.event("crane-impact", undefined, p);
@@ -795,12 +898,18 @@ export class Expedition {
       input[key] = input[key] || this.bufferedActions[key];
     this.bufferedActions = {};
     this.time += dt;
+    if (this.reaction) {
+      this.reaction.elapsed += dt;
+      if (this.reaction.elapsed >= this.reaction.duration)
+        this.reaction = undefined;
+    }
     this.transition = Math.max(0, this.transition - dt);
 
     for (const key of [
       "invuln",
       "dodge",
       "dodgeCooldown",
+      "dodgeBuffer",
       "attack",
       "attackCooldown",
       "comboWindow",
@@ -839,6 +948,7 @@ export class Expedition {
 
     if (input.grapple) this.useGrapple();
     if (input.attack) this.attackBuffer = 0.14;
+    if (input.dodge) this.dodgeBuffer = 0.16;
     if (input.interact) this.interact();
 
     if (input.jump) this.jumpBuffer = 0.16;
@@ -848,9 +958,18 @@ export class Expedition {
       ix = len > 1 ? input.x / len : input.x,
       iz = len > 1 ? input.z / len : input.z;
 
-    if (input.dodge && this.dodgeCooldown <= 0 && !this.grapple) {
+    if (
+      this.dodgeBuffer > 0 &&
+      this.dodgeCooldown <= 0 &&
+      !this.grapple &&
+      this.hurtTime <= this.hurtDuration - 0.12
+    ) {
       this.swingDelay = -1;
       this.attack = this.attackBuffer = 0;
+      this.hurtTime = 0;
+      this.reaction = undefined;
+      this.recoil = v();
+      this.dodgeBuffer = 0;
       this.dodge = 0.28;
       this.dodgeCooldown = 0.65;
       this.invuln = 0.32;
@@ -892,7 +1011,11 @@ export class Expedition {
       if (this.grounded) this.coyote = 0.12;
       else this.coyote = Math.max(0, this.coyote - dt);
 
-      if (this.jumpBuffer > 0 && this.coyote > 0) {
+      if (
+        this.jumpBuffer > 0 &&
+        this.coyote > 0 &&
+        this.hurtTime <= this.hurtDuration - 0.12
+      ) {
         this.velocity.y = 11;
         this.grounded = false;
         this.coyote = 0;
@@ -900,7 +1023,14 @@ export class Expedition {
         this.event("jump");
       }
 
-      const targetSpeed = this.dodge > 0 ? 18 : this.attack > 0 ? 4.2 : 6.8,
+      const targetSpeed =
+          this.dodge > 0
+            ? 18
+            : this.hurtTime > 0
+              ? 1.5
+              : this.attack > 0
+                ? 4.2
+                : 6.8,
         accel = this.grounded ? 18 : 8;
 
       // A short planted step closes melee reach; it uses the same collision sweep as walking.
@@ -943,15 +1073,22 @@ export class Expedition {
       const old = { ...this.p };
       let landed = false;
 
+      const moveVelocity = v(
+        this.velocity.x + this.recoil.x,
+        this.velocity.y,
+        this.velocity.z + this.recoil.z,
+      );
+      this.recoil.x *= Math.exp(-8 * dt);
+      this.recoil.z *= Math.exp(-8 * dt);
       if (this.motion) {
-        const result = this.motion(old, this.velocity, dt);
+        const result = this.motion(old, moveVelocity, dt);
         this.p = result.p;
         landed = !this.grounded && result.grounded && this.velocity.y < -5;
         this.grounded = result.grounded;
         if (this.grounded) this.velocity.y = 0;
       } else {
-        this.p.x += this.velocity.x * dt;
-        this.p.z += this.velocity.z * dt;
+        this.p.x += moveVelocity.x * dt;
+        this.p.z += moveVelocity.z * dt;
         this.p.y += this.velocity.y * dt;
         const ground = floorAt(this.chapter, this.p.x, this.p.z);
         if (
@@ -1064,14 +1201,25 @@ export class Expedition {
     this.syncEnemyPhysics?.(this.enemies);
     for (const e of this.enemies) {
       e.flash = Math.max(0, e.flash - dt);
+      e.wallImpactCooldown = Math.max(0, (e.wallImpactCooldown || 0) - dt);
+      if (e.reaction) {
+        e.reaction.elapsed += dt;
+        if (e.reaction.elapsed >= e.reaction.duration) e.reaction = undefined;
+      }
       if (e.hp <= 0) {
         e.dead = Math.max(0, e.dead - dt);
+        if (e.dead > 0 && e.corpseMotion) {
+          if (e.kind === "wing") this.moveFlyingRecoil(e, dt);
+          else this.moveGroundEnemy(e, e.fallVelocity || v(), dt);
+        }
         continue;
       }
       e.timer -= dt;
       const d = distance(this.p, e.p);
       const committedFacing =
         e.state === "falling" ||
+        e.state === "stunned" ||
+        !!e.reaction ||
         e.state === "lunge" ||
         (e.kind === "raptor" && e.state === "windup") ||
         (e.kind === "guardian" &&
@@ -1105,16 +1253,28 @@ export class Expedition {
               : stats[e.kind].range;
 
         const returning = distance(e.p, this.destination) > 21;
-        if (d > range || returning) {
-          const dir = norm(e.p, returning ? this.destination : this.p);
+        const occluded =
+          e.kind !== "wing" &&
+          !!this.combatTrace?.(
+            v(e.p.x, e.p.y + 1.1, e.p.z),
+            v(this.p.x, this.p.y + 1.1, this.p.z),
+          );
+        if (d > range || returning || occluded) {
+          const direct = norm(e.p, returning ? this.destination : this.p);
+          const dir =
+            e.kind === "wing"
+              ? direct
+              : this.avoidGroundObstacle(e, direct, dt);
           velocity.x = dir.x * stats[e.kind].speed;
           velocity.z = dir.z * stats[e.kind].speed;
         }
 
+        if (e.kind !== "wing" && (velocity.x || velocity.z) && !e.reaction)
+          e.yaw = Math.atan2(velocity.x, velocity.z);
         if (e.kind === "wing")
           e.p.y = e.home.y + Math.sin(this.time * 2 + e.id) * 1.2;
 
-        if (d < stats[e.kind].range && e.timer <= 0) {
+        if (d < stats[e.kind].range && e.timer <= 0 && !occluded) {
           e.state = "windup";
           e.timer =
             e.kind === "brute"
@@ -1125,6 +1285,7 @@ export class Expedition {
                   ? 0.6
                   : 0.85;
           e.dir = norm(e.p, v(this.p.x, e.p.y, this.p.z));
+          e.yaw = Math.atan2(e.dir.x, e.dir.z);
           this.event("tell", e.kind, e.p);
         }
       } else if (e.state === "windup" && e.timer <= 0) {
@@ -1159,7 +1320,7 @@ export class Expedition {
           e.state = "recover";
           e.timer = 1.4;
         } else if (e.kind === "bomber") {
-          if (d < 7 && Math.abs(this.p.y - e.p.y) < 4) this.hurt(30);
+          if (d < 7 && Math.abs(this.p.y - e.p.y) < 4) this.hurt(30, e.p);
           e.hp = 0;
           e.dead = 0.6;
           this.kills++;
@@ -1198,17 +1359,83 @@ export class Expedition {
         e.p.x += velocity.x * dt;
         e.p.y += velocity.y * dt;
         e.p.z += velocity.z * dt;
+        this.moveFlyingRecoil(e, dt);
       } else this.moveGroundEnemy(e, velocity, dt);
       if (
         e.state === "lunge" &&
-        distance(e.p, this.p) < 2.4 &&
-        Math.abs(this.p.y - e.p.y) < 3
+        distance(e.p, this.p) < (e.kind === "wing" ? 2 : 1.75) &&
+        Math.abs(this.p.y - e.p.y) < 2 &&
+        !this.combatTrace?.(
+          v(e.p.x, e.p.y + 1, e.p.z),
+          v(this.p.x, this.p.y + 1, this.p.z),
+        )
       )
-        this.hurt(stats[e.kind].damage);
+        this.hurt(stats[e.kind].damage, e.p);
     }
   }
 
+  /** Local pursuit probes use Havok; the controller still owns all movement and contact. */
+  avoidGroundObstacle(e: Enemy, direct: V, dt: number) {
+    if (!this.combatTrace) return direct;
+    const radius = e.kind === "brute" ? 0.9 : 0.55;
+    const clear = (dir: V) => {
+      const length = radius + 1.1;
+      const floor = floorAt(
+        this.chapter,
+        e.p.x + dir.x * length,
+        e.p.z + dir.z * length,
+      );
+      if (floor === null || Math.abs(floor - e.p.y) > 1.5) return false;
+      return ![-radius * 0.7, radius * 0.7].some((side) => {
+        const from = v(e.p.x + dir.z * side, e.p.y + 0.9, e.p.z - dir.x * side);
+        return this.combatTrace!(
+          from,
+          v(from.x + dir.x * length, from.y, from.z + dir.z * length),
+        );
+      });
+    };
+    e.avoidRemaining = Math.max(0, (e.avoidRemaining || 0) - dt);
+    if (e.avoidRemaining > 0 && e.avoidDirection && clear(e.avoidDirection))
+      return e.avoidDirection;
+    if (clear(direct)) {
+      e.avoidRemaining = 0;
+      return direct;
+    }
+    const side = e.id % 2 ? 1 : -1;
+    for (const turn of [
+      (side * Math.PI) / 2,
+      (-side * Math.PI) / 2,
+      side * Math.PI * 0.75,
+      -side * Math.PI * 0.75,
+    ]) {
+      const dir = v(
+        direct.x * Math.cos(turn) - direct.z * Math.sin(turn),
+        0,
+        direct.x * Math.sin(turn) + direct.z * Math.cos(turn),
+      );
+      if (clear(dir)) {
+        e.avoidDirection = dir;
+        e.avoidRemaining = 0.55;
+        return dir;
+      }
+    }
+    return v();
+  }
+
+  moveFlyingRecoil(e: Enemy, dt: number) {
+    if (!e.knockVelocity) return;
+    e.p.x += e.knockVelocity.x * dt;
+    e.p.z += e.knockVelocity.z * dt;
+    e.knockVelocity.x *= Math.exp(-6.5 * dt);
+    e.knockVelocity.z *= Math.exp(-6.5 * dt);
+  }
+
   moveGroundEnemy(e: Enemy, horizontal: V, dt: number) {
+    const before = { ...e.p };
+    const knockSpeed = Math.hypot(
+      e.knockVelocity?.x || 0,
+      e.knockVelocity?.z || 0,
+    );
     e.verticalSpeed = Math.max(-40, (e.verticalSpeed || 0) - 28 * dt);
     const velocity = v(
       horizontal.x + (e.knockVelocity?.x || 0),
@@ -1216,7 +1443,7 @@ export class Expedition {
       horizontal.z + (e.knockVelocity?.z || 0),
     );
     if (e.knockVelocity) {
-      const decay = Math.exp(-12 * dt);
+      const decay = Math.exp(-6.5 * dt);
       e.knockVelocity.x *= decay;
       e.knockVelocity.z *= decay;
     }
@@ -1241,6 +1468,36 @@ export class Expedition {
       result = { p, grounded };
     }
     e.p = result.p;
+    if (e.knockVelocity && knockSpeed > 4 && result.grounded) {
+      const intended = Math.hypot(velocity.x, velocity.z) * dt;
+      const travelled = Math.hypot(e.p.x - before.x, e.p.z - before.z);
+      if (intended > 0.02 && travelled < intended * 0.25) {
+        e.knockVelocity = undefined;
+        if (!e.wallImpactCooldown) {
+          const direction = impactDirection(
+            before,
+            v(before.x + velocity.x, before.y, before.z + velocity.z),
+          );
+          this.event("body-impact", undefined, e.p, knockSpeed, {
+            direction,
+            strength: Math.min(1, knockSpeed / 18),
+            contact: v(e.p.x, e.p.y + 0.9, e.p.z),
+          });
+          e.wallImpactCooldown = 0.3;
+          if (e.hp > 0) {
+            e.state = "stunned";
+            e.timer = Math.max(e.timer, 0.3);
+          }
+        }
+      }
+    }
+    if (e.hp <= 0) {
+      if (result.grounded) {
+        e.verticalSpeed = 0;
+        if (!e.knockVelocity || knockSpeed < 0.2) e.corpseMotion = false;
+      }
+      return;
+    }
     if (result.grounded) {
       e.verticalSpeed = 0;
       e.groundY = e.p.y;
@@ -1278,25 +1535,46 @@ export class Expedition {
   updateShots(dt: number) {
     for (const s of this.shots) {
       s.life -= dt;
-      s.trail.push({ ...s.p });
+      const previous = { ...s.p };
+      s.trail.push(previous);
       if (s.trail.length > 7) s.trail.shift();
       s.p.x += s.dir.x * s.speed * dt;
       s.p.y += s.dir.y * s.speed * dt;
       s.p.z += s.dir.z * s.speed * dt;
+      const obstacle = this.combatTrace?.(previous, s.p);
+      if (obstacle) {
+        this.event("weapon-block", undefined, obstacle.p, 0, {
+          contact: obstacle.p,
+          direction: obstacle.normal,
+          strength: 0.35,
+          blocked: true,
+        });
+        s.life = 0;
+        continue;
+      }
       if (s.friendly) {
         for (const e of this.living) {
           if (
             length3(s.p, v(e.p.x, e.p.y + 1, e.p.z)) <
-            (e.kind === "guardian" ? 4 : 2.1)
+              (e.kind === "guardian" ? 4 : 2.1) &&
+            !this.combatTrace?.(previous, v(e.p.x, e.p.y + 1, e.p.z))
           ) {
-            this.damage(e, s.damage, 1);
+            this.damage(
+              e,
+              s.damage,
+              1,
+              v(s.p.x - s.dir.x, s.p.y - s.dir.y, s.p.z - s.dir.z),
+            );
             s.life = 0;
             break;
           }
         }
         if (this.sector === 4) this.checkPods(s.p, 2);
       } else if (length3(s.p, v(this.p.x, this.p.y + 1, this.p.z)) < 1.3) {
-        this.hurt(s.damage);
+        this.hurt(
+          s.damage,
+          v(s.p.x - s.dir.x, s.p.y - s.dir.y, s.p.z - s.dir.z),
+        );
         s.life = 0;
       }
     }
@@ -1312,7 +1590,7 @@ export class Expedition {
         Math.abs(d - r.r) < 1.1 &&
         this.p.y < r.p.y + 1.4
       ) {
-        this.hurt(r.damage);
+        this.hurt(r.damage, r.p);
         r.hit = true;
       }
     }
@@ -1369,7 +1647,7 @@ export class Expedition {
     } else if (e.state === "charge") {
       e.p.x += e.dir.x * 24 * dt;
       e.p.z += e.dir.z * 24 * dt;
-      if (distance(e.p, this.p) < 4) this.hurt(32);
+      if (distance(e.p, this.p) < 4) this.hurt(32, e.p);
       if (this.pillars().some((p) => distance(p, e.p) < 4.2)) {
         e.state = "stunned";
         e.timer = 6;
@@ -1439,7 +1717,7 @@ export class Expedition {
         Math.abs(Math.sin(a - angle)) < 0.08 &&
         this.p.y < p.y + 1.2
       )
-        this.hurt(20);
+        this.hurt(20, p);
     } else if (this.hazardClock > 4) {
       this.hazardClock = 0;
       if (this.objective.hazard === "surge")
