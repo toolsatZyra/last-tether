@@ -1,7 +1,7 @@
 {
   "version": "0.2.27",
   "date": "2026-11-02",
-  "status": "locally-verified-awaiting-publication",
+  "status": "published-and-verified",
   "changes": [
     "Derived Spear_Thrust clip retains licensed Punch_Right body movement and Idle_Sword arm guard, with Babylon BoneIKController for both hands.",
     "Arm controllers solve in model space to handle the imported mirrored root. The original weapon remains attached to the right wrist; the left palm follows its shaft.",
@@ -2464,5 +2464,29 @@
     "jsHeapBytes": 486917850,
     "sceneVertices": 1373374,
     "textureAudit": "External texture files total approximately 89.7 MiB assuming RGBA8 and full mip chains; embedded textures and render targets are additional. Largest observed internal texture dimension was 2048."
+  },
+  "public": {
+    "version": "LAST TETHER · 0.2.27",
+    "frameSample": {
+      "frames": 614,
+      "seconds": 17.7602,
+      "averageFps": 34.515377079086946,
+      "medianMs": 24.200000000000728,
+      "p95Ms": 54.89999999999782
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "state": "READY",
+    "id": "dpl_F7thG8wFCNAwvUPYCsgxnfjXRumr",
+    "sha": "c071b33dba6028280676bc8b61652a80a44e5b29",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-CwbGN1dt.js"
   }
 }
