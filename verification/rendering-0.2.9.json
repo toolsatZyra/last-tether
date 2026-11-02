@@ -1,0 +1,476 @@
+{
+  "version": "0.2.9",
+  "date": "2026-11-02",
+  "scope": "Rendering and camera-query optimization; gameplay, resolution and asset geometry retained.",
+  "environment": {
+    "browser": "desktop Chrome WebGL2",
+    "gpu": "AMD Radeon integrated graphics",
+    "quality": "Balanced",
+    "renderSize": [
+      1036,
+      703
+    ],
+    "sampling": "Stationary checkpoint views, 4.2 seconds settling and 4 seconds instrumentation; not a complete moving playthrough."
+  },
+  "before": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "fps": 51.709924808273605,
+      "averageViewUpdateMs": 18.04106280196836,
+      "cpu": {
+        "frame": 13.772463767748812,
+        "render": 5.027053139707893,
+        "targets": 2.3545893721174505,
+        "meshes": 2.450724637378817,
+        "animation": 1.0898550721470284,
+        "physics": 0.24685990349682058,
+        "particles": 0.07149758477861755
+      },
+      "gpuMs": 8.522555797101452,
+      "drawCalls": 410.28985507246375,
+      "activeMeshes": 183,
+      "sceneMeshes": 628,
+      "shadowMeshes": 173,
+      "reflectionMeshes": 29,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "fps": 52.31037489107831,
+      "averageViewUpdateMs": 18.02999999991485,
+      "cpu": {
+        "frame": 11.640476190405233,
+        "render": 4.120476190391041,
+        "targets": 1.917619047917071,
+        "meshes": 2.3404761905471485,
+        "animation": 0.9019047619331451,
+        "physics": 0.1366666665744214,
+        "particles": 0.05428571420766058
+      },
+      "gpuMs": 8.059788619047621,
+      "drawCalls": 356.3809523809524,
+      "activeMeshes": 152,
+      "sceneMeshes": 626,
+      "shadowMeshes": 199,
+      "reflectionMeshes": 29,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 5,
+      "beat": 1,
+      "fps": 42.470270810432666,
+      "averageViewUpdateMs": 22.335882353212902,
+      "cpu": {
+        "frame": 16.852352941474493,
+        "render": 6.180000000184073,
+        "targets": 3.1199999999474075,
+        "meshes": 3.0241176473743776,
+        "animation": 0.997058823354104,
+        "physics": 0.22352941215914837,
+        "particles": 0.10999999975456912
+      },
+      "gpuMs": 10.684310235294122,
+      "drawCalls": 518.0529411764705,
+      "activeMeshes": 211,
+      "sceneMeshes": 639,
+      "shadowMeshes": 238,
+      "reflectionMeshes": 35,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "fps": 55.35607420708221,
+      "averageViewUpdateMs": 16.900900900968022,
+      "cpu": {
+        "frame": 12.507657657704643,
+        "render": 4.459909909983745,
+        "targets": 2.0405405406412243,
+        "meshes": 2.286036036405209,
+        "animation": 1.0054054051167793,
+        "physics": 0.2094594596608265,
+        "particles": 0.055405405089930373
+      },
+      "gpuMs": 8.122575945945954,
+      "drawCalls": 401.6666666666667,
+      "activeMeshes": 166,
+      "sceneMeshes": 595,
+      "shadowMeshes": 245,
+      "reflectionMeshes": 30,
+      "renderSize": [
+        1036,
+        703
+      ]
+    }
+  ],
+  "after": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "fps": 69.70643347910156,
+      "averageViewUpdateMs": 13.47992831543355,
+      "cpu": {
+        "frame": 12.306093189825294,
+        "render": 4.02365591406395,
+        "targets": 2.078136200706164,
+        "meshes": 2.4756272397801866,
+        "animation": 0.9154121860007232,
+        "physics": 0.17670250911011917,
+        "particles": 0.04408602141458074
+      },
+      "gpuMs": 9.922198172043007,
+      "drawCalls": 364.36559139784947,
+      "activeMeshes": 183,
+      "sceneMeshes": 629,
+      "shadowMeshes": 173,
+      "reflectionMeshes": 29,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "fps": 70.6924876785719,
+      "averageViewUpdateMs": 13.354225352406502,
+      "cpu": {
+        "frame": 10.57218309877519,
+        "render": 3.326760563448491,
+        "targets": 1.6535211270281547,
+        "meshes": 2.4820422533322386,
+        "animation": 0.9130281690035907,
+        "physics": 0.11373239430323454,
+        "particles": 0.04119718321402308
+      },
+      "gpuMs": 9.477437640845062,
+      "drawCalls": 299.0176056338028,
+      "activeMeshes": 152,
+      "sceneMeshes": 627,
+      "shadowMeshes": 199,
+      "reflectionMeshes": 29,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 5,
+      "beat": 1,
+      "fps": 64.23343126026991,
+      "averageViewUpdateMs": 14.669379845059426,
+      "cpu": {
+        "frame": 13.01589147290287,
+        "render": 4.434496124325565,
+        "targets": 2.1166666667301985,
+        "meshes": 2.7108527129992495,
+        "animation": 0.9224806200972823,
+        "physics": 0.18410852718953938,
+        "particles": 0.06976744203373443
+      },
+      "gpuMs": 9.972270465116278,
+      "drawCalls": 421.031007751938,
+      "activeMeshes": 179,
+      "sceneMeshes": 596,
+      "shadowMeshes": 227,
+      "reflectionMeshes": 35,
+      "renderSize": [
+        1036,
+        703
+      ]
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "fps": 70.97515869443045,
+      "averageViewUpdateMs": 13.226760562824111,
+      "cpu": {
+        "frame": 12.290492957484135,
+        "render": 3.968309858813882,
+        "targets": 1.9926056337713356,
+        "meshes": 2.607042253174832,
+        "animation": 0.8992957745377027,
+        "physics": 0.1732394367089154,
+        "particles": 0.055633802885110946
+      },
+      "gpuMs": 9.52682112676056,
+      "drawCalls": 376.6866197183099,
+      "activeMeshes": 166,
+      "sceneMeshes": 596,
+      "shadowMeshes": 245,
+      "reflectionMeshes": 30,
+      "renderSize": [
+        1036,
+        703
+      ]
+    }
+  ],
+  "pairedCameraQuery": [
+    {
+      "tiled": false,
+      "calls": 200,
+      "averageMs": 4.225
+    },
+    {
+      "tiled": true,
+      "calls": 200,
+      "averageMs": 0.8210000000149011
+    },
+    {
+      "tiled": false,
+      "calls": 200,
+      "averageMs": 4.300999999977648
+    },
+    {
+      "tiled": true,
+      "calls": 200,
+      "averageMs": 0.7044999999925494
+    }
+  ],
+  "terrainEquivalence": [
+    {
+      "sector": 0,
+      "rays": 240,
+      "hits": 174,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 1,
+      "rays": 240,
+      "hits": 172,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 2,
+      "rays": 240,
+      "hits": 176,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 3,
+      "rays": 240,
+      "hits": 174,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 4,
+      "rays": 240,
+      "hits": 177,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 5,
+      "rays": 240,
+      "hits": 175,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 6,
+      "rays": 240,
+      "hits": 174,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    },
+    {
+      "sector": 7,
+      "rays": 240,
+      "hits": 171,
+      "maxError": 0,
+      "sharedGeometry": true,
+      "visibleDraws": 1,
+      "queryTiles": 36
+    }
+  ],
+  "foliage": [
+    {
+      "sector": 0,
+      "baseCount": 629,
+      "instances": 191,
+      "checked": 191,
+      "maxTransformError": 0,
+      "queryMeshes": 1,
+      "wheelMeshes": []
+    },
+    {
+      "sector": 5,
+      "baseCount": 596,
+      "instances": 161,
+      "checked": 161,
+      "maxTransformError": 0,
+      "queryMeshes": 1,
+      "wheelMeshes": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "sector": 3,
+      "baseCount": 627,
+      "instances": 221,
+      "checked": 221,
+      "maxTransformError": 0,
+      "queryMeshes": 1,
+      "wheelMeshes": []
+    },
+    {
+      "sector": 0,
+      "baseCount": 629,
+      "instances": 191,
+      "checked": 191,
+      "maxTransformError": 0,
+      "queryMeshes": 1,
+      "wheelMeshes": []
+    }
+  ],
+  "transitions": {
+    "results": [
+      {
+        "sector": 1,
+        "wallMs": 2010.2000000000007,
+        "frames": 189,
+        "maxMs": 145.60000000000036,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": true,
+        "physicsBodies": 52,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 2,
+        "wallMs": 2498.60000000298,
+        "frames": 280,
+        "maxMs": 151.5,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 61,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 3,
+        "wallMs": 1929.4000000059605,
+        "frames": 185,
+        "maxMs": 139.5,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 54,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 4,
+        "wallMs": 2495.3000000044703,
+        "frames": 264,
+        "maxMs": 151.59999999999854,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 78,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 5,
+        "wallMs": 3546.700000004472,
+        "frames": 401,
+        "maxMs": 230.5,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 6,
+        "wallMs": 2594.0000000014916,
+        "frames": 266,
+        "maxMs": 133.40000000000146,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 74,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 7,
+        "wallMs": 1926.7000000014887,
+        "frames": 182,
+        "maxMs": 163.6999999999971,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      }
+    ],
+    "errors": []
+  },
+  "production": {
+    "initial": "Cross the pressure channel",
+    "objective": "Release the crown lock",
+    "meta": "2 defeated · 0 recoveries",
+    "noDebug": true,
+    "errors": [],
+    "bad": [],
+    "resumed": "Release the crown lock"
+  },
+  "additionalChecks": {
+    "behaviourTests": 23,
+    "productionBuild": true,
+    "sourceGeometry": {
+      "meshes": 72,
+      "rebuilds": 4,
+      "unchanged": true
+    },
+    "chestAndFade": {
+      "nativeInteraction": true,
+      "saveRestore": true,
+      "fadeAndRestore": true,
+      "errors": []
+    }
+  },
+  "limits": [
+    "No sustained 60 FPS guarantee; High quality and other devices are not covered by these Balanced samples.",
+    "Area loading remains visible and is not seamless.",
+    "Visual quality, first-time 15–20 minute pacing and human enjoyment remain unvalidated."
+  ]
+}

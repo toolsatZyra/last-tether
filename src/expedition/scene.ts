@@ -18,6 +18,7 @@ import {
   GlowLayer,
   TransformNode,
   Mesh,
+  SubMesh,
   VertexData,
   Matrix,
   Ray,
@@ -30,6 +31,7 @@ import {
   ParticleSystem,
   DynamicTexture,
 } from "@babylonjs/core";
+import "@babylonjs/core/Culling/Octrees/octreeSceneComponent";
 import { Assets, Actor } from "./actors";
 import { PhysicsWorld } from "./physics";
 import { createRiver } from "./water";
@@ -37,6 +39,7 @@ import { weatheredStone, pavingMaterial } from "./surfaces";
 import { terraceStructure, bridgeStructure } from "./structures";
 import { landmarks } from "./landmarks";
 import { landscapeHeight, LANDSCAPES } from "./landscape";
+import { fadeFoliage, type FoliageView } from "./foliage";
 import { PressureGallery } from "./pressure-gallery";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
@@ -56,8 +59,7 @@ export class GameScene {
   foregroundProps: AbstractMesh[] = [];
   shadowCasters: AbstractMesh[] = [];
   foliage: TransformNode[] = [];
-  foliageViews: { meshes: AbstractMesh[]; center: Vector3; radius: number }[] =
-    [];
+  foliageViews: FoliageView[] = [];
   wheels: TransformNode[] = [];
   staticDraws: Mesh[] = [];
   visibilityTick = 0;
@@ -458,12 +460,54 @@ export class GameScene {
     terrain.refreshBoundingInfo();
     terrain.material = this.materials.terrain;
     terrain.parent = this.root;
+    // Preserve every triangle and vertex; smaller bounds let Babylon reject
+    // terrain tiles before testing camera rays against their triangles.
+    const indices = terrain.getIndices()!;
+    const tiles: number[][] = Array.from({ length: 36 }, () => []);
+    for (let i = 0; i < indices.length; i += 3) {
+      const a = indices[i] * 3,
+        b = indices[i + 1] * 3,
+        d = indices[i + 2] * 3;
+      const x = (positions[a] + positions[b] + positions[d]) / 3;
+      const z = (positions[a + 2] + positions[b + 2] + positions[d + 2]) / 3;
+      const col = Math.min(5, Math.max(0, Math.floor((x + 360) / 120)));
+      const row = Math.min(5, Math.max(0, Math.floor((z + 500) / (1000 / 6))));
+      tiles[row * 6 + col].push(indices[i], indices[i + 1], indices[i + 2]);
+    }
+    terrain.setIndices(tiles.flat());
+    terrain.releaseSubMeshes();
+    let offset = 0;
+    for (const tile of tiles) {
+      new SubMesh(
+        0,
+        0,
+        terrain.getTotalVertices(),
+        offset,
+        tile.length,
+        terrain,
+      );
+      offset += tile.length;
+    }
+    const cameraTerrain = terrain.clone("gorge-camera-query", this.root, true);
+    cameraTerrain.isVisible = false;
+    cameraTerrain.isPickable = true;
+    cameraTerrain.metadata = {
+      cameraSolid: true,
+      cameraQuery: true,
+      physics: false,
+    };
+    cameraTerrain.computeWorldMatrix(true);
+    cameraTerrain.createOrUpdateSubmeshesOctree(8, 2);
+    cameraTerrain.freezeWorldMatrix();
+    // The visible surface keeps one draw; the hidden query shares its geometry.
+    terrain.releaseSubMeshes();
+    new SubMesh(0, 0, terrain.getTotalVertices(), 0, indices.length, terrain);
     terrain.receiveShadows = true;
     terrain.isPickable = true;
     terrain.metadata = {
       landscape: true,
       distant: true,
-      cameraSolid: true,
+      cameraSolid: false,
       physics: false,
     };
   }
@@ -1175,6 +1219,7 @@ export class GameScene {
       const bounds = n.getHierarchyBoundingVectors(true);
       return {
         meshes: n.getChildMeshes(),
+        fades: new Map(),
         center: bounds.min.add(bounds.max).scale(0.5),
         radius: bounds.max.subtract(bounds.min).length() * 0.42,
       };
@@ -1224,6 +1269,7 @@ export class GameScene {
         !m.getTotalVertices() ||
         m.skeleton ||
         keep.has(m) ||
+        m.metadata?.cameraQuery ||
         /^(lantern|lantern-cap|lamp-post|lamp-base)$/.test(m.name)
       )
         continue;
@@ -1517,6 +1563,7 @@ export class GameScene {
         wheel.parent = frame;
         wheel.rotation.z = Math.PI / 2;
         wheel.material = this.materials.brass;
+        const spokes: Mesh[] = [];
         for (let j = 0; j < 12; j++) {
           const a = (j * Math.PI) / 6,
             m = this.box(
@@ -1528,6 +1575,15 @@ export class GameScene {
               frame,
             );
           m.rotation.x = -a;
+          spokes.push(m);
+        }
+        const spokeRing = Mesh.MergeMeshes(spokes, true, true);
+        if (spokeRing) {
+          spokeRing.name = "turbine-spoke-ring";
+          spokeRing.setParent(frame);
+          spokeRing.receiveShadows = true;
+          spokeRing.isPickable = false;
+          this.shadow.addShadowCaster(spokeRing);
         }
         frame.metadata = { wheel: true };
       }
@@ -1872,7 +1928,7 @@ export class GameScene {
       const blocked =
         occludes(plant.center, plant.radius) ||
         Vector3.Distance(this.camera.position, plant.center) < plant.radius;
-      for (const mesh of plant.meshes) mesh.visibility = blocked ? 0.16 : 1;
+      fadeFoliage(plant, blocked, this.shadowCasters);
     }
     for (const prop of this.foregroundProps) {
       prop.visibility = occludes(

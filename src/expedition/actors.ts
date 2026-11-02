@@ -731,7 +731,10 @@ export class Assets {
     const c = this.containers.get(key)!;
     const root = new TransformNode(key, scene);
     root.parent = parent;
-    const result = c.instantiateModelsToScene(undefined, false);
+    for (const mesh of c.meshes) mesh.receiveShadows = true;
+    const result = c.instantiateModelsToScene(undefined, false, {
+      doNotInstantiate: false,
+    });
     result.rootNodes.forEach((n) => (n.parent = root));
     const base = root.getHierarchyBoundingVectors(true).min.y;
     root.position.copyFrom(p);
@@ -744,7 +747,6 @@ export class Assets {
     root.rotation.y = (p.x + p.z) * 0.47;
     root.metadata = { foliage: true, phase: (p.x + p.z) * 0.2 };
     root.getChildMeshes().forEach((m) => {
-      m.receiveShadows = true;
       m.isPickable = false;
     });
     return root;
