@@ -119,5 +119,21 @@
     "No foot IK or root-motion attacks",
     "Latest full rendered chapter timing remains 0.2.13",
     "Top-tier art, first-time pacing and enjoyment remain open"
-  ]
+  ],
+  "public": {
+    "commit": "1efd1d2cef95a6ea2d5e886e1e4a638623ad0e3f",
+    "deployment": "dpl_6JetN6xMyDaTvWri4LSdzCGvvA8Z",
+    "state": "READY",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "/assets/index-BTxe-3un.js",
+    "check": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
+  }
 }
