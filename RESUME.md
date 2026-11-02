@@ -1,6 +1,6 @@
 # Last Tether — active checkpoint
 
-User resumed; goal remains active. Version 0.2.30 is locally validated and ready for Git-connected production deployment. Public was 0.2.29 at last verification.
+User resumed; goal remains active. Version 0.2.30 is published and verified at https://last-tether.vercel.app/. App commit 53a1bf03ec22c3fb2b575fff49613db9b2651cce; READY deployment dpl_327oHDK3mUXs6LCVzACxoEV552aL; alias bundle index-CHLqMMis.js.
 
 ## This release
 
@@ -16,6 +16,8 @@ Compiled ordinary controls/pause/save/reload pass with no debug hook/errors/fail
 
 ## Next
 
-Finish publishing this tested release and verify public alias/asset/ordinary input. Then address remaining hero/creature art and frame pacing/contact weaknesses. Whole goal unfinished: top-tier visual quality, human combat enjoyment and first-time 15–20 minute pacing unverified. Preserve supported thrust, directional impacts, rig pool, native fixed physics clock and bloom-only renderer.
+Public keyboard combat/pause/save/reload passes with no debug hook/errors/failed responses. Model byte-identical to local: SHA256 4a8833ff03a129f1b6da6d3afe6fbb788a61e490c6becab84f2a07ae50c271f9. Bounded 17.87-second public sample: 81.20 FPS / p95 18.2 ms; variability versus compiled sample means no sustained-performance conclusion. All checks are terminal.
+
+Next address remaining hero/creature art and frame pacing/contact weaknesses. Whole goal unfinished: top-tier visual quality, human combat enjoyment and first-time 15–20 minute pacing unverified. Preserve supported thrust, directional impacts, rig pool, native fixed physics clock and bloom-only renderer.
 
 Fal US$5 pilot remains blocked by exhausted credits: no generation/upload/retry/poll until user confirms credits. No new paid resources. No Supabase/cloud integration. No subagents. Main auto-deploys; do not create a duplicate manual deployment. Owned silent Playwright tether-release and local dev4173/preview4174 are running. Leave unrelated browser/audio/system settings alone.
