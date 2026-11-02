@@ -168,5 +168,22 @@
     "Landing remains an authored short pose, without measured terrain-aware sole contact.",
     "Kavi reference v1 is concept artwork only; fal 3D conversion remains pending credits.",
     "No new sustained-frame-rate or first-time-human pacing claim."
-  ]
+  ],
+  "public": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_713sijoM9vLD4Gyfh5Us1nRmoXSF",
+    "commit": "9dbc5059a00b77eafc9a7425aa6dbfef78844de4",
+    "state": "READY",
+    "target": "production",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-BKbXObeo.js"
+  }
 }
