@@ -2455,5 +2455,22 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "publicKeyboard": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_FVu2XAiwCAS7FJCgTUxF79afeaNW",
+    "commit": "f5145e97eb1986636b1e48f7afe126b6aea4f1fc",
+    "state": "READY",
+    "target": "production",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-D7xTCwIH.js"
   }
 }
