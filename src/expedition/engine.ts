@@ -970,10 +970,12 @@ export class Expedition {
       }
       e.timer -= dt;
       const d = distance(this.p, e.p);
-      if (
-        e.kind !== "guardian" ||
-        !["windup", "charge", "stunned"].includes(e.state)
-      )
+      const committedFacing =
+        e.state === "lunge" ||
+        (e.kind === "raptor" && e.state === "windup") ||
+        (e.kind === "guardian" &&
+          ["windup", "charge", "stunned"].includes(e.state));
+      if (!committedFacing)
         e.yaw = Math.atan2(this.p.x - e.p.x, this.p.z - e.p.z);
 
       if (e.kind === "guardian") {

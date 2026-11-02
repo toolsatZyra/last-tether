@@ -250,3 +250,42 @@ test("guardian commits its facing to the charge instead of tracking a dodging pl
   s.damage(e, 9999);
   assert.equal(e.dead, 2.4);
 });
+
+test("raptor tells and lunges retain the same direction when the player dodges sideways", () => {
+  const s = new Expedition();
+  s.addEnemy("raptor", { ...s.destination });
+  const e = s.enemies.at(-1)!;
+  e.timer = 0;
+  s.p = { x: e.p.x, y: e.p.y, z: e.p.z + 3 };
+  s.updateEnemies(1 / 60);
+  assert.equal(e.state, "windup");
+  const yaw = e.yaw,
+    origin = { ...e.p };
+  s.p.x += 10;
+  for (let i = 0; i < 40; i++) s.updateEnemies(1 / 60);
+  assert.equal(e.state, "lunge");
+  assert.equal(e.yaw, yaw);
+  assert.equal(e.p.x, origin.x);
+  assert.ok(e.p.z > origin.z);
+  assert.equal(s.health, 100);
+});
+
+test("flyer follows during anticipation but commits its dive once released", () => {
+  const s = new Expedition();
+  s.addEnemy("wing", { ...s.destination });
+  const e = s.enemies.at(-1)!;
+  e.state = "windup";
+  e.timer = 0.02;
+  s.p = { x: e.p.x + 8, y: e.p.y, z: e.p.z };
+  s.updateEnemies(1 / 60);
+  assert.ok(Math.abs(e.yaw - Math.PI / 2) < 1e-8);
+  s.updateEnemies(1 / 60);
+  assert.equal(e.state, "lunge");
+  const yaw = e.yaw,
+    origin = { ...e.p };
+  s.p = { x: e.p.x, y: e.p.y, z: e.p.z + 8 };
+  s.updateEnemies(1 / 60);
+  assert.equal(e.yaw, yaw);
+  assert.equal(e.p.z, origin.z);
+  assert.ok(e.p.x > origin.x);
+});

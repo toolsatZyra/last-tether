@@ -180,3 +180,9 @@ A normal-speed full rendered route at Balanced 1036×703 completed all 32 object
 This uses an expert input policy at Explorer difficulty through the ordinary fixed-step/render loop, without health grants or teleportation. It is not first-time human pacing, a native-keyboard full playthrough, or sustained 60 FPS evidence. A separate compiled native keyboard/mouse check reached the guardian and exercised a charge with zero recoveries, asset HTTP 200 and no development hook/errors. Evidence: verification/render-cache-0.2.13.json and verification/render-cache-0.2.13-realtime.json.
 
 Public 0.2.13 deployment dpl_7HN4gSjrrdPd6qGaChbTgk3WKzZo is READY (application commit ad2936c). The public alias serves the same index-DMA5fanh.js bundle as the verified local build. Ordinary keyboard/mouse guardian approach and charge check passed with zero recoveries, asset HTTP 200, no development hook, no browser errors and no failed responses.
+
+## Creature motion continuity — 0.2.14
+
+28 tests pass, including sideways player movement during a raptor tell/lunge and a flyer dive. A Babylon check covers all five smaller creature types moving, stopping and pausing: Idle → Run (or Flying_Idle → Fast_Flying) → Idle, with pause preserving motion selection. A staged raptor encounter runs through the native game/render loop: 105 sampled input frames, 29 lunge frames, zero direction or rendered-facing error, 100 remaining health after a sideways dodge, no browser errors.
+
+The compiled opening uses ordinary keyboard controls to defeat three creatures, reach Take back the watchpost, pause, reload and resume the same checkpoint, with zero recoveries and no browser/asset errors or development hook. The 0.2.13 normal-speed full chapter remains the latest full rendered timing result; this change does not alter movement paths, damage or attack timing. Evidence: verification/creature-motion-0.2.14.json.

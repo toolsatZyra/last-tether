@@ -1,0 +1,123 @@
+{
+  "version": "0.2.14",
+  "tests": 28,
+  "assets": 83,
+  "motion": {
+    "rows": [
+      {
+        "kind": "raptor",
+        "stopped": "motion-raptor_Idle",
+        "moving": "motion-raptor_Run",
+        "rate": 0.9999999847700216,
+        "settled": "motion-raptor_Idle"
+      },
+      {
+        "kind": "spitter",
+        "stopped": "motion-spitter_Idle",
+        "moving": "motion-spitter_Run",
+        "rate": 0.9999999847700216,
+        "settled": "motion-spitter_Idle"
+      },
+      {
+        "kind": "brute",
+        "stopped": "motion-brute_Idle",
+        "moving": "motion-brute_Run",
+        "rate": 0.9999999847700216,
+        "settled": "motion-brute_Idle"
+      },
+      {
+        "kind": "bomber",
+        "stopped": "motion-bomber_Idle",
+        "moving": "motion-bomber_Run",
+        "rate": 0.9999999847700216,
+        "settled": "motion-bomber_Idle"
+      },
+      {
+        "kind": "wing",
+        "stopped": "motion-wing_Flying_Idle",
+        "moving": "motion-wing_Fast_Flying",
+        "rate": 1,
+        "settled": "motion-wing_Flying_Idle"
+      }
+    ],
+    "errors": []
+  },
+  "dodge": {
+    "frames": 105,
+    "lungeFrames": 29,
+    "maxFacingError": 0,
+    "maxRenderedFacingError": 0,
+    "health": 100,
+    "states": [
+      "idle",
+      "windup",
+      "lunge",
+      "recover"
+    ],
+    "clips": [
+      null,
+      "enemy-1_Duck",
+      "enemy-1_Punch",
+      "enemy-1_Idle"
+    ],
+    "first": {
+      "tick": 24,
+      "state": "lunge",
+      "p": {
+        "x": 18,
+        "y": 10,
+        "z": 58,
+        "width": 10,
+        "gap": false,
+        "arena": true
+      },
+      "yaw": 3.141592653589793,
+      "dir": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "actorYaw": 3.141592653589793,
+      "clip": "enemy-1_Punch",
+      "health": 100
+    },
+    "last": {
+      "tick": 52,
+      "state": "lunge",
+      "p": {
+        "x": 18,
+        "y": 10,
+        "z": 48.65000000000006,
+        "width": 10,
+        "gap": false,
+        "arena": true
+      },
+      "yaw": 3.141592653589793,
+      "dir": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "actorYaw": 3.141592653589793,
+      "clip": "enemy-1_Punch",
+      "health": 100
+    },
+    "errors": []
+  },
+  "production": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "limits": [
+    "No new character assets integrated",
+    "Custom hero generation pilot awaits explicit spending approval; no paid jobs submitted",
+    "No foot IK or root-motion attacks",
+    "Latest full rendered chapter timing remains 0.2.13",
+    "Top-tier art, first-time pacing and enjoyment remain open"
+  ]
+}

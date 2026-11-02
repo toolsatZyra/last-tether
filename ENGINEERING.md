@@ -81,3 +81,9 @@ GuardianMotion layers authored neck/head/jaw accents after Babylon skeletal anim
 Static environment PBR materials use Babylon's native freeze() after scene preparation. Rebuilding an area unfreezes and clears the old set. Changing quality unfreezes the current set, then waits for two ready rendered frames before caching it again. Animated actor materials, WaterMaterial and StandardMaterial are excluded. Lighting and uniform updates remain active; this caches shader readiness rather than freezing the scene.
 
 The world shadow cache contains only descendants of the current area root. The active shadow list is deduplicated and excludes disabled/disposed/empty meshes before adding current characters. Previously every rebuild carried another copy of hero meshes into the world cache. Babylon already suppresses duplicate GPU draws, so this correction bounds list growth and traversal; it is not a draw-call reduction.
+
+## Creature motion continuity — 0.2.14
+
+Raptors retain their captured facing through anticipation and the lunge. Flyers can track during anticipation, then retain their release direction during the dive. Guardian facing rules remain unchanged. Movement, attack range, damage and timing are unchanged.
+
+Actor locomotion reads actual horizontal displacement between view updates, with exponential smoothing and a bounded rate. Stationary creatures use their idle clip; moving spitters now use their native Run instead of sliding in Idle. Ground gait playback scales with measured movement. Paused frames preserve the speed estimate and animation selection. This improves movement/pose correspondence but does not provide foot IK, root-motion attacks or replace the underlying character art.

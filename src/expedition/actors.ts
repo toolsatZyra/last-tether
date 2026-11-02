@@ -59,6 +59,8 @@ export class Actor {
   attackPose = -1;
   attackPhase = 0;
   turnLean = 0;
+  enemyPosition?: Vector3;
+  enemyMoveSpeed = 0;
   poseBases = new Map<TransformNode, Quaternion>();
   constructor(
     container: AssetContainer,
@@ -495,6 +497,20 @@ export class Actor {
   }
   enemy(e: Enemy, dt: number) {
     this.clearPose();
+    if (dt > 0) {
+      const speed = this.enemyPosition
+        ? Math.min(
+            18,
+            Math.hypot(
+              e.p.x - this.enemyPosition.x,
+              e.p.z - this.enemyPosition.z,
+            ) / dt,
+          )
+        : 0;
+      this.enemyMoveSpeed +=
+        (speed - this.enemyMoveSpeed) * (1 - Math.exp(-dt * 18));
+    }
+    (this.enemyPosition ??= new Vector3()).set(e.p.x, e.p.y, e.p.z);
     this.contact.position.set(e.p.x, e.p.y + 0.045, e.p.z);
     this.contact.visibility = e.hp > 0 ? 0.65 : 0;
     this.root.position.set(e.p.x, e.p.y, e.p.z);
@@ -522,10 +538,16 @@ export class Actor {
       anim = flying ? "No" : "Duck";
     else if (["lunge", "charge"].includes(e.state))
       anim = flying ? "Headbutt" : "Punch";
-    else if (e.state === "idle" && e.kind !== "spitter")
+    else if (e.state === "idle" && this.enemyMoveSpeed > 0.4)
       anim = flying ? "Fast_Flying" : "Run";
     else if (e.state === "stunned") anim = "HitReact";
-    this.play(anim, anim === "Run" ? 1.15 : 1, e.hp > 0);
+    this.play(
+      anim,
+      anim === "Run"
+        ? Math.max(0.6, Math.min(1.8, this.enemyMoveSpeed / 4.2))
+        : 1,
+      e.hp > 0,
+    );
     this.root.scaling.y =
       this.root.scaling.x * (e.hp <= 0 ? Math.min(1, e.dead * 2) : 1);
     this.update(dt);
