@@ -215,3 +215,5 @@ Public 0.2.15 deployment dpl_8QaEw5Bv4bPZpsC74dh1GaZ8E6JU is READY (application 
 Reproduction: tools/forest-physics-check.js, forest-detail-check.js, forest-realtime-start.js with realtime-status.js, forest-ghost-check.js, and story-ui-route.js. Captures forest-after.png and forest-crossing.png stage the player for art inspection. Machine-readable results: verification/forest-0.2.16.json.
 
 Compiled preview checks passed with ordinary keyboard input: forest first encounter (two defeats, next objective and pause), plus story opening (three defeats, watchpost, pause/save/reload/resume). Neither exposed a development hook, page error or failed asset response.
+
+Published commit b30fa662a3f447406de1ab89f8aebfe9d8e2b986 is READY as dpl_En7GczCckqMhLjxir2V58vndWwSd. The public alias serves index-CkUKeOEx.js. Live ordinary-keyboard forest entry, tether/combat (two defeats), next objective and pause pass without page errors, failed asset responses or a development hook. tools/forest-live-check.js reproduces that bounded check.

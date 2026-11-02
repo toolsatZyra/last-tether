@@ -663,5 +663,21 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "deployment": {
+    "id": "dpl_En7GczCckqMhLjxir2V58vndWwSd",
+    "commit": "b30fa662a3f447406de1ab89f8aebfe9d8e2b986",
+    "url": "https://last-tether.vercel.app/",
+    "state": "READY",
+    "bundle": "index-CkUKeOEx.js",
+    "publicForest": {
+      "noDebug": true,
+      "start": "Follow the anchor line",
+      "objective": "Hold the hanging terrace",
+      "meta": "2 defeated · 0 recoveries",
+      "paused": true,
+      "errors": [],
+      "bad": []
+    }
   }
 }
