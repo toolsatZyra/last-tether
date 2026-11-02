@@ -197,5 +197,20 @@
     "Normal smoothing preserves geometry and skinning; it does not add character geometry or facial animation.",
     "Short stationary performance samples, not sustained combat benchmarks.",
     "Top-tier visual parity, first-time 15–20 minute pacing, and human enjoyment remain unverified."
-  ]
+  ],
+  "live": {
+    "applicationCommit": "34a01f97d08939b267a20deb939bb46f4442a1b7",
+    "deployment": "dpl_5je2Pz1wgN2wdXdqM7AejZNjLCFV",
+    "status": "READY",
+    "url": "https://last-tether.vercel.app/",
+    "check": {
+      "noDebug": true,
+      "objective": "Take back the watchpost",
+      "meta": "3 defeated · 0 recoveries",
+      "paused": true,
+      "resumed": "Take back the watchpost",
+      "errors": [],
+      "bad": []
+    }
+  }
 }
