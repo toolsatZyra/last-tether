@@ -364,6 +364,7 @@ function events(immediate = false) {
         "falling",
         "reinforcement",
         "environmentkill",
+        "crane-release",
       ].includes(e.type)
     )
       toast(e.text || "");
@@ -473,6 +474,8 @@ function hud() {
     )
       prompt = "E · Read the routefinder’s memory";
   }
+  if (game.canReleaseCrane)
+    prompt = "E · Release crane load · lure creatures onto the marked ground";
   $("interact").hidden = !prompt;
   $("interact").textContent = prompt;
   $("death").hidden = game.death <= 0;

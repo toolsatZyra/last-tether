@@ -239,7 +239,7 @@ export const CHAPTERS: Chapter[] = [
       {
         node: 1,
         title: "Clear the blasting yard",
-        hint: "Strike a red charge pod to explode it. Draw nearby creatures into the blast.",
+        hint: "Lure creatures under the hanging stone, then E at the brass lever releases it. Red charge pods also explode when struck.",
         enemies: ["raptor", "raptor", "bomber", "bomber", "spitter", "brute"],
       },
       {

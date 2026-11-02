@@ -1,3 +1,4 @@
+import { quarryTrap, CRANE_IMPACT, CRANE_RADIUS } from "./crane.ts";
 import {
   pressureGates,
   pressurePhase,
@@ -227,6 +228,8 @@ export class Expedition {
   escape = 110;
   checkpoint = v(0, 8, 0);
   podUsed = new Set<number>();
+  craneElapsed = -1;
+  craneSpent = false;
   transition = 0;
 
   constructor(save?: Save | null, mode: "story" | "daily" = "story") {
@@ -309,6 +312,8 @@ export class Expedition {
     this.deviceTurn = 0;
     this.hazardClock = 0;
     this.podUsed.clear();
+    this.craneElapsed = -1;
+    this.craneSpent = beat > 0;
     this.grapple = null;
     this.resetActions();
     this.velocity = v();
@@ -439,6 +444,8 @@ export class Expedition {
     this.hazardClock = 0;
     this.escape = 110;
     this.podUsed.clear();
+    this.craneElapsed = -1;
+    this.craneSpent = this.beat > 0;
     this.event("save");
   }
 
@@ -653,7 +660,48 @@ export class Expedition {
     this.event("save");
   }
 
+  get canReleaseCrane() {
+    if (
+      this.sector !== 4 ||
+      this.beat !== 0 ||
+      this.craneSpent ||
+      this.craneElapsed >= 0 ||
+      !this.grounded ||
+      this.grapple ||
+      this.death > 0
+    )
+      return false;
+    const lever = quarryTrap(this.chapter).lever;
+    return distance(this.p, lever) < 3 && Math.abs(this.p.y - lever.y) < 2;
+  }
+
+  updateCrane(dt: number) {
+    if (this.sector !== 4 || this.craneElapsed < 0 || this.craneSpent) return;
+    this.craneElapsed += dt;
+    if (this.craneElapsed < CRANE_IMPACT) return;
+    this.craneElapsed = CRANE_IMPACT;
+    this.craneSpent = true;
+    const p = quarryTrap(this.chapter).load;
+    for (const e of this.living)
+      if (distance(e.p, p) < CRANE_RADIUS && Math.abs(e.p.y - p.y) < 4)
+        this.damage(e, 360, 2);
+    if (distance(this.p, p) < CRANE_RADIUS && Math.abs(this.p.y - p.y) < 3)
+      this.hurt(35);
+    // The first-yard charge sits below the load: a surviving charge chains the impact.
+    if (this.beat === 0) this.checkPods(p, 2);
+    this.event("crane-impact", undefined, p);
+  }
+
   interact() {
+    if (this.canReleaseCrane) {
+      this.craneElapsed = 0;
+      this.event(
+        "crane-release",
+        "Load released — clear the marked ground!",
+        quarryTrap(this.chapter).load,
+      );
+      return;
+    }
     const p = this.destination;
 
     if (this.clear && this.objective.device === "rune") {
@@ -933,6 +981,7 @@ export class Expedition {
     this.updateEnemies(dt);
     this.updateShots(dt);
     this.updateHazards(dt);
+    this.updateCrane(dt);
 
     if (
       this.spawned &&

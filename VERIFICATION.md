@@ -240,3 +240,13 @@ Four real keyboard jumps, dodge and melee recorded 259 airborne frames and 56 la
 Evidence: verification/foot-pose-0.2.18.json. Reproduce with tools/foot-pose-check.js; tools/foot-pose-gallery.js records explicitly staged before/after views. Landing remains an authored pose rather than terrain-aware sole IK. No new full-chapter timing or sustained performance claim is made.
 
 Published 0.2.18 commit 9dbc5059a00b77eafc9a7425aa6dbfef78844de4 is READY as dpl_713sijoM9vLD4Gyfh5Us1nRmoXSF. The public alias serves index-BKbXObeo.js. The ordinary keyboard opening, three defeats, watchpost, pause/save/reload/resume check passes on the public URL with no page errors, failed responses or development hook.
+
+## Usable quarry crane — 0.2.19
+
+All 39 tests and the production build pass. New behavior checks cover grounded/proximate release, warning timing, one impact, enemy radius/height bounds, player damage/dodge protection, retry/resume and charge chaining. The keyboard-operated native scene check confirms lever prompt, falling load, pause hold, two controlled defeats, hidden ropes/load and 12 rubble pieces. These enemies were placed/stunned for the mechanism check.
+
+A separate normal-speed run starts via the ordinary checkpoint loading screen and uses an input policy to approach/lure/release, then finish the actual encounter. It reaches objective 2 in 20.03 game seconds / 20.23 wall seconds with 9 total defeats and no recoveries. Two defeats occurred at the crane/charge impact, which also reduced the brute to 160 health. Balanced Chrome frames in this short run average 53.76 FPS, p95 24.5 ms, maximum 184.1 ms. This is not a sustained performance or human enjoyment claim.
+
+The compiled build was separately exercised with ordinary WASD/E/H keys from a prepared valid quarry checkpoint. The player reaches the lever, releases it and sees the impact; four defeats and zero recoveries are shown, with no page errors, failed responses or development hook. Ordinary gameplay camera captures show the whole load after lowering its start and adding smooth proximity framing.
+
+The quarry audit checks 1,515 route samples without visual-solid intersections, pod resets, paused smoke, and repeated rebuilds returning to 548 meshes / 57 textures / 105 materials / one smoke system. The full native-collision route still finishes all 32 objectives in 677.40 simulated seconds, 188 defeats, zero recoveries, coherent ending/save and no page errors. It does not use the optional crane and demonstrates that the new action does not gate progression. Evidence: verification/crane-0.2.19.json. Reproduce with tools/crane-check.js, crane-encounter-start.js + crane-encounter-status.js, crane-production-check.js, quarry-check.js and story-ui-route.js.

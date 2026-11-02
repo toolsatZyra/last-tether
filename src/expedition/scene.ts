@@ -75,6 +75,12 @@ export class GameScene {
   blades: TransformNode[] = [];
   pressureGallery?: PressureGallery;
   quarrySmoke?: ParticleSystem;
+  quarryCrane?: {
+    dynamicMeshes: Mesh[];
+    load: TransformNode;
+    lever: TransformNode;
+    update(s: Expedition): void;
+  };
   chargeMarks = new Map<number, Mesh>();
   flood!: Mesh;
   physics!: PhysicsWorld;
@@ -97,6 +103,7 @@ export class GameScene {
   time = 0;
   shake = 0;
   landingKick = 0;
+  craneFraming = 0;
   ao: SSAO2RenderingPipeline;
   aoEnabled = true;
   quality = "high";
@@ -873,6 +880,8 @@ export class GameScene {
     this.worldMaterials.clear();
     this.quarrySmoke?.dispose(false);
     this.quarrySmoke = undefined;
+    this.quarryCrane = undefined;
+    this.craneFraming = 0;
     this.pressureGallery?.dispose();
     this.pressureGallery = undefined;
     this.particleBursts.forEach((p) => p.system.dispose(false));
@@ -1312,6 +1321,7 @@ export class GameScene {
       ...this.pods.flatMap((pod) => pod.getChildMeshes()),
       ...this.cacheMeshes,
       ...(this.pressureGallery?.dynamicMeshes || []),
+      ...(this.quarryCrane?.dynamicMeshes || []),
     ]);
     const groups = new Map<string, Mesh[]>();
     for (const m of this.root.getChildMeshes()) {
@@ -1652,15 +1662,34 @@ export class GameScene {
     const color = c(
       mat === "danger" ? "#ed813e" : mat === "cyan" ? "#85ddd2" : "#efd293",
     );
-    particles.color1 = new Color4(color.r, color.g, color.b, 1);
+    if (mat === "stone") {
+      color.set(0.42, 0.37, 0.3);
+      particles.minSize = 0.6;
+      particles.maxSize = 1.6;
+      particles.minLifeTime = 0.5;
+      particles.maxLifeTime = 1.4;
+      particles.gravity.set(0, -1, 0);
+    }
+    particles.color1 = new Color4(
+      color.r,
+      color.g,
+      color.b,
+      mat === "stone" ? 0.5 : 1,
+    );
     particles.color2 = particles.color1;
     particles.colorDead = new Color4(color.r, color.g, color.b, 0);
-    particles.blendMode = ParticleSystem.BLENDMODE_ADD;
+    particles.blendMode =
+      mat === "stone"
+        ? ParticleSystem.BLENDMODE_STANDARD
+        : ParticleSystem.BLENDMODE_ADD;
     particles.manualEmitCount = count;
     particles.emitRate = 0;
     particles.updateSpeed = 1 / 60;
     particles.start();
-    this.particleBursts.push({ system: particles, life: 1.1 });
+    this.particleBursts.push({
+      system: particles,
+      life: mat === "stone" ? 2 : 1.1,
+    });
   }
   event(e: Event, s: Expedition) {
     if (
@@ -1676,6 +1705,10 @@ export class GameScene {
     if (["slam", "burst", "explode"].includes(e.type)) {
       this.burst(e.p || s.p, e.type === "explode" ? "danger" : "cyan", 35);
       this.shake = 0.35;
+    }
+    if (e.type === "crane-impact") {
+      this.burst(e.p || s.p, "stone", 38);
+      this.shake = 0.4;
     }
     if (e.type === "hurt") this.shake = 0.2;
     if (e.type === "land") {
@@ -1850,6 +1883,7 @@ export class GameScene {
       });
     this.motes.emitter = new Vector3(s.p.x, s.p.y + 1, s.p.z);
     this.motes.updateSpeed = dt > 0 ? 1 / 60 : 0;
+    this.quarryCrane?.update(s);
     if (this.quarrySmoke) this.quarrySmoke.updateSpeed = dt > 0 ? 1 / 60 : 0;
     this.rain.emitter = new Vector3(s.p.x, s.p.y + 20, s.p.z);
     this.rain.emitRate = [0, 7].includes(s.sector)
@@ -1886,7 +1920,22 @@ export class GameScene {
       const nearbyThreats = s.living.filter(
         (e) => Math.hypot(e.p.x - s.p.x, e.p.z - s.p.z) < 13,
       ).length;
-      const distance = s.grapple
+      const frameCrane =
+        this.quarryCrane && !s.craneSpent
+          ? clamp(
+              (18 -
+                Math.hypot(
+                  s.p.x - this.quarryCrane.load.position.x,
+                  s.p.z - this.quarryCrane.load.position.z,
+                )) /
+                8,
+              0,
+              1,
+            )
+          : 0;
+      this.craneFraming +=
+        (frameCrane - this.craneFraming) * (1 - Math.exp(-dt * 3));
+      let distance = s.grapple
         ? 13
         : bossPresent
           ? 13
@@ -1895,11 +1944,14 @@ export class GameScene {
             : nearbyThreats
               ? 8.8
               : 7.8;
+      distance = Math.max(distance, 7.8 + this.craneFraming * 4);
+      target.y += this.craneFraming * 1.8;
       if (bossPresent) target.y += 2.5;
       desired = new Vector3(
         s.p.x - Math.sin(this.yaw) * distance,
         s.p.y +
           (bossPresent ? 4.8 : 2.7) +
+          this.craneFraming * 2 +
           this.pitch * (bossPresent ? 4 : 3.8),
         s.p.z - Math.cos(this.yaw) * distance,
       );

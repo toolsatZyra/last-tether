@@ -132,7 +132,7 @@ export class Soundscape {
       );
     else if (event === "hit")
       this.sample("impactPunch_heavy_000", 0.7, 1 + variation);
-    else if (["slam", "explode", "burst"].includes(event)) {
+    else if (["slam", "explode", "burst", "crane-impact"].includes(event)) {
       this.sample("impactMining_000", 0.9, 0.72);
       this.tone(70, 25, 0.38, 0.3);
     } else if (event === "hurt")
@@ -149,7 +149,10 @@ export class Soundscape {
       this.sample("metalClick", 0.75, 0.85);
     else if (event === "heal")
       for (const f of [220, 330, 440]) this.tone(f, f, 0.8, 0.08);
-    else if (event === "tell") this.sample("creak1", 0.3, 0.6);
+    else if (event === "crane-release") {
+      this.sample("metalLatch", 0.8, 0.7);
+      this.sample("creak1", 0.65, 0.6);
+    } else if (event === "tell") this.sample("creak1", 0.3, 0.6);
     else if (event === "land") this.sample("footstep_concrete_002", 0.9, 0.7);
   }
   update(dt: number, moving: boolean, combat: boolean) {

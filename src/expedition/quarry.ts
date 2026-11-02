@@ -1,4 +1,5 @@
 import {
+  TransformNode,
   Color3,
   Color4,
   ParticleSystem,
@@ -13,6 +14,15 @@ import {
 } from "@babylonjs/core";
 import type { GameScene } from "./scene";
 import { v, type Point, type V } from "./level";
+import {
+  quarryTrap,
+  CRANE_WARNING,
+  CRANE_FALL,
+  CRANE_RADIUS,
+  CRANE_LOAD_HEIGHT,
+  CRANE_DROP,
+} from "./crane";
+import type { Expedition } from "./engine";
 import { weatheredStone } from "./surfaces";
 
 export function quarryMaterials(view: GameScene) {
@@ -275,34 +285,55 @@ function derrick(view: GameScene, p: Point) {
   }
   cable(view, "derrick-stay", [v(x, y + 25, z), v(heel.x, heel.y + 3, heel.z)]);
   pulley(view, tip);
-  const load = v(tip.x, y + 10, tip.z);
-  for (const side of [-1, 1])
-    cable(view, "hoist-rope", [
-      v(tip.x + side * 0.6, tip.y, tip.z),
-      v(load.x + side * 0.6, load.y + 2.5, load.z),
-    ]);
-  beam(
-    view,
-    "hoist-shackle",
-    v(load.x - 0.8, load.y + 2.5, load.z),
-    v(load.x + 0.8, load.y + 2.5, load.z),
-    0.18,
-    "metal",
-  );
-  piece(view, "suspended-cut-block", load, v(4.8, 3.2, 3.2), "quarryStone");
+  const load = v(tip.x, y + CRANE_LOAD_HEIGHT, tip.z);
+  const ropeLength = tip.y - load.y - 2.5;
+  const moving = new TransformNode("crane-load", view.scene);
+  moving.parent = view.root;
+  moving.position.set(load.x, load.y, load.z);
+  const movingMeshes: Mesh[] = [];
+  const attach = (mesh: Mesh) => {
+    mesh.metadata = { quarry: true, physics: false, cameraSolid: false };
+    mesh.isPickable = false;
+    mesh.setParent(moving);
+    movingMeshes.push(mesh);
+  };
+  const ropes: Mesh[] = [];
   for (const side of [-1, 1]) {
-    cable(
+    const rope = cable(view, "hoist-rope", [
+      v(side * 0.6, 0, 0),
+      v(side * 0.6, -ropeLength, 0),
+    ]);
+    rope.position.set(tip.x, tip.y, tip.z);
+    ropes.push(rope);
+  }
+  attach(
+    beam(
       view,
-      "load-sling",
-      [
-        v(load.x + side * 2, load.y - 1.65, load.z - 1.65),
-        v(load.x + side * 2, load.y + 1.65, load.z - 1.65),
-        v(load.x, load.y + 2.5, load.z),
-        v(load.x + side * 2, load.y + 1.65, load.z + 1.65),
-        v(load.x + side * 2, load.y - 1.65, load.z + 1.65),
-        v(load.x + side * 2, load.y - 1.65, load.z - 1.65),
-      ],
-      0.09,
+      "hoist-shackle",
+      v(load.x - 0.8, load.y + 2.5, load.z),
+      v(load.x + 0.8, load.y + 2.5, load.z),
+      0.18,
+      "metal",
+    ),
+  );
+  attach(
+    piece(view, "suspended-cut-block", load, v(4.8, 3.2, 3.2), "quarryStone"),
+  );
+  for (const side of [-1, 1]) {
+    attach(
+      cable(
+        view,
+        "load-sling",
+        [
+          v(load.x + side * 2, load.y - 1.65, load.z - 1.65),
+          v(load.x + side * 2, load.y + 1.65, load.z - 1.65),
+          v(load.x, load.y + 2.5, load.z),
+          v(load.x + side * 2, load.y + 1.65, load.z + 1.65),
+          v(load.x + side * 2, load.y - 1.65, load.z + 1.65),
+          v(load.x + side * 2, load.y - 1.65, load.z - 1.65),
+        ],
+        0.09,
+      ),
     );
   }
   for (let i = 0; i < 3; i++)
@@ -313,6 +344,113 @@ function derrick(view: GameScene, p: Point) {
       v(3.7, 1.15, 4),
       "quarryStone",
     );
+  const trap = quarryTrap(view.current.chapter);
+  const marker = MeshBuilder.CreateTorus(
+    "crane-drop-warning",
+    { diameter: CRANE_RADIUS * 2, thickness: 0.07, tessellation: 64 },
+    view.scene,
+  );
+  marker.parent = view.root;
+  marker.position.set(trap.load.x, y + 0.08, trap.load.z);
+  marker.material = view.materials.brass;
+  marker.isPickable = false;
+  piece(
+    view,
+    "crane-release-base",
+    v(trap.lever.x, y + 0.45, trap.lever.z),
+    v(0.8, 0.9, 0.7),
+    "metal",
+    false,
+  );
+  const lever = new TransformNode("crane-release-lever", view.scene);
+  lever.parent = view.root;
+  lever.position.set(trap.lever.x, y + 0.9, trap.lever.z);
+  const handle = beam(
+    view,
+    "crane-release-handle",
+    v(trap.lever.x, y + 0.9, trap.lever.z),
+    v(trap.lever.x, y + 1.9, trap.lever.z - 0.4),
+    0.12,
+    "brass",
+  );
+  handle.setParent(lever);
+  handle.metadata.cameraSolid = false;
+  handle.isPickable = false;
+  const grip = piece(
+    view,
+    "crane-release-grip",
+    v(trap.lever.x, y + 1.9, trap.lever.z - 0.4),
+    v(0.6, 0.17, 0.17),
+    "red",
+    false,
+  );
+  grip.setParent(lever);
+  cable(
+    view,
+    "crane-release-line",
+    [
+      v(trap.lever.x, y + 0.3, trap.lever.z),
+      v(p.x + 17, y + 0.3, trap.lever.z),
+      v(x, y + 0.3, z - 4),
+      v(x, y + 13, z),
+    ],
+    0.035,
+  );
+  const rubble: Mesh[] = [];
+  for (let i = 0; i < 12; i++) {
+    const angle = i * 2.399,
+      radius = 1.2 + (i % 4) * 0.7;
+    const chunk = piece(
+      view,
+      "crane-shattered-stone",
+      v(
+        trap.load.x + Math.sin(angle) * radius,
+        y + 0.13,
+        trap.load.z + Math.cos(angle) * radius,
+      ),
+      v(0.7 + (i % 3) * 0.25, 0.24, 0.55 + (i % 2) * 0.3),
+      "quarryStone",
+      false,
+    );
+    chunk.rotation.y = angle;
+    chunk.setEnabled(false);
+    rubble.push(chunk);
+  }
+  const dynamicMeshes = [
+    ...movingMeshes,
+    ...ropes,
+    marker,
+    handle,
+    grip,
+    ...rubble,
+  ];
+  return {
+    dynamicMeshes,
+    load: moving,
+    lever,
+    update(s: Expedition) {
+      const released = s.craneElapsed >= 0 || s.craneSpent;
+      const t = Math.max(
+        0,
+        Math.min(1, (s.craneElapsed - CRANE_WARNING) / CRANE_FALL),
+      );
+      moving.position.y = load.y - CRANE_DROP * t * t;
+      moving.setEnabled(!s.craneSpent);
+      ropes.forEach((rope) => {
+        rope.scaling.y = 1 + (CRANE_DROP * t * t) / ropeLength;
+        rope.setEnabled(!s.craneSpent);
+      });
+      lever.rotation.x = released
+        ? -0.95 *
+          (s.craneSpent ? 1 : Math.min(1, Math.max(0, s.craneElapsed) * 8))
+        : 0;
+      marker.setEnabled(!s.craneSpent);
+      marker.visibility = released
+        ? 0.7 + 0.3 * Math.sin(s.craneElapsed * 24)
+        : 0.55;
+      rubble.forEach((chunk) => chunk.setEnabled(s.craneSpent));
+    },
+  };
 }
 function furnace(view: GameScene, p: Point) {
   const x = p.x - 41,
@@ -384,7 +522,7 @@ function furnace(view: GameScene, p: Point) {
 export function quarryYard(view: GameScene) {
   const points = view.current.chapter.points;
   cuttingFace(view, points[1], 1);
-  derrick(view, { ...points[1], z: points[1].z + 18 });
+  view.quarryCrane = derrick(view, points[1]);
   furnace(view, points[3]);
   cuttingFace(view, points[5], -1);
   for (const p of points) {

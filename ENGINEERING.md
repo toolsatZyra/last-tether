@@ -115,3 +115,9 @@ Performance diagnostics now enter through the real sky-route loading screen. The
 ## Detached boot pose correction — 0.2.18
 
 The current hero export animates Foot.L/R under Root, outside the UpperLeg/LowerLeg chains. Added leg rotations therefore stretched the skinned boots toward their old positions. FootPose captures each boot relative to its lower leg before the additional pose, uses Babylon matrix composition/decomposition to carry it afterward, and restores the original local position/quaternion before the next frame. The source hierarchy, animation tracks, vertex positions and skin weights remain intact. This is a rig-specific attachment correction, not a custom IK solver; a future character whose feet already descend from its legs must not receive this adapter. The new original Kavi reference and exact prompt are in docs/character-pilot. It is not yet a 3D asset.
+
+## Quarry crane trap — 0.2.19
+
+crane.ts shares the load/lever positions, 0.5-second warning, 0.64-second fall and 5.2-unit impact radius between the game state and scene. A nearby grounded E press releases it once. At impact, the damage check runs once, respects height and player invulnerability, and can trigger the charge beneath the load. Checkpoint retries rearm the unsecured first yard; later checkpoints show spent rubble. The existing save format remains unchanged.
+
+The load, ropes, lever, warning ring and shallow rubble are excluded from static mesh batches. Their transforms derive from game time, so pause freezes the mechanism. The authored falling pose is not a new rigid-body simulation. Camera distance and target height blend with proximity to the load; yaw remains under player control. Existing native Havok movement, Babylon particle effects and licensed audio samples are retained.
