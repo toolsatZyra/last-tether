@@ -1,0 +1,621 @@
+{
+  "version": "0.2.17",
+  "date": "2026-11-02",
+  "scope": "Release expired creature visuals after their disappearance, retaining engine defeat records.",
+  "lifecycle": {
+    "initial": {
+      "actors": 0,
+      "skeletons": 2,
+      "groups": 48,
+      "textures": 59,
+      "meshes": 865,
+      "poseObservers": 2
+    },
+    "cycles": [
+      {
+        "engineRecords": 6,
+        "expired": {
+          "actors": 0,
+          "skeletons": 2,
+          "groups": 48,
+          "textures": 59,
+          "meshes": 865,
+          "poseObservers": 2
+        }
+      },
+      {
+        "engineRecords": 12,
+        "expired": {
+          "actors": 0,
+          "skeletons": 2,
+          "groups": 48,
+          "textures": 59,
+          "meshes": 865,
+          "poseObservers": 2
+        }
+      },
+      {
+        "engineRecords": 18,
+        "expired": {
+          "actors": 0,
+          "skeletons": 2,
+          "groups": 48,
+          "textures": 59,
+          "meshes": 865,
+          "poseObservers": 2
+        }
+      },
+      {
+        "engineRecords": 24,
+        "expired": {
+          "actors": 0,
+          "skeletons": 2,
+          "groups": 48,
+          "textures": 59,
+          "meshes": 865,
+          "poseObservers": 2
+        }
+      }
+    ]
+  },
+  "diagnosis": {
+    "memoryPressureObserved": {
+      "freeGiB": 0.46495,
+      "totalGiB": 15.28796
+    },
+    "baselineProfile": {
+      "frames": 2698,
+      "meanFrameMs": 28.85456,
+      "medianFrameMs": 25.7,
+      "meanSimulationMs": 0.50393,
+      "meanRenderMs": 23.14907,
+      "meanCameraRayMs": 1.10771,
+      "notes": "Instrumented developer immediate-start path. Includes a 1.145 second first frame; bypasses the normal area-preparation screen. External memory pressure makes this unsuitable as a controlled before/after benchmark."
+    },
+    "memoryPressureLater": {
+      "freeGiB": 2.65449
+    }
+  },
+  "limits": [
+    "No claim that actor disposal alone resolves long stalls.",
+    "No human first-time pacing, enjoyment or top-tier-art validation."
+  ],
+  "normalLoadingProfile": {
+    "status": "complete",
+    "resources": {
+      "actors": 1,
+      "skeletons": 3,
+      "groups": 62,
+      "textures": 61
+    },
+    "completedWallSeconds": 79.08029999999702,
+    "wallSeconds": 89.64810000000149,
+    "frames": 4860,
+    "game": {
+      "sector": 3,
+      "beat": 3,
+      "p": {
+        "x": 4.059221287905053,
+        "y": 38.08556676726991,
+        "z": 408.93654027866813
+      },
+      "health": 75.30000000000001,
+      "seconds": 78.11666666666352,
+      "deaths": 0,
+      "kills": 25,
+      "finished": true,
+      "paused": false,
+      "transitioning": false,
+      "playing": false,
+      "enemies": [],
+      "fps": 94.54774661070806,
+      "meshes": 897,
+      "animation": "kavi_Idle_Neutral"
+    },
+    "stats": {
+      "dt": {
+        "mean": 16.271666666666054,
+        "median": 15.5,
+        "p95": 21,
+        "max": 155.29999999701977
+      },
+      "cpu": {
+        "mean": 15.198045267477447,
+        "median": 14.799999997019768,
+        "p95": 19.899999998509884,
+        "max": 67.20000000298023
+      },
+      "idle": {
+        "mean": 1.0736213991886059,
+        "median": 0.4000000059604645,
+        "p95": 2,
+        "max": 129.40000000596046
+      },
+      "simulation": {
+        "mean": 0.2609670782070837,
+        "median": 0.29999999701976776,
+        "p95": 0.5,
+        "max": 9.299999997019768
+      },
+      "view": {
+        "mean": 14.823065843655433,
+        "median": 14.399999998509884,
+        "p95": 19.30000000447035,
+        "max": 66.60000000149012
+      },
+      "render": {
+        "mean": 13.381625514422302,
+        "median": 13,
+        "p95": 17.600000001490116,
+        "max": 65.29999999701977
+      },
+      "enemyPhysics": {
+        "mean": 0.04771604938547552,
+        "median": 0,
+        "p95": 0.20000000298023224,
+        "max": 1.7999999970197678
+      },
+      "cameraRays": {
+        "mean": 0.6783127571590275,
+        "median": 0.6999999955296516,
+        "p95": 1.1000000014901161,
+        "max": 10.800000004470348
+      }
+    },
+    "worst": [
+      {
+        "wall": 155.29999999701977,
+        "dt": 155.29999999701977,
+        "cpu": 33.19999999552965,
+        "idle": 122.10000000149012,
+        "game": 0.05,
+        "beat": 0,
+        "enemies": 0,
+        "heap": 575565900,
+        "simulation": 0.7000000029802322,
+        "cameraRays": 1.3000000044703484,
+        "render": 24.600000001490116,
+        "view": 29
+      },
+      {
+        "wall": 60852.89999999851,
+        "dt": 148.60000000149012,
+        "cpu": 19.19999999552965,
+        "idle": 129.40000000596046,
+        "game": 60.116666666664536,
+        "beat": 3,
+        "enemies": 5,
+        "heap": 622956705,
+        "enemyPhysics": 0.9000000059604645,
+        "simulation": 2.7000000029802322,
+        "cameraRays": 1.1000000014901161,
+        "render": 14.100000001490116,
+        "view": 16.299999997019768
+      },
+      {
+        "wall": 5574,
+        "dt": 120,
+        "cpu": 21.299999997019768,
+        "idle": 98.70000000298023,
+        "game": 5.33333333333332,
+        "beat": 1,
+        "enemies": 0,
+        "heap": 575184405,
+        "simulation": 0.19999999552965164,
+        "cameraRays": 1.1000000014901161,
+        "render": 18,
+        "view": 21.100000001490116
+      },
+      {
+        "wall": 67119.20000000298,
+        "dt": 115.80000000447035,
+        "cpu": 22.100000001490116,
+        "idle": 93.70000000298023,
+        "game": 66.31666666666419,
+        "beat": 3,
+        "enemies": 3,
+        "heap": 622874177,
+        "enemyPhysics": 0.29999999701976776,
+        "simulation": 1.2999999970197678,
+        "cameraRays": 0.8999999985098839,
+        "render": 17.799999997019768,
+        "view": 20.5
+      },
+      {
+        "wall": 28840.39999999851,
+        "dt": 110.60000000149012,
+        "cpu": 17.600000001490116,
+        "idle": 93,
+        "game": 28.266666666666342,
+        "beat": 2,
+        "enemies": 0,
+        "heap": 585125853,
+        "simulation": 0.6000000014901161,
+        "cameraRays": 2.4000000059604645,
+        "render": 12.899999998509884,
+        "view": 16.600000001490116
+      },
+      {
+        "wall": 15293.60000000149,
+        "dt": 105.80000000447035,
+        "cpu": 19.600000001490116,
+        "idle": 86.20000000298023,
+        "game": 14.96666666666699,
+        "beat": 1,
+        "enemies": 5,
+        "heap": 594175461,
+        "enemyPhysics": 0.5999999940395355,
+        "simulation": 1.6000000014901161,
+        "cameraRays": 0.6999999955296516,
+        "render": 15.699999995529652,
+        "view": 17.299999997019768
+      },
+      {
+        "wall": 78755.39999999851,
+        "dt": 101.39999999850988,
+        "cpu": 13.799999997019768,
+        "idle": 87.60000000149012,
+        "game": 77.8333333333302,
+        "beat": 3,
+        "enemies": 0,
+        "heap": 624552617,
+        "simulation": 0.29999999701976776,
+        "cameraRays": 0.3999999985098839,
+        "render": 10.600000001490116,
+        "view": 13.200000002980232
+      },
+      {
+        "wall": 18782.79999999702,
+        "dt": 100.19999999552965,
+        "cpu": 21.099999994039536,
+        "idle": 79.10000000149012,
+        "game": 18.400000000000237,
+        "beat": 1,
+        "enemies": 5,
+        "heap": 576882197,
+        "enemyPhysics": 0.6000000014901161,
+        "simulation": 2,
+        "cameraRays": 0.6000000014901161,
+        "render": 17.099999994039536,
+        "view": 19
+      },
+      {
+        "wall": 77780.5,
+        "dt": 99.20000000298023,
+        "cpu": 17,
+        "idle": 82.20000000298023,
+        "game": 76.89999999999692,
+        "beat": 3,
+        "enemies": 1,
+        "heap": 622433745,
+        "enemyPhysics": 0.19999999552965164,
+        "simulation": 0.5,
+        "cameraRays": 0.5,
+        "render": 14.799999997019768,
+        "view": 15.899999998509884
+      },
+      {
+        "wall": 79060.70000000298,
+        "dt": 97.80000000447035,
+        "cpu": 17.400000005960464,
+        "idle": 80.39999999850988,
+        "game": 78.09999999999685,
+        "beat": 3,
+        "enemies": 0,
+        "heap": 631032281,
+        "simulation": 0.6999999955296516,
+        "cameraRays": 1.3999999985098839,
+        "render": 13.200000002980232,
+        "view": 16.30000000447035
+      },
+      {
+        "wall": 22939.29999999702,
+        "dt": 97.5,
+        "cpu": 17.599999994039536,
+        "idle": 79.90000000596046,
+        "game": 22.500000000000004,
+        "beat": 1,
+        "enemies": 1,
+        "heap": 603108405,
+        "simulation": 0.5,
+        "enemyPhysics": 0.10000000149011612,
+        "cameraRays": 1.8999999985098839,
+        "render": 12.399999998509884,
+        "view": 16.600000001490116
+      },
+      {
+        "wall": 24353.70000000298,
+        "dt": 96.60000000149012,
+        "cpu": 18.200000002980232,
+        "idle": 78.39999999850988,
+        "game": 23.866666666666593,
+        "beat": 1,
+        "enemies": 1,
+        "heap": 591998917,
+        "enemyPhysics": 0.10000000149011612,
+        "simulation": 0.7999999970197678,
+        "cameraRays": 0.8000000044703484,
+        "render": 12.600000001490116,
+        "view": 17.30000000447035
+      },
+      {
+        "wall": 3167.39999999851,
+        "dt": 96.10000000149012,
+        "cpu": 24.899999998509884,
+        "idle": 71.20000000298023,
+        "game": 2.9999999999999942,
+        "beat": 0,
+        "enemies": 2,
+        "heap": 562972321,
+        "simulation": 1.5,
+        "cameraRays": 2.5999999940395355,
+        "render": 16.19999999552965,
+        "view": 23.299999997019768
+      },
+      {
+        "wall": 49340.79999999702,
+        "dt": 96.09999999403954,
+        "cpu": 21,
+        "idle": 75.09999999403954,
+        "game": 48.71666666666518,
+        "beat": 2,
+        "enemies": 3,
+        "heap": 604060141,
+        "simulation": 1,
+        "enemyPhysics": 0.3999999985098839,
+        "cameraRays": 2.2000000029802322,
+        "render": 14.799999997019768,
+        "view": 19.700000002980232
+      },
+      {
+        "wall": 70140.5,
+        "dt": 88.70000000298023,
+        "cpu": 19.399999998509884,
+        "idle": 69.30000000447035,
+        "game": 69.29999999999735,
+        "beat": 3,
+        "enemies": 3,
+        "heap": 610292553,
+        "enemyPhysics": 0.4000000059604645,
+        "simulation": 1,
+        "cameraRays": 0.3999999985098839,
+        "render": 16,
+        "view": 18.100000001490116
+      },
+      {
+        "wall": 26437.89999999851,
+        "dt": 85.5,
+        "cpu": 24.399999998509884,
+        "idle": 61.100000001490116,
+        "game": 25.916666666666476,
+        "beat": 1,
+        "enemies": 3,
+        "heap": 604211869,
+        "enemyPhysics": 0.3999999985098839,
+        "simulation": 1,
+        "cameraRays": 2.399999998509884,
+        "render": 18.200000002980232,
+        "view": 23
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 14804.20000000298,
+        "duration": 67
+      },
+      {
+        "start": 15098.29999999702,
+        "duration": 66
+      },
+      {
+        "start": 39161.70000000298,
+        "duration": 55
+      },
+      {
+        "start": 60623.60000000149,
+        "duration": 52
+      }
+    ],
+    "averageFps": 61.45651951244726
+  },
+  "behaviourTests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "buildPassed": true,
+  "fullRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 63,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 677.3999999997126,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 10.200000000000086,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 44.76666666666541,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 70.18333333333064,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 86.44999999999638,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 108.81666666666177,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 142.3666666666721,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 169.81666666669395,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 187.10000000004104,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 221.6666666667352,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 250.13333333342453,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 274.5333333334123,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 280.63333333340677,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 305.0333333333846,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 329.4333333333624,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 353.8333333333402,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 369.0833333333263,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 396.53333333330136,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 420.93333333327917,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 452.44999999991717,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 465.6666666665718,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 480.91666666655794,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 514.4666666665274,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 534.7999999998423,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 551.0666666664941,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 595.7999999997868,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 621.2166666664303,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 639.5166666664137,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 641.5499999997452,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 652.7333333330683,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 664.9333333330572,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 677.3999999997126,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "compiledPreview": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

@@ -103,3 +103,11 @@ The forest now uses Quaternius maple trees and grass, original bark/normal textu
 Tree placement keeps trunks away from route centrelines and memory-cache approaches. Hidden collision meshes copy the lower imported bark triangles in world space; they do not mutate shared geometry. Planks, rope rails and posts participate in Havok collision. Root curves and the below-deck rock shells are scenery. Forest-specific materials are created once and reused across area rebuilds. Existing foreground foliage fading remains active.
 
 A full-route regression exposed a quarry crate positioned across the arena exit. Crates and accompanying barrels now sit nearer the side-centre, keeping the diagonal departure clear. This corrects prop placement; it does not add obstacle-avoiding AI.
+
+## Expired creature resources — 0.2.17
+
+The scene now reconciles actor visuals against creatures with positive health or a positive death-animation timer. Expired defeat records stay in the game state, but their model instances, skeletons, animation groups, contact textures and pose callbacks are disposed. Subsequent updates do not instantiate them again. This preserves the normal 1.4-second disappearance and 2.4-second guardian collapse. The final still-visible death animation remains at the frozen ending.
+
+The lifetime regression uses four cycles of all six creature kinds in the same area. Babylon defers Observable removal to a later task, so the check yields before counting callbacks. It requires the same baseline mesh, texture, skeleton, animation-group and callback counts after every cycle.
+
+Performance diagnostics now enter through the real sky-route loading screen. The earlier synchronous developer-start path skipped area preparation and included first-frame setup work. tools/frame-cost-start.js and frame-cost-status.js separate render, simulation, camera-query and between-frame time; render-cost-check.js uses native Babylon SceneInstrumentation, and render-cpu-profile.js uses Chrome's profiler. These diagnostic timings are not a controlled speedup benchmark.

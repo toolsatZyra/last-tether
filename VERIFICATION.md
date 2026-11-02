@@ -217,3 +217,14 @@ Reproduction: tools/forest-physics-check.js, forest-detail-check.js, forest-real
 Compiled preview checks passed with ordinary keyboard input: forest first encounter (two defeats, next objective and pause), plus story opening (three defeats, watchpost, pause/save/reload/resume). Neither exposed a development hook, page error or failed asset response.
 
 Published commit b30fa662a3f447406de1ab89f8aebfe9d8e2b986 is READY as dpl_En7GczCckqMhLjxir2V58vndWwSd. The public alias serves index-CkUKeOEx.js. Live ordinary-keyboard forest entry, tether/combat (two defeats), next objective and pause pass without page errors, failed asset responses or a development hook. tools/forest-live-check.js reproduces that bounded check.
+
+## Expired creature cleanup — 0.2.17
+
+- Four same-area cycles create all six creature kinds, keep them visible during their death timers, then expire them. Every cycle returns to **2 skeletons, 48 animation groups, 59 textures, 865 meshes and 2 pose callbacks**. The 24 retained game-state defeat records do not recreate visuals on subsequent frames.
+- 34 tests and the production build pass. The complete accelerated route remains **677.40 simulated seconds, 188 defeats, zero recoveries**, with all 32 objectives, a visible ending and a finished saved checkpoint; no page errors.
+- Instrumented forest play through the normal loading screen completes in **78.12 game / 79.08 wall seconds**, with 25 defeats and zero recoveries. At Balanced 1036 × 703 it records **61.46 average FPS**, median frame 15.5 ms, p95 21.0 ms, maximum 155.3 ms. At the frozen ending, one still-visible creature death animation remains (3 total skeletons / 62 groups / 61 textures), versus the previous trial's 27 / 326 / 109.
+- This is not a controlled speedup comparison: free system memory was 0.46 GiB during earlier diagnosis and later 2.65 GiB. The earlier profiler also used a developer path that skipped area preparation. Rendering remains the largest measured frame component; long-run performance across hardware is not established. No unrelated processes or system settings were changed.
+
+Evidence: verification/actor-lifetime-0.2.17.json. Reproduce lifetime checks with tools/expired-actors-check.js; frame instrumentation with frame-cost-start.js and frame-cost-status.js. The native renderer counters follow Babylon's [instrumentation guidance](https://doc.babylonjs.com/features/featuresDeepDive/scene/optimize_your_scene#instrumentation).
+
+Compiled preview ordinary-keyboard check passes: three defeats, watchpost objective, pause, save/reload/resume, no page errors or failed assets, and no development hook.

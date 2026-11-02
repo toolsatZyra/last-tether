@@ -1701,7 +1701,9 @@ export class GameScene {
     this.cascadeTexture.vOffset = (this.cascadeTexture.vOffset - dt * 0.7) % 1;
     const actorDt = s.hitstop > 0 ? 0 : dt;
     this.hero.player(s, actorDt);
-    for (const e of s.enemies) {
+    const visibleEnemies = s.enemies.filter((e) => e.hp > 0 || e.dead > 0);
+    const visibleEnemyIds = new Set(visibleEnemies.map((e) => e.id));
+    for (const e of visibleEnemies) {
       let a = this.actors.get(e.id);
       if (!a) {
         a = this.assets.actor(e.kind, this.scene, "enemy-" + e.id, this.shadow);
@@ -1718,7 +1720,7 @@ export class GameScene {
       }
     }
     for (const [id, a] of this.actors)
-      if (!s.enemies.some((e) => e.id === id)) {
+      if (!visibleEnemyIds.has(id)) {
         a.dispose();
         this.actors.delete(id);
       }
