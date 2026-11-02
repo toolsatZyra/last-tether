@@ -353,5 +353,23 @@
     "Audio remains silent during checks; no audible mix approval.",
     "The 20-second encounter performance sample does not establish sustained 60 FPS.",
     "The custom hero, coherent creature art, first-time chapter duration and human enjoyment gates remain open."
-  ]
+  ],
+  "publicKeyboard": {
+    "prompt": "E · Release crane load · lure creatures onto the marked ground",
+    "corrections": 0,
+    "released": true,
+    "noDebug": true,
+    "meta": "4 defeated · 0 recoveries",
+    "errors": [],
+    "bad": []
+  },
+  "publicAttemptNote": "The initial fixed-duration approach stopped outside lever reach; no release was recorded. While inspecting that terminal test failure, the idle player later recovered once. The subsequent fresh checkpoint run passed with zero approach corrections, four defeats and no recoveries. The test now supports small visible-prompt keyboard corrections and pauses if it cannot reach the lever.",
+  "deployment": {
+    "id": "dpl_9LaVWCnYufCaDiEps5NTELJEdnBx",
+    "commit": "272bcb5650c21481cd990b27da9288244fc48445",
+    "state": "READY",
+    "target": "production",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-Q6XBEc6E.js"
+  }
 }
