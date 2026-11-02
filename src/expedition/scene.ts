@@ -21,7 +21,6 @@ import {
   HDRCubeTexture,
   ShadowGenerator,
   DefaultRenderingPipeline,
-  GlowLayer,
   TransformNode,
   Mesh,
   SubMesh,
@@ -147,8 +146,10 @@ export class GameScene {
   frameNow = 0;
   current!: Expedition;
   constructor(canvas: HTMLCanvasElement) {
-    this.engine = new Engine(canvas, true, {
-      preserveDrawingBuffer: true,
+    // FXAA and High-quality MSAA run in the post-process pipeline.
+    // The canvas needs neither a second MSAA resolve nor a retained back buffer.
+    this.engine = new Engine(canvas, false, {
+      preserveDrawingBuffer: false,
       stencil: true,
       powerPreference: "high-performance",
     });
@@ -248,10 +249,6 @@ export class GameScene {
       0.07,
       1,
     );
-    const glow = new GlowLayer("gold-bloom", this.scene, {
-      mainTextureRatio: 0.4,
-    });
-    glow.intensity = 0.3;
     this.makeMaterials();
     this.makeWater();
     this.combatFeedback = new CombatFeedback(this.scene);

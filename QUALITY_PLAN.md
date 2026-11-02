@@ -113,3 +113,7 @@ Creature model/rig creation now occurs during area preparation and rigs are reus
 The new third strike is a two-handed thrust with a visible wind-up, forward extension and guarded recovery. The first prototype's empty-hand recovery flipped the spear; it was rejected and replaced by a derived clip with the spear guard. Native model-space arm IK keeps both palms attached at the contact pose without stretching bones. Damage now uses the animation's attack clock, removing an input-frame lead from the former independent countdown. Weapon reach and the thrust corridor are tighter. These changes address animation/contact coherence, not the unresolved low-detail hero or mixed creature art.
 
 Rendered phase checks and real F-key combat demonstrate the intended contact and recovery. They cannot certify enjoyment. The requested top-tier art, sustained whole-chapter performance and human first-time pacing remain open.
+
+## Rendering and ground contact, 0.2.28
+
+A duplicate glow layer was washing out the contact shadows beneath actors and adding 128 draw calls in the controlled opening view. Removing it retains scene bloom and restores darker grounding. The canvas buffer comparison preserved the rendered detail but did not establish a meaningful speed gain. This pass removes measured redundant work; it does not close the overall art, combat-feel, sustained-performance or first-time pacing gates.

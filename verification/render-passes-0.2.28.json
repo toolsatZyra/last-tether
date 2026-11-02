@@ -1,0 +1,1752 @@
+{
+  "version": "0.2.28",
+  "status": "local-verification-passed",
+  "date": "2026-11-02",
+  "glowAblation": [
+    {
+      "mode": "both",
+      "stats": {
+        "dt": {
+          "mean": 35.032499999987586,
+          "p95": 56.19999999925494,
+          "max": 438.3999999985099
+        },
+        "frame": {
+          "mean": 25.52499999993791,
+          "p95": 44.20000000298023,
+          "max": 67.19999999925494
+        },
+        "render": {
+          "mean": 6.735000000180055,
+          "p95": 15,
+          "max": 20
+        },
+        "targets": {
+          "mean": 4.360833333277454,
+          "p95": 8.699999999254942,
+          "max": 23
+        },
+        "meshes": {
+          "mean": 7.261666666467985,
+          "p95": 12.099999997764826,
+          "max": 52.80000000074506
+        },
+        "animation": {
+          "mean": 0.02916666672875484,
+          "p95": 0.10000000149011612,
+          "max": 0.10000000149011612
+        },
+        "gpu": {
+          "mean": 18.46083158333333,
+          "p95": 30.36585,
+          "max": 38.97453
+        },
+        "draws": {
+          "mean": 406,
+          "p95": 406,
+          "max": 406
+        }
+      },
+      "gpuSamples": 120,
+      "prepass": {
+        "enabled": false,
+        "targets": [
+          {
+            "enabled": false,
+            "name": "sceneprePassRT"
+          },
+          {
+            "enabled": false,
+            "name": "_reflection_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "_refraction_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "EffectLayerMainRTT_prePassRTT"
+          }
+        ]
+      },
+      "passes": [
+        "highlights",
+        "horizontal blur",
+        "vertical blur",
+        "bloomMerge",
+        "imageProcessing",
+        "fxaa"
+      ],
+      "size": [
+        1036,
+        703
+      ]
+    },
+    {
+      "mode": "pipeline",
+      "stats": {
+        "dt": {
+          "mean": 24.395000000018626,
+          "p95": 43.79999999701977,
+          "max": 64.5
+        },
+        "frame": {
+          "mean": 18.279166666604578,
+          "p95": 31.300000000745058,
+          "max": 49.899999998509884
+        },
+        "render": {
+          "mean": 6.639166666691502,
+          "p95": 14,
+          "max": 18.900000002235174
+        },
+        "targets": {
+          "mean": 0.9575000002980232,
+          "p95": 2.300000000745058,
+          "max": 5.100000001490116
+        },
+        "meshes": {
+          "mean": 5.625000000124176,
+          "p95": 13.400000002235174,
+          "max": 23.400000002235174
+        },
+        "animation": {
+          "mean": 0.039166666381061074,
+          "p95": 0.10000000149011612,
+          "max": 0.19999999925494194
+        },
+        "gpu": {
+          "mean": 13.141497666666663,
+          "p95": 23.6143,
+          "max": 36.37459
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "gpuSamples": 120,
+      "prepass": {
+        "enabled": false,
+        "targets": [
+          {
+            "enabled": false,
+            "name": "sceneprePassRT"
+          },
+          {
+            "enabled": false,
+            "name": "_reflection_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "_refraction_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "EffectLayerMainRTT_prePassRTT"
+          }
+        ]
+      },
+      "passes": [
+        "highlights",
+        "horizontal blur",
+        "vertical blur",
+        "bloomMerge",
+        "imageProcessing",
+        "fxaa"
+      ],
+      "size": [
+        1036,
+        703
+      ]
+    },
+    {
+      "mode": "pipeline",
+      "stats": {
+        "dt": {
+          "mean": 25.0125,
+          "p95": 48.69999999925494,
+          "max": 109.69999999925494
+        },
+        "frame": {
+          "mean": 18.460000000335278,
+          "p95": 35.899999998509884,
+          "max": 48.099999997764826
+        },
+        "render": {
+          "mean": 6.474166666778426,
+          "p95": 12.300000000745058,
+          "max": 20.5
+        },
+        "targets": {
+          "mean": 0.8549999999813735,
+          "p95": 1.5999999977648258,
+          "max": 7.300000000745058
+        },
+        "meshes": {
+          "mean": 5.950833333345751,
+          "p95": 11.199999999254942,
+          "max": 36
+        },
+        "animation": {
+          "mean": 0.03416666692743699,
+          "p95": 0.10000000149011612,
+          "max": 0.20000000298023224
+        },
+        "gpu": {
+          "mean": 14.141018166666669,
+          "p95": 25.85918,
+          "max": 92.61552
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "gpuSamples": 120,
+      "prepass": {
+        "enabled": false,
+        "targets": [
+          {
+            "enabled": false,
+            "name": "sceneprePassRT"
+          },
+          {
+            "enabled": false,
+            "name": "_reflection_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "_refraction_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "EffectLayerMainRTT_prePassRTT"
+          }
+        ]
+      },
+      "passes": [
+        "highlights",
+        "horizontal blur",
+        "vertical blur",
+        "bloomMerge",
+        "imageProcessing",
+        "fxaa"
+      ],
+      "size": [
+        1036,
+        703
+      ]
+    },
+    {
+      "mode": "both",
+      "stats": {
+        "dt": {
+          "mean": 26.225,
+          "p95": 43.80000000074506,
+          "max": 89.90000000223517
+        },
+        "frame": {
+          "mean": 21.74833333340163,
+          "p95": 37.600000001490116,
+          "max": 45.400000002235174
+        },
+        "render": {
+          "mean": 6.225000000186265,
+          "p95": 12.300000000745058,
+          "max": 24.300000000745058
+        },
+        "targets": {
+          "mean": 4.079166666728755,
+          "p95": 7.800000000745058,
+          "max": 18.199999999254942
+        },
+        "meshes": {
+          "mean": 5.599166666778426,
+          "p95": 9.600000001490116,
+          "max": 25.5
+        },
+        "animation": {
+          "mean": 0.03166666661078731,
+          "p95": 0.10000000149011612,
+          "max": 0.5999999977648258
+        },
+        "gpu": {
+          "mean": 16.486769333333328,
+          "p95": 32.24047,
+          "max": 32.93599
+        },
+        "draws": {
+          "mean": 406,
+          "p95": 406,
+          "max": 406
+        }
+      },
+      "gpuSamples": 120,
+      "prepass": {
+        "enabled": false,
+        "targets": [
+          {
+            "enabled": false,
+            "name": "sceneprePassRT"
+          },
+          {
+            "enabled": false,
+            "name": "_reflection_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "_refraction_prePassRTT"
+          },
+          {
+            "enabled": false,
+            "name": "EffectLayerMainRTT_prePassRTT"
+          }
+        ]
+      },
+      "passes": [
+        "highlights",
+        "horizontal blur",
+        "vertical blur",
+        "bloomMerge",
+        "imageProcessing",
+        "fxaa"
+      ],
+      "size": [
+        1036,
+        703
+      ]
+    }
+  ],
+  "scope": "Remove duplicate glow rendering while preserving the existing main bloom pipeline, and test redundant canvas retention/MSAA separately.",
+  "limits": [
+    "Static paused-scene comparison isolates render passes; it does not establish active whole-chapter FPS.",
+    "All four ABBA samples retained; CPU/GPU timing varies with machine state.",
+    "Normal-speed sample remains bounded and includes a 514 ms hitch; variable host load prevents attributing its overall frame rate to this change.",
+    "Canvas retained/direct ABBA samples have essentially unchanged GPU means (about 13.7–14.0 ms)."
+  ],
+  "canvasComparison": [
+    {
+      "mode": "retained",
+      "attributes": {
+        "alpha": true,
+        "antialias": true,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "high-performance",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": true,
+        "stencil": true,
+        "xrCompatible": false
+      },
+      "stats": {
+        "dt": {
+          "mean": 26.944444444444443,
+          "p95": 46,
+          "max": 87.39999999850988
+        },
+        "cpu": {
+          "mean": 20.154444444345103,
+          "p95": 35.5,
+          "max": 46.399999998509884
+        },
+        "gpu": {
+          "mean": 13.967710666666665,
+          "p95": 23.89798,
+          "max": 29.69363
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "size": [
+        1036,
+        703
+      ],
+      "camera": [
+        26.999954600070236,
+        16.144038862339876,
+        153.19513312752946
+      ]
+    },
+    {
+      "mode": "direct",
+      "attributes": {
+        "alpha": true,
+        "antialias": false,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "high-performance",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": false,
+        "stencil": true,
+        "xrCompatible": false
+      },
+      "stats": {
+        "dt": {
+          "mean": 27.039999999975166,
+          "p95": 46.900000002235174,
+          "max": 73.60000000149012
+        },
+        "cpu": {
+          "mean": 20.87222222218083,
+          "p95": 35.899999998509884,
+          "max": 66.20000000298023
+        },
+        "gpu": {
+          "mean": 13.655105333333335,
+          "p95": 23.97632,
+          "max": 27.01918
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "size": [
+        1036,
+        703
+      ],
+      "camera": [
+        26.999954600070236,
+        16.144038862339876,
+        153.19513312752946
+      ]
+    },
+    {
+      "mode": "direct",
+      "attributes": {
+        "alpha": true,
+        "antialias": false,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "high-performance",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": false,
+        "stencil": true,
+        "xrCompatible": false
+      },
+      "stats": {
+        "dt": {
+          "mean": 26.679999999991722,
+          "p95": 47.899999998509884,
+          "max": 56
+        },
+        "cpu": {
+          "mean": 20.594444444485838,
+          "p95": 41.30000000074506,
+          "max": 46.5
+        },
+        "gpu": {
+          "mean": 13.871174666666672,
+          "p95": 25.92626,
+          "max": 30.04656
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "size": [
+        1036,
+        703
+      ],
+      "camera": [
+        26.999954600070236,
+        16.144038862339876,
+        153.19513312752946
+      ]
+    },
+    {
+      "mode": "retained",
+      "attributes": {
+        "alpha": true,
+        "antialias": true,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "high-performance",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": true,
+        "stencil": true,
+        "xrCompatible": false
+      },
+      "stats": {
+        "dt": {
+          "mean": 27.832222222247058,
+          "p95": 44.19999999925494,
+          "max": 67.69999999925494
+        },
+        "cpu": {
+          "mean": 20.801111111127668,
+          "p95": 36.69999999925494,
+          "max": 56.100000001490116
+        },
+        "gpu": {
+          "mean": 13.919084555555557,
+          "p95": 23.95699,
+          "max": 29.77561
+        },
+        "draws": {
+          "mean": 278,
+          "p95": 278,
+          "max": 278
+        }
+      },
+      "size": [
+        1036,
+        703
+      ],
+      "camera": [
+        26.999954600070236,
+        16.144038862339876,
+        153.19513312752946
+      ]
+    }
+  ],
+  "qualitySweep": {
+    "rows": [
+      {
+        "sector": 0,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          17.999546000702374,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 0,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          17.999546000702374,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 0,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          17.999546000702374,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 1,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          -27.99836560252855,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 1,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          -27.99836560252855,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 1,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          -27.99836560252855,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 2,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          29.999001201545227,
+          16.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 2,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          29.999001201545227,
+          16.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 2,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          29.999001201545227,
+          16.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 3,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          -31.998184002809502,
+          27.143902662550587,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 3,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          -31.998184002809502,
+          27.143902662550587,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 3,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          -31.998184002809502,
+          27.143902662550587,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 4,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          35.99872880196665,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 4,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          35.99872880196665,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 4,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          35.99872880196665,
+          18.144038862339876,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 5,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          -23.9985472022476,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 5,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          -23.9985472022476,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 5,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          -23.9985472022476,
+          14.144038862339874,
+          39.19767552359616
+        ]
+      },
+      {
+        "sector": 6,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          0.0009079985952489267,
+          24.31984927223319,
+          150.99523300737494
+        ]
+      },
+      {
+        "sector": 6,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          0.0009079985952489267,
+          24.31984927223319,
+          150.99523300737494
+        ]
+      },
+      {
+        "sector": 6,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          0.0009079985952489267,
+          24.31984927223319,
+          150.99523300737494
+        ]
+      },
+      {
+        "sector": 7,
+        "quality": "high",
+        "glowLayers": 0,
+        "ao": true,
+        "bloom": true,
+        "samples": 4,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1295,
+          879
+        ],
+        "camera": [
+          19.99945520084285,
+          21.143902662550587,
+          40.1976301236664
+        ]
+      },
+      {
+        "sector": 7,
+        "quality": "low",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": false,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          719,
+          488
+        ],
+        "camera": [
+          19.99945520084285,
+          21.143902662550587,
+          40.1976301236664
+        ]
+      },
+      {
+        "sector": 7,
+        "quality": "balanced",
+        "glowLayers": 0,
+        "ao": false,
+        "bloom": true,
+        "samples": 1,
+        "fxaa": true,
+        "attributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "size": [
+          1036,
+          703
+        ],
+        "camera": [
+          19.99945520084285,
+          21.143902662550587,
+          40.1976301236664
+        ]
+      }
+    ],
+    "resized": [
+      1280,
+      720
+    ],
+    "errors": [],
+    "bad": []
+  },
+  "setupInterruption": "First sweep interrupted by Vite reload when package version changed; rerun completed after source edits stopped.",
+  "unitTests": {
+    "passed": 58,
+    "failed": 0
+  },
+  "build": {
+    "passed": true,
+    "bundle": "index-Cu6lX-fk.js"
+  },
+  "visualReview": "Inspected all eight areas at Balanced/Low and High; retained gold anchors, lanterns, valves, quarry warning barrels and guardian armour. Contact shadows are darker without additive glow. Lower Low-resolution detail remains the existing quality tradeoff.",
+  "normalSpeedCombat": {
+    "status": "sample-complete",
+    "resources": {
+      "actors": 3,
+      "skeletons": 16,
+      "groups": 228,
+      "textures": 79
+    },
+    "completedWallSeconds": 35.0035,
+    "wallSeconds": 73.511,
+    "frames": 2934,
+    "game": {
+      "sector": 0,
+      "beat": 1,
+      "p": {
+        "x": 17.350714828154665,
+        "y": 12.102527155331314,
+        "z": 161.39345751411201
+      },
+      "health": 71.60000000000002,
+      "seconds": 34.616666666665985,
+      "deaths": 0,
+      "kills": 7,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "raptor",
+          "p": {
+            "x": 36.75487148206296,
+            "y": 12,
+            "z": 179.73818418779084
+          },
+          "hp": 110,
+          "state": "idle"
+        },
+        {
+          "kind": "raptor",
+          "p": {
+            "x": 19.582256734575274,
+            "y": 12.032292644296795,
+            "z": 159.78155518761542
+          },
+          "hp": 76,
+          "state": "stunned"
+        }
+      ],
+      "fps": 93.60374414976576,
+      "meshes": 710,
+      "animation": "kavi_Sword_Slash"
+    },
+    "stats": {
+      "dt": {
+        "mean": 11.930299931833675,
+        "median": 11.300000000745058,
+        "p95": 14.800000000745058,
+        "max": 514.0999999977648
+      },
+      "cpu": {
+        "mean": 11.113803681024256,
+        "median": 10.700000002980232,
+        "p95": 13.800000000745058,
+        "max": 451.19999999925494
+      },
+      "idle": {
+        "mean": 0.8164962508094172,
+        "median": 0.4000000022351742,
+        "p95": 1.8999999985098839,
+        "max": 85.20000000298023
+      },
+      "simulation": {
+        "mean": 0.4652351738190521,
+        "median": 0.5,
+        "p95": 1,
+        "max": 17.800000000745058
+      },
+      "view": {
+        "mean": 10.555385139763823,
+        "median": 10.199999999254942,
+        "p95": 13,
+        "max": 432.69999999925494
+      },
+      "render": {
+        "mean": 9.146762099539849,
+        "median": 8.800000000745058,
+        "p95": 11.300000000745058,
+        "max": 414.80000000074506
+      },
+      "enemyPhysics": {
+        "mean": 0.12324471710898596,
+        "median": 0,
+        "p95": 0.4000000022351742,
+        "max": 2.7999999970197678
+      },
+      "worldPhysics": {
+        "mean": 0.1218473073958477,
+        "median": 0.10000000149011612,
+        "p95": 0.30000000074505806,
+        "max": 15.900000005960464
+      },
+      "cameraRays": {
+        "mean": 0.7496250851959722,
+        "median": 0.6999999992549419,
+        "p95": 1.300000000745058,
+        "max": 5.5
+      },
+      "combatRays": {
+        "mean": 0.023244717075212033,
+        "median": 0,
+        "p95": 0.10000000149011612,
+        "max": 2.2999999970197678
+      },
+      "actorCreation": {
+        "mean": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "armIK": {
+        "mean": 0.026209952283064036,
+        "median": 0,
+        "p95": 0.19999999925494194,
+        "max": 3.100000001490116
+      },
+      "heroPose": {
+        "mean": 0.21690524886879656,
+        "median": 0.19999999925494194,
+        "p95": 0.4000000022351742,
+        "max": 16.599999997764826
+      },
+      "enemyPose": {
+        "mean": 0.0958759372745372,
+        "median": 0.09999999776482582,
+        "p95": 0.30000000074505806,
+        "max": 2.5
+      },
+      "eventEffects": {
+        "mean": 0.0008520790716682718,
+        "median": 0,
+        "p95": 0,
+        "max": 0.8000000007450581
+      }
+    },
+    "worst": [
+      {
+        "wall": 31324.79999999702,
+        "dt": 514.0999999977648,
+        "cpu": 451.19999999925494,
+        "idle": 62.899999998509884,
+        "game": 30.916666666666192,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 633180953,
+        "enemyPhysics": 0.8000000007450581,
+        "combatRays": 0.09999999776482582,
+        "worldPhysics": 15.900000005960464,
+        "simulation": 17.800000000745058,
+        "eventEffects": 0,
+        "heroPose": 16.599999997764826,
+        "enemyPose": 0,
+        "cameraRays": 0.8999999985098839,
+        "armIK": 0.19999999925494194,
+        "render": 414.80000000074506,
+        "view": 432.69999999925494
+      },
+      {
+        "wall": 11826.199999999255,
+        "dt": 101.40000000223517,
+        "cpu": 16.199999999254942,
+        "idle": 85.20000000298023,
+        "game": 11.916666666666838,
+        "beat": 0,
+        "kills": 2,
+        "hitstop": 0,
+        "enemies": 1,
+        "heap": 1590889014,
+        "enemyPhysics": 0.8000000007450581,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 2.899999998509884,
+        "heroPose": 1.699999999254942,
+        "enemyPose": 0.5,
+        "cameraRays": 1.1000000014901161,
+        "render": 9.100000001490116,
+        "view": 12.900000002235174
+      },
+      {
+        "wall": 20607.199999999255,
+        "dt": 79.80000000074506,
+        "cpu": 16.100000001490116,
+        "idle": 63.69999999925494,
+        "game": 20.666666666666774,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 1602904075,
+        "combatRays": 0.4999999962747097,
+        "enemyPhysics": 0.9999999962747097,
+        "worldPhysics": 0.5,
+        "simulation": 2.899999998509884,
+        "heroPose": 0.8000000007450581,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.9000000022351742,
+        "render": 9.199999999254942,
+        "view": 12.800000000745058
+      },
+      {
+        "wall": 2758.89999999851,
+        "dt": 76.39999999850988,
+        "cpu": 15.899999998509884,
+        "idle": 60.5,
+        "game": 2.8999999999999946,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 1578843866,
+        "combatRays": 0.30000000074505806,
+        "enemyPhysics": 0.6999999992549419,
+        "worldPhysics": 0.6000000014901161,
+        "simulation": 2.699999999254942,
+        "heroPose": 1,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 1.2000000029802322,
+        "render": 9.699999999254942,
+        "view": 12.899999998509884
+      },
+      {
+        "wall": 6936.5,
+        "dt": 73.10000000149012,
+        "cpu": 22.700000002980232,
+        "idle": 50.399999998509884,
+        "game": 7.066666666666647,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 1595749038,
+        "enemyPhysics": 1.5000000037252903,
+        "worldPhysics": 0.30000000074505806,
+        "simulation": 3.199999999254942,
+        "heroPose": 0.8000000007450581,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 2.399999998509884,
+        "render": 14.200000002980232,
+        "view": 19.200000002980232
+      },
+      {
+        "wall": 34904.39999999851,
+        "dt": 65.60000000149012,
+        "cpu": 16,
+        "idle": 49.600000001490116,
+        "game": 34.51666666666599,
+        "beat": 1,
+        "kills": 7,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 643805179,
+        "combatRays": 0.09999999776482582,
+        "enemyPhysics": 0.4999999962747097,
+        "worldPhysics": 0.20000000298023224,
+        "simulation": 1.7999999970197678,
+        "heroPose": 0.4000000022351742,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 1.5,
+        "render": 10.699999999254942,
+        "view": 13.400000002235174
+      },
+      {
+        "wall": 34780.099999997765,
+        "dt": 41.899999998509884,
+        "cpu": 41.599999997764826,
+        "idle": 0.30000000074505806,
+        "game": 34.383333333332665,
+        "beat": 1,
+        "kills": 7,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 639818483,
+        "combatRays": 0,
+        "enemyPhysics": 0.20000000298023224,
+        "worldPhysics": 0.09999999776482582,
+        "simulation": 0.5999999977648258,
+        "heroPose": 0,
+        "enemyPose": 0.09999999776482582,
+        "cameraRays": 1.2000000029802322,
+        "render": 39.5,
+        "view": 41
+      },
+      {
+        "wall": 32181.89999999851,
+        "dt": 37.899999998509884,
+        "cpu": 16.199999999254942,
+        "idle": 21.699999999254942,
+        "game": 31.81666666666614,
+        "beat": 1,
+        "kills": 5,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 635099329,
+        "simulation": 0.7000000029802322,
+        "enemyPhysics": 0.29999999701976776,
+        "combatRays": 0,
+        "worldPhysics": 0.20000000298023224,
+        "heroPose": 0.5999999977648258,
+        "enemyPose": 0.5,
+        "cameraRays": 1.5999999977648258,
+        "render": 11.700000002980232,
+        "view": 15
+      },
+      {
+        "wall": 6435.199999999255,
+        "dt": 30.800000000745058,
+        "cpu": 30.400000002235174,
+        "idle": 0.3999999985098839,
+        "game": 6.566666666666649,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 1597582102,
+        "combatRays": 0,
+        "enemyPhysics": 0.30000000074505806,
+        "worldPhysics": 0.10000000149011612,
+        "simulation": 0.6000000014901161,
+        "heroPose": 0.29999999701976776,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 0.3999999985098839,
+        "render": 28.300000000745058,
+        "view": 29.5
+      },
+      {
+        "wall": 6491.199999999255,
+        "dt": 30.699999999254942,
+        "cpu": 24.5,
+        "idle": 6.199999999254942,
+        "game": 6.633333333333315,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 1605430046,
+        "enemyPhysics": 1.6000000014901161,
+        "worldPhysics": 0.29999999701976776,
+        "simulation": 3.099999997764826,
+        "eventEffects": 0,
+        "heroPose": 0.4000000022351742,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 0.5999999977648258,
+        "render": 18.900000002235174,
+        "view": 20.400000002235174
+      },
+      {
+        "wall": 10155.89999999851,
+        "dt": 29.899999998509884,
+        "cpu": 29.600000001490116,
+        "idle": 0.29999999701976776,
+        "game": 10.266666666666756,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 1585944834,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 0.30000000074505806,
+        "render": 28.299999997019768,
+        "view": 29.5
+      },
+      {
+        "wall": 25.599999997764826,
+        "dt": 25.599999997764826,
+        "cpu": 24.399999998509884,
+        "idle": 1.199999999254942,
+        "game": 0.19999999999999998,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 1569739506,
+        "worldPhysics": 0.4999999962747097,
+        "simulation": 1.5,
+        "heroPose": 2.900000002235174,
+        "cameraRays": 0.8000000007450581,
+        "render": 17.899999998509884,
+        "view": 22.100000001490116
+      },
+      {
+        "wall": 6460.5,
+        "dt": 25.300000000745058,
+        "cpu": 24.600000001490116,
+        "idle": 0.6999999992549419,
+        "game": 6.599999999999982,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 1605430046,
+        "combatRays": 0,
+        "enemyPhysics": 1.0000000037252903,
+        "worldPhysics": 0.6999999992549419,
+        "simulation": 2.199999999254942,
+        "eventEffects": 0,
+        "heroPose": 1.9000000022351742,
+        "enemyPose": 1.199999999254942,
+        "cameraRays": 1.1000000014901161,
+        "render": 17.300000000745058,
+        "view": 22.300000000745058
+      },
+      {
+        "wall": 31557.89999999851,
+        "dt": 25.199999999254942,
+        "cpu": 16.100000001490116,
+        "idle": 9.099999997764826,
+        "game": 31.183333333332843,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 633545185,
+        "combatRays": 0,
+        "enemyPhysics": 0.19999999925494194,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 0.8000000007450581,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.09999999776482582,
+        "cameraRays": 0.6999999992549419,
+        "armIK": 0.19999999925494194,
+        "render": 13.800000000745058,
+        "view": 15.199999999254942
+      },
+      {
+        "wall": 18281.199999999255,
+        "dt": 25.100000001490116,
+        "cpu": 24.699999999254942,
+        "idle": 0.4000000022351742,
+        "game": 18.35000000000024,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 1608502919,
+        "heroPose": 0,
+        "cameraRays": 0.8999999985098839,
+        "render": 23.300000000745058,
+        "view": 24.5
+      },
+      {
+        "wall": 10179.39999999851,
+        "dt": 23.5,
+        "cpu": 23,
+        "idle": 0.5,
+        "game": 10.300000000000091,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 1593827770,
+        "enemyPhysics": 0.6999999992549419,
+        "worldPhysics": 1.699999999254942,
+        "simulation": 3.199999999254942,
+        "heroPose": 1.800000000745058,
+        "enemyPose": 0.6999999992549419,
+        "cameraRays": 2.199999999254942,
+        "render": 14.5,
+        "view": 19.699999999254942
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 30873.5,
+        "duration": 454
+      }
+    ]
+  },
+  "compiled": {
+    "version": "LAST TETHER · 0.2.28",
+    "frameSample": {
+      "frames": 1168,
+      "seconds": 14.854700000000001,
+      "averageFps": 78.5609941634634,
+      "medianMs": 12.100000000002183,
+      "p95Ms": 18.299999999999272
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

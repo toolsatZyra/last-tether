@@ -368,3 +368,13 @@ The arm-pose optimization preserves the native contact results and reduces sampl
 Compiled ordinary keyboard combat, pause, save/reload/resume and absence of the development hook all pass with no page/console errors or failed requests. Its bounded 17.86-second sample averaged 49.54 FPS with p95 42.4 ms. This remains below the intended sustained smoothness gate.
 
 Public 0.2.27 deployment dpl_F7thG8wFCNAwvUPYCsgxnfjXRumr is READY for app commit c071b33dba6028280676bc8b61652a80a44e5b29; the alias serves index-CwbGN1dt.js. Public keyboard combat, pause and save/reload/resume passed with no debug hook, page/console errors or failed responses. Its bounded 17.76-second sample averaged 34.52 FPS with p95 54.9 ms; rendering smoothness remains unresolved. See verification/spear-thrust-0.2.27.json for all retained samples.
+
+## Render pass and canvas audit, 0.2.28
+
+58 tests and the production build pass (index-Cu6lX-fk.js). The fixed opening view loses 128 draw calls with the extra GlowLayer disabled: 406 to 278. Four ABBA samples retain valid GPU queries for all 120 frames each. GPU means are 18.46/13.14/14.14/16.49 ms; render-target CPU means are 4.36/.96/.85/4.08 ms. This isolates redundant paused-scene work, not whole-game frame rate.
+
+Retained/multisampled versus direct/unretained canvas ABBA comparison confirms actual WebGL attributes and matching visible detail, but no meaningful timing improvement. Main pipeline FXAA remains on; High keeps four-sample MSAA and SSAO, while Balanced/Low correctly disable the SSAO prepass. All eight areas pass High/Low/Balanced switches (24 cases), with no console/page errors or failed responses. The 1600×900 resize yields 1280×720 Balanced output. Galleries were visually inspected for anchors, controls, warning colours, guardian armour and ground contact. The first sweep was interrupted by the package-version Vite reload; the clean repeat passed.
+
+A 35.0035-second normal-speed opening combat sample reached seven defeats. Mean interval 11.93 ms, p95 14.8 ms, maximum 514.1 ms; runtime creature construction remains zero. The long hitch prevents calling the game consistently smooth. Different host load and earlier inconsistent timings prevent attributing this overall result solely to the renderer change. Structured evidence: verification/render-passes-0.2.28.json.
+
+Compiled 0.2.28 ordinary keyboard combat, pause and save/reload/resume pass, with three defeats and zero recoveries, no development hook, page/console errors or failed responses. Bounded 14.85-second sample: 78.56 FPS average, p95 18.3 ms; not a whole-chapter claim.
