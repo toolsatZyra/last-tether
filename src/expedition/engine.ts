@@ -633,7 +633,14 @@ export class Expedition {
       if (
         d < move.reach &&
         Math.abs(this.p.y - e.p.y) < move.height &&
-        dot > move.cone
+        dot > move.cone &&
+        (this.meleeMove !== "finisher" ||
+          Math.abs(
+            (e.p.x - this.p.x) * Math.cos(this.yaw) -
+              (e.p.z - this.p.z) * Math.sin(this.yaw),
+          ) <
+            (e.kind === "guardian" ? 2.5 : e.kind === "brute" ? 0.9 : 0.55) +
+              0.22)
       ) {
         const wall = this.combatTrace?.(
           v(this.p.x, this.p.y + 1.1, this.p.z),
@@ -1131,8 +1138,10 @@ export class Expedition {
     if (this.p.y < recoveryFloor) this.die();
 
     if (this.swingDelay >= 0) {
-      this.swingDelay -= dt;
-      if (this.swingDelay <= 0) {
+      // Damage and the sampled native pose share one attack clock.
+      this.swingDelay =
+        this.attack - this.attackDuration * (1 - MELEE[this.meleeMove].contact);
+      if (this.swingDelay <= 1e-8) {
         this.swingDelay = -1;
         this.resolveSwing();
       }

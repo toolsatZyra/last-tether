@@ -67,3 +67,56 @@ test("taking damage cancels the pending kick and retry clears its state", () => 
   assert.equal(s.meleeMove, "slash");
   assert.equal(s.swingDelay, -1);
 });
+
+test("the thrust commits before contact and hits a narrow forward lane once", () => {
+  const { s, e } = setup(2.5);
+  s.resetActions();
+  s.combo = 1;
+  s.comboWindow = 1;
+  s.strike();
+  assert.equal(s.meleeMove, "finisher");
+  const hp = e.hp;
+  for (let i = 0; i < 17; i++) s.step(1 / 60, { x: 0, z: 0 });
+  assert.equal(e.hp, hp);
+  for (let i = 0; i < 3; i++) s.step(1 / 60, { x: 0, z: 0 });
+  assert.equal(e.hp, hp - 72);
+  for (let i = 0; i < 30; i++) s.step(1 / 60, { x: 0, z: 0 });
+  assert.equal(e.hp, hp - 72);
+  for (const offset of [
+    v(2, 0, 1),
+    v(1.5, 0, 2),
+    v(0, 1.6, 2),
+    v(0, 0, 3.3),
+    v(0, 0, -2),
+  ]) {
+    e.p = v(s.p.x + offset.x, s.p.y + offset.y, s.p.z + offset.z);
+    const before = e.hp;
+    s.resolveSwing();
+    assert.equal(e.hp, before);
+  }
+});
+
+test("input-triggered strikes cannot deal damage before the visible attack clock reaches contact", () => {
+  for (const combo of [-1, 0, 1]) {
+    const { s, e } = setup(combo === 0 ? 2 : 2.6);
+    s.resetActions();
+    s.combo = combo;
+    s.comboWindow = combo < 0 ? 0 : 1;
+    const hp = e.hp;
+    let contact = false;
+    for (let i = 0; i < 40 && !contact; i++) {
+      s.step(1 / 60, { x: 0, z: 0, attack: i === 0 });
+      if (e.hp < hp) {
+        contact = true;
+        const phase = 1 - s.attack / s.attackDuration;
+        assert.ok(
+          phase + 1e-8 >=
+            { slash: 0.42, kick: 0.55, finisher: 0.52, sweep: 0.375 }[
+              s.meleeMove
+            ],
+        );
+      }
+    }
+    assert.ok(contact);
+  }
+});

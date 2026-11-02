@@ -18,7 +18,7 @@ export function drive(s: Expedition, tick: number): Input {
   if (e && distance(s.p, e.p) < 32 && distance(s.p, s.destination) < 23) {
     target = { ...e.p };
     i.throw = true;
-    i.attack = distance(s.p, e.p) < 4.1;
+    i.attack = distance(s.p, e.p) < 3.5 && Math.abs(s.p.y - e.p.y) < 1.5;
     i.grapple = !s.anchor && distance(s.p, e.p) > 6 && e.kind !== "guardian";
     if (e.kind === "guardian" && e.armour) {
       const pillars = s.pillars();

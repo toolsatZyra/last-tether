@@ -210,7 +210,7 @@ test("a late attack press carries through recovery and melee takes priority over
 
 test("the melee closing step moves through collision, never by teleporting", () => {
   const { s, enemy } = meleeEncounter();
-  enemy.p.z = s.p.z + 3.9;
+  enemy.p.z = s.p.z + 3.4;
   const origin = { ...s.p };
   let sweeps = 0;
   s.motion = (p, velocity, dt) => {
@@ -224,7 +224,7 @@ test("the melee closing step moves through collision, never by teleporting", () 
   assert.deepEqual(s.p, origin);
   assert.equal(enemy.hp, enemy.max);
   const free = meleeEncounter();
-  free.enemy.p.z = free.s.p.z + 3.9;
+  free.enemy.p.z = free.s.p.z + 3.4;
   free.s.step(1 / 60, { x: 0, z: 0, attack: true });
   step(free.s, 12);
   assert.ok(free.s.p.z > origin.z + 0.2 && free.s.p.z < origin.z + 1);

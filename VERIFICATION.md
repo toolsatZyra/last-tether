@@ -352,3 +352,17 @@ The compiled keyboard check defeated the opening group, advanced the objective, 
 Compiled 0.2.26 ordinary keyboard verification passed: three defeats, watchpost objective, pause freeze, save/reload/resume, no debug hook, no page/console errors or failed responses. A bounded 15.39-second sample averaged 65.87 FPS with p95 18.7 ms; this is not a whole-chapter performance claim.
 
 Public 0.2.26 deployment dpl_9mka4tGGbKtrooTD3uZzWeGJD74S is READY for app commit 2c9b11beb97ca12d1ae4c582ce91fc8b5358223c; the alias serves index-C72MUnWr.js. Public ordinary keyboard combat, pause and save/reload/resume passed without page/console errors or failed responses. Footer reports 0.2.26 and the development hook is absent. Bounded 15.48-second sample: 68.48 FPS average, p95 18.3 ms; not sustained chapter performance.
+
+## Supported thrust and shared contact clock, 0.2.27
+
+58 behaviour tests and the production build pass. The input-frame timing regression checks that damage cannot precede the visible contact phase. The narrow thrust rejects side, rear, high and out-of-reach targets; collision-aware closing remains tested at the shorter reach.
+
+Four-facing native browser checks deliver exactly one 72-point thrust at phase 0.545977, with supporting-palm error below 0.0000053 units, blade overlap with the target body proxy, zero pause drift and clean pose removal on incoming damage. The results are identical after the IK workload optimization. A real F-key check against a controlled brute reaches cut/kick/thrust damage of 148 at 1.3333 seconds with the Spear_Thrust clip active. Rendered wind-up, extension and guarded recovery were inspected. These are controlled pose/contact checks, not a claim about human enjoyment.
+
+Final full native input-driven route: 749.1 simulated seconds (12m29s), 188 defeats, zero recoveries, all 32 objectives, valid ending/save and no page errors. Zero rig reserve misses; the ending has two hero/ghost skeletons and 50 animation groups. The added two derived thrust clips are persistent per hero/ghost, not per strike.
+
+The driver now chooses R when an enemy is above the combo contact height. Its previous melee-first policy could suppress throws while swinging below flyers; that earlier 933.0167-second run with two recoveries is retained in the evidence. No health grants, teleportation or enemy nerfs were added. Neither automated duration verifies first-time 15–20 minute pacing.
+
+The arm-pose optimization preserves the native contact results and reduces sampled arm IK p95 from 2.8 ms to 0.4 ms. Overall timing remains variable: the optimized existing-session 35-second sample measured mean interval 33.76 ms, p95 55.1 and maximum 221.9; a fresh test browser measured 36.27, 73.6 and 357.8 ms. Both samples retain zero in-combat model creation. The renderer is hardware ANGLE D3D11 on integrated AMD Radeon graphics, despite the high-performance context preference. Do not interpret the IK improvement as a whole-game FPS gain.
+
+Compiled ordinary keyboard combat, pause, save/reload/resume and absence of the development hook all pass with no page/console errors or failed requests. Its bounded 17.86-second sample averaged 49.54 FPS with p95 42.4 ms. This remains below the intended sustained smoothness gate.

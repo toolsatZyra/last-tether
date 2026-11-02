@@ -1,0 +1,2468 @@
+{
+  "version": "0.2.27",
+  "date": "2026-11-02",
+  "status": "locally-verified-awaiting-publication",
+  "changes": [
+    "Derived Spear_Thrust clip retains licensed Punch_Right body movement and Idle_Sword arm guard, with Babylon BoneIKController for both hands.",
+    "Arm controllers solve in model space to handle the imported mirrored root. The original weapon remains attached to the right wrist; the left palm follows its shaft.",
+    "Anticipation, extension, hold and recovery use the gameplay attack clock. Contact shares that clock instead of a separate countdown that could advance on the input frame.",
+    "Opening slash contact is 42 percent, distant sweep 37.5 percent, thrust 52 percent and kick 55 percent of their respective clips.",
+    "Spear reach is 3.1 instead of 3.6 units; kick reach 2.3 instead of 2.8. The thrust has a narrower forward cone and 1.5-unit vertical separation limit."
+  ],
+  "native": {
+    "rows": [
+      {
+        "yaw": 0,
+        "hits": 1,
+        "hp": 928,
+        "contact": {
+          "tick": 19,
+          "phase": 0.5459770114942532,
+          "clip": "kavi_Spear_Thrust",
+          "palmError": 0.000002035471136082413,
+          "surfaceGap": 0,
+          "tipHeight": 1.357609688161796,
+          "thrust": true,
+          "pauseDrift": 0
+        },
+        "interruptClears": true
+      },
+      {
+        "yaw": 1.5707963267948966,
+        "hits": 1,
+        "hp": 928,
+        "contact": {
+          "tick": 19,
+          "phase": 0.5459770114942532,
+          "clip": "kavi_Spear_Thrust",
+          "palmError": 0.000005223206008238291,
+          "surfaceGap": 0,
+          "tipHeight": 1.357610639070641,
+          "thrust": true,
+          "pauseDrift": 0
+        },
+        "interruptClears": true
+      },
+      {
+        "yaw": 3.141592653589793,
+        "hits": 1,
+        "hp": 928,
+        "contact": {
+          "tick": 19,
+          "phase": 0.5459770114942532,
+          "clip": "kavi_Spear_Thrust",
+          "palmError": 0.000002352456154639205,
+          "surfaceGap": 0,
+          "tipHeight": 1.3576107177004086,
+          "thrust": true,
+          "pauseDrift": 0
+        },
+        "interruptClears": true
+      },
+      {
+        "yaw": 4.71238898038469,
+        "hits": 1,
+        "hp": 928,
+        "contact": {
+          "tick": 19,
+          "phase": 0.5459770114942532,
+          "clip": "kavi_Spear_Thrust",
+          "palmError": 0.000005186000154347589,
+          "surfaceGap": 0,
+          "tipHeight": 1.3576107087549154,
+          "thrust": true,
+          "pauseDrift": 0
+        },
+        "interruptClears": true
+      }
+    ],
+    "groups": 25,
+    "resources": {
+      "skeletons": 16,
+      "groups": 228
+    },
+    "errors": []
+  },
+  "gallery": [
+    {
+      "phase": 0.050000000000000044,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.21387982368469238,
+        9.13904094696045,
+        -0.07742616534233093
+      ]
+    },
+    {
+      "phase": 0.19999999999999996,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.12000024318695068,
+        9.350000381469727,
+        -0.1200002133846283
+      ]
+    },
+    {
+      "phase": 0.4,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.12000016123056412,
+        9.393199920654297,
+        0.11760307103395462
+      ]
+    },
+    {
+      "phase": 0.52,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.12000008672475815,
+        9.450000762939453,
+        0.4299998879432678
+      ]
+    },
+    {
+      "phase": 0.7,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.12000007927417755,
+        9.446173667907715,
+        0.40895354747772217
+      ]
+    },
+    {
+      "phase": 0.9,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.16491422057151794,
+        9.21080493927002,
+        0.025845522060990334
+      ]
+    },
+    {
+      "phase": 0.99,
+      "thrust": true,
+      "clip": "kavi_Spear_Thrust",
+      "additive": -1,
+      "hand": [
+        0.26983383297920227,
+        9.123123168945312,
+        -0.0618368536233902
+      ]
+    }
+  ],
+  "tests": {
+    "passed": 58,
+    "failed": 0
+  },
+  "limits": [
+    "Contact still uses authored attack volumes and native Havok scenery queries rather than an animated weapon mesh sweep.",
+    "The existing low-detail hero and mixed creature art remain below the requested visual standard.",
+    "Native geometry and automated completion do not establish human enjoyment or first-time chapter duration.",
+    "All tests are silent; audible impact quality remains unreviewed."
+  ],
+  "fullChapter": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 65,
+      "animationGroups": 50
+    },
+    "actorPool": {
+      "created": 40,
+      "disposed": 40,
+      "misses": 0,
+      "inUse": 0
+    },
+    "finished": true,
+    "seconds": 749.0999999996474,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 13.250000000000238,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 40.69999999999897,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 55.949999999998106,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 83.39999999999655,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 104.74999999999534,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 128.13333333332744,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 164.73333333335657,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 200.31666666671822,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 215.56666666673036,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 255.2166666667619,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 295.8833333333929,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 321.30000000003645,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 325.3666666666994,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 354.85000000000593,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 381.2833333333152,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 408.73333333329026,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 422.96666666661065,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 446.3499999999227,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 470.7499999999005,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 508.366666666533,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 524.6333333331849,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 542.9333333331682,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 577.4999999998034,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 602.916666666447,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 622.2333333330961,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 665.949999999723,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 694.4166666663638,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 711.6999999996814,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 713.7333333330129,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 724.916666666336,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 737.1166666663249,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 749.0999999996474,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "initialDriverRun": {
+    "deathAudit": [
+      {
+        "p": {
+          "x": -13.487740805435424,
+          "y": 35.09841705743909,
+          "z": 303.5272289630592
+        },
+        "health": 0,
+        "sector": 3,
+        "beat": 2,
+        "time": 468.8666666665689,
+        "style": "slash",
+        "recent": [
+          {
+            "amount": 15,
+            "health": 70.80000000000001,
+            "p": {
+              "x": -14.248911655428751,
+              "y": 35.09841705743909,
+              "z": 269.21507791988097
+            },
+            "time": 444.1166666665914,
+            "style": "finisher"
+          },
+          {
+            "amount": 15,
+            "health": 60.30000000000001,
+            "p": {
+              "x": -20.449475311432273,
+              "y": 35.09841705743909,
+              "z": 269.3154120650684
+            },
+            "time": 447.2166666665886,
+            "style": "slash"
+          },
+          {
+            "amount": 15,
+            "health": 49.80000000000001,
+            "p": {
+              "x": -20.139985026181783,
+              "y": 35.09841705743909,
+              "z": 273.9903564799988
+            },
+            "time": 450.449999999919,
+            "style": "slash"
+          },
+          {
+            "amount": 15,
+            "health": 45.30000000000001,
+            "p": {
+              "x": -14.914947114306944,
+              "y": 35.09841705743909,
+              "z": 290.05757800719186
+            },
+            "time": 457.19999999991285,
+            "style": "finisher"
+          },
+          {
+            "amount": 15,
+            "health": 34.80000000000001,
+            "p": {
+              "x": -11.73065182701748,
+              "y": 35.09841705743909,
+              "z": 296.5476457578478
+            },
+            "time": 460.2833333332434,
+            "style": "finisher"
+          },
+          {
+            "amount": 15,
+            "health": 24.30000000000001,
+            "p": {
+              "x": -8.74460642986525,
+              "y": 35.09841705743909,
+              "z": 302.6336507245976
+            },
+            "time": 463.38333333324056,
+            "style": "finisher"
+          },
+          {
+            "amount": 13,
+            "health": 15.200000000000012,
+            "p": {
+              "x": -8.069075594868307,
+              "y": 35.09841705743909,
+              "z": 304.01048311331647
+            },
+            "time": 466.0499999999048,
+            "style": "sweep"
+          },
+          {
+            "amount": 15,
+            "health": 4.700000000000012,
+            "p": {
+              "x": -12.888396517709179,
+              "y": 35.09841705743909,
+              "z": 303.6323595157411
+            },
+            "time": 466.61666666657095,
+            "style": "finisher"
+          }
+        ]
+      },
+      {
+        "p": {
+          "x": -19.736408861527426,
+          "y": 35.0991925069389,
+          "z": 271.67404532798326
+        },
+        "health": 0,
+        "sector": 3,
+        "beat": 2,
+        "time": 517.2999999998582,
+        "style": "sweep",
+        "recent": [
+          {
+            "amount": 15,
+            "health": 68.60000000000002,
+            "p": {
+              "x": -19.136424782585447,
+              "y": 35.0991925069389,
+              "z": 282.96039697073195
+            },
+            "time": 499.03333333320813,
+            "style": "finisher"
+          },
+          {
+            "amount": 13,
+            "health": 59.50000000000002,
+            "p": {
+              "x": -19.691424433504856,
+              "y": 35.0991925069389,
+              "z": 283.2397248549194
+            },
+            "time": 500.0333333332072,
+            "style": "sweep"
+          },
+          {
+            "amount": 15,
+            "health": 49.00000000000002,
+            "p": {
+              "x": -20.120840397746047,
+              "y": 35.0991925069389,
+              "z": 282.822758675243
+            },
+            "time": 501.2499999998728,
+            "style": "slash"
+          },
+          {
+            "amount": 15,
+            "health": 38.50000000000002,
+            "p": {
+              "x": -19.134991267415284,
+              "y": 35.0991925069389,
+              "z": 281.87855898206766
+            },
+            "time": 502.33333333320513,
+            "style": "finisher"
+          },
+          {
+            "amount": 13,
+            "health": 29.40000000000002,
+            "p": {
+              "x": -18.52335079695398,
+              "y": 35.0991925069389,
+              "z": 281.98650425413666
+            },
+            "time": 503.4166666665375,
+            "style": "sweep"
+          },
+          {
+            "amount": 13,
+            "health": 22.30000000000002,
+            "p": {
+              "x": -19.35692489401056,
+              "y": 35.0991925069389,
+              "z": 285.2205104922149
+            },
+            "time": 506.5333333332013,
+            "style": "finisher"
+          },
+          {
+            "amount": 15,
+            "health": 15.800000000000018,
+            "p": {
+              "x": -15.847705648380662,
+              "y": 35.0991925069389,
+              "z": 281.7451752353856
+            },
+            "time": 511.1499999998638,
+            "style": "sweep"
+          },
+          {
+            "amount": 15,
+            "health": 5.3000000000000185,
+            "p": {
+              "x": -17.7849276559387,
+              "y": 35.0991925069389,
+              "z": 276.7280748221593
+            },
+            "time": 514.2333333331943,
+            "style": "sweep"
+          }
+        ]
+      }
+    ],
+    "resources": {
+      "skeletons": 2,
+      "textures": 65,
+      "animationGroups": 50
+    },
+    "actorPool": {
+      "created": 40,
+      "disposed": 40,
+      "misses": 0,
+      "inUse": 0
+    },
+    "finished": true,
+    "seconds": 933.0166666661468,
+    "kills": 196,
+    "deaths": 2,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 13.250000000000238,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 41.71666666666558,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 57.98333333333132,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 87.46666666666299,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 108.81666666666177,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 136.26666666666725,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 172.86666666669637,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 231.83333333340997,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 253.18333333342696,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 309.10000000004754,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 342.65000000001703,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 368.0666666666606,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 375.1833333333208,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 420.93333333327917,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 552.9333333331591,
+        "deaths": 2
+      },
+      {
+        "key": "4-0",
+        "seconds": 580.3833333331341,
+        "deaths": 2
+      },
+      {
+        "key": "4-1",
+        "seconds": 595.6333333331203,
+        "deaths": 2
+      },
+      {
+        "key": "4-2",
+        "seconds": 617.9999999997666,
+        "deaths": 2
+      },
+      {
+        "key": "4-3",
+        "seconds": 642.3999999997444,
+        "deaths": 2
+      },
+      {
+        "key": "5-0",
+        "seconds": 674.9333333330482,
+        "deaths": 2
+      },
+      {
+        "key": "5-1",
+        "seconds": 689.1666666663685,
+        "deaths": 2
+      },
+      {
+        "key": "5-2",
+        "seconds": 711.5333333330149,
+        "deaths": 2
+      },
+      {
+        "key": "5-3",
+        "seconds": 751.1833333329788,
+        "deaths": 2
+      },
+      {
+        "key": "6-0",
+        "seconds": 772.5333333329594,
+        "deaths": 2
+      },
+      {
+        "key": "6-1",
+        "seconds": 791.8499999996085,
+        "deaths": 2
+      },
+      {
+        "key": "6-2",
+        "seconds": 837.5999999995669,
+        "deaths": 2
+      },
+      {
+        "key": "6-3",
+        "seconds": 877.2499999995308,
+        "deaths": 2
+      },
+      {
+        "key": "7-0",
+        "seconds": 895.5499999995142,
+        "deaths": 2
+      },
+      {
+        "key": "7-1",
+        "seconds": 896.5666666661799,
+        "deaths": 2
+      },
+      {
+        "key": "7-2",
+        "seconds": 908.7666666661688,
+        "deaths": 2
+      },
+      {
+        "key": "7-3",
+        "seconds": 920.9666666661577,
+        "deaths": 2
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 933.0166666661468,
+      "deaths": 2,
+      "kills": 196,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "driverChange": "Use throws when target vertical separation exceeds 1.5 units, and close into the shorter melee reach. The prior melee-first policy could suppress R while swinging below a flyer; no health, teleportation or enemy nerfs were added.",
+  "keyboard": {
+    "hit": {
+      "phase": 0.5459770114942532,
+      "health": 852,
+      "clip": "kavi_Spear_Thrust",
+      "seconds": 1.3333333333333335
+    },
+    "errors": []
+  },
+  "build": {
+    "passed": true,
+    "bundle": "assets/index-CwbGN1dt.js"
+  },
+  "profileBeforeOptimization": {
+    "status": "sample-complete",
+    "resources": {
+      "actors": 2,
+      "skeletons": 16,
+      "groups": 228,
+      "textures": 83
+    },
+    "completedWallSeconds": 35.01630000000075,
+    "wallSeconds": 43.40889999999851,
+    "frames": 1597,
+    "game": {
+      "sector": 0,
+      "beat": 1,
+      "p": {
+        "x": 15.758863026087358,
+        "y": 12.103981043988854,
+        "z": 159.7537557730337
+      },
+      "health": 71.40000000000003,
+      "seconds": 34.11666666666601,
+      "deaths": 0,
+      "kills": 6,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "spitter",
+          "p": {
+            "x": 12.856676945227788,
+            "y": 12,
+            "z": 170.19165207393573
+          },
+          "hp": 115,
+          "state": "recover"
+        }
+      ],
+      "fps": 34.562211981567046,
+      "meshes": 711,
+      "animation": "kavi_Run"
+    },
+    "stats": {
+      "dt": {
+        "mean": 21.926299311208982,
+        "median": 19.300000000745058,
+        "p95": 35.099999997764826,
+        "max": 270.4000000022352
+      },
+      "cpu": {
+        "mean": 20.01565435194482,
+        "median": 18.399999998509884,
+        "p95": 30,
+        "max": 144.30000000074506
+      },
+      "idle": {
+        "mean": 1.9106449592641614,
+        "median": 0.5999999977648258,
+        "p95": 2.900000002235174,
+        "max": 246.5
+      },
+      "simulation": {
+        "mean": 0.9329993738142602,
+        "median": 0.6999999992549419,
+        "p95": 2.199999999254942,
+        "max": 38.80000000074506
+      },
+      "view": {
+        "mean": 18.820726361965473,
+        "median": 17.599999997764826,
+        "p95": 27,
+        "max": 142.30000000074506
+      },
+      "render": {
+        "mean": 16.85735754542748,
+        "median": 15.800000000745058,
+        "p95": 23.800000000745058,
+        "max": 139.29999999701977
+      },
+      "enemyPhysics": {
+        "mean": 0.2794614903507527,
+        "median": 0.19999999925494194,
+        "p95": 0.8999999985098839,
+        "max": 34.900000005960464
+      },
+      "worldPhysics": {
+        "mean": 0.23506574830741306,
+        "median": 0.19999999925494194,
+        "p95": 0.4000000059604645,
+        "max": 35.30000000074506
+      },
+      "cameraRays": {
+        "mean": 0.940763932362936,
+        "median": 0.8000000007450581,
+        "p95": 1.800000000745058,
+        "max": 5.600000001490116
+      },
+      "combatRays": {
+        "mean": 0.03863494046400992,
+        "median": 0,
+        "p95": 0.19999999925494194,
+        "max": 1.3999999985098839
+      },
+      "actorCreation": {
+        "mean": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "armIK": {
+        "mean": 0.3876017532967446,
+        "median": 0,
+        "p95": 2.800000000745058,
+        "max": 100.19999999925494
+      },
+      "heroPose": {
+        "mean": 0.34664996869222925,
+        "median": 0.29999999701976776,
+        "p95": 0.6999999992549419,
+        "max": 29.5
+      },
+      "enemyPose": {
+        "mean": 0.13030682530069843,
+        "median": 0.09999999776482582,
+        "p95": 0.4000000022351742,
+        "max": 2.399999998509884
+      },
+      "eventEffects": {
+        "mean": 0.002066374447898859,
+        "median": 0,
+        "p95": 0,
+        "max": 0.6999999992549419
+      }
+    },
+    "worst": [
+      {
+        "wall": 24916.300000000745,
+        "dt": 270.4000000022352,
+        "cpu": 23.900000002235174,
+        "idle": 246.5,
+        "game": 24.64999999999988,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 603551840,
+        "combatRays": 0.30000000447034836,
+        "enemyPhysics": 0.6999999955296516,
+        "worldPhysics": 0.5999999977648258,
+        "simulation": 5.800000000745058,
+        "heroPose": 0.6999999992549419,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 0.6999999992549419,
+        "render": 15.600000001490116,
+        "view": 17.699999999254942
+      },
+      {
+        "wall": 34280.800000000745,
+        "dt": 144.60000000149012,
+        "cpu": 144.30000000074506,
+        "idle": 0.30000000074505806,
+        "game": 33.366666666666056,
+        "beat": 1,
+        "kills": 5,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 617617788,
+        "enemyPhysics": 0.10000000149011612,
+        "combatRays": 0.10000000149011612,
+        "worldPhysics": 0.09999999776482582,
+        "simulation": 0.5999999977648258,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0,
+        "cameraRays": 2.100000001490116,
+        "armIK": 100.19999999925494,
+        "render": 139.29999999701977,
+        "view": 142.30000000074506
+      },
+      {
+        "wall": 28440.10000000149,
+        "dt": 142.60000000149012,
+        "cpu": 45.900000002235174,
+        "idle": 96.69999999925494,
+        "game": 27.96666666666636,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 626394248,
+        "combatRays": 0,
+        "enemyPhysics": 0.9999999962747097,
+        "worldPhysics": 0.4000000059604645,
+        "simulation": 1.800000000745058,
+        "heroPose": 29.5,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.199999999254942,
+        "armIK": 1.6000000014901161,
+        "render": 12.5,
+        "view": 43.899999998509884
+      },
+      {
+        "wall": 16034.5,
+        "dt": 131.89999999850988,
+        "cpu": 18,
+        "idle": 113.89999999850988,
+        "game": 16.05000000000037,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 617677468,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 0.30000000074505806,
+        "heroPose": 0.20000000298023224,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.199999999254942,
+        "render": 15.199999999254942,
+        "view": 17.5
+      },
+      {
+        "wall": 32144.60000000149,
+        "dt": 117.20000000298023,
+        "cpu": 21.200000002980232,
+        "idle": 96,
+        "game": 31.383333333332832,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 628100904,
+        "enemyPhysics": 1,
+        "combatRays": 0.5,
+        "worldPhysics": 0.5,
+        "simulation": 3.199999999254942,
+        "heroPose": 0.5,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 2,
+        "render": 14.300000000745058,
+        "view": 17.800000000745058
+      },
+      {
+        "wall": 23537.60000000149,
+        "dt": 114.70000000298023,
+        "cpu": 25.300000000745058,
+        "idle": 89.40000000223517,
+        "game": 23.48333333333328,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 622873812,
+        "combatRays": 0.20000000298023224,
+        "enemyPhysics": 0.7999999932944775,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 2.099999997764826,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.8999999985098839,
+        "render": 19.900000002235174,
+        "view": 22.800000000745058
+      },
+      {
+        "wall": 7040.699999999255,
+        "dt": 112.80000000074506,
+        "cpu": 24.099999997764826,
+        "idle": 88.70000000298023,
+        "game": 7.133333333333313,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 592772432,
+        "enemyPhysics": 1.199999999254942,
+        "worldPhysics": 0.5999999977648258,
+        "simulation": 2.800000000745058,
+        "heroPose": 1.5,
+        "enemyPose": 0,
+        "cameraRays": 1.5,
+        "render": 16.800000000745058,
+        "view": 20.800000000745058
+      },
+      {
+        "wall": 2780.39999999851,
+        "dt": 101.09999999776483,
+        "cpu": 22.899999998509884,
+        "idle": 78.19999999925494,
+        "game": 2.916666666666661,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 588974028,
+        "combatRays": 0.5,
+        "enemyPhysics": 0.6000000014901161,
+        "worldPhysics": 0.5999999977648258,
+        "simulation": 2.699999999254942,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.4000000022351742,
+        "cameraRays": 0.7999999970197678,
+        "render": 17.800000000745058,
+        "view": 19.800000000745058
+      },
+      {
+        "wall": 31929,
+        "dt": 99.80000000074506,
+        "cpu": 25.100000001490116,
+        "idle": 74.69999999925494,
+        "game": 31.266666666666172,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 626067756,
+        "enemyPhysics": 0.8999999985098839,
+        "combatRays": 0.09999999776482582,
+        "worldPhysics": 0.5999999977648258,
+        "simulation": 2.300000000745058,
+        "heroPose": 1.199999999254942,
+        "enemyPose": 1.199999999254942,
+        "cameraRays": 1.800000000745058,
+        "render": 17.099999997764826,
+        "view": 22.399999998509884
+      },
+      {
+        "wall": 31169.300000000745,
+        "dt": 81.69999999925494,
+        "cpu": 22.199999999254942,
+        "idle": 59.5,
+        "game": 30.549999999999546,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 606728508,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 1.0999999977648258,
+        "worldPhysics": 0.30000000447034836,
+        "simulation": 2.600000001490116,
+        "eventEffects": 0,
+        "heroPose": 1.199999999254942,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 0.8000000007450581,
+        "render": 16.800000000745058,
+        "view": 19.399999998509884
+      },
+      {
+        "wall": 26590.800000000745,
+        "dt": 80.69999999925494,
+        "cpu": 45,
+        "idle": 35.69999999925494,
+        "game": 26.266666666666456,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 618922764,
+        "combatRays": 1,
+        "enemyPhysics": 5.600000005215406,
+        "worldPhysics": 2.6999999955296516,
+        "simulation": 12.199999999254942,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 2.800000000745058,
+        "render": 27.800000000745058,
+        "view": 32.400000002235174
+      },
+      {
+        "wall": 32027.39999999851,
+        "dt": 79.79999999701977,
+        "cpu": 21.799999997019768,
+        "idle": 58,
+        "game": 31.333333333332835,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 627356528,
+        "enemyPhysics": 0.8000000007450581,
+        "combatRays": 0,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 1.699999999254942,
+        "heroPose": 0.7000000029802322,
+        "enemyPose": 0.7000000029802322,
+        "cameraRays": 1.7000000029802322,
+        "render": 15.800000000745058,
+        "view": 19.699999999254942
+      },
+      {
+        "wall": 30050.300000000745,
+        "dt": 73.90000000223517,
+        "cpu": 63.30000000074506,
+        "idle": 10.600000001490116,
+        "game": 29.499999999999606,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 609780596,
+        "enemyPhysics": 34.900000005960464,
+        "combatRays": 0.6000000052154064,
+        "worldPhysics": 0.8999999985098839,
+        "simulation": 38.80000000074506,
+        "heroPose": 0.5,
+        "enemyPose": 0.3999999985098839,
+        "cameraRays": 4.199999999254942,
+        "render": 18.5,
+        "view": 24
+      },
+      {
+        "wall": 27914.60000000149,
+        "dt": 73.40000000223517,
+        "cpu": 26.5,
+        "idle": 46.900000002235174,
+        "game": 27.566666666666382,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 616800340,
+        "combatRays": 0.09999999776482582,
+        "enemyPhysics": 1.0000000037252903,
+        "worldPhysics": 0.5,
+        "simulation": 2.2999999970197678,
+        "heroPose": 0.8000000007450581,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 1.3999999985098839,
+        "render": 20.299999997019768,
+        "view": 23.5
+      },
+      {
+        "wall": 28205.60000000149,
+        "dt": 72.30000000074506,
+        "cpu": 70.90000000223517,
+        "idle": 1.3999999985098839,
+        "game": 27.816666666666368,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 622477816,
+        "combatRays": 0.10000000149011612,
+        "enemyPhysics": 0.6999999955296516,
+        "worldPhysics": 0.30000000074505806,
+        "simulation": 1.5,
+        "heroPose": 0.5,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.0999999977648258,
+        "render": 15.899999998509884,
+        "view": 18.099999997764826
+      },
+      {
+        "wall": 28570.89999999851,
+        "dt": 72.19999999925494,
+        "cpu": 22.399999998509884,
+        "idle": 49.80000000074506,
+        "game": 28.099999999999685,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 629456040,
+        "combatRays": 0.19999999552965164,
+        "enemyPhysics": 0.6000000014901161,
+        "worldPhysics": 0.4000000059604645,
+        "simulation": 1.9000000022351742,
+        "eventEffects": 0,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.3999999985098839,
+        "cameraRays": 1.3999999985098839,
+        "armIK": 2.399999998509884,
+        "render": 16.799999997019768,
+        "view": 20.299999997019768
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 24918.39999999851,
+        "duration": 51
+      },
+      {
+        "start": 26462.39999999851,
+        "duration": 83
+      },
+      {
+        "start": 26902.800000000745,
+        "duration": 50
+      },
+      {
+        "start": 27143.39999999851,
+        "duration": 59
+      },
+      {
+        "start": 27372,
+        "duration": 50
+      },
+      {
+        "start": 27422.800000000745,
+        "duration": 50
+      },
+      {
+        "start": 27808.800000000745,
+        "duration": 71
+      },
+      {
+        "start": 28134.60000000149,
+        "duration": 82
+      },
+      {
+        "start": 28480.10000000149,
+        "duration": 68
+      },
+      {
+        "start": 29424.89999999851,
+        "duration": 67
+      },
+      {
+        "start": 29636.199999999255,
+        "duration": 53
+      },
+      {
+        "start": 29987,
+        "duration": 66
+      },
+      {
+        "start": 30230.199999999255,
+        "duration": 65
+      },
+      {
+        "start": 30687.699999999255,
+        "duration": 65
+      },
+      {
+        "start": 33516.5,
+        "duration": 75
+      },
+      {
+        "start": 33628.800000000745,
+        "duration": 54
+      },
+      {
+        "start": 34136.5,
+        "duration": 163
+      },
+      {
+        "start": 34301.5,
+        "duration": 55
+      }
+    ]
+  },
+  "profileOptimized": {
+    "status": "sample-complete",
+    "resources": {
+      "actors": 1,
+      "skeletons": 16,
+      "groups": 228,
+      "textures": 83
+    },
+    "completedWallSeconds": 35.00809999999777,
+    "wallSeconds": 96.26239999999851,
+    "frames": 1037,
+    "game": {
+      "sector": 0,
+      "beat": 1,
+      "p": {
+        "x": 13.845272850996395,
+        "y": 12.094221975985432,
+        "z": 168.37048359146075
+      },
+      "health": 85.80000000000001,
+      "seconds": 33.833333333332696,
+      "deaths": 0,
+      "kills": 6,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "spitter",
+          "p": {
+            "x": 12.850518723750119,
+            "y": 12,
+            "z": 170.43751438143084
+          },
+          "hp": 17,
+          "state": "idle"
+        }
+      ],
+      "fps": 35.65486094610558,
+      "meshes": 711,
+      "animation": "kavi_Spear_Thrust"
+    },
+    "stats": {
+      "dt": {
+        "mean": 33.75901639344047,
+        "median": 31.200000002980232,
+        "p95": 55.099999997764826,
+        "max": 221.89999999850988
+      },
+      "cpu": {
+        "mean": 31.271745419454838,
+        "median": 29.300000000745058,
+        "p95": 51,
+        "max": 110
+      },
+      "idle": {
+        "mean": 2.4872709739856287,
+        "median": 1,
+        "p95": 4.700000002980232,
+        "max": 148.09999999776483
+      },
+      "simulation": {
+        "mean": 1.5882352940925004,
+        "median": 1.2000000029802322,
+        "p95": 4.099999997764826,
+        "max": 24.5
+      },
+      "view": {
+        "mean": 29.351398264265395,
+        "median": 27.5,
+        "p95": 47.600000001490116,
+        "max": 108.80000000074506
+      },
+      "render": {
+        "mean": 25.7988428158206,
+        "median": 24.199999999254942,
+        "p95": 42.80000000074506,
+        "max": 104.89999999850988
+      },
+      "enemyPhysics": {
+        "mean": 0.4230472516832494,
+        "median": 0.20000000298023224,
+        "p95": 1.5000000037252903,
+        "max": 5.400000002235174
+      },
+      "worldPhysics": {
+        "mean": 0.4076181291571119,
+        "median": 0.30000000074505806,
+        "p95": 0.9000000022351742,
+        "max": 24.299999997019768
+      },
+      "cameraRays": {
+        "mean": 1.7677917068387698,
+        "median": 1.3999999985098839,
+        "p95": 4,
+        "max": 20.300000000745058
+      },
+      "combatRays": {
+        "mean": 0.08042430088441305,
+        "median": 0,
+        "p95": 0.4000000022351742,
+        "max": 2.5000000037252903
+      },
+      "actorCreation": {
+        "mean": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "armIK": {
+        "mean": 0.05920925747563662,
+        "median": 0,
+        "p95": 0.4000000022351742,
+        "max": 2.199999999254942
+      },
+      "heroPose": {
+        "mean": 0.5728061716920959,
+        "median": 0.4000000022351742,
+        "p95": 1.3999999985098839,
+        "max": 16.600000001490116
+      },
+      "enemyPose": {
+        "mean": 0.25805207331850766,
+        "median": 0.10000000149011612,
+        "p95": 0.8999999985098839,
+        "max": 11.899999998509884
+      },
+      "eventEffects": {
+        "mean": 0.0052073288389204095,
+        "median": 0,
+        "p95": 0,
+        "max": 1.9000000022351742
+      }
+    },
+    "worst": [
+      {
+        "wall": 27295.89999999851,
+        "dt": 221.89999999850988,
+        "cpu": 73.80000000074506,
+        "idle": 148.09999999776483,
+        "game": 26.516666666666442,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 566676246,
+        "enemyPhysics": 1,
+        "combatRays": 0.19999999925494194,
+        "worldPhysics": 0.4000000022351742,
+        "simulation": 2.399999998509884,
+        "heroPose": 0.6000000014901161,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 3.399999998509884,
+        "render": 65,
+        "view": 71.19999999925494
+      },
+      {
+        "wall": 9016.79999999702,
+        "dt": 155.79999999701977,
+        "cpu": 17.399999998509884,
+        "idle": 138.39999999850988,
+        "game": 8.91666666666669,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 556702950,
+        "enemyPhysics": 0.19999999925494194,
+        "worldPhysics": 0.10000000149011612,
+        "simulation": 1.0000000037252903,
+        "heroPose": 1,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 0.7000000029802322,
+        "armIK": 0.19999999925494194,
+        "render": 13.900000002235174,
+        "view": 16.199999999254942
+      },
+      {
+        "wall": 21467.599999997765,
+        "dt": 142.5,
+        "cpu": 34.399999998509884,
+        "idle": 108.10000000149012,
+        "game": 21.100000000000083,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 550709726,
+        "combatRays": 0.4999999962747097,
+        "enemyPhysics": 1.5000000037252903,
+        "worldPhysics": 0.5999999977648258,
+        "simulation": 4.5,
+        "heroPose": 0.7999999970197678,
+        "enemyPose": 0.20000000298023224,
+        "cameraRays": 2.099999997764826,
+        "render": 25.700000002980232,
+        "view": 29.599999997764826
+      },
+      {
+        "wall": 34886.79999999702,
+        "dt": 132.09999999776483,
+        "cpu": 38.599999997764826,
+        "idle": 93.5,
+        "game": 33.69999999999937,
+        "beat": 1,
+        "kills": 6,
+        "hitstop": 0,
+        "enemies": 1,
+        "heap": 567604906,
+        "enemyPhysics": 0.19999999925494194,
+        "combatRays": 0.19999999552965164,
+        "worldPhysics": 0.20000000298023224,
+        "simulation": 1.800000000745058,
+        "heroPose": 1.4000000022351742,
+        "enemyPose": 0.29999999701976776,
+        "cameraRays": 4.300000000745058,
+        "armIK": 0.6999999992549419,
+        "render": 29.5,
+        "view": 36.600000001490116
+      },
+      {
+        "wall": 8605.89999999851,
+        "dt": 128.80000000074506,
+        "cpu": 22.5,
+        "idle": 106.30000000074506,
+        "game": 8.616666666666674,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 549746062,
+        "enemyPhysics": 0.6000000014901161,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 1.5,
+        "heroPose": 0.5,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.1000000014901161,
+        "render": 17.799999997019768,
+        "view": 20.299999997019768
+      },
+      {
+        "wall": 22827.199999999255,
+        "dt": 111.10000000149012,
+        "cpu": 110,
+        "idle": 1.1000000014901161,
+        "game": 22.383333333333344,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 550518358,
+        "combatRays": 0,
+        "enemyPhysics": 0.3999999985098839,
+        "worldPhysics": 0.10000000149011612,
+        "simulation": 0.8000000007450581,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.09999999776482582,
+        "cameraRays": 2.599999997764826,
+        "render": 104.89999999850988,
+        "view": 108.80000000074506
+      },
+      {
+        "wall": 2795.199999999255,
+        "dt": 109.30000000074506,
+        "cpu": 24.600000001490116,
+        "idle": 84.69999999925494,
+        "game": 2.9499999999999944,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 550660614,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 0.8999999910593033,
+        "worldPhysics": 1.2000000029802322,
+        "simulation": 3.600000001490116,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 0.5999999977648258,
+        "render": 19.699999999254942,
+        "view": 20.899999998509884
+      },
+      {
+        "wall": 23996.5,
+        "dt": 93.60000000149012,
+        "cpu": 79.5,
+        "idle": 14.100000001490116,
+        "game": 23.466666666666615,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 573191462,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 2.9999999925494194,
+        "worldPhysics": 0.8999999947845936,
+        "simulation": 16.199999999254942,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 3.100000001490116,
+        "render": 58.600000001490116,
+        "view": 63.20000000298023
+      },
+      {
+        "wall": 8448.39999999851,
+        "dt": 83.60000000149012,
+        "cpu": 26.199999999254942,
+        "idle": 57.400000002235174,
+        "game": 8.550000000000004,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 548437170,
+        "enemyPhysics": 0.4999999962747097,
+        "worldPhysics": 0.5,
+        "simulation": 1.800000000745058,
+        "eventEffects": 0,
+        "heroPose": 0.5999999977648258,
+        "enemyPose": 0,
+        "cameraRays": 1.300000000745058,
+        "render": 20.799999997019768,
+        "view": 23.599999997764826
+      },
+      {
+        "wall": 27589,
+        "dt": 82.5,
+        "cpu": 79.60000000149012,
+        "idle": 2.899999998509884,
+        "game": 26.783333333333093,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 572803602,
+        "enemyPhysics": 1,
+        "combatRays": 0.10000000149011612,
+        "worldPhysics": 0.5,
+        "simulation": 2.300000000745058,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 2.5,
+        "cameraRays": 3.600000001490116,
+        "render": 67.5,
+        "view": 77.20000000298023
+      },
+      {
+        "wall": 21177.39999999851,
+        "dt": 78.69999999925494,
+        "cpu": 77.5,
+        "idle": 1.199999999254942,
+        "game": 20.900000000000095,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 575398782,
+        "worldPhysics": 0.30000000074505806,
+        "simulation": 0.5999999977648258,
+        "heroPose": 0.4000000022351742,
+        "cameraRays": 20.300000000745058,
+        "render": 53.69999999925494,
+        "view": 76.69999999925494
+      },
+      {
+        "wall": 34754.699999999255,
+        "dt": 78.60000000149012,
+        "cpu": 74.5,
+        "idle": 4.100000001490116,
+        "game": 33.64999999999937,
+        "beat": 1,
+        "kills": 6,
+        "hitstop": 0,
+        "enemies": 1,
+        "heap": 567082306,
+        "enemyPhysics": 2.0000000037252903,
+        "combatRays": 0.19999999925494194,
+        "worldPhysics": 0.5,
+        "simulation": 9.100000001490116,
+        "eventEffects": 0,
+        "heroPose": 1.800000000745058,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 2.199999999254942,
+        "armIK": 1.3999999985098839,
+        "render": 59.099999997764826,
+        "view": 64.39999999850988
+      },
+      {
+        "wall": 29525.79999999702,
+        "dt": 75.19999999925494,
+        "cpu": 72.39999999850988,
+        "idle": 2.800000000745058,
+        "game": 28.616666666666323,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0.055,
+        "enemies": 3,
+        "heap": 579621306,
+        "combatRays": 0.29999999701976776,
+        "enemyPhysics": 0.9000000022351742,
+        "worldPhysics": 0.29999999701976776,
+        "simulation": 3.199999999254942,
+        "eventEffects": 0.19999999925494194,
+        "heroPose": 0.4000000022351742,
+        "enemyPose": 2.100000001490116,
+        "cameraRays": 3.5,
+        "render": 44,
+        "view": 68.90000000223517
+      },
+      {
+        "wall": 18567.599999997765,
+        "dt": 74.80000000074506,
+        "cpu": 56.80000000074506,
+        "idle": 18,
+        "game": 18.366666666666905,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 565610838,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 1,
+        "heroPose": 1.2000000029802322,
+        "cameraRays": 3,
+        "render": 49.599999997764826,
+        "view": 55.30000000074506
+      },
+      {
+        "wall": 33813.89999999851,
+        "dt": 74.60000000149012,
+        "cpu": 73.5,
+        "idle": 1.1000000014901161,
+        "game": 32.749999999999424,
+        "beat": 1,
+        "kills": 6,
+        "hitstop": 0,
+        "enemies": 1,
+        "heap": 587671610,
+        "enemyPhysics": 0.30000000447034836,
+        "combatRays": 0,
+        "worldPhysics": 1.300000000745058,
+        "simulation": 2.199999999254942,
+        "heroPose": 1,
+        "enemyPose": 0.4000000022351742,
+        "cameraRays": 3.399999998509884,
+        "render": 61.899999998509884,
+        "view": 70.09999999776483
+      },
+      {
+        "wall": 28894.29999999702,
+        "dt": 74.29999999701977,
+        "cpu": 73.29999999701977,
+        "idle": 1,
+        "game": 28.033333333333022,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 568476826,
+        "combatRays": 0.09999999776482582,
+        "enemyPhysics": 0.6999999992549419,
+        "worldPhysics": 0.4000000022351742,
+        "simulation": 1.8999999985098839,
+        "eventEffects": 0.09999999776482582,
+        "heroPose": 1.699999999254942,
+        "enemyPose": 0,
+        "cameraRays": 2,
+        "render": 65.29999999701977,
+        "view": 70.19999999925494
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 29453.39999999851,
+        "duration": 73
+      },
+      {
+        "start": 29823.599999997765,
+        "duration": 61
+      },
+      {
+        "start": 29885.5,
+        "duration": 54
+      },
+      {
+        "start": 30009.89999999851,
+        "duration": 51
+      },
+      {
+        "start": 30436.79999999702,
+        "duration": 50
+      },
+      {
+        "start": 30487.599999997765,
+        "duration": 74
+      },
+      {
+        "start": 30726.79999999702,
+        "duration": 50
+      },
+      {
+        "start": 31054.099999997765,
+        "duration": 51
+      },
+      {
+        "start": 31366.199999999255,
+        "duration": 68
+      },
+      {
+        "start": 32185.79999999702,
+        "duration": 62
+      },
+      {
+        "start": 32410.89999999851,
+        "duration": 53
+      },
+      {
+        "start": 32706,
+        "duration": 52
+      },
+      {
+        "start": 32950.5,
+        "duration": 50
+      },
+      {
+        "start": 33320,
+        "duration": 68
+      },
+      {
+        "start": 33580.599999997765,
+        "duration": 52
+      },
+      {
+        "start": 33633.89999999851,
+        "duration": 65
+      },
+      {
+        "start": 33740.29999999702,
+        "duration": 77
+      },
+      {
+        "start": 34005.5,
+        "duration": 57
+      },
+      {
+        "start": 34134.199999999255,
+        "duration": 52
+      },
+      {
+        "start": 34678.699999999255,
+        "duration": 80
+      }
+    ]
+  },
+  "profileFreshBrowser": {
+    "status": "sample-complete",
+    "resources": {
+      "actors": 3,
+      "skeletons": 16,
+      "groups": 228,
+      "textures": 83
+    },
+    "completedWallSeconds": 35.00260000000149,
+    "wallSeconds": 128.22230000000076,
+    "frames": 965,
+    "game": {
+      "sector": 0,
+      "beat": 1,
+      "p": {
+        "x": 13.953723037403877,
+        "y": 12.093571240682817,
+        "z": 156.57144554776272
+      },
+      "health": 67.60000000000002,
+      "seconds": 31.099999999999515,
+      "deaths": 0,
+      "kills": 5,
+      "finished": false,
+      "paused": true,
+      "transitioning": false,
+      "playing": true,
+      "enemies": [
+        {
+          "kind": "spitter",
+          "p": {
+            "x": 12.80900641076421,
+            "y": 12,
+            "z": 170.28452940817016
+          },
+          "hp": 115,
+          "state": "recover"
+        },
+        {
+          "kind": "raptor",
+          "p": {
+            "x": 9.386582688384447,
+            "y": 12.065363694907061,
+            "z": 156.9430948678433
+          },
+          "hp": 68,
+          "state": "recover"
+        }
+      ],
+      "fps": 42.98610116048709,
+      "meshes": 712,
+      "animation": "kavi_HitRecieve"
+    },
+    "stats": {
+      "dt": {
+        "mean": 36.27212435233315,
+        "median": 30.800000000745058,
+        "p95": 73.59999999776483,
+        "max": 357.80000000074506
+      },
+      "cpu": {
+        "mean": 31.446528497434805,
+        "median": 27.699999999254942,
+        "p95": 60.5,
+        "max": 183.60000000149012
+      },
+      "idle": {
+        "mean": 4.825595854898345,
+        "median": 1.1000000014901161,
+        "p95": 13.299999997019768,
+        "max": 174.19999999925494
+      },
+      "simulation": {
+        "mean": 2.066010362782318,
+        "median": 1.2000000029802322,
+        "p95": 6,
+        "max": 43.600000001490116
+      },
+      "view": {
+        "mean": 28.986113989685176,
+        "median": 25.200000002980232,
+        "p95": 57.30000000074506,
+        "max": 180.80000000074506
+      },
+      "render": {
+        "mean": 25.465699481910065,
+        "median": 21.699999999254942,
+        "p95": 51.100000001490116,
+        "max": 174.09999999776483
+      },
+      "enemyPhysics": {
+        "mean": 0.6462176164660429,
+        "median": 0.30000000074505806,
+        "p95": 2.1999999955296516,
+        "max": 31.00000000372529
+      },
+      "worldPhysics": {
+        "mean": 0.46404145092466953,
+        "median": 0.30000000074505806,
+        "p95": 1.2999999970197678,
+        "max": 10.800000000745058
+      },
+      "cameraRays": {
+        "mean": 1.6118134714740238,
+        "median": 1.1000000014901161,
+        "p95": 3.800000000745058,
+        "max": 22.099999997764826
+      },
+      "combatRays": {
+        "mean": 0.13865284981891282,
+        "median": 0,
+        "p95": 0.5000000037252903,
+        "max": 21.300000000745058
+      },
+      "actorCreation": {
+        "mean": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "armIK": {
+        "mean": 0.0623834196960679,
+        "median": 0,
+        "p95": 0.4000000022351742,
+        "max": 7.100000001490116
+      },
+      "heroPose": {
+        "mean": 0.65481865287908,
+        "median": 0.3999999985098839,
+        "p95": 1.699999999254942,
+        "max": 26.600000001490116
+      },
+      "enemyPose": {
+        "mean": 0.2620725388199554,
+        "median": 0.10000000149011612,
+        "p95": 1,
+        "max": 7.100000001490116
+      },
+      "eventEffects": {
+        "mean": 0.009430051803434451,
+        "median": 0,
+        "p95": 0,
+        "max": 5.399999998509884
+      }
+    },
+    "worst": [
+      {
+        "wall": 3491.800000000745,
+        "dt": 357.80000000074506,
+        "cpu": 183.60000000149012,
+        "idle": 174.19999999925494,
+        "game": 2.883333333333328,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 547427664,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 0.5,
+        "worldPhysics": 0.4000000022351742,
+        "simulation": 2.400000002235174,
+        "heroPose": 0.30000000074505806,
+        "enemyPose": 0.5,
+        "cameraRays": 1.1000000014901161,
+        "render": 174.09999999776483,
+        "view": 180.80000000074506
+      },
+      {
+        "wall": 26867.10000000149,
+        "dt": 191,
+        "cpu": 34.30000000074506,
+        "idle": 156.69999999925494,
+        "game": 23.466666666666615,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 572046293,
+        "combatRays": 0.4999999962747097,
+        "enemyPhysics": 1.199999999254942,
+        "worldPhysics": 0.6999999992549419,
+        "simulation": 3.399999998509884,
+        "heroPose": 0.4000000022351742,
+        "enemyPose": 0.3999999985098839,
+        "cameraRays": 3.699999999254942,
+        "render": 25.399999998509884,
+        "view": 30.800000000745058
+      },
+      {
+        "wall": 999,
+        "dt": 187.5,
+        "cpu": 22.800000000745058,
+        "idle": 164.69999999925494,
+        "game": 0.966666666666668,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 554079424,
+        "worldPhysics": 0.4000000022351742,
+        "simulation": 1.1000000014901161,
+        "heroPose": 0.09999999776482582,
+        "cameraRays": 1.5999999977648258,
+        "render": 19.300000000745058,
+        "view": 21.599999997764826
+      },
+      {
+        "wall": 4437.199999999255,
+        "dt": 182.29999999701977,
+        "cpu": 35.599999997764826,
+        "idle": 146.69999999925494,
+        "game": 3.3666666666666596,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 558020691,
+        "combatRays": 0.6999999992549419,
+        "enemyPhysics": 0.7000000029802322,
+        "worldPhysics": 1,
+        "simulation": 3.300000000745058,
+        "heroPose": 0.5999999977648258,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 1.199999999254942,
+        "render": 27.399999998509884,
+        "view": 30.299999997019768
+      },
+      {
+        "wall": 2645.699999999255,
+        "dt": 156.09999999776483,
+        "cpu": 55,
+        "idle": 101.09999999776483,
+        "game": 2.3999999999999964,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 0,
+        "heap": 564632876,
+        "worldPhysics": 0.19999999925494194,
+        "simulation": 1,
+        "heroPose": 0.20000000298023224,
+        "cameraRays": 1,
+        "render": 52.30000000074506,
+        "view": 53.900000002235174
+      },
+      {
+        "wall": 4254.900000002235,
+        "dt": 155.60000000149012,
+        "cpu": 32.5,
+        "idle": 123.10000000149012,
+        "game": 3.3166666666666598,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 557170596,
+        "combatRays": 0.4999999962747097,
+        "enemyPhysics": 1.199999999254942,
+        "worldPhysics": 1.5,
+        "simulation": 4.899999998509884,
+        "heroPose": 0.8000000007450581,
+        "enemyPose": 0.10000000149011612,
+        "cameraRays": 1.1000000014901161,
+        "render": 24.699999999254942,
+        "view": 27.5
+      },
+      {
+        "wall": 23945.699999999255,
+        "dt": 154,
+        "cpu": 49.5,
+        "idle": 104.5,
+        "game": 20.983333333333423,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 570844365,
+        "combatRays": 0.6999999992549419,
+        "enemyPhysics": 2.6999999955296516,
+        "worldPhysics": 1.5,
+        "simulation": 7.899999998509884,
+        "heroPose": 0.7000000029802322,
+        "enemyPose": 0.29999999701976776,
+        "cameraRays": 4.099999997764826,
+        "render": 35.100000001490116,
+        "view": 41.400000002235174
+      },
+      {
+        "wall": 3703.5,
+        "dt": 151.69999999925494,
+        "cpu": 137.39999999850988,
+        "idle": 14.300000000745058,
+        "game": 2.966666666666661,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 549218156,
+        "combatRays": 0.30000000447034836,
+        "enemyPhysics": 0.4999999962747097,
+        "worldPhysics": 0.19999999552965164,
+        "simulation": 1.5999999977648258,
+        "heroPose": 0.20000000298023224,
+        "enemyPose": 0.9000000022351742,
+        "cameraRays": 0.8000000007450581,
+        "render": 133.10000000149012,
+        "view": 135.60000000149012
+      },
+      {
+        "wall": 15534.199999999255,
+        "dt": 148.89999999850988,
+        "cpu": 19.599999997764826,
+        "idle": 129.30000000074506,
+        "game": 13.23333333333357,
+        "beat": 0,
+        "kills": 2,
+        "hitstop": 0,
+        "enemies": 1,
+        "heap": 581086591,
+        "enemyPhysics": 0.9000000022351742,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 2.399999998509884,
+        "heroPose": 0.5999999977648258,
+        "enemyPose": 0.20000000298023224,
+        "cameraRays": 1.300000000745058,
+        "render": 13.900000002235174,
+        "view": 16.900000002235174
+      },
+      {
+        "wall": 10361.400000002235,
+        "dt": 148.20000000298023,
+        "cpu": 38.80000000074506,
+        "idle": 109.40000000223517,
+        "game": 8.600000000000007,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 556407127,
+        "enemyPhysics": 1.300000000745058,
+        "worldPhysics": 0.8000000007450581,
+        "simulation": 9.600000001490116,
+        "heroPose": 0.4000000022351742,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 0.8000000007450581,
+        "armIK": 0.3999999985098839,
+        "render": 26.800000000745058,
+        "view": 28.800000000745058
+      },
+      {
+        "wall": 10213.199999999255,
+        "dt": 145.19999999925494,
+        "cpu": 28.199999999254942,
+        "idle": 117,
+        "game": 8.550000000000004,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 555692395,
+        "enemyPhysics": 1.2000000029802322,
+        "worldPhysics": 0.5,
+        "simulation": 3,
+        "heroPose": 0.6999999992549419,
+        "enemyPose": 0.8000000007450581,
+        "cameraRays": 1,
+        "armIK": 0.4000000022351742,
+        "render": 20.600000001490116,
+        "view": 24.699999999254942
+      },
+      {
+        "wall": 10622.60000000149,
+        "dt": 142.40000000223517,
+        "cpu": 28.699999999254942,
+        "idle": 113.70000000298023,
+        "game": 8.78333333333335,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 559377715,
+        "enemyPhysics": 6.5,
+        "worldPhysics": 0.5000000037252903,
+        "simulation": 7.400000002235174,
+        "heroPose": 3.099999997764826,
+        "enemyPose": 0,
+        "cameraRays": 4.100000001490116,
+        "armIK": 0.29999999701976776,
+        "render": 11,
+        "view": 21.099999997764826
+      },
+      {
+        "wall": 4071.900000002235,
+        "dt": 141.5,
+        "cpu": 25.900000002235174,
+        "idle": 115.59999999776483,
+        "game": 3.2333333333333267,
+        "beat": 0,
+        "kills": 0,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 555517848,
+        "combatRays": 0.7999999970197678,
+        "enemyPhysics": 0.30000000074505806,
+        "worldPhysics": 0.4999999962747097,
+        "simulation": 2.099999997764826,
+        "heroPose": 0.5,
+        "enemyPose": 0.09999999776482582,
+        "cameraRays": 1.8999999985098839,
+        "render": 20,
+        "view": 23.600000001490116
+      },
+      {
+        "wall": 29681,
+        "dt": 131.30000000074506,
+        "cpu": 53.80000000074506,
+        "idle": 77.5,
+        "game": 26.066666666666467,
+        "beat": 1,
+        "kills": 4,
+        "hitstop": 0,
+        "enemies": 3,
+        "heap": 569237581,
+        "enemyPhysics": 1.5999999977648258,
+        "combatRays": 0.20000000298023224,
+        "worldPhysics": 1.2000000029802322,
+        "simulation": 4.100000001490116,
+        "eventEffects": 0,
+        "heroPose": 6.100000001490116,
+        "enemyPose": 3.2999999970197678,
+        "cameraRays": 6.699999999254942,
+        "render": 30.699999999254942,
+        "view": 49.5
+      },
+      {
+        "wall": 26676.10000000149,
+        "dt": 128.69999999925494,
+        "cpu": 55.400000002235174,
+        "idle": 73.29999999701977,
+        "game": 23.416666666666618,
+        "beat": 1,
+        "kills": 3,
+        "hitstop": 0,
+        "enemies": 4,
+        "heap": 571170281,
+        "combatRays": 0.4000000022351742,
+        "enemyPhysics": 0.7999999970197678,
+        "worldPhysics": 0.3999999985098839,
+        "simulation": 2.300000000745058,
+        "heroPose": 0.19999999925494194,
+        "enemyPose": 0.30000000074505806,
+        "cameraRays": 1.8999999985098839,
+        "render": 47.80000000074506,
+        "view": 52
+      },
+      {
+        "wall": 8796,
+        "dt": 123.09999999776483,
+        "cpu": 23.5,
+        "idle": 99.59999999776483,
+        "game": 7.399999999999979,
+        "beat": 0,
+        "kills": 1,
+        "hitstop": 0,
+        "enemies": 2,
+        "heap": 551331423,
+        "enemyPhysics": 0.7999999970197678,
+        "worldPhysics": 0.6999999992549419,
+        "simulation": 2.199999999254942,
+        "heroPose": 0.3999999985098839,
+        "enemyPose": 0.19999999925494194,
+        "cameraRays": 0.7000000029802322,
+        "armIK": 0.19999999925494194,
+        "render": 19.199999999254942,
+        "view": 21.199999999254942
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 31925.199999999255,
+        "duration": 66
+      },
+      {
+        "start": 31991.60000000149,
+        "duration": 57
+      },
+      {
+        "start": 32049.199999999255,
+        "duration": 53
+      },
+      {
+        "start": 32311.699999999255,
+        "duration": 56
+      },
+      {
+        "start": 32447.5,
+        "duration": 50
+      },
+      {
+        "start": 32818,
+        "duration": 63
+      },
+      {
+        "start": 33068.199999999255,
+        "duration": 72
+      },
+      {
+        "start": 33180.300000000745,
+        "duration": 53
+      },
+      {
+        "start": 33234,
+        "duration": 52
+      },
+      {
+        "start": 33456.60000000149,
+        "duration": 78
+      },
+      {
+        "start": 33583.10000000149,
+        "duration": 55
+      },
+      {
+        "start": 33707.300000000745,
+        "duration": 51
+      },
+      {
+        "start": 33825.10000000149,
+        "duration": 60
+      },
+      {
+        "start": 33885.800000000745,
+        "duration": 60
+      },
+      {
+        "start": 33988.10000000149,
+        "duration": 53
+      },
+      {
+        "start": 34238.60000000149,
+        "duration": 68
+      },
+      {
+        "start": 34391.699999999255,
+        "duration": 56
+      },
+      {
+        "start": 34659.400000002235,
+        "duration": 51
+      },
+      {
+        "start": 34711,
+        "duration": 51
+      },
+      {
+        "start": 34763.699999999255,
+        "duration": 69
+      }
+    ]
+  },
+  "production": {
+    "version": "LAST TETHER · 0.2.27",
+    "frameSample": {
+      "frames": 886,
+      "seconds": 17.8631,
+      "averageFps": 49.54347229764151,
+      "medianMs": 18.19999999999709,
+      "p95Ms": 42.400000000001455
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "performanceLimits": "Sequential samples varied with machine state. Arm IK p95 fell from 2.8 ms to 0.4 ms after removing redundant skeleton preparation; overall frame times did not improve in these samples. Optimized existing-session mean interval 33.76 ms / p95 55.1 / max 221.9; fresh-session 36.27 / 73.6 / 357.8. Compiled keyboard sample averaged 49.54 FPS with p95 42.4 ms. Sustained frame pacing remains open.",
+  "environment": {
+    "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11-32.0.31021.5001)",
+    "jsHeapBytes": 486917850,
+    "sceneVertices": 1373374,
+    "textureAudit": "External texture files total approximately 89.7 MiB assuming RGBA8 and full mip chains; embedded textures and render targets are additional. Largest observed internal texture dimension was 2048."
+  }
+}

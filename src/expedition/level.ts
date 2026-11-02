@@ -64,13 +64,13 @@ export const CHAPTERS: Chapter[] = [
       {
         node: 3,
         title: "Take back the watchpost",
-        hint: "Hold F or click to chain attacks. Stay close to mix in a kick. Shift dodges through attacks.",
+        hint: "Hold F or click for a cut, close kick and braced thrust. Stay close; Shift dodges through attacks.",
         enemies: ["raptor", "raptor", "spitter", "raptor"],
       },
       {
         node: 5,
         title: "Cross the broken aqueduct",
-        hint: "Face the gold ring and press Q. Space can release a grapple early.",
+        hint: "Q crosses the gold-ring gap. Use R against circling flyers; strike after their dive.",
         hazard: "rocks",
         enemies: ["wing", "wing"],
       },

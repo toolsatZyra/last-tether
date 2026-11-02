@@ -107,3 +107,9 @@ Review the opening through ordinary play again after publication. Automated nati
 ## Combat allocation pass, 0.2.26
 
 Creature model/rig creation now occurs during area preparation and rigs are reused during waves. Native lifecycle and full-route checks establish clean reuse, bounded retained resources and zero reserve shortages in the authored chapter. The normal-speed profile confirms no model construction in active opening combat. It still includes a 371 ms frame, so smoothness is not closed; rendering and system scheduling remain material. This implementation supports the preceding impact revision without establishing player-approved combat feel, visual quality or pacing.
+
+## Spear motion and contact pass, 0.2.27
+
+The new third strike is a two-handed thrust with a visible wind-up, forward extension and guarded recovery. The first prototype's empty-hand recovery flipped the spear; it was rejected and replaced by a derived clip with the spear guard. Native model-space arm IK keeps both palms attached at the contact pose without stretching bones. Damage now uses the animation's attack clock, removing an input-frame lead from the former independent countdown. Weapon reach and the thrust corridor are tighter. These changes address animation/contact coherence, not the unresolved low-detail hero or mixed creature art.
+
+Rendered phase checks and real F-key combat demonstrate the intended contact and recovery. They cannot certify enjoyment. The requested top-tier art, sustained whole-chapter performance and human first-time pacing remain open.

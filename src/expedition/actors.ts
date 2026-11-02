@@ -1,3 +1,4 @@
+import { SpearThrust } from "./spear-thrust";
 import { reactionEnvelope, type HitReaction } from "./combat-impact";
 import { MELEE } from "./melee";
 import { FootPose } from "./foot-pose";
@@ -60,6 +61,8 @@ export class Actor {
   lastReaction = -1;
   lastAttack = 0;
   lastDodge = 0;
+  thrust?: SpearThrust;
+  thrustActive = false;
   attackPose = -1;
   attackPhase = 0;
   turnLean = 0;
@@ -261,6 +264,7 @@ export class Actor {
         }
       }
       if (poseLegs) this.footPoses.forEach((foot) => foot.apply());
+      if (this.thrustActive) this.thrust?.apply(this.attackPhase);
       if (scene.animationsEnabled && this.trailActive)
         this.weaponTrail?.update();
     });
@@ -399,6 +403,13 @@ export class Actor {
     trail.isPickable = false;
     trail.isVisible = false;
     this.weaponTrail = trail;
+    this.thrust = new SpearThrust(
+      this.root,
+      this.meshes.find((m) => m.skeleton)!,
+      this.nodes,
+      grip,
+      this.groups,
+    );
     const wrap = MeshBuilder.CreateCylinder(
       "spear-wrap",
       { height: 0.19, diameter: 0.065, tessellation: 10 },
@@ -468,6 +479,7 @@ export class Actor {
     }
   }
   clearPose() {
+    this.thrust?.restore();
     this.footPoses.forEach((foot) => foot.restore());
     for (const [node, base] of this.poseBases)
       node.rotationQuaternion?.copyFrom(base);
@@ -489,7 +501,15 @@ export class Actor {
     const phase = 1 - s.attack / s.attackDuration;
     const melee = MELEE[s.meleeMove];
     this.attackPose =
-      s.attack > 0 && !s.slam && s.grounded && melee.trail ? s.combo : -1;
+      s.attack > 0 &&
+      !s.slam &&
+      s.grounded &&
+      melee.trail &&
+      s.meleeMove !== "finisher"
+        ? s.combo
+        : -1;
+    this.thrustActive =
+      s.attack > 0 && !s.slam && s.grounded && s.meleeMove === "finisher";
     this.attackPhase = Math.max(0, Math.min(1, phase));
     const trailActive =
       s.attack > 0 && !s.slam && melee.trail && phase > 0.27 && phase < 0.66;
@@ -677,6 +697,7 @@ export class Actor {
     (this.contact.material as StandardMaterial).diffuseTexture?.dispose();
     this.contact.dispose(false, true);
     this.removePose?.();
+    this.thrust?.dispose();
     this.guardian?.dispose();
     this.weaponTrail?.dispose(false, true);
     this.instance.dispose();
