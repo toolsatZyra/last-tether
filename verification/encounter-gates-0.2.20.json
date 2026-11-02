@@ -301,5 +301,22 @@
     "The short 179-frame performance sample is paused, without active combat; it does not establish sustained 60 FPS.",
     "Gate motion is an authored visual transition. Existing encounter movement restrictions remain, with 0.7-unit visual clearance.",
     "Modular environment composition, simple hero/creature art and first-time 15–20 minute pacing remain open."
-  ]
+  ],
+  "publicKeyboard": {
+    "prompt": "E · Release crane load · lure creatures onto the marked ground",
+    "corrections": 0,
+    "released": true,
+    "noDebug": true,
+    "meta": "4 defeated · 0 recoveries",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_E7ZNRpN9HxEbUaz2oFZqtoP76fVt",
+    "commit": "4924525beb34133e8accf6a34d920f4d36b6107f",
+    "state": "READY",
+    "target": "production",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-DONNncC_.js"
+  }
 }
