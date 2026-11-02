@@ -1,0 +1,1416 @@
+{
+  "version": "0.2.24",
+  "date": "2026-11-02",
+  "status": "local checks passed; not yet published",
+  "change": "Responsive waterworks handwheels, three lifting sluice gates, flowing spills and channel machinery; clear spillway canyon volume.",
+  "unitTests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "build": {
+    "passed": true,
+    "bundle": "index-Cf_qpYaw.js"
+  },
+  "state": {
+    "partial": {
+      "beat": 1,
+      "time": 0.16666666666666666,
+      "gates": [
+        {
+          "open": 0.30524776960121114,
+          "y": 23.530932602889447,
+          "width": 0.3886180372490658,
+          "flow": 0.41640812646501735
+        },
+        {
+          "open": 0,
+          "y": 21.15,
+          "width": 0.12,
+          "flow": 0.16
+        },
+        {
+          "open": 0,
+          "y": 21.15,
+          "width": 0.12,
+          "flow": 0.16
+        }
+      ],
+      "pools": [
+        9.680130379250443,
+        9.680130379250443,
+        11.680130379250443,
+        11.680130379250443,
+        14.75,
+        14.75,
+        13.75,
+        13.75,
+        15.75,
+        15.75,
+        19.75,
+        19.75,
+        18.75,
+        18.75,
+        21.75,
+        21.75
+      ],
+      "angles": [
+        -1.3941520483164997,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "clock": 0.16666666666666666
+    },
+    "opened": {
+      "beat": 1,
+      "time": 2.6499999999999955,
+      "gates": [
+        {
+          "open": 0.9951839442738805,
+          "y": 28.912434765336265,
+          "width": 0.9957618709610148,
+          "flow": 0.9959545131900596
+        },
+        {
+          "open": 0,
+          "y": 21.15,
+          "width": 0.12,
+          "flow": 0.16
+        },
+        {
+          "open": 0,
+          "y": 21.15,
+          "width": 0.12,
+          "flow": 0.16
+        }
+      ],
+      "pools": [
+        9.502052874318816,
+        9.502052874318816,
+        11.502052874318816,
+        11.502052874318816,
+        14.75,
+        14.75,
+        13.75,
+        13.75,
+        15.75,
+        15.75,
+        19.75,
+        19.75,
+        18.75,
+        18.75,
+        21.75,
+        21.75
+      ],
+      "angles": [
+        -1.5707963267948768,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "clock": 2.6499999999999955
+    },
+    "pauseHolds": true,
+    "collision": {
+      "p": {
+        "x": 29.999877258007324,
+        "y": 12.035624995733926,
+        "z": 56.94922084931283
+      },
+      "valve": {
+        "x": 30,
+        "y": 12,
+        "z": 58,
+        "width": 10,
+        "gap": false,
+        "arena": true
+      },
+      "hidden": true,
+      "grounded": true
+    },
+    "restored": {
+      "sector": 2,
+      "beat": 1,
+      "gates": [
+        1,
+        0,
+        0
+      ],
+      "completedAngle": -1.5707963267948966
+    },
+    "turns": [
+      {
+        "runes": [
+          1,
+          1,
+          0
+        ],
+        "angle": -1.540707978882091,
+        "centered": true
+      },
+      {
+        "runes": [
+          2,
+          2,
+          0
+        ],
+        "angle": -3.1147346812214853,
+        "centered": true
+      },
+      {
+        "runes": [
+          3,
+          3,
+          0
+        ],
+        "angle": -4.682406631799838,
+        "centered": true
+      },
+      {
+        "runes": [
+          0,
+          0,
+          0
+        ],
+        "angle": -6.253366010195151,
+        "centered": true
+      }
+    ],
+    "resumedLate": {
+      "gates": [
+        1,
+        1,
+        1
+      ],
+      "crownClearance": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "solved": [
+        {
+          "target": 0,
+          "angle": 0
+        },
+        {
+          "target": 3,
+          "angle": -4.71238898038469
+        },
+        {
+          "target": 1,
+          "angle": -1.5707963267948966
+        }
+      ],
+      "centredFalls": true
+    },
+    "counts": [
+      {
+        "meshes": 681,
+        "materials": 112,
+        "textures": 59,
+        "skeletons": 2,
+        "controls": 8
+      },
+      {
+        "meshes": 681,
+        "materials": 112,
+        "textures": 59,
+        "skeletons": 2,
+        "controls": 8
+      },
+      {
+        "meshes": 681,
+        "materials": 112,
+        "textures": 59,
+        "skeletons": 2,
+        "controls": 8
+      }
+    ],
+    "errors": []
+  },
+  "gallery": {
+    "views": [
+      {
+        "name": "approach",
+        "meshes": 681,
+        "materials": 109,
+        "textures": 55,
+        "controls": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "gates": [
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          }
+        ]
+      },
+      {
+        "name": "control",
+        "meshes": 681,
+        "materials": 109,
+        "textures": 55,
+        "controls": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "gates": [
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          }
+        ]
+      },
+      {
+        "name": "reservoir-closed",
+        "meshes": 683,
+        "materials": 109,
+        "textures": 55,
+        "controls": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "gates": [
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          }
+        ]
+      },
+      {
+        "name": "reservoir-open",
+        "meshes": 681,
+        "materials": 109,
+        "textures": 55,
+        "controls": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "gates": [
+          {
+            "open": 1,
+            "y": 28.95,
+            "flow": 1
+          },
+          {
+            "open": 1,
+            "y": 28.95,
+            "flow": 1
+          },
+          {
+            "open": 1,
+            "y": 28.95,
+            "flow": 1
+          }
+        ]
+      },
+      {
+        "name": "linked",
+        "meshes": 681,
+        "materials": 109,
+        "textures": 55,
+        "controls": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "gates": [
+          {
+            "open": 1,
+            "y": 28.95,
+            "flow": 1
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          },
+          {
+            "open": 0,
+            "y": 21.15,
+            "flow": 0.16
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "rockClearance": {
+    "reserved": {
+      "min": {
+        "x": 39,
+        "y": -8,
+        "z": 101
+      },
+      "max": {
+        "x": 81,
+        "y": 38,
+        "z": 112
+      }
+    },
+    "rocks": [
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -53.765663146972656,
+          -19.502681732177734,
+          -12.70711898803711
+        ],
+        "max": [
+          -53.765663146972656,
+          -19.502681732177734,
+          -12.70711898803711
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -74.05913870805239,
+          -23.99999936278681,
+          -39.499998576639655
+        ],
+        "max": [
+          -31.940864115081347,
+          37.99999921179756,
+          25.4999994662519
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          53.765663146972656,
+          -19.502681732177734,
+          -1.2928805351257324
+        ],
+        "max": [
+          53.765663146972656,
+          -19.502681732177734,
+          -1.2928805351257324
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          31.940864115081347,
+          -23.99999936278681,
+          -39.49999898941474
+        ],
+        "max": [
+          74.05913870805239,
+          37.99999921179756,
+          25.499999053476817
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -83.32760620117188,
+          -18.777307510375977,
+          59.979148864746094
+        ],
+        "max": [
+          -83.32760620117188,
+          -18.777307510375977,
+          59.979148864746094
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -110.43470671305596,
+          -23.99999916685715,
+          25.42458055250634
+        ],
+        "max": [
+          -51.565299029034975,
+          48.000002134690476,
+          106.57541682717039
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          113.7623062133789,
+          -18.777307510375977,
+          72.0208511352539
+        ],
+        "max": [
+          113.7623062133789,
+          -18.777307510375977,
+          72.0208511352539
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          81.999999041242,
+          -23.99999916685715,
+          25.424583172829614
+        ],
+        "max": [
+          140.869406725263,
+          48.000002134690476,
+          106.57541944749366
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -85.76566314697266,
+          -17.97939682006836,
+          103.29287719726562
+        ],
+        "max": [
+          -85.76566314697266,
+          -17.97939682006836,
+          103.29287719726562
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -106.05913870805239,
+          -23.99999937863049,
+          76.49999760866308
+        ],
+        "max": [
+          -63.94086411508135,
+          58.99999766592737,
+          141.49999565155463
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          103.82479858398438,
+          -17.97939682006836,
+          114.70712280273438
+        ],
+        "max": [
+          103.82479858398438,
+          -17.97939682006836,
+          114.70712280273438
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          81.99999955209307,
+          -23.99999937863049,
+          76.50000434844537
+        ],
+        "max": [
+          124.1182741450641,
+          58.99999766592737,
+          141.50000239133692
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -97.32760620117188,
+          -19.21253204345703,
+          175.97915649414062
+        ],
+        "max": [
+          -97.32760620117188,
+          -19.21253204345703,
+          175.97915649414062
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -124.43470671305596,
+          -23.999999118190203,
+          141.42458818190087
+        ],
+        "max": [
+          -65.56529902903497,
+          41.99999825560599,
+          222.57542445656492
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          89.32760620117188,
+          -19.21253204345703,
+          188.02084350585938
+        ],
+        "max": [
+          89.32760620117188,
+          -19.21253204345703,
+          188.02084350585938
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          57.565299029034975,
+          -23.999999118190203,
+          141.42457554343508
+        ],
+        "max": [
+          116.43470671305596,
+          41.99999825560599,
+          222.57541181809913
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -95.76566314697266,
+          -18.487159729003906,
+          219.29287719726562
+        ],
+        "max": [
+          -95.76566314697266,
+          -18.487159729003906,
+          219.29287719726562
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -116.05913870805239,
+          -24.00000055256794,
+          192.49999760866308
+        ],
+        "max": [
+          -73.94086411508135,
+          51.99999572890238,
+          257.4999956515546
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          75.76566314697266,
+          -18.487159729003906,
+          230.70712280273438
+        ],
+        "max": [
+          75.76566314697266,
+          -18.487159729003906,
+          230.70712280273438
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          53.94086411508135,
+          -24.00000055256794,
+          192.50000434844537
+        ],
+        "max": [
+          96.05913870805239,
+          51.99999572890238,
+          257.5000023913369
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -73.32760620117188,
+          -17.616710662841797,
+          291.9791564941406
+        ],
+        "max": [
+          -73.32760620117188,
+          -17.616710662841797,
+          291.9791564941406
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -100.43470671305596,
+          -24.00000009581936,
+          257.42458818190084
+        ],
+        "max": [
+          -41.565299029034975,
+          63.99999640257556,
+          338.5754244565649
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          97.32760620117188,
+          -17.616710662841797,
+          304.0208435058594
+        ],
+        "max": [
+          97.32760620117188,
+          -17.616710662841797,
+          304.0208435058594
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          65.56529902903497,
+          -24.00000009581936,
+          257.4245755434351
+        ],
+        "max": [
+          124.43470671305596,
+          63.99999640257556,
+          338.57541181809916
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -71.76566314697266,
+          -18.84984588623047,
+          335.2928771972656
+        ],
+        "max": [
+          -71.76566314697266,
+          -18.84984588623047,
+          335.2928771972656
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -92.05913870805239,
+          -23.99999983537907,
+          308.4999976086631
+        ],
+        "max": [
+          -49.94086411508135,
+          46.99999699225418,
+          373.4999956515546
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          83.76566314697266,
+          -18.84984588623047,
+          346.7071228027344
+        ],
+        "max": [
+          83.76566314697266,
+          -18.84984588623047,
+          346.7071228027344
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          61.94086411508135,
+          -23.99999983537907,
+          308.5000043484454
+        ],
+        "max": [
+          104.05913870805239,
+          46.99999699225418,
+          373.5000023913369
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          -65.32760620117188,
+          -18.05193519592285,
+          407.9791564941406
+        ],
+        "max": [
+          -65.32760620117188,
+          -18.05193519592285,
+          407.9791564941406
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          -92.43470671305596,
+          -24.000000601234888,
+          373.42458818190084
+        ],
+        "max": [
+          -33.565299029034975,
+          57.999999607986865,
+          454.5754244565649
+        ]
+      },
+      {
+        "name": "Rock_Mass-__root__",
+        "parent": "Rock_Mass",
+        "min": [
+          65.32760620117188,
+          -18.05193519592285,
+          420.0208435058594
+        ],
+        "max": [
+          65.32760620117188,
+          -18.05193519592285,
+          420.0208435058594
+        ]
+      },
+      {
+        "name": "Rock_Mass-boulder_01",
+        "parent": "Rock_Mass-__root__",
+        "min": [
+          33.565299029034975,
+          -24.000000601234888,
+          373.4245755434351
+        ],
+        "max": [
+          92.43470671305596,
+          57.999999607986865,
+          454.57541181809916
+        ]
+      }
+    ],
+    "intersections": []
+  },
+  "controlVisibility": {
+    "rows": [
+      {
+        "beat": 0,
+        "name": "behind",
+        "blocked": true,
+        "opacity": 0.22000000000001094,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          29.99999327014895,
+          16.144000261852387,
+          55.199979443364064
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "approach",
+        "blocked": false,
+        "opacity": 0.99999976139619,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          29.999999999997943,
+          16.144000000000077,
+          45.20000305901692
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "beside",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          37.99999755278143,
+          16.14400000000001,
+          55.19999694097773
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "turned",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          30.000002447217817,
+          16.14400000000001,
+          70.79999522792286
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "distant",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          229.99993881953662,
+          16.14400000000001,
+          55.20000477207474
+        ]
+      },
+      {
+        "beat": 0,
+        "name": "return",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          30.000061180445385,
+          16.14400000000001,
+          45.20000305902467
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "behind",
+        "blocked": true,
+        "opacity": 0.22000000000000364,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.00000642394873,
+          18.144000261852387,
+          171.19996170102945
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "approach",
+        "blocked": false,
+        "opacity": 0.99999976139619,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000000000001965,
+          18.144000000000077,
+          161.20000305901146
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "beside",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          24.999997552781437,
+          18.14400000000001,
+          171.1999969409777
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "turned",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000002447217817,
+          18.14400000000001,
+          186.7999952279229
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "distant",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          216.99993881953662,
+          18.14400000000001,
+          171.20000477207472
+        ]
+      },
+      {
+        "beat": 1,
+        "name": "return",
+        "blocked": false,
+        "opacity": 1,
+        "members": 6,
+        "allSame": true,
+        "alive": true,
+        "visible": true,
+        "camera": [
+          17.000061180445385,
+          18.14400000000001,
+          161.20000305902465
+        ]
+      }
+    ],
+    "interaction": {
+      "runes": [
+        1,
+        1,
+        0
+      ],
+      "beat": 1
+    },
+    "resources": [
+      {
+        "controls": 8,
+        "members": 48,
+        "meshes": 670,
+        "materials": 110,
+        "textures": 56
+      },
+      {
+        "controls": 8,
+        "members": 48,
+        "meshes": 670,
+        "materials": 110,
+        "textures": 56
+      },
+      {
+        "controls": 8,
+        "members": 48,
+        "meshes": 670,
+        "materials": 110,
+        "textures": 56
+      }
+    ],
+    "errors": []
+  },
+  "fullRoute": {
+    "deathAudit": [],
+    "resources": {
+      "skeletons": 2,
+      "textures": 66,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 692.7166666663653,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 11.216666666666804,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 47.816666666665235,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 73.23333333333046,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 91.53333333332942,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 115.93333333332804,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 148.46666666667696,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 179.9833333333687,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 196.25000000004832,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 231.83333333340997,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 261.31666666675767,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 287.75000000006696,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 292.8333333333957,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 317.2333333333735,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 343.6666666666828,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 370.09999999999206,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 383.3166666666467,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 407.7166666666245,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 431.0999999999366,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 463.63333333324033,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 478.88333333322646,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 494.1333333332126,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 527.6833333331821,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 549.0333333331627,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 564.2833333331488,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 611.0499999997729,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 637.4833333330822,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 655.7833333330656,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 656.7999999997313,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 668.9999999997202,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 680.1833333330434,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 692.7166666663653,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "normalSpeedSamples": [
+    {
+      "method": "45 synchronous render calls before sampling",
+      "wallSeconds": 30.01,
+      "game": {
+        "sector": 2,
+        "beat": 1,
+        "p": {
+          "x": -29.187343961951115,
+          "y": 15.107011053136329,
+          "z": 116.91330811976074
+        },
+        "health": 100,
+        "seconds": 29.39999999999961,
+        "deaths": 0,
+        "kills": 6,
+        "finished": false,
+        "paused": true,
+        "transitioning": false,
+        "playing": true,
+        "enemies": [],
+        "fps": 70.85498346742033,
+        "meshes": 686,
+        "animation": "kavi_Run"
+      },
+      "beats": [
+        {
+          "beat": 0,
+          "seconds": 0,
+          "kills": 0
+        },
+        {
+          "beat": 1,
+          "seconds": 16.116666666667033,
+          "kills": 6
+        }
+      ],
+      "frames": 1784,
+      "averageFps": 59.446851049650114,
+      "medianMs": 15.599999999627471,
+      "p95Ms": 22,
+      "maxMs": 284.30000000074506,
+      "renderSize": [
+        1036,
+        703
+      ],
+      "renderer": {
+        "vendor": "Google Inc. (AMD)",
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "gates": [
+        0.999999999997251,
+        0,
+        0
+      ],
+      "errors": []
+    },
+    {
+      "method": "45 non-rendering camera updates, shader readiness and 45 natural render frames before sampling",
+      "wallSeconds": 30.0115,
+      "game": {
+        "sector": 2,
+        "beat": 1,
+        "p": {
+          "x": -25.976424573984872,
+          "y": 15.08047902470934,
+          "z": 110.36503935676251
+        },
+        "health": 100,
+        "seconds": 29.28333333333295,
+        "deaths": 0,
+        "kills": 6,
+        "finished": false,
+        "paused": true,
+        "transitioning": false,
+        "playing": true,
+        "enemies": [],
+        "fps": 64.1162641592127,
+        "meshes": 686,
+        "animation": "kavi_Run"
+      },
+      "beats": [
+        {
+          "beat": 0,
+          "seconds": 0,
+          "kills": 0
+        },
+        {
+          "beat": 1,
+          "seconds": 17.3000000000003,
+          "kills": 6
+        }
+      ],
+      "frames": 1615,
+      "averageFps": 53.812705129700284,
+      "medianMs": 17.5,
+      "p95Ms": 23.90000000037253,
+      "maxMs": 267.2999999988824,
+      "renderSize": [
+        1036,
+        703
+      ],
+      "renderer": {
+        "vendor": "Google Inc. (AMD)",
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "gates": [
+        0.9999999999629371,
+        0,
+        0
+      ],
+      "errors": []
+    }
+  ],
+  "limits": [
+    "The full route uses an accelerated route-aware input policy, not first-time human play. It ran after solid valve proxies and gate clearance changes, before removing an unused waterfall material and moving decorative canyon rocks outside the spillway.",
+    "The normal-speed samples use a route-aware input driver at Balanced 1036x703 on integrated AMD graphics. They show 53.81-59.45 average FPS and 267-284 ms worst frames, not sustained 60 FPS.",
+    "Water remains stylized shader animation. Overall hero/creature art, environment cohesion and first-time pacing remain open.",
+    "No new paid generation, remote service, download, physics engine or runtime dependency.",
+    "Compiled opening keyboard sample averaged 39.05 FPS (p95 36.4 ms) in this run; frame rate varies and remains below the desired bar."
+  ],
+  "production": {
+    "frameSample": {
+      "frames": 574,
+      "seconds": 14.6731,
+      "averageFps": 39.05105260647034,
+      "medianMs": 23.799999999999272,
+      "p95Ms": 36.39999999999782
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

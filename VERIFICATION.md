@@ -307,3 +307,17 @@ Final camera-fix rendering check: all eight areas load/render without page or co
 Final compiled build: ordinary keyboard combat defeats the first three creatures and advances to the watchpost; pause freezes the timer; save/reload restores the same objective. No debug hook, page errors or failed requests. The 13.830-second opening sample averages 61.32 FPS, median 18.1 ms and 95th-percentile 24.2 ms. This remains a short bounded sample.
 
 Public verification: fe104c55cbae692e282cb6d940be33db75f15e0d is READY as dpl_J9HhBK5FTo5vrRNdsgagFHKfBkMe in the existing last-tether project. The public alias serves index-DyFxEaJl.js, matching the compiled local release. Ordinary keyboard combat, watchpost progression, pause and save/reload/resume pass with no debug hook, page errors or failed requests. The 13.939-second opening sample averages 73.11 FPS, median 12.2 ms and 95th-percentile 18.3 ms; variability between local and live samples prevents a sustained-performance claim.
+
+## Waterworks machinery, 0.2.24
+
+45 tests and the production build pass. Native E presses advance the first valve, rotate a linked wheel through four continuous clockwise quarter-turns and retain centered geometry. Native W input stops Kavi at the solid valve housing while its collision proxy remains invisible. Pause holds gate lift, pool levels, wheel angle and flow clocks exactly. Story resume restores the first completed valve and later solved target orientations. Fully raised gates retain 1.5 units of clearance below the crown.
+
+Three warm quarry/waterworks rebuild cycles retain 681 meshes, 112 materials, 59 textures, 2 skeletons and 8 controls. Twelve control visibility cases and an actual linked E-key turn pass. Staged normal-camera views cover approach, control, linked controls and closed/open reservoir. A measured rock overlap in the right spillway was removed; final pre-batch world bounds show zero intersections with the reserved gate and waterfall volume. No page or console errors in these checks.
+
+The full native Havok input-driven route completes all 32 objectives in **692.7167 simulated seconds (11m33s), 188 defeats, zero recoveries**, reaches the ending and writes a valid finished checkpoint. This ran after adding valve collision and raising the crown; subsequent changes removed unused water resources and shifted decorative canyon rock outside the spillway. It is an accelerated, route-aware policy, not a first-time 15–20 minute result.
+
+Two 30-second normal-speed waterworks samples measured **59.45 / 53.81 FPS**, median **15.6 / 17.5 ms**, p95 **22.0 / 23.9 ms**, maximum **284.3 / 267.3 ms**, on integrated AMD Radeon graphics at Balanced 1036×703. Each defeated six creatures, opened the first gate and advanced to the next objective without recovery. The second sample uses 45 natural render frames for warm-up rather than queued synchronous renders. Hitches remain in both; no sustained-performance claim is made.
+
+Reproduction: tools/waterworks-state-check.js, waterworks-gallery.js, waterworks-rock-clearance.js, waterworks-play-sample.js; existing control-visibility-check.js and kick-route-audit.js. Detailed results: verification/waterworks-0.2.24.json.
+
+The compiled 0.2.24 preview passed ordinary keyboard combat, pause and save/reload/resume, with no development hook, page errors or failed requests. Its bounded opening sample measured 39.05 FPS and p95 36.4 ms; performance remains variable. This local checkpoint has not yet been published.

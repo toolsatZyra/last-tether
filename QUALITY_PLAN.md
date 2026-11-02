@@ -91,3 +91,9 @@ The retained treatment alternates rock-supported small landings and masonry aren
 Structural stone and imported ruins now respond to light through aligned normal detail. A diagnostic close-up compares the actual map with an exactly neutral normal while retaining the same colour, lighting and camera; the former gives cracks and uneven stone subtle relief. Ordinary gameplay-camera captures still show the larger layout and silhouette limitations. Retain the detail as a surface improvement, not as evidence that the broader visual bar is met.
 
 The waterworks inspection revealed a separate readability issue: the foreground valve could hide Kavi. Complete control wheels now fade when they lie between the camera and player, restoring the view while keeping the wheel position visible. This repair applies to ordinary and linked controls throughout the chapter; it does not replace the still-needed waterworks machinery/art pass.
+
+## Waterworks pass, 0.2.24
+
+The area now communicates machinery and progress through physical handwheel assemblies, raised sluice gates, widening spills and changing channel levels. Camera views exposed rock intrusion into the third spillway; its full face and falling-water volume now remain clear. Native input checks cover collision, continuous turns, pause and saved state. Water is still stylized shader work, and the route still contains repeated masonry decks. This pass improves one area; it does not close the hero/creature art, overall composition, sustained-performance or first-time pacing gates.
+
+Two bounded normal-speed waterworks samples measured 59.45 and 53.81 FPS on integrated AMD graphics, with maximum frame intervals of 284 and 267 ms. The latter uses natural render frames for warm-up instead of synchronous render calls. Do not select the faster result as a sustained-performance claim or attribute the hitch solely to test setup.

@@ -54,30 +54,6 @@ function bellTower(view: GameScene, p: V) {
     false,
   );
 }
-function reservoir(view: GameScene, p: V) {
-  block(view, "reservoir-base", v(p.x, -4, p.z), v(28, 28, 28));
-  for (const side of [-1, 1]) {
-    block(
-      view,
-      "reservoir-buttress",
-      v(p.x + side * 13, 9, p.z - 11),
-      v(5, 45, 6),
-    );
-    block(view, "reservoir-cap", v(p.x + side * 13, 32, p.z - 11), v(7, 2, 8));
-  }
-  block(view, "reservoir-lintel", v(p.x, 31, p.z - 11), v(26, 3, 6));
-  view.architecture(
-    "Arch_Gothic_RoundColumn",
-    v(p.x, 16, p.z - 12),
-    19,
-    0,
-    false,
-    22,
-  );
-  // The spill openings face the route, with a clear channel beneath each one.
-  for (const x of [-8, 0, 8])
-    view.addCascade(v(p.x + x, 24, p.z - 14.2), 4.8, 31.1);
-}
 function rockBanks(view: GameScene) {
   for (let i = 0; i < 8; i++) {
     const p = view.current.chapter.points[i];
@@ -97,6 +73,20 @@ function rockBanks(view: GameScene) {
         rock.position.x += side * 35;
       // Compress depth so the scanned masses remain well outside the traversable deck.
       rock.scaling.z *= 42 / ((p.y + 52 + (i % 3) * 8) * 1.823);
+      const spill = view.waterworks?.spillwayBounds;
+      if (spill) {
+        const b = rock.getHierarchyBoundingVectors(true);
+        if (
+          b.max.x > spill.min.x &&
+          b.min.x < spill.max.x &&
+          b.max.y > spill.min.y &&
+          b.min.y < spill.max.y &&
+          b.max.z > spill.min.z &&
+          b.min.z < spill.max.z
+        )
+          rock.position.x +=
+            side > 0 ? spill.max.x + 1 - b.min.x : spill.min.x - 1 - b.max.x;
+      }
       for (let attempt = 0; attempt < 16; attempt++) {
         const bounds = rock.getHierarchyBoundingVectors(true);
         let close = false;
@@ -144,7 +134,6 @@ export function landmarks(view: GameScene) {
       );
     }
   }
-  if (view.sector === 2) reservoir(view, v(p.x + 28, 0, p.z + 60));
   if (view.sector === 7) bellTower(view, v(p.x + 58, p.y - 2, p.z + 40));
   if (view.sector === 3)
     for (let i = 0; i < 12; i++) {

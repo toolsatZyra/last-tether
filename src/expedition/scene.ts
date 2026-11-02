@@ -1,3 +1,4 @@
+import { Waterworks } from "./waterworks";
 import { stormSpur, stormGrapple } from "./storm-road";
 import { EncounterGate } from "./encounter-gate";
 import { actorSight, actorOpacity } from "./actor-visibility";
@@ -61,7 +62,6 @@ export class GameScene {
   landscapeClimate = new Vector3(0.42, 0, 0);
   lampPositions: Vector3[] = [];
   lampLights: PointLight[] = [];
-  cascadeTexture!: DynamicTexture;
   rain!: ParticleSystem;
   motes!: ParticleSystem;
   sparkTexture!: DynamicTexture;
@@ -78,6 +78,7 @@ export class GameScene {
   dials: { beat: number; index: number; hand: TransformNode }[] = [];
   blades: TransformNode[] = [];
   pressureGallery?: PressureGallery;
+  waterworks?: Waterworks;
   quarrySmoke?: ParticleSystem;
   quarryCrane?: {
     dynamicMeshes: Mesh[];
@@ -361,33 +362,6 @@ export class GameScene {
       this.materials[name] = m;
       return m;
     };
-    const cascade = new StandardMaterial("spillway-water", this.scene);
-    this.cascadeTexture = new DynamicTexture(
-      "cascade-streaks",
-      { width: 256, height: 256 },
-      this.scene,
-      true,
-    );
-    const ink = this.cascadeTexture.getContext();
-    ink.clearRect(0, 0, 256, 256);
-    for (let x = 0; x < 256; x++) {
-      const edge = Math.sin((x / 255) * Math.PI),
-        a = (0.25 + 0.22 * Math.sin(x * 0.7) + 0.1 * Math.sin(x * 2.9)) * edge;
-      ink.fillStyle = "rgba(181,225,218," + Math.max(0.04, a) + ")";
-      ink.fillRect(x, 0, 1, 256);
-    }
-    for (let y = 0; y < 256; y += 16) {
-      ink.fillStyle = "rgba(215,246,237,0.08)";
-      ink.fillRect(0, y, 256, 2);
-    }
-    this.cascadeTexture.hasAlpha = true;
-    this.cascadeTexture.update();
-    cascade.diffuseTexture = this.cascadeTexture;
-    cascade.useAlphaFromDiffuseTexture = true;
-    cascade.emissiveColor = c("#527f7d");
-    cascade.backFaceCulling = false;
-    cascade.disableDepthWrite = true;
-    this.materials.cascade = cascade;
     const stone = pbr("stone", "#a1aaa0");
     stone.albedoTexture = new Texture(
       "/assets/materials/stone.jpg",
@@ -534,35 +508,6 @@ export class GameScene {
       cameraSolid: false,
       physics: false,
     };
-  }
-  addCascade(p: V, width: number, height: number) {
-    const left: Vector3[] = [],
-      right: Vector3[] = [];
-    for (let i = 0; i <= 16; i++) {
-      const t = i / 16,
-        z = p.z - Math.sin((t * Math.PI) / 2) * 1.6;
-      left.push(new Vector3(p.x - width / 2, p.y - height * t, z));
-      right.push(new Vector3(p.x + width / 2, p.y - height * t, z));
-    }
-    const mesh = MeshBuilder.CreateRibbon(
-      "spillway-cascade",
-      { pathArray: [left, right], sideOrientation: Mesh.DOUBLESIDE },
-      this.scene,
-    );
-    mesh.material = this.materials.cascade;
-    mesh.parent = this.root;
-    mesh.isPickable = false;
-    mesh.metadata = { animatedWater: true };
-    const foam = MeshBuilder.CreateGround(
-      "spillway-foam",
-      { width: width * 1.7, height: 6 },
-      this.scene,
-    );
-    foam.position.set(p.x, p.y - height + 0.1, p.z - 2);
-    foam.material = this.materials.cascade;
-    foam.parent = this.root;
-    foam.isPickable = false;
-    foam.metadata = { animatedWater: true };
   }
   makeWater() {
     this.river = createRiver(this.scene);
@@ -890,6 +835,7 @@ export class GameScene {
     this.craneFraming = 0;
     this.pressureGallery?.dispose();
     this.pressureGallery = undefined;
+    this.waterworks = undefined;
     this.particleBursts.forEach((p) => p.system.dispose(false));
     this.particleBursts = [];
     this.sector = s.sector;
@@ -949,6 +895,7 @@ export class GameScene {
     this.river.material.waterColor = c(ch.water);
     this.sun.diffuse = c(ch.color);
     this.yaw = 0;
+    if (s.sector === 2) this.waterworks = new Waterworks(this);
     let seed = 71 + s.sector * 37;
     const rand = () => {
       seed = (seed * 1664525 + 1013904223) >>> 0;
@@ -1106,135 +1053,147 @@ export class GameScene {
       device.parent = this.root;
       device.position.copyFrom(V(p));
       this.devices.push(device);
-      if (b.device && b.device !== "rune") {
-        const pedestal = this.cylinder(
-          "pedestal",
-          v(p.x, p.y + 0.7, p.z),
-          2.8,
-          1.4,
-          "stone",
-        );
-        const ring = MeshBuilder.CreateTorus(
-          "brass-dial",
-          { diameter: 2.7, thickness: 0.16, tessellation: 36 },
-          this.scene,
-        );
-        ring.material = this.materials.brass;
-        ring.position.set(p.x, p.y + 2.6, p.z);
-        ring.rotation.x = Math.PI / 2;
-        ring.parent = this.root;
-        const pointer = this.box(
-          "dial-hand",
-          v(p.x, p.y + 2.6, p.z),
-          v(0.12, 2.3, 0.13),
-          "cyan",
-          false,
-        );
-        this.pointers.push(pointer);
-        const control = {
-          center: ring.position.clone(),
-          meshes: [ring, pointer],
-          opacity: 1,
-        };
-        this.controlViews.push(control);
-        for (let j = 0; j < 4; j++) {
-          const a = (j * Math.PI) / 2;
-          control.meshes.push(
-            this.box(
-              "dial-notch",
-              v(p.x + Math.sin(a) * 1.55, p.y + 2.6 + Math.cos(a) * 1.55, p.z),
-              v(0.23, 0.23, 0.23),
-              j === ((s.sector + i * 2) % 3) + 1 ? "glow" : "metal",
-              false,
-            ),
-          );
-        }
-      } else
-        this.pointers.push(
-          this.box(
-            "marker",
-            v(p.x, p.y - 0.4, p.z),
-            v(0.1, 0.1, 0.1),
+      if (this.waterworks && b.device) {
+        this.waterworks.controlsFor(p, i, b.device === "rune");
+      } else {
+        if (b.device && b.device !== "rune") {
+          const pedestal = this.cylinder(
+            "pedestal",
+            v(p.x, p.y + 0.7, p.z),
+            2.8,
+            1.4,
             "stone",
-            false,
-          ),
-        );
-      if (b.device === "rune") {
-        const targets =
-          s.sector === 2 && i === 1
-            ? [0, 3, 1]
-            : s.sector === 2
-              ? [1, 0, 3]
-              : [3, 1, 0];
-        for (let j = 0; j < 3; j++) {
-          const q = v(p.x + [-7, 7, 0][j], p.y, p.z + [0, 0, 9][j]);
-          this.cylinder(
-            "linked-wheel-base",
-            v(q.x, q.y + 0.6, q.z),
-            2.5,
-            1.2,
-            "cutstone",
           );
           const ring = MeshBuilder.CreateTorus(
-            "linked-wheel",
-            { diameter: 2.8, thickness: 0.17, tessellation: 40 },
+            "brass-dial",
+            { diameter: 2.7, thickness: 0.16, tessellation: 36 },
             this.scene,
           );
-          ring.position.set(q.x, q.y + 2.3, q.z);
-          ring.rotation.x = Math.PI / 2;
           ring.material = this.materials.brass;
+          ring.position.set(p.x, p.y + 2.6, p.z);
+          ring.rotation.x = Math.PI / 2;
           ring.parent = this.root;
-          const hand = new TransformNode("wheel-pointer", this.scene);
-          hand.parent = this.root;
-          hand.position.set(q.x, q.y + 2.3, q.z);
-          this.box(
-            "pointer",
-            v(0, 0.57, 0),
-            v(0.12, 1.14, 0.14),
+          const pointer = this.box(
+            "dial-hand",
+            v(p.x, p.y + 2.6, p.z),
+            v(0.12, 2.3, 0.13),
             "cyan",
             false,
-            hand,
           );
-          this.box(
-            "pointer-tip",
-            v(0, 1.15, 0),
-            v(0.25, 0.16, 0.18),
-            "cyan",
-            false,
-            hand,
-          );
-          this.dials.push({ beat: i, index: j, hand });
+          this.pointers.push(pointer);
           const control = {
             center: ring.position.clone(),
-            meshes: [ring, ...hand.getChildMeshes()],
+            meshes: [ring, pointer],
             opacity: 1,
           };
           this.controlViews.push(control);
-          for (let k = 0; k < 4; k++) {
-            const a = (k * Math.PI) / 2;
+          for (let j = 0; j < 4; j++) {
+            const a = (j * Math.PI) / 2;
             control.meshes.push(
               this.box(
-                "gold-alignment",
-                v(q.x + Math.sin(a) * 1.6, q.y + 2.3 + Math.cos(a) * 1.6, q.z),
-                v(0.24, 0.24, 0.2),
-                k === targets[j] ? "glow" : "metal",
+                "dial-notch",
+                v(
+                  p.x + Math.sin(a) * 1.55,
+                  p.y + 2.6 + Math.cos(a) * 1.55,
+                  p.z,
+                ),
+                v(0.23, 0.23, 0.23),
+                j === ((s.sector + i * 2) % 3) + 1 ? "glow" : "metal",
                 false,
               ),
             );
           }
-          const next = v(
-            p.x + [-7, 7, 0][(j + 1) % 3],
-            p.y,
-            p.z + [0, 0, 9][(j + 1) % 3],
+        } else
+          this.pointers.push(
+            this.box(
+              "marker",
+              v(p.x, p.y - 0.4, p.z),
+              v(0.1, 0.1, 0.1),
+              "stone",
+              false,
+            ),
           );
-          const link = this.box(
-            "linked-gears",
-            v((q.x + next.x) / 2, p.y + 0.08, (q.z + next.z) / 2),
-            v(0.08, 0.06, Math.hypot(q.x - next.x, q.z - next.z)),
-            "brass",
-            false,
-          );
-          link.rotation.y = Math.atan2(next.x - q.x, next.z - q.z);
+        if (b.device === "rune") {
+          const targets =
+            s.sector === 2 && i === 1
+              ? [0, 3, 1]
+              : s.sector === 2
+                ? [1, 0, 3]
+                : [3, 1, 0];
+          for (let j = 0; j < 3; j++) {
+            const q = v(p.x + [-7, 7, 0][j], p.y, p.z + [0, 0, 9][j]);
+            this.cylinder(
+              "linked-wheel-base",
+              v(q.x, q.y + 0.6, q.z),
+              2.5,
+              1.2,
+              "cutstone",
+            );
+            const ring = MeshBuilder.CreateTorus(
+              "linked-wheel",
+              { diameter: 2.8, thickness: 0.17, tessellation: 40 },
+              this.scene,
+            );
+            ring.position.set(q.x, q.y + 2.3, q.z);
+            ring.rotation.x = Math.PI / 2;
+            ring.material = this.materials.brass;
+            ring.parent = this.root;
+            const hand = new TransformNode("wheel-pointer", this.scene);
+            hand.parent = this.root;
+            hand.position.set(q.x, q.y + 2.3, q.z);
+            this.box(
+              "pointer",
+              v(0, 0.57, 0),
+              v(0.12, 1.14, 0.14),
+              "cyan",
+              false,
+              hand,
+            );
+            this.box(
+              "pointer-tip",
+              v(0, 1.15, 0),
+              v(0.25, 0.16, 0.18),
+              "cyan",
+              false,
+              hand,
+            );
+            this.dials.push({ beat: i, index: j, hand });
+            const control = {
+              center: ring.position.clone(),
+              meshes: [ring, ...hand.getChildMeshes()],
+              opacity: 1,
+            };
+            this.controlViews.push(control);
+            for (let k = 0; k < 4; k++) {
+              const a = (k * Math.PI) / 2;
+              control.meshes.push(
+                this.box(
+                  "gold-alignment",
+                  v(
+                    q.x + Math.sin(a) * 1.6,
+                    q.y + 2.3 + Math.cos(a) * 1.6,
+                    q.z,
+                  ),
+                  v(0.24, 0.24, 0.2),
+                  k === targets[j] ? "glow" : "metal",
+                  false,
+                ),
+              );
+            }
+            const next = v(
+              p.x + [-7, 7, 0][(j + 1) % 3],
+              p.y,
+              p.z + [0, 0, 9][(j + 1) % 3],
+            );
+            const link = this.box(
+              "linked-gears",
+              v((q.x + next.x) / 2, p.y + 0.08, (q.z + next.z) / 2),
+              v(0.08, 0.06, Math.hypot(q.x - next.x, q.z - next.z)),
+              "brass",
+              false,
+            );
+            link.rotation.y = Math.atan2(next.x - q.x, next.z - q.z);
+          }
         }
       }
       this.gates.push(new EncounterGate(this, p, i === s.beat && !s.clear));
@@ -1340,6 +1299,7 @@ export class GameScene {
       ...this.cacheMeshes,
       ...(this.pressureGallery?.dynamicMeshes || []),
       ...(this.quarryCrane?.dynamicMeshes || []),
+      ...(this.waterworks?.dynamicMeshes || []),
     ]);
     const groups = new Map<string, Mesh[]>();
     for (const m of this.root.getChildMeshes()) {
@@ -1452,7 +1412,7 @@ export class GameScene {
     for (let i = 0; i < 8; i++) {
       const p = ch.points[i];
       const wide = p.arena ? 21 : 11;
-      if (i % 2 && s.sector !== 4 && s.sector !== 3) {
+      if (i % 2 && ![2, 3, 4].includes(s.sector)) {
         for (const side of [-1, 1]) {
           this.architecture(
             "Wall_ArchRound_Overgrown_Broken",
@@ -1550,45 +1510,6 @@ export class GameScene {
             false,
           );
           m.rotation.y = a;
-        }
-      }
-      if (s.sector === 2) {
-        for (const side of [-1, 1]) {
-          this.box(
-            "garden-channel",
-            v(p.x + side * 10, p.y + 0.04, p.z),
-            v(0.85, 0.08, p.arena ? 33 : 23),
-            "channel",
-            false,
-          );
-          for (const edge of [-1, 1])
-            this.box(
-              "channel-curb",
-              v(p.x + side * 10 + edge * 0.56, p.y + 0.15, p.z),
-              v(0.24, 0.3, p.arena ? 33 : 23),
-              "cutstone",
-              false,
-            );
-          for (let j = -1; j <= 1; j++) {
-            this.cylinder(
-              "garden-column",
-              v(
-                p.x + side * (p.arena ? 17 : 10),
-                p.y + 4,
-                p.z + j * (p.arena ? 12 : 10),
-              ),
-              0.75,
-              8,
-              "cutstone",
-            );
-            this.box(
-              "pergola-beam",
-              v(p.x, p.y + 8, p.z + j * (p.arena ? 12 : 10)),
-              v(p.arena ? 35 : 21, 0.45, 0.6),
-              "wood",
-              false,
-            );
-          }
         }
       }
       if (s.sector === 5 && i % 2) {
@@ -1749,7 +1670,6 @@ export class GameScene {
     this.particleBursts = this.particleBursts.filter((p) => p.life > 0);
     this.time += dt;
     this.pressureGallery?.update(s, dt);
-    this.cascadeTexture.vOffset = (this.cascadeTexture.vOffset - dt * 0.7) % 1;
     const actorDt = s.hitstop > 0 ? 0 : dt;
     this.hero.player(s, actorDt);
     const visibleEnemies = s.enemies.filter((e) => e.hp > 0 || e.dead > 0);
@@ -1904,6 +1824,7 @@ export class GameScene {
     this.motes.emitter = new Vector3(s.p.x, s.p.y + 1, s.p.z);
     this.motes.updateSpeed = dt > 0 ? 1 / 60 : 0;
     this.quarryCrane?.update(s);
+    this.waterworks?.update(s, dt);
     if (this.quarrySmoke) this.quarrySmoke.updateSpeed = dt > 0 ? 1 / 60 : 0;
     this.rain.emitter = new Vector3(s.p.x, s.p.y + 20, s.p.z);
     this.rain.emitRate = [0, 7].includes(s.sector)
@@ -2041,7 +1962,8 @@ export class GameScene {
         occludes(control.center, 1.85),
         dt,
       );
-      const visible = Vector3.DistanceSquared(control.center, V(s.p)) < 110 * 110;
+      const visible =
+        Vector3.DistanceSquared(control.center, V(s.p)) < 110 * 110;
       for (const mesh of control.meshes) {
         mesh.visibility = control.opacity;
         mesh.isVisible = visible;
