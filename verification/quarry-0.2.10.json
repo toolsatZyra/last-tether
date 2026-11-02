@@ -417,5 +417,20 @@
     "Crane is environmental scenery, not a player-operated mechanism.",
     "New quarry structure and props do not close the full-game art-quality gate.",
     "First-time 15–20 minute pacing and human enjoyment remain unverified."
-  ]
+  ],
+  "public": {
+    "url": "https://last-tether.vercel.app/",
+    "applicationCommit": "f475985d22c4c16fcbd03ab4fc56a5b106df2d29",
+    "deployment": "dpl_D62wv2CdMaFgMJAPcf2CD7LeLXFn",
+    "ready": true,
+    "verification": {
+      "initial": "Clear the blasting yard",
+      "objective": "Survive the furnace approach",
+      "meta": "9 defeated · 0 recoveries",
+      "noDebug": true,
+      "errors": [],
+      "bad": [],
+      "resumed": "Survive the furnace approach"
+    }
+  }
 }
