@@ -1,0 +1,201 @@
+{
+  "version": "0.2.7",
+  "date": "2026-11-02",
+  "unitTests": 19,
+  "character": {
+    "checkedMeshes": 15,
+    "strikes": {
+      "0": {
+        "phase": 0.33333333333333326,
+        "pose": 0,
+        "arm": [
+          -0.6339225083885774,
+          -0.2120488148182501,
+          0.06854774661382586,
+          0.7405935411879349
+        ],
+        "tip": [
+          -1.4455617666244507,
+          10.216682434082031,
+          0.4962054193019867
+        ]
+      },
+      "1": {
+        "phase": 0.33333333333333326,
+        "pose": 1,
+        "arm": [
+          -0.5765221311858124,
+          -0.3382967318205417,
+          -0.08575113825780079,
+          0.7387992481740965
+        ],
+        "tip": [
+          -1.1140531301498413,
+          9.876443862915039,
+          1.4160348176956177
+        ]
+      },
+      "2": {
+        "phase": 0.3448275862068969,
+        "pose": 2,
+        "arm": [
+          -0.5775766677173488,
+          -0.3286669303692332,
+          -0.097370001119684,
+          0.740879442109092
+        ],
+        "tip": [
+          -1.3330719470977783,
+          10.122117042541504,
+          1.088832974433899
+        ]
+      }
+    },
+    "poseReset": true,
+    "duplicatePack": false,
+    "idleCameraDistance": 7.800002733535206,
+    "combatCameraDistance": 9.999989514766664,
+    "errors": []
+  },
+  "geometry": {
+    "sourceMeshes": 72,
+    "sectorsRebuilt": 4,
+    "sharedGeometryUnchanged": true
+  },
+  "production": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "transitions": {
+    "results": [
+      {
+        "sector": 1,
+        "wallMs": 2556.4000000014894,
+        "frames": 232,
+        "maxMs": 187.89999999999964,
+        "p95Ms": 24.30000000000109,
+        "gameFrozen": true,
+        "paused": true,
+        "physicsBodies": 52,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 2,
+        "wallMs": 3204.7999999985095,
+        "frames": 335,
+        "maxMs": 157.79999999999927,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 61,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 3,
+        "wallMs": 2156.10000000149,
+        "frames": 219,
+        "maxMs": 145.5,
+        "p95Ms": 24.200000000000728,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 54,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 4,
+        "wallMs": 2145.699999998509,
+        "frames": 219,
+        "maxMs": 151.5,
+        "p95Ms": 24.19999999999891,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 78,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 5,
+        "wallMs": 2352.5000000029795,
+        "frames": 256,
+        "maxMs": 169.79999999999927,
+        "p95Ms": 18.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 57,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 6,
+        "wallMs": 2245.39999999851,
+        "frames": 217,
+        "maxMs": 139.5,
+        "p95Ms": 24.299999999999272,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 74,
+        "skeletons": 2,
+        "animationGroups": 48
+      },
+      {
+        "sector": 7,
+        "wallMs": 2010.6999999985092,
+        "frames": 205,
+        "maxMs": 133.39999999999782,
+        "p95Ms": 18.30000000000291,
+        "gameFrozen": true,
+        "paused": false,
+        "physicsBodies": 59,
+        "skeletons": 2,
+        "animationGroups": 48
+      }
+    ],
+    "errors": []
+  },
+  "stationaryRenderingSamples": [
+    {
+      "sector": 0,
+      "beat": 0,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 46.889653016239976,
+      "medianFrameMs": 18.19999999999709,
+      "p95FrameMs": 24.30000000000291,
+      "frames": 262
+    },
+    {
+      "sector": 3,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 41.73622704524811,
+      "medianFrameMs": 24.099999999998545,
+      "p95FrameMs": 30.299999999995634,
+      "frames": 179
+    },
+    {
+      "sector": 6,
+      "beat": 1,
+      "renderWidth": 1036,
+      "renderHeight": 703,
+      "fps": 43.047783038805214,
+      "medianFrameMs": 24.10000000000582,
+      "p95FrameMs": 30.200000000004366,
+      "frames": 182
+    }
+  ],
+  "limits": [
+    "The existing licensed animation is accented with additive poses; these are not three new motion-capture clips.",
+    "Normal smoothing preserves geometry and skinning; it does not add character geometry or facial animation.",
+    "Short stationary performance samples, not sustained combat benchmarks.",
+    "Top-tier visual parity, first-time 15–20 minute pacing, and human enjoyment remain unverified."
+  ]
+}

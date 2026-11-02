@@ -1794,11 +1794,22 @@ export class GameScene {
         s.p.z + Math.cos(this.yaw) * 2,
       );
       const bossPresent = s.living.some((e) => e.kind === "guardian");
-      const distance = s.grapple ? 13 : bossPresent ? 17 : 9.5;
+      const nearbyThreats = s.living.filter(
+        (e) => Math.hypot(e.p.x - s.p.x, e.p.z - s.p.z) < 13,
+      ).length;
+      const distance = s.grapple
+        ? 13
+        : bossPresent
+          ? 17
+          : nearbyThreats > 2
+            ? 10
+            : nearbyThreats
+              ? 8.8
+              : 7.8;
       if (bossPresent) target.y += 2.5;
       desired = new Vector3(
         s.p.x - Math.sin(this.yaw) * distance,
-        s.p.y + (bossPresent ? 7 : 3) + this.pitch * 5,
+        s.p.y + (bossPresent ? 7 : 2.7) + this.pitch * (bossPresent ? 5 : 3.8),
         s.p.z - Math.cos(this.yaw) * distance,
       );
       const ray = new Ray(

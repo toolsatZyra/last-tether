@@ -25,6 +25,7 @@ const creatureMaterials = new Map<number, PBRCustomMaterial>();
 import { ASSETS, type Kind } from "./level";
 import type { Expedition, Enemy } from "./engine";
 import { weatheredStone } from "./surfaces";
+import { characterSurface, softenCharacterSurface } from "./character-finish";
 export class Actor {
   instance: InstantiatedEntries;
   height: number;
@@ -46,6 +47,10 @@ export class Actor {
   removePose: (() => void) | null = null;
   lastAttack = 0;
   lastDodge = 0;
+  attackPose = -1;
+  attackPhase = 0;
+  turnLean = 0;
+  poseBases = new Map<TransformNode, Quaternion>();
   constructor(
     container: AssetContainer,
     scene: Scene,
@@ -104,8 +109,16 @@ export class Actor {
       m.isPickable = false;
       shadows.addShadowCaster(m);
       if (m.material instanceof PBRMaterial) {
-        if (hero) m.material = m.material.clone(id + "_" + m.material.name);
-        else {
+        if (hero) {
+          if (!/Hair|Eyebrows|Eye|Gold/.test(m.material.name))
+            softenCharacterSurface(m);
+          m.material = characterSurface(
+            scene,
+            m.material,
+            id,
+            m.name.includes("Backpack"),
+          );
+        } else {
           const original = m.material;
           let appearance = creatureMaterials.get(original.uniqueId);
           if (!appearance) {
@@ -135,26 +148,17 @@ export class Actor {
           m.material = appearance;
         }
         const mat = m.material as PBRMaterial;
-        mat.roughness = 0.83;
-        mat.metallic = 0;
-        if (!hero) mat.albedoColor = new Color3(0.62, 0.68, 0.57);
-        if (hero) {
-          if (mat.name.endsWith("LightGreen"))
-            mat.albedoColor = Color3.FromHexString("#ba6a36");
-          if (mat.name.endsWith("_Green"))
-            mat.albedoColor = Color3.FromHexString("#70472e");
-          if (mat.name.endsWith("_Gold")) {
-            mat.albedoColor = Color3.FromHexString("#cbad70");
-            mat.metallic = 0.6;
-            mat.roughness = 0.4;
-          }
+        if (!hero) {
+          mat.roughness = 0.83;
+          mat.metallic = 0;
+          mat.albedoColor = new Color3(0.62, 0.68, 0.57);
         }
       }
     });
     this.groups.forEach((g) => g.stop());
     this.play(hero ? "Idle_Sword" : "Idle");
     const observer = scene.onAfterAnimationsObservable.add(() => {
-      if (scene.animationsEnabled && (this.air > 0.01 || this.landing > 0.01)) {
+      if (this.air > 0.01 || this.landing > 0.01 || this.attackPose >= 0) {
         for (const n of this.nodes) {
           if (!n.rotationQuaternion) continue;
           const name = n.name;
@@ -168,16 +172,39 @@ export class Actor {
           if (/UpperLeg\.[LR]$/.test(name)) amount -= 0.24 * this.landing;
           if (/LowerLeg\.[LR]$/.test(name)) amount += 0.46 * this.landing;
           if (/Chest$/.test(name)) amount += 0.08 * this.landing;
-          if (amount)
+          const strike =
+            this.attackPose >= 0 ? Math.sin(Math.PI * this.attackPhase) : 0;
+          let twist = 0,
+            lift = 0;
+          if (/Chest$/.test(name)) {
+            twist =
+              (this.attackPose === 1
+                ? -0.28
+                : this.attackPose === 2
+                  ? 0.16
+                  : 0) * strike;
+            if (this.attackPose === 2) amount -= 0.18 * strike;
+          }
+          if (/UpperArm\.R$/.test(name))
+            lift = (this.attackPose === 1 ? -0.48 : 0) * strike;
+          if (/UpperArm\.R$/.test(name) && this.attackPose === 2)
+            lift =
+              0.85 * Math.sin(Math.PI * Math.min(1, this.attackPhase / 0.32)) -
+              0.38 * strike;
+          if (amount || twist || lift) {
+            this.poseBases.set(n, n.rotationQuaternion.clone());
             n.rotationQuaternion = n.rotationQuaternion.multiply(
-              Quaternion.RotationAxis(Vector3.Right(), amount),
+              Quaternion.RotationYawPitchRoll(twist, amount, lift),
             );
+          }
         }
       }
       if (scene.animationsEnabled && this.trailActive)
         this.weaponTrail?.update();
     });
-    this.removePose = () => scene.onAfterAnimationsObservable.remove(observer);
+    this.removePose = () => {
+      scene.onAfterAnimationsObservable.remove(observer);
+    };
     if (hero) {
       this.weapon(scene);
       this.outfit(scene);
@@ -220,9 +247,6 @@ export class Actor {
     cloth.albedoTexture = weave;
     cloth.roughness = 0.96;
     cloth.backFaceCulling = false;
-    const leather = new PBRMaterial("kavi-pack", scene);
-    leather.albedoColor = Color3.FromHexString("#69432d");
-    leather.roughness = 0.9;
     const cape = new Mesh("weather-cloak", scene);
     const data = new VertexData();
     data.positions = [];
@@ -255,14 +279,6 @@ export class Actor {
     this.cloak = cape;
     cape.material = cloth;
     cape.parent = chest;
-    const pack = MeshBuilder.CreateBox(
-      "field-pack",
-      { width: 0.25, height: 0.31, depth: 0.16 },
-      scene,
-    );
-    pack.parent = chest;
-    pack.position.set(0, -0.15, -0.2);
-    pack.material = leather;
     const collar = MeshBuilder.CreateTorus(
       "woven-scarf",
       { diameter: 0.25, thickness: 0.09, tessellation: 24 },
@@ -271,7 +287,7 @@ export class Actor {
     collar.parent = chest;
     collar.position.y = 0.15;
     const amber = new PBRMaterial("scarf-ochre", scene);
-    amber.albedoColor = Color3.FromHexString("#b8753c");
+    amber.albedoColor = Color3.FromHexString("#b8753c").toLinearSpace();
     amber.roughness = 1;
     collar.material = amber;
   }
@@ -368,7 +384,13 @@ export class Actor {
       }
     }
   }
+  clearPose() {
+    for (const [node, base] of this.poseBases)
+      node.rotationQuaternion?.copyFrom(base);
+    this.poseBases.clear();
+  }
   player(s: Expedition, dt: number) {
+    this.clearPose();
     if (s.attack > this.lastAttack + 0.05 || s.dodge > this.lastDodge + 0.05) {
       this.groups.find((g) => g.name === this.active)?.stop();
       this.active = "";
@@ -381,6 +403,8 @@ export class Actor {
       s.landTime > 0 ? Math.sin(Math.PI * (1 - s.landTime / 0.22)) : 0;
     this.root.position.set(s.p.x, s.p.y - this.landing * 0.06, s.p.z);
     const phase = 1 - s.attack / s.attackDuration;
+    this.attackPose = s.attack > 0 && !s.slam && s.grounded ? s.combo : -1;
+    this.attackPhase = Math.max(0, Math.min(1, phase));
     const trailActive = s.attack > 0 && !s.slam && phase > 0.27 && phase < 0.66;
     if (trailActive && !this.trailActive) this.weaponTrail?.reset();
     this.trailActive = trailActive;
@@ -423,10 +447,16 @@ export class Actor {
     else if (!s.grounded) this.play("Idle_Sword");
     else if (s.speed > 0.7) this.play("Run", Math.max(0.6, s.speed / 5.8));
     else this.play("Idle_Sword");
-    this.root.rotation.z = 0;
+    const lean =
+      s.speed > 2 && !s.attack && !s.dodge && s.grounded
+        ? Math.max(-0.12, Math.min(0.12, -delta * 0.16))
+        : 0;
+    this.turnLean += (lean - this.turnLean) * (1 - Math.exp(-dt * 12));
+    this.root.rotation.z = this.turnLean;
     this.update(dt);
   }
   enemy(e: Enemy, dt: number) {
+    this.clearPose();
     this.contact.position.set(e.p.x, e.p.y + 0.045, e.p.z);
     this.contact.visibility = e.hp > 0 ? 0.65 : 0;
     this.root.position.set(e.p.x, e.p.y, e.p.z);
