@@ -95,3 +95,11 @@ Raptors, spitters, brutes and bombers now use Babylon/Havok character controller
 Ground knockback is a decaying velocity, with momentum transferred once when support is lost. Unsupported creatures fall, can land on a lower surface and recover, or count as defeated after dropping 18 metres below their last support. Falling creatures use the imported Jump_Idle clip and are excluded from tether targeting.
 
 Combat tethering captures a destination and pulls over 0.3 seconds, displaying the line while it travels. Ground pulls use the same Havok sweep and stop at solid geometry; they never teleport at completion. Flyers move continuously but remain outside ground-capsule collision. A living pulled creature is stunned for 0.65 seconds; a lethal tether hit cannot revive it. Existing guardian armour interaction is retained.
+
+## Hanging forest — 0.2.16
+
+The forest now uses Quaternius maple trees and grass, original bark/normal textures, scanned Rock_Mass foundations, authored root curves and native Babylon timber/rope geometry. Bark maps are resized to at most 1024 pixels; tools/prepare-forest.mjs reproduces the eight additions from pinned sources and records hashes. The additions total 2,229,643 bytes. Sharp is pinned as a direct development dependency.
+
+Tree placement keeps trunks away from route centrelines and memory-cache approaches. Hidden collision meshes copy the lower imported bark triangles in world space; they do not mutate shared geometry. Planks, rope rails and posts participate in Havok collision. Root curves and the below-deck rock shells are scenery. Forest-specific materials are created once and reused across area rebuilds. Existing foreground foliage fading remains active.
+
+A full-route regression exposed a quarry crate positioned across the arena exit. Crates and accompanying barrels now sit nearer the side-centre, keeping the diagonal departure clear. This corrects prop placement; it does not add obstacle-avoiding AI.

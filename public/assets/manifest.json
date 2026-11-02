@@ -766,5 +766,93 @@
     "license": "CC-BY-4.0",
     "licenseSource": "https://bake3d.ai/free-3d-models",
     "modifications": "Geometry simplified. Runtime armour, positioning and skeletal combat accents added."
+  },
+  {
+    "path": "assets/nature/Textures/BirchTree_Bark.jpg",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/BirchTree_Bark.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "689dd3e55523e999cf9a2271aa1e8ce1ac6a7cf3a2dc4bd796dd76860a33154b",
+    "sha256": "d684069c154d67b67da400a0ec5205bc4b7598e7a9def0a6aa42849e8145ab2b",
+    "bytes": 232281,
+    "modifications": "Original bark map resized to at most 1024px and JPEG quality 90 with 4:4:4 sampling."
+  },
+  {
+    "path": "assets/nature/Textures/BirchTree_Bark_Normal.jpg",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/BirchTree_Bark_Normal.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "e30ee9c7561742523340d5657056f8392bc0f944da5145f0af7690cd1d2e6a11",
+    "sha256": "c1f6486214f3cc4c4b1948323533cad92ee982fce8d1ca8455262bcab14c78ad",
+    "bytes": 353355,
+    "modifications": "Original bark map resized to at most 1024px and JPEG quality 90 with 4:4:4 sampling."
+  },
+  {
+    "path": "assets/nature/Textures/MapleTree_Bark.jpg",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/MapleTree_Bark.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "183645b8dc99e810e9b4c5d48a0944ccff4c2f2a9bd5f1816ab66a367cfe9a92",
+    "sha256": "73b1ed8c61bcd0ea2b329f198e42bc87f9297633519f06dab8cd42933de7a57d",
+    "bytes": 178225,
+    "modifications": "Original bark map resized to at most 1024px and JPEG quality 90 with 4:4:4 sampling."
+  },
+  {
+    "path": "assets/nature/Textures/MapleTree_Bark_Normal.jpg",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/MapleTree_Bark_Normal.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "2e3d97d57838d6e8203f0fab2858bada8ad1e6d6f240c0e898f8e88c110f2f5d",
+    "sha256": "35f470418a338ee9da1b9fce220a8529a876ee686b7af407b24b1a5753df89a8",
+    "bytes": 268522,
+    "modifications": "Original bark map resized to at most 1024px and JPEG quality 90 with 4:4:4 sampling."
+  },
+  {
+    "path": "assets/nature/Textures/MapleTree_Leaves.png",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/MapleTree_Leaves.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "915f0836e9889e28032662c7aa0d0eb9601ba999eda042c9a4e38690786d6c7b",
+    "sha256": "915f0836e9889e28032662c7aa0d0eb9601ba999eda042c9a4e38690786d6c7b",
+    "bytes": 212333,
+    "modifications": "Unmodified source file; materials connected in Babylon at runtime."
+  },
+  {
+    "path": "assets/nature/Textures/Grass.png",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Textures/Grass.png",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "facde747020acfefdc84d176dd4037282895d200a66fc20b0d9baca470f310f1",
+    "sha256": "facde747020acfefdc84d176dd4037282895d200a66fc20b0d9baca470f310f1",
+    "bytes": 734927,
+    "modifications": "Unmodified source file; materials connected in Babylon at runtime."
+  },
+  {
+    "path": "assets/nature/MapleTree_2.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/MapleTree_2.gltf",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "da08631d753fc2efdb56228077a330477153596217b3b7e43bec53465a4688f7",
+    "sha256": "da08631d753fc2efdb56228077a330477153596217b3b7e43bec53465a4688f7",
+    "bytes": 243708,
+    "modifications": "Unmodified source file; materials connected in Babylon at runtime."
+  },
+  {
+    "path": "assets/nature/Grass_Small.gltf",
+    "source": "https://raw.githubusercontent.com/walterpalladino/godot-shaders/c1920d176ab5443ff386959969074fd0eef86c4e/assets/godot-shaders/models/Ultimate%20Stylized%20Nature/Grass_Small.gltf",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "licenseSource": "https://quaternius.com/packs/ultimatestylizednature.html",
+    "originalDownloadSha256": "51b305eae2344854e975dca85f2532930f75373827cb9937a7a6b6b798fd10c1",
+    "sha256": "51b305eae2344854e975dca85f2532930f75373827cb9937a7a6b6b798fd10c1",
+    "bytes": 6292,
+    "modifications": "Unmodified source file; materials connected in Babylon at runtime."
   }
 ]

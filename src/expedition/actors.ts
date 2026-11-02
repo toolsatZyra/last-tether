@@ -585,6 +585,8 @@ export class Assets {
       "BirchTree_2",
       "Bush_Large",
       "Bush_Small",
+      "MapleTree_2",
+      "Grass_Small",
     ]) {
       const container = await SceneLoader.LoadAssetContainerAsync(
         "/assets/nature/",
@@ -594,11 +596,17 @@ export class Assets {
       for (const material of container.materials) {
         if (
           material instanceof PBRMaterial &&
-          material.name.includes("Leaves")
+          (material.name.includes("Leaves") || material.name === "Grass")
         ) {
           material.albedoTexture = new Texture(
             "/assets/nature/Textures/" +
-              (name.startsWith("Bush") ? "Bush_Leaves" : "BirchTree_Leaves") +
+              (name.startsWith("Bush")
+                ? "Bush_Leaves"
+                : name.startsWith("Maple")
+                  ? "MapleTree_Leaves"
+                  : name.startsWith("Grass")
+                    ? "Grass"
+                    : "BirchTree_Leaves") +
               ".png",
             scene,
             false,
@@ -611,7 +619,31 @@ export class Assets {
           material.backFaceCulling = false;
           material.roughness = 0.9;
           material.metallic = 0;
-          material.albedoColor = new Color3(0.22, 0.31, 0.15);
+          material.albedoColor = name.startsWith("Maple")
+            ? new Color3(0.65, 0.6, 0.45)
+            : new Color3(0.22, 0.31, 0.15);
+        }
+        if (material instanceof PBRMaterial && material.name.includes("Bark")) {
+          const bark = name.startsWith("Maple")
+            ? "MapleTree_Bark"
+            : "BirchTree_Bark";
+          material.albedoTexture = new Texture(
+            "/assets/nature/Textures/" + bark + ".jpg",
+            scene,
+            false,
+            false,
+          );
+          material.bumpTexture = new Texture(
+            "/assets/nature/Textures/" + bark + "_Normal.jpg",
+            scene,
+            false,
+            false,
+          );
+          material.bumpTexture.level = 0.7;
+          material.albedoColor =
+            Color3.FromHexString("#d8d4c4").toLinearSpace();
+          material.metallic = 0;
+          material.roughness = 0.92;
         }
       }
       this.containers.set(name, container);

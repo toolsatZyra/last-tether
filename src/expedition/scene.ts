@@ -47,6 +47,7 @@ import {
   quarryYard,
   quarryCharge,
 } from "./quarry";
+import { forestMaterials, forestTerrace, forestBridge } from "./forest";
 import { PressureGallery } from "./pressure-gallery";
 import { SkyMaterial } from "@babylonjs/materials/sky";
 import { CHAPTERS, ASSETS, floorAt, v, type V } from "./level";
@@ -905,6 +906,7 @@ export class GameScene {
     this.effects = [];
     const ch = s.chapter;
     if (s.sector === 4) quarryMaterials(this);
+    if (s.sector === 3) forestMaterials(this);
     const climates = [
       [0.32, 0.85, 0],
       [0.85, 0.2, 0],
@@ -938,15 +940,23 @@ export class GameScene {
     };
     for (let i = 0; i < ch.points.length; i++) {
       const p = ch.points[i];
-      this.slab(p, p.arena ? 46 : 26, p.arena ? 46 : 28, 3.1);
       this.slab(
-        v(p.x, p.y - 2.8, p.z),
-        p.arena ? 47 : 27,
-        p.arena ? 47 : 29,
-        0.5,
-        "edge",
+        p,
+        p.arena ? 46 : 26,
+        p.arena ? 46 : 28,
+        s.sector === 3 ? 1.8 : 3.1,
+        s.sector === 3 ? "forestFloor" : "floor",
       );
+      if (s.sector !== 3)
+        this.slab(
+          v(p.x, p.y - 2.8, p.z),
+          p.arena ? 47 : 27,
+          p.arena ? 47 : 29,
+          0.5,
+          "edge",
+        );
       if (s.sector === 4) quarryBench(this, p);
+      else if (s.sector === 3) forestTerrace(this, p, i);
       else terraceStructure(this, p);
       yield;
       if (i % 2) {
@@ -960,7 +970,8 @@ export class GameScene {
       }
       const q = ch.points[i + 1];
       if (q && !q.gap) {
-        bridgeStructure(this, p, q);
+        const crossing = s.sector === 3 ? forestBridge(this, p, q) : null;
+        if (!crossing) bridgeStructure(this, p, q);
         const left: Vector3[] = [],
           right: Vector3[] = [];
         const dx = q.x - p.x,
@@ -969,7 +980,9 @@ export class GameScene {
           nx = -dz / len,
           nz = dx / len;
         for (let j = 0; j <= 30; j++) {
-          const t = j / 30,
+          const t = crossing
+              ? crossing.from + ((crossing.to - crossing.from) * j) / 30
+              : j / 30,
             x = p.x + dx * t,
             z = p.z + dz * t,
             y = floorAt(ch, x, z) ?? p.y;
@@ -981,7 +994,8 @@ export class GameScene {
           { pathArray: [left, right], sideOrientation: Mesh.DOUBLESIDE },
           this.scene,
         );
-        road.material = this.materials.floor;
+        road.material =
+          this.materials[s.sector === 3 ? "forestBridgeBed" : "floor"];
         road.parent = this.root;
         road.receiveShadows = true;
         road.metadata = { physics: true, cameraSolid: true };
@@ -998,13 +1012,14 @@ export class GameScene {
             z = p.z + dz * t,
             y = floorAt(ch, x, z) ?? p.y;
           for (const side of [-1, 1]) {
-            this.box(
-              "causeway-edge",
-              v(x + nx * side * 5.1, y + 0.22, z + nz * side * 5.1),
-              v(1, 0.5, 3),
-              "cutstone",
-              false,
-            );
+            if (s.sector !== 3)
+              this.box(
+                "causeway-edge",
+                v(x + nx * side * 5.1, y + 0.22, z + nz * side * 5.1),
+                v(1, 0.5, 3),
+                "cutstone",
+                false,
+              );
             if (j % 2 === 0)
               this.lamp(v(x + nx * side * 4.5, y, z + nz * side * 4.5));
           }
@@ -1025,7 +1040,7 @@ export class GameScene {
         this.anchors.push(anchor);
         this.arch(v(p.x, p.y, p.z - 8), 11, 10);
       }
-      for (let j = 0; j < (s.sector === 4 ? 0 : 5); j++) {
+      for (let j = 0; j < ([3, 4].includes(s.sector) ? 0 : 5); j++) {
         const side = j % 2 ? 1 : -1,
           x = p.x + side * ((p.arena ? 21 : 11) - rand() * 3),
           z = p.z - 20 + rand() * 40;
@@ -1055,7 +1070,11 @@ export class GameScene {
         z = -30 + rand() * 530,
         y = this.terrainHeight(x, z);
       this.assets.prop(
-        i % 3 ? "BirchTree_1" : "BirchTree_2",
+        s.sector === 3 && i % 3
+          ? "MapleTree_2"
+          : i % 3
+            ? "BirchTree_1"
+            : "BirchTree_2",
         this.scene,
         this.root,
         new Vector3(x, y, z),
@@ -1405,7 +1424,7 @@ export class GameScene {
     for (let i = 0; i < 8; i++) {
       const p = ch.points[i];
       const wide = p.arena ? 21 : 11;
-      if (i % 2 && s.sector !== 4) {
+      if (i % 2 && s.sector !== 4 && s.sector !== 3) {
         for (const side of [-1, 1]) {
           this.architecture(
             "Wall_ArchRound_Overgrown_Broken",
@@ -1443,7 +1462,7 @@ export class GameScene {
             false,
           );
         }
-      } else if (s.sector !== 4) {
+      } else if (s.sector !== 4 && s.sector !== 3) {
         for (const side of [-1, 1]) {
           this.architecture(
             "Rail_Straight",
@@ -1456,14 +1475,8 @@ export class GameScene {
       }
       if (s.sector === 4 && p.arena) {
         this.architecture("Cart", v(p.x + 15, p.y, p.z - 12), 2.3, 0.4, true);
-        this.architecture(
-          "Crate",
-          v(p.x - 17, p.y, p.z + 14),
-          2,
-          i * 0.3,
-          true,
-        );
-        this.architecture("Barrel", v(p.x - 19, p.y, p.z + 10), 1.8, 0, true);
+        this.architecture("Crate", v(p.x - 17, p.y, p.z + 1), 2, i * 0.3, true);
+        this.architecture("Barrel", v(p.x - 19, p.y, p.z - 4), 1.8, 0, true);
       }
       if (s.sector === 0 && i % 2 === 1) {
         this.architecture(
@@ -1476,7 +1489,7 @@ export class GameScene {
         this.architecture("Barrel", v(p.x + 18, p.y, p.z - 12), 1.6, 0, true);
       }
       // A planted perimeter gives each deck a silhouette without hiding the playable floor.
-      if ([0, 1, 2, 3].includes(s.sector)) {
+      if ([0, 1, 2].includes(s.sector)) {
         for (const side of [-1, 1]) {
           const x = p.x + side * (p.arena ? 21 : 11),
             z = p.z + (i % 2 ? 14 : side === 1 && i > 0 ? -9 : 5);
@@ -1489,7 +1502,7 @@ export class GameScene {
           );
         }
       }
-      if (i % 2 && s.sector !== 4) {
+      if (i % 2 && s.sector !== 4 && s.sector !== 3) {
         const ring = MeshBuilder.CreateTorus(
           "terrace-inlay",
           { diameter: 32, thickness: 0.045, tessellation: 80 },

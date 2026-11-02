@@ -1,0 +1,667 @@
+{
+  "version": "0.2.16",
+  "date": "2026-11-02",
+  "assets": {
+    "count": 91,
+    "totalBytes": 32614861,
+    "addedBytes": 2229643,
+    "hashesPassed": true
+  },
+  "behaviourTests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "physics": {
+    "crossings": [
+      {
+        "from": 2,
+        "to": 3,
+        "frames": 804,
+        "remaining": 0.2329609018420457,
+        "maxFloorError": 0.2189096099554959,
+        "railLateral": 4.83547455013357
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "frames": 866,
+        "remaining": 0.2352848803913892,
+        "maxFloorError": 0.2590988057052286,
+        "railLateral": 4.83502875741382
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "frames": 720,
+        "remaining": 0.2408809952518119,
+        "maxFloorError": 0.318922757985753,
+        "railLateral": 4.834559703320929
+      }
+    ],
+    "trunks": 24,
+    "trunkStop": {
+      "center": {
+        "x": -10.881539721715155,
+        "z": -5.923350656086028
+      },
+      "foot": {
+        "x": -9.70695092278681,
+        "y": 17.998053722974912,
+        "z": -5.266778650374687
+      }
+    },
+    "resources": {
+      "meshes": 861,
+      "textures": 59,
+      "skeletons": 2
+    },
+    "errors": []
+  },
+  "details": {
+    "caches": [
+      {
+        "key": "3-0",
+        "opened": true,
+        "flasks": 2,
+        "lid": 1.1457474567260446,
+        "glimmer": false
+      },
+      {
+        "key": "3-1",
+        "opened": true,
+        "flasks": 2,
+        "lid": 1.1457474567260446,
+        "glimmer": false
+      },
+      {
+        "key": "3-2",
+        "opened": true,
+        "flasks": 2,
+        "lid": 1.1457474567260446,
+        "glimmer": false
+      }
+    ],
+    "foliageFades": 247,
+    "resources": [
+      {
+        "sector": 3,
+        "meshes": 861,
+        "textures": 58,
+        "materials": 110,
+        "skeletons": 2
+      },
+      {
+        "sector": 0,
+        "meshes": 629,
+        "textures": 58,
+        "materials": 110,
+        "skeletons": 2
+      },
+      {
+        "sector": 3,
+        "meshes": 861,
+        "textures": 58,
+        "materials": 110,
+        "skeletons": 2
+      },
+      {
+        "sector": 0,
+        "meshes": 629,
+        "textures": 58,
+        "materials": 110,
+        "skeletons": 2
+      }
+    ]
+  },
+  "fullRoute": {
+    "resources": {
+      "skeletons": 2,
+      "textures": 63,
+      "animationGroups": 48
+    },
+    "finished": true,
+    "seconds": 677.3999999997126,
+    "kills": 188,
+    "deaths": 0,
+    "log": [
+      {
+        "key": "0-0",
+        "seconds": 0.03333333333333333,
+        "deaths": 0
+      },
+      {
+        "key": "0-1",
+        "seconds": 10.200000000000086,
+        "deaths": 0
+      },
+      {
+        "key": "0-2",
+        "seconds": 31.54999999999949,
+        "deaths": 0
+      },
+      {
+        "key": "0-3",
+        "seconds": 44.76666666666541,
+        "deaths": 0
+      },
+      {
+        "key": "1-0",
+        "seconds": 70.18333333333064,
+        "deaths": 0
+      },
+      {
+        "key": "1-1",
+        "seconds": 86.44999999999638,
+        "deaths": 0
+      },
+      {
+        "key": "1-2",
+        "seconds": 108.81666666666177,
+        "deaths": 0
+      },
+      {
+        "key": "1-3",
+        "seconds": 142.3666666666721,
+        "deaths": 0
+      },
+      {
+        "key": "2-0",
+        "seconds": 169.81666666669395,
+        "deaths": 0
+      },
+      {
+        "key": "2-1",
+        "seconds": 187.10000000004104,
+        "deaths": 0
+      },
+      {
+        "key": "2-2",
+        "seconds": 221.6666666667352,
+        "deaths": 0
+      },
+      {
+        "key": "2-3",
+        "seconds": 250.13333333342453,
+        "deaths": 0
+      },
+      {
+        "key": "3-0",
+        "seconds": 274.5333333334123,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "seconds": 280.63333333340677,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "seconds": 305.0333333333846,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "seconds": 329.4333333333624,
+        "deaths": 0
+      },
+      {
+        "key": "4-0",
+        "seconds": 353.8333333333402,
+        "deaths": 0
+      },
+      {
+        "key": "4-1",
+        "seconds": 369.0833333333263,
+        "deaths": 0
+      },
+      {
+        "key": "4-2",
+        "seconds": 396.53333333330136,
+        "deaths": 0
+      },
+      {
+        "key": "4-3",
+        "seconds": 420.93333333327917,
+        "deaths": 0
+      },
+      {
+        "key": "5-0",
+        "seconds": 452.44999999991717,
+        "deaths": 0
+      },
+      {
+        "key": "5-1",
+        "seconds": 465.6666666665718,
+        "deaths": 0
+      },
+      {
+        "key": "5-2",
+        "seconds": 480.91666666655794,
+        "deaths": 0
+      },
+      {
+        "key": "5-3",
+        "seconds": 514.4666666665274,
+        "deaths": 0
+      },
+      {
+        "key": "6-0",
+        "seconds": 534.7999999998423,
+        "deaths": 0
+      },
+      {
+        "key": "6-1",
+        "seconds": 551.0666666664941,
+        "deaths": 0
+      },
+      {
+        "key": "6-2",
+        "seconds": 595.7999999997868,
+        "deaths": 0
+      },
+      {
+        "key": "6-3",
+        "seconds": 621.2166666664303,
+        "deaths": 0
+      },
+      {
+        "key": "7-0",
+        "seconds": 639.5166666664137,
+        "deaths": 0
+      },
+      {
+        "key": "7-1",
+        "seconds": 641.5499999997452,
+        "deaths": 0
+      },
+      {
+        "key": "7-2",
+        "seconds": 652.7333333330683,
+        "deaths": 0
+      },
+      {
+        "key": "7-3",
+        "seconds": 664.9333333330572,
+        "deaths": 0
+      }
+    ],
+    "saved": {
+      "version": 2,
+      "sector": 7,
+      "beat": 3,
+      "seconds": 677.3999999997126,
+      "deaths": 0,
+      "kills": 188,
+      "secrets": [],
+      "finished": true,
+      "difficulty": "explorer"
+    },
+    "errors": [],
+    "endingVisible": true
+  },
+  "limitations": [
+    "Automated expert input, not human first-time pacing or enjoyment.",
+    "The hero and remaining creatures remain simpler than the requested art bar.",
+    "Detailed forest captures stage the player for inspection.",
+    "No audible mix validation, cloud saves or public leaderboard."
+  ],
+  "normalSpeedTrial": {
+    "status": "complete",
+    "errors": [],
+    "wallSeconds": 88.60379999999702,
+    "game": {
+      "sector": 3,
+      "beat": 3,
+      "p": {
+        "x": 4.969884550930631,
+        "y": 38.06747211863406,
+        "z": 407.73054020554224
+      },
+      "health": 100,
+      "seconds": 78.29999999999684,
+      "deaths": 0,
+      "kills": 25,
+      "finished": true,
+      "paused": false,
+      "transitioning": false,
+      "playing": false,
+      "enemies": [],
+      "fps": 61.62695152050846,
+      "meshes": 973,
+      "animation": "kavi_Idle_Neutral"
+    },
+    "frameStats": {
+      "frames": 3938,
+      "averageFps": 44.4485077920341,
+      "medianMs": 18.600000001490116,
+      "p95Ms": 28.799999997019768,
+      "maxMs": 1807.7000000029802,
+      "over50Ms": 80
+    },
+    "sectorStats": {
+      "3": {
+        "frames": 3938,
+        "averageFps": 44.4485077920341,
+        "medianMs": 18.600000001490116,
+        "p95Ms": 28.799999997019768,
+        "maxMs": 1807.7000000029802,
+        "over50Ms": 80
+      }
+    },
+    "objectives": [
+      {
+        "key": "3-0",
+        "wallSeconds": 0.17309999999403952,
+        "gameSeconds": 0.05,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "wallSeconds": 5.61159999999404,
+        "gameSeconds": 5.266666666666653,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "wallSeconds": 27.94279999999702,
+        "gameSeconds": 27.283333333333065,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "wallSeconds": 53.19459999999404,
+        "gameSeconds": 52.43333333333164,
+        "deaths": 0
+      }
+    ],
+    "longFrames": [
+      {
+        "ms": 1807.7000000029802,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.28333333333108
+      },
+      {
+        "ms": 1536.7999999970198,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.23333333333108
+      },
+      {
+        "ms": 888.5,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.183333333331085
+      },
+      {
+        "ms": 704.8000000044703,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.38333333333107
+      },
+      {
+        "ms": 678.2999999970198,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.48333333333107
+      },
+      {
+        "ms": 480.69999999552965,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.58333333333106
+      },
+      {
+        "ms": 379.3999999985099,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.333333333331076
+      },
+      {
+        "ms": 276,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 77.13333333333024
+      },
+      {
+        "ms": 271.8999999985099,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 63.0499999999977
+      },
+      {
+        "ms": 261.20000000298023,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.999999999997705
+      },
+      {
+        "ms": 253.20000000298023,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 62.74999999999772
+      },
+      {
+        "ms": 229.39999999850988,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 60.09999999999787
+      }
+    ],
+    "visibilityChanges": [],
+    "renderSize": [
+      1036,
+      703
+    ],
+    "quality": "balanced",
+    "endingVisible": true,
+    "savedDaily": [
+      {
+        "date": "2026-11-02",
+        "seconds": 78.29999999999684,
+        "deaths": 0,
+        "samples": 656
+      }
+    ],
+    "resources": {
+      "skeletons": 27,
+      "textures": 109,
+      "animationGroups": 326
+    }
+  },
+  "earlierTimingBaseline": {
+    "status": "complete",
+    "errors": [],
+    "wallSeconds": 76.75660000000148,
+    "game": {
+      "sector": 3,
+      "beat": 3,
+      "p": {
+        "x": 4.978369283493884,
+        "y": 38.08811662273874,
+        "z": 405.89277810769664
+      },
+      "health": 100,
+      "seconds": 75.41666666666367,
+      "deaths": 0,
+      "kills": 25,
+      "finished": true,
+      "paused": false,
+      "transitioning": false,
+      "playing": false,
+      "enemies": [],
+      "fps": 50.43712172183974,
+      "meshes": 974,
+      "animation": "kavi_Idle_Neutral"
+    },
+    "frameStats": {
+      "frames": 4408,
+      "averageFps": 57.42858557354659,
+      "medianMs": 16.600000001490116,
+      "p95Ms": 21,
+      "maxMs": 198.5,
+      "over50Ms": 23
+    },
+    "sectorStats": {
+      "3": {
+        "frames": 4408,
+        "averageFps": 57.42858557354659,
+        "medianMs": 16.600000001490116,
+        "p95Ms": 21,
+        "maxMs": 198.5,
+        "over50Ms": 23
+      }
+    },
+    "objectives": [
+      {
+        "key": "3-0",
+        "wallSeconds": 0.1985,
+        "gameSeconds": 0.05,
+        "deaths": 0
+      },
+      {
+        "key": "3-1",
+        "wallSeconds": 5.67439999999851,
+        "gameSeconds": 5.249999999999987,
+        "deaths": 0
+      },
+      {
+        "key": "3-2",
+        "wallSeconds": 28.09329999999702,
+        "gameSeconds": 27.283333333333065,
+        "deaths": 0
+      },
+      {
+        "key": "3-3",
+        "wallSeconds": 53.37269999999553,
+        "gameSeconds": 52.43333333333164,
+        "deaths": 0
+      }
+    ],
+    "longFrames": [
+      {
+        "ms": 198.5,
+        "sector": 3,
+        "beat": 0,
+        "gameSeconds": 0.05
+      },
+      {
+        "ms": 173.20000000298023,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 60.06666666666454
+      },
+      {
+        "ms": 142,
+        "sector": 3,
+        "beat": 0,
+        "gameSeconds": 0.09999999999999999
+      },
+      {
+        "ms": 126,
+        "sector": 3,
+        "beat": 1,
+        "gameSeconds": 5.366666666666653
+      },
+      {
+        "ms": 121.80000000447035,
+        "sector": 3,
+        "beat": 2,
+        "gameSeconds": 28.249999999999677
+      },
+      {
+        "ms": 119.80000000447035,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 63.99999999999765
+      },
+      {
+        "ms": 116.30000000447035,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 75.26666666666368
+      },
+      {
+        "ms": 115.19999999552965,
+        "sector": 3,
+        "beat": 2,
+        "gameSeconds": 48.71666666666518
+      },
+      {
+        "ms": 113.60000000149012,
+        "sector": 3,
+        "beat": 1,
+        "gameSeconds": 22.466666666666672
+      },
+      {
+        "ms": 111,
+        "sector": 3,
+        "beat": 3,
+        "gameSeconds": 66.41666666666418
+      },
+      {
+        "ms": 110.89999999850988,
+        "sector": 3,
+        "beat": 0,
+        "gameSeconds": 0.15
+      },
+      {
+        "ms": 110.5,
+        "sector": 3,
+        "beat": 1,
+        "gameSeconds": 23.91666666666659
+      }
+    ],
+    "visibilityChanges": [],
+    "renderSize": [
+      1036,
+      703
+    ],
+    "quality": "balanced",
+    "endingVisible": true,
+    "saved": {
+      "version": 2,
+      "sector": 0,
+      "beat": 0,
+      "seconds": 0,
+      "deaths": 0,
+      "kills": 0,
+      "secrets": [],
+      "finished": false,
+      "difficulty": "explorer"
+    },
+    "resources": {
+      "skeletons": 27,
+      "textures": 109,
+      "animationGroups": 326
+    }
+  },
+  "ghostReload": {
+    "before": {
+      "seconds": 78.29999999999684,
+      "samples": 656
+    },
+    "after": {
+      "samples": 629,
+      "enabled": true
+    }
+  },
+  "compiledForest": {
+    "noDebug": true,
+    "start": "Follow the anchor line",
+    "objective": "Hold the hanging terrace",
+    "meta": "2 defeated · 0 recoveries",
+    "paused": true,
+    "errors": [],
+    "bad": []
+  },
+  "compiledStory": {
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  }
+}

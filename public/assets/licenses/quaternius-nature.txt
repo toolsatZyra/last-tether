@@ -1,0 +1,4 @@
+Ultimate Stylized Nature Pack by Quaternius. CC0.
+Official license/source: https://quaternius.com/packs/ultimatestylizednature.html
+Source mirror pinned at c1920d176ab5443ff386959969074fd0eef86c4e: https://github.com/walterpalladino/godot-shaders
+Bark maps resized for web delivery; source files and hashes retained in asset manifest.
