@@ -1,7 +1,7 @@
 {
   "version": "0.2.22",
   "date": "2026-11-02",
-  "status": "local validation passed; public verification pending",
+  "status": "published and verified",
   "scope": "Storm-road foundations, damaged belfry roof, supported fixed grapple eyes; no new assets or paid generation",
   "unitTests": {
     "passed": 45,
@@ -503,5 +503,30 @@
     "resumed": "Take back the watchpost",
     "errors": [],
     "bad": []
+  },
+  "public": {
+    "frameSample": {
+      "frames": 896,
+      "seconds": 14.066099999999999,
+      "averageFps": 63.628155636601484,
+      "medianMs": 18,
+      "p95Ms": 18.700000000000728
+    },
+    "noDebug": true,
+    "objective": "Take back the watchpost",
+    "meta": "3 defeated · 0 recoveries",
+    "paused": true,
+    "resumed": "Take back the watchpost",
+    "errors": [],
+    "bad": []
+  },
+  "deployment": {
+    "id": "dpl_8Pt6BjUTCNkAy83WqNa5irYfr4D2",
+    "state": "READY",
+    "commit": "50edba455f9641b4a8b50a78cc01d09f690091d0",
+    "project": "prj_WtbzNkygG6fAqp66QmLgz40gr0NP",
+    "team": "team_pwTpdWGJnbaaUJHUGUtCMxVG",
+    "url": "https://last-tether.vercel.app/",
+    "bundle": "index-D82ou0xn.js"
   }
 }
